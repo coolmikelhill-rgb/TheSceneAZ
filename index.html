@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Arizona live music and events in one place: arena tours, club nights, jazz rooms, metal shows and underground raves, with ticket links.">
+<title>TheSceneAZ — Arizona live music & events</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Archivo+Expanded:wght@600;800&family=Inter:wght@400;500;600;700&display=swap');
+
+  :root {
+    --bg: #0E1220;
+    --bg-raised: #171C2E;
+    --line: #262C42;
+    --text: #F3F1EC;
+    --text-muted: #9198B5;
+
+    --blue: #4FA8FF;
+    --orange: #FF7A4A;
+    --violet: #B084FF;
+    --teal: #35D6A8;
+    --gold: #FFC94F;
+    --red: #FF5C6C;
+    --pink: #FF5CB3;
+    --amber: #D9A056;
+    --cyan: #4FE0E8;
+    --gold2: #C9A876;
+    --steel: #8E9BB0;
+    --indigo: #5E7CE2;
+  }
+
+  * { box-sizing: border-box; }
+  :root { padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); }
+  html { scroll-padding-top: env(safe-area-inset-top, 0px); }
+  body::before {
+    content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px);
+    z-index: 11; background: rgba(14,18,32,0.92); backdrop-filter: blur(8px);
+  }
+
+  body {
+    margin: 0;
+    background:
+      radial-gradient(ellipse 900px 500px at 15% -10%, rgba(79,168,255,0.16), transparent),
+      radial-gradient(ellipse 700px 400px at 100% 0%, rgba(176,132,255,0.12), transparent),
+      var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.5;
+  }
+
+  .masthead {
+    padding: 48px 24px 24px;
+    max-width: 820px;
+    margin: 0 auto;
+  }
+
+  .masthead .kicker {
+    color: var(--blue);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .masthead h1 {
+    font-family: 'Archivo Expanded', sans-serif;
+    font-weight: 800;
+    font-size: 38px;
+    margin: 0 0 8px;
+    letter-spacing: -0.01em;
+    background: linear-gradient(90deg, #fff 40%, var(--blue) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .masthead p {
+    color: var(--text-muted);
+    margin: 0;
+    font-size: 15px;
+    max-width: 56ch;
+  }
+
+  .filters {
+    position: sticky;
+    top: env(safe-area-inset-top, 0px);
+    background: rgba(14,18,32,0.9);
+    backdrop-filter: blur(8px);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    padding: 14px 24px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+    max-width: 820px;
+    margin: 0 auto;
+    z-index: 10;
+  }
+
+  select, .toggle {
+    background: var(--bg-raised);
+    border: 1px solid var(--line);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    padding: 7px 10px;
+    border-radius: 6px;
+  }
+
+  .toggle {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    cursor: pointer;
+    user-select: none;
+    margin-left: auto;
+  }
+
+  .toggle input { accent-color: var(--violet); }
+
+  .search-box {
+    background: var(--bg-raised);
+    border: 1px solid var(--line);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    padding: 7px 10px;
+    border-radius: 6px;
+    min-width: 160px;
+  }
+  .search-box::placeholder { color: var(--text-muted); }
+
+  .clear-btn {
+    background: transparent;
+    border: 1px solid var(--line);
+    color: var(--text-muted);
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    padding: 7px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  .clear-btn:hover { color: var(--text); border-color: var(--text-muted); }
+
+  .no-results {
+    color: var(--text-muted);
+    font-size: 14px;
+    padding: 40px 0;
+    text-align: center;
+  }
+
+  .count {
+    font-size: 12px;
+    color: var(--text-muted);
+    padding: 0 4px;
+  }
+
+  .feed {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 8px 24px 60px;
+  }
+
+  .event {
+    display: grid;
+    grid-template-columns: 60px 1fr auto;
+    gap: 18px;
+    padding: 18px 16px;
+    margin: 10px 0;
+    border-radius: 10px;
+    background: var(--bg-raised);
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--genre-color, var(--blue));
+  }
+
+  .event.community {
+    border-left-style: dashed;
+  }
+
+  .event.hidden { display: none; }
+
+  .date-block { text-align: center; padding-top: 2px; }
+
+  .date-block .dow {
+    font-size: 11px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .date-block .num {
+    font-family: 'Archivo Expanded', sans-serif;
+    font-size: 26px;
+    font-weight: 800;
+    line-height: 1;
+    color: var(--genre-color, var(--blue));
+  }
+
+  .details h3 { margin: 0 0 4px; font-size: 16px; font-weight: 600; }
+
+  .details .meta {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin: 0 0 8px;
+  }
+
+  .tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 9px;
+    border-radius: 20px;
+    margin-right: 6px;
+    background: color-mix(in srgb, var(--genre-color, var(--blue)) 18%, transparent);
+    color: var(--genre-color, var(--blue));
+  }
+
+  .tag.status {
+    background: transparent;
+    border: 1px solid;
+  }
+  .tag.status.verified { color: var(--teal); border-color: var(--teal); }
+  .tag.status.community { color: var(--gold); border-color: var(--gold); border-style: dashed; }
+
+
+  /* genre + sub-genre: one split pill, e.g.  [ ROCK | Pop Punk ] */
+  .details .tag, .details .gpill { vertical-align: middle; white-space: nowrap; }
+  .details .tag { margin-bottom: 2px; }
+  .gpill { margin-bottom: 2px; }
+  .gpill {
+    display: inline-flex;
+    align-items: stretch;
+    margin: 0 6px 0 0;
+    border-radius: 20px;
+    overflow: hidden;
+    font-size: 11px;
+    line-height: 1.5;
+    border: 1px solid color-mix(in srgb, var(--genre-color, var(--blue)) 50%, transparent);
+  }
+  .gpill .g {
+    padding: 3px 9px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    color: var(--genre-color, var(--blue));
+    background: color-mix(in srgb, var(--genre-color, var(--blue)) 22%, transparent);
+  }
+  .gpill .s {
+    padding: 3px 10px 3px 9px;
+    font-weight: 500;
+    color: var(--text);
+    background: color-mix(in srgb, var(--genre-color, var(--blue)) 7%, transparent);
+    border-left: 1px solid color-mix(in srgb, var(--genre-color, var(--blue)) 50%, transparent);
+  }
+
+  .tag.scale {
+    background: transparent;
+    border: 1px solid var(--line);
+    color: var(--text-muted);
+  }
+
+  .action { align-self: center; }
+
+  .btn {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 9px 14px;
+    border-radius: 7px;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .btn.tickets {
+    background: linear-gradient(90deg, var(--blue), var(--violet));
+    color: #0A0E1A;
+  }
+
+  .btn.info {
+    background: transparent;
+    border: 1px solid var(--line);
+    color: var(--text-muted);
+  }
+
+
+  @media (max-width: 560px) {
+    .event { grid-template-columns: 48px 1fr; gap: 12px; padding: 14px 12px; }
+    .event .action { grid-column: 2; justify-self: start; align-self: start; }
+    .masthead h1 { font-size: 30px; }
+  }
+
+  .note {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 0 24px 44px;
+    color: var(--text-muted);
+    font-size: 12.5px;
+  }
+
+  .note strong { color: var(--text); }
+</style>
+</head>
+<body>
+
+<div class="masthead">
+  <div class="kicker">Phoenix · Tempe · Scottsdale · Mesa · Tucson</div>
+  <h1>TheSceneAZ</h1>
+  <p>Arizona's live music in one place — arena tours, club nights, jazz rooms, metal shows and underground raves. Compiled from venue calendars, ticketing pages and community trackers like 19hz.info and Jazz PHX. Filter by genre, city and room size.</p>
+</div>
+
+<div class="filters">
+  <input type="text" id="searchBox" class="search-box" placeholder="Search artist or venue…">
+  <select id="genreFilter">
+    <option value="all">All genres</option>
+    <option value="house">House</option>
+    <option value="techno">Techno</option>
+    <option value="bass">Bass / Dubstep</option>
+    <option value="dnb">Drum & Bass</option>
+    <option value="rock">Rock</option>
+    <option value="hiphop">Hip-Hop / R&B</option>
+    <option value="country">Country</option>
+    <option value="pop">Pop</option>
+    <option value="jazz">Jazz</option>
+    <option value="metal">Metal</option>
+    <option value="blues">Blues</option>
+  </select>
+  <select id="cityFilter">
+    <option value="all">All cities</option>
+    <option value="Phoenix">Phoenix</option>
+    <option value="Tempe">Tempe</option>
+    <option value="Tucson">Tucson</option>
+    <option value="Mesa">Mesa</option>
+    <option value="Scottsdale">Scottsdale</option>
+    <option value="Glendale">Glendale</option>
+    <option value="Chandler">Chandler</option>
+    <option value="Mayer">Mayer</option>
+    <option value="Avondale">Avondale</option>
+    <option value="Sedona">Sedona</option>
+    <option value="Flagstaff">Flagstaff</option>
+    <option value="Prescott">Prescott</option>
+    <option value="Yuma">Yuma</option>
+  </select>
+  <select id="scaleFilter">
+    <option value="all">All sizes</option>
+    <option value="arena">Large (Arena)</option>
+    <option value="club">Medium (Club/Theater)</option>
+    <option value="warehouse">Underground (Warehouse/DIY)</option>
+  </select>
+  <select id="sortBy">
+    <option value="date-asc">Soonest first</option>
+    <option value="date-desc">Latest first</option>
+    <option value="venue">Venue A–Z</option>
+  </select>
+  <label class="toggle">
+    <input type="checkbox" id="communityToggle" checked>
+    Include underground / TBA-venue
+  </label>
+  <button class="clear-btn" id="clearFilters">Clear filters</button>
+  <span class="count" id="count"></span>
+</div>
+
+<div class="feed" id="feed"></div>
+
+<div class="note">
+  <strong>Verified</strong> = a confirmed listing. <strong>Underground</strong> = venue is TBA or released by the promoter the day of. The gray badge is room size: Large (Arena), Medium (Club/Theater) or Underground (Warehouse/DIY). Genre tags can carry a sub-genre (like Rock | Pop Punk) for flavor — it isn't a filter. Each listing names where it was found, since no single source catches everything. Listings are compiled from public sources and can change, sell out or be canceled — confirm with the venue or ticket page before you go. Last updated Oct 19, 2026.
+</div>
+
+<script>
+const genreColors = {
+  house: 'var(--blue)', techno: 'var(--orange)', bass: 'var(--violet)', dnb: 'var(--teal)',
+  rock: 'var(--red)', hiphop: 'var(--pink)', country: 'var(--amber)', pop: 'var(--cyan)', jazz: 'var(--gold2)', metal: 'var(--steel)', blues: 'var(--indigo)'
+};
+const genreLabels = {
+  house: 'House', techno: 'Techno', bass: 'Bass', dnb: 'D&B',
+  rock: 'Rock', hiphop: 'Hip-Hop / R&B', country: 'Country', pop: 'Pop', jazz: 'Jazz', metal: 'Metal', blues: 'Blues'
+};
+const scaleLabels = { arena: 'Large (Arena)', club: 'Medium (Club/Theater)', warehouse: 'Underground (Warehouse/DIY)' };
+
+const FALLBACK_EVENTS = [
+  { date: "2026-10-20", title: "Weezer: The Gathering w/ The Shins, Silversun Pickups", venue: "Mortgage Matchup Center", city: "Phoenix", genre: "rock", sub: "Alt Rock", scale: "arena", price: "See listing", type: "verified", cta: "Get Tickets", source: "Venue site", link: "https://mortgagematchupcenter.com/events/weezer-the-gathering/" },
+  { date: "2026-10-20", title: "Bryson Tiller w/ Majid Jordan, Ty Dolla $ign, Austin Millz", venue: "Talking Stick Resort Amphitheatre", city: "Scottsdale", genre: "hiphop", sub: "R&B / Trap Soul", scale: "arena", price: "See listing", type: "verified", cta: "Get Tickets", source: "Ticketmaster", link: "https://www.ticketmaster.com/bryson-tiller-presents-the-neo-trapsoul-phoenix-arizona-10-20-2026/event/190064BACE5E8BF1" },
+  { date: "2026-10-21", title: "Charli XCX", venue: "Desert Diamond Arena", city: "Glendale", genre: "pop", sub: "Hyperpop", scale: "arena", price: "See listing", type: "verified", cta: "Get Tickets", source: "Venue site", link: "https://www.desertdiamondarena.com/event/charli-xcx/102/" },
+  { date: "2026-10-24", title: "Public Enemy", venue: "AZ State Fair Coliseum", city: "Phoenix", genre: "hiphop", sub: "Golden Age Hip-Hop", scale: "arena", price: "See listing", type: "verified", cta: "Get Tickets", source: "AZ State Fair", link: "https://azstatefair.com/event/public-enemy/" },
+  { date: "2026-10-29", title: "Doja Cat", venue: "Mortgage Matchup Center", city: "Phoenix", genre: "pop", sub: "Pop Rap", scale: "arena", price: "See listing", type: "verified", cta: "Get Tickets", source: "Ticketmaster", link: "https://www.ticketmaster.com/doja-cat-tour-ma-vie-world-phoenix-arizona-10-29-2026/event/1900633A9B863640" },
+  { date: "2026-10-20", title: "Glaive", venue: "Nile Theater", city: "Mesa", genre: "pop", sub: "Hyperpop / Emo Pop", scale: "club", price: "See listing", type: "verified", cta: "Get Tickets", source: "Ticketmaster", link: "https://www.stereoboard.com/glaive-tickets/mesa" },
+  { date: "2026-10-24", title: "Post Sex Nachos", venue: "The Rebel Lounge", city: "Phoenix", genre: "rock", sub: "Indie Pop-Rock", scale: "club", price: "$10.67–$102", type: "verified", cta: "Get Tickets", source: "Songkick", link: "https://www.songkick.com/concerts/43210162-post-sex-nachos-at-rebel-lounge" },
+  { date: "2026-10-26", title: "Frog", venue: "The Rebel Lounge", city: "Phoenix", genre: "rock", sub: "Indie Rock", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://songkick.com/concerts/43298077-frog-at-rebel-lounge" },
+  { date: "2026-10-30", title: "Orville Peck w/ Abbie Callahan", venue: "The Van Buren", city: "Phoenix", genre: "country", sub: "Alt-Country", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://songkick.com/concerts/43338931-orville-peck-at-van-buren" },
+  { date: "2026-10-30", title: "Haunted Hearts w/ Desert Hearts", venue: "Walter Where?House", city: "Phoenix", genre: "house", sub: "Tech House", scale: "club", price: "$29.97–35.13 · 21+", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://wl.eventim.us/event/haunted-hearts-w-desert-hearts-at-walter-wherehouse/703240?afflky=WalterWhereHouse" },
+  { date: "2026-11-02", title: "Alvaro Díaz", venue: "The Van Buren", city: "Phoenix", genre: "hiphop", sub: "Latin Trap", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43271882-alvaro-diaz-at-van-buren" },
+  { date: "2026-11-05", title: "Dan + Shay w/ Tyler Hubbard, Josh Ross", venue: "Talking Stick Resort Amphitheatre", city: "Scottsdale", genre: "country", sub: "Country Pop", scale: "arena", price: "See listing", type: "verified", cta: "Get Tickets", source: "KTAR", link: "https://www.ticketmaster.com/dan-shay-the-young-tour-phoenix-arizona-11-05-2026/event/190064AEE2E28037" },
+  { date: "2026-11-06", title: "Cristian Castro", venue: "Desert Diamond Arena", city: "Glendale", genre: "pop", sub: "Latin Ballads", scale: "arena", price: "See listing", type: "verified", cta: "Get Tickets", source: "KTAR", link: "https://www.desertdiamondarena.com/event/cristian-castro/84/" },
+  { date: "2026-11-06", title: "José Madero", venue: "Marquee Theatre", city: "Tempe", genre: "rock", sub: "Latin Rock / Pop Punk", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://songkick.com/de/concerts/43286604-jose-madero-at-marquee-theatre" },
+  { date: "2026-11-08", title: "Don Omar", venue: "Mortgage Matchup Center", city: "Phoenix", genre: "hiphop", sub: "Reggaeton", scale: "arena", price: "See listing", type: "verified", cta: "Get Tickets", source: "Songkick", link: "https://mortgagematchupcenter.com/events/don-omar/" },
+  { date: "2026-11-11", title: "Smashing Pumpkins", venue: "Mortgage Matchup Center", city: "Phoenix", genre: "rock", sub: "Alt Rock", scale: "arena", price: "See listing", type: "verified", cta: "Get Tickets", source: "KTAR", link: "https://mortgagematchupcenter.com/events/smashing-pumpkins/" },
+  { date: "2026-11-16", title: "Teddy Swims", venue: "Mortgage Matchup Center", city: "Phoenix", genre: "pop", sub: "Soul Pop", scale: "arena", price: "See listing", type: "verified", cta: "Get Tickets", source: "KTAR", link: "https://mortgagematchupcenter.com/events/teddy-swims/" },
+  { date: "2026-11-21", title: "Three Days Grace w/ I Prevail, The Funeral Portrait", venue: "Talking Stick Resort Amphitheatre", city: "Scottsdale", genre: "rock", sub: "Post-Grunge", scale: "arena", price: "See listing", type: "verified", cta: "Get Tickets", source: "KTAR", link: "https://www.ticketmaster.com/three-days-grace-alienation-tour-phoenix-arizona-11-21-2026/event/19006364AE216854" },
+  { date: "2026-11-24", title: "Katseye", venue: "Mortgage Matchup Center", city: "Phoenix", genre: "pop", sub: "K-Pop", scale: "arena", price: "See listing", type: "verified", cta: "Get Tickets", source: "KTAR", link: "https://mortgagematchupcenter.com/events/katseye/" },
+  { date: "2026-11-30", title: "The Neighbourhood w/ Nessa Barrett", venue: "Mortgage Matchup Center", city: "Phoenix", genre: "rock", sub: "Alt Rock", scale: "arena", price: "See listing", type: "verified", cta: "Get Tickets", source: "KTAR", link: "https://mortgagematchupcenter.com/events/the-neighbourhood/" },
+  { date: "2026-10-19", title: "Basement w/ Momma, Big Boy, Febuary", venue: "The Van Buren", city: "Phoenix", genre: "rock", sub: "Emo / Melodic Hardcore", scale: "club", price: "$58.11+", type: "verified", cta: "Get Tickets", source: "Stereoboard", link: "https://www.stereoboard.com/basement-tickets/phoenix/2026-10-19" },
+  { date: "2026-10-30", title: "HEX 2026 ft Subtronics, Excision, INZO + more", venue: "Rawhide Festival Grounds", city: "Chandler", genre: "bass", sub: "Dubstep Festival", scale: "arena", price: "$90-170 · 18+", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://www.tixr.com/groups/rbfestivals/events/hex-2026-185888" },
+  { date: "2026-10-30", title: "Boo Arizona", venue: "Westworld", city: "Scottsdale", genre: "house", sub: "EDM Festival", scale: "arena", price: "$118+ · 18+", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://booarizona.frontgatetickets.com/?utm_source=Promoters&utm_medium=19hz&utm_campaign=19hz" },
+  { date: "2026-11-06", title: "Obsidian ft Boys Noize, Chris Liebing, Stingray 313 + more", venue: "Eastlake Park Underpass", city: "Phoenix", genre: "techno", sub: "Techno / Electro", scale: "warehouse", price: "$100+ · 18+", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://tixr.com/e/194704" },
+  { date: "2026-11-07", title: "Whethan — Warehouse.Wavs Tour", venue: "The Van Buren", city: "Phoenix", genre: "bass", sub: "Future Bass", scale: "club", price: "$78-287+ · 18+", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://www.ticketmaster.com/event/190064B5EC549C5F" },
+  { date: "2026-11-21", title: "Work Presents Ben Klock, Jia b2b Ma, Alix Rico", venue: "Walter Studios", city: "Phoenix", genre: "techno", sub: "Minimal Techno", scale: "club", price: "$25-35 · 21+", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://wl.eventim.us/event/work-ben-klock-at-walter-studios/704832?afflky=WalterStudios" },
+  { date: "2026-10-19", title: "Beabadoobee w/ Wisp", venue: "Talking Stick Resort Amphitheatre", city: "Scottsdale", genre: "rock", sub: "Indie / Bedroom Pop", scale: "arena", price: "See listing", type: "verified", cta: "Get Tickets", source: "KTAR", link: "https://www.ticketmaster.com/beabadoobee-the-powerlines-tour-phoenix-arizona-10-19-2026/event/190064D2C8F57F33" },
+  { date: "2026-10-23", title: "Gorillaz — The Mountain Tour", venue: "Mortgage Matchup Center", city: "Phoenix", genre: "rock", sub: "Alt / Trip-Hop", scale: "arena", price: "$86", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://www.ticketmaster.com/event/1900645AAC798E42" },
+  { date: "2026-10-24", title: "Los Tigres del Norte", venue: "Desert Diamond Arena", city: "Glendale", genre: "country", sub: "Norteño", scale: "arena", price: "See listing", type: "verified", cta: "Get Tickets", source: "KTAR", link: "https://www.desertdiamondarena.com/event/los-tigres-del-norte/85/" },
+  { date: "2026-11-07", title: "90's Corridos Tour", venue: "Desert Diamond Arena", city: "Glendale", genre: "country", sub: "Corridos", scale: "arena", price: "See listing", type: "verified", cta: "Get Tickets", source: "KTAR", link: "https://www.desertdiamondarena.com/event/90s-corridos-tour/93/" },
+  { date: "2026-11-13", title: "Hondo Rodeo Fest ft Tim McGraw, Miranda Lambert, Blake Shelton, Turnpike Troubadours, Parker McCollum, Lynyrd Skynyrd (3 days)", venue: "Chase Field", city: "Phoenix", genre: "country", sub: "Country Festival", scale: "arena", price: "See listing", type: "verified", cta: "Get Tickets", source: "KTAR", link: "https://www.thehondorodeofest.com/phoenix" },
+  { date: "2026-11-20", title: "Better Together 2026 (2 days)", venue: "Steele Indian School Park", city: "Phoenix", genre: "pop", sub: "Music Festival", scale: "arena", price: "See listing", type: "verified", cta: "Get Tickets", source: "KTAR", link: "https://wegobettertogether.com/" },
+  { date: "2026-11-21", title: "Forever Tour ft Barbara Mason, Lisa Lisa, Next", venue: "Desert Diamond Arena", city: "Glendale", genre: "hiphop", sub: "'80s-'90s R&B", scale: "arena", price: "See listing", type: "verified", cta: "Get Tickets", source: "KTAR", link: "https://www.desertdiamondarena.com/event/forever-tour%3a-barbara-mason/107/" },
+  { date: "2026-11-21", title: "Ye (Kanye West)", venue: "State Farm Stadium", city: "Glendale", genre: "hiphop", sub: "Rap", scale: "arena", price: "See listing", type: "verified", cta: "Get Tickets", source: "KTAR", link: "https://www.statefarmstadium.com/events/detail/ye-liveinphoenix" },
+  { date: "2026-11-27", title: "Jonas Brothers", venue: "Desert Diamond Arena", city: "Glendale", genre: "pop", sub: "Pop Rock", scale: "arena", price: "See listing", type: "verified", cta: "Get Tickets", source: "KTAR", link: "https://www.desertdiamondarena.com/event/jonas-brothers/112/" },
+  { date: "2026-11-28", title: "Banda MS", venue: "Mortgage Matchup Center", city: "Phoenix", genre: "country", sub: "Banda", scale: "arena", price: "See listing", type: "verified", cta: "Get Tickets", source: "KTAR", link: "https://mortgagematchupcenter.com/events/banda-ms-2026/" },
+  { date: "2026-12-01", title: "Rush", venue: "Desert Diamond Arena", city: "Glendale", genre: "rock", sub: "Prog Rock", scale: "arena", price: "See listing", type: "verified", cta: "Get Tickets", source: "KTAR", link: "https://www.desertdiamondarena.com/event/rush/51/" },
+  { date: "2026-12-03", title: "Rush (night 2)", venue: "Desert Diamond Arena", city: "Glendale", genre: "rock", sub: "Prog Rock", scale: "arena", price: "See listing", type: "verified", cta: "Get Tickets", source: "KTAR", link: "https://www.desertdiamondarena.com/event/rush/52/" },
+  { date: "2026-12-06", title: "Trans-Siberian Orchestra", venue: "Mortgage Matchup Center", city: "Phoenix", genre: "rock", sub: "Holiday Prog Rock", scale: "arena", price: "See listing", type: "verified", cta: "Get Tickets", source: "KTAR", link: "https://transsiberianexpress.shop.ticketstoday.com/eventlist.aspx?eventId=205091&otfn=transsiberianexpress" },
+  { date: "2026-12-09", title: "Gracie Abrams w/ Rachel Chinouriri (2 nights)", venue: "Desert Diamond Arena", city: "Glendale", genre: "pop", sub: "Singer-Songwriter Pop", scale: "arena", price: "See listing", type: "verified", cta: "Get Tickets", source: "KTAR", link: "https://www.ticketmaster.com/desert-diamond-arena-tickets-glendale/venue/204917?startDate=2026-12-09&endDate=2026-12-10" },
+  { date: "2026-12-11", title: "Ugly Sweater Holiday Party: Sublime, Slightly Stoopid, Codefendants", venue: "Desert Diamond Arena", city: "Glendale", genre: "rock", sub: "Reggae Rock", scale: "arena", price: "See listing", type: "verified", cta: "Get Tickets", source: "KTAR", link: "https://www.desertdiamondarena.com/event/alt-az-93-3-presents%3a-ugly-sweater-holiday-party-with-sublime-slightly-stoopid-and-codefendants/108/" },
+  { date: "2026-12-12", title: "Alice Cooper's Christmas Pudding", venue: "Celebrity Theatre", city: "Phoenix", genre: "rock", sub: "Shock Rock", scale: "club", price: "See listing", type: "verified", cta: "Get Tickets", source: "KTAR", link: "https://dzplive.com/event/alice-cooper-christmas-pudding26/" },
+  { date: "2026-12-19", title: "Pentatonix", venue: "Desert Diamond Arena", city: "Glendale", genre: "pop", sub: "A Cappella", scale: "arena", price: "See listing", type: "verified", cta: "Get Tickets", source: "KTAR", link: "https://www.desertdiamondarena.com/event/pentatonix/110/" },
+  { date: "2026-12-30", title: "Decadence Arizona 2026 (2 days)", venue: "Phoenix Raceway", city: "Avondale", genre: "house", sub: "NYE EDM Festival", scale: "arena", price: "See listing", type: "verified", cta: "Get Tickets", source: "KTAR", link: "https://relentlessbeats.com/events/decadence-arizona-2026-phoenix-raceway-123026" },
+  { date: "2027-01-15", title: "8123 Fest ft The Maine (2 days)", venue: "Mesa Amphitheatre", city: "Mesa", genre: "rock", sub: "Pop Punk / Emo", scale: "arena", price: "See listing", type: "verified", cta: "Get Tickets", source: "KTAR", link: "https://www.8123fest.com/" },
+  { date: "2027-02-06", title: "Imagine Dragons w/ Counting Crows", venue: "TPC Scottsdale", city: "Scottsdale", genre: "rock", sub: "Pop Rock", scale: "arena", price: "See listing", type: "verified", cta: "Get Tickets", source: "KTAR", link: "https://wmphoenixopen.com/insights/grammy-award-winning-imagine-dragons-to-kick-off-wm-phoenix-open-week-at-the-iconic-16th-hole-for-year-6-of-concert-in-the-coliseum/" },
+  { date: "2027-02-10", title: "Riley Green w/ Ashley Cooke", venue: "WM Phoenix Open Birds Nest", city: "Scottsdale", genre: "country", sub: "Country Rock", scale: "arena", price: "See listing", type: "verified", cta: "Get Tickets", source: "KTAR", link: "https://coorslightbirdsnest.com/" },
+  { date: "2027-02-11", title: "Jason Aldean w/ Josh Ross", venue: "WM Phoenix Open Birds Nest", city: "Scottsdale", genre: "country", sub: "Country Rock", scale: "arena", price: "See listing", type: "verified", cta: "Get Tickets", source: "KTAR", link: "https://coorslightbirdsnest.com/" },
+  { date: "2027-02-12", title: "Snoop Dogg w/ T-Pain", venue: "WM Phoenix Open Birds Nest", city: "Scottsdale", genre: "hiphop", sub: "West Coast Hip-Hop", scale: "arena", price: "See listing", type: "verified", cta: "Get Tickets", source: "KTAR", link: "https://coorslightbirdsnest.com/" },
+  { date: "2027-02-12", title: "Los Tucanes De Tijuana", venue: "Desert Diamond Arena", city: "Glendale", genre: "country", sub: "Norteño", scale: "arena", price: "See listing", type: "verified", cta: "Get Tickets", source: "KTAR", link: "https://www.desertdiamondarena.com/event/los-tucanes-de-tijuana/109/" },
+  { date: "2027-03-20", title: "Greta Van Fleet w/ The Kooks, sana sana", venue: "Mortgage Matchup Center", city: "Phoenix", genre: "rock", sub: "Hard Rock", scale: "arena", price: "See listing", type: "verified", cta: "Get Tickets", source: "KTAR", link: "https://mortgagematchupcenter.com/events/greta-van-fleet/" },
+  { date: "2027-04-02", title: "Harry Styles (2 nights)", venue: "State Farm Stadium", city: "Glendale", genre: "pop", sub: "Pop Rock", scale: "arena", price: "See listing", type: "verified", cta: "Get Tickets", source: "KTAR", link: "https://www.statefarmstadium.com/events/detail/tgtgtour" },
+  { date: "2027-04-20", title: "Nickelback w/ Don Broco", venue: "Mortgage Matchup Center", city: "Phoenix", genre: "rock", sub: "Post-Grunge", scale: "arena", price: "See listing", type: "verified", cta: "Get Tickets", source: "KTAR", link: "https://mortgagematchupcenter.com/events/nickelback/" },
+  { date: "2027-04-26", title: "Iron Maiden w/ Bullet for My Valentine, The Raven Age", venue: "Talking Stick Resort Amphitheatre", city: "Scottsdale", genre: "metal", sub: "Heavy Metal", scale: "arena", price: "See listing", type: "verified", cta: "Get Tickets", source: "KTAR", link: "https://www.ticketmaster.com/iron-maiden-run-for-your-lives-phoenix-arizona-04-26-2027/event/1900654CBB336947" },
+  { date: "2027-04-29", title: "Def Leppard w/ Goo Goo Dolls, The Struts", venue: "Desert Diamond Arena", city: "Glendale", genre: "rock", sub: "Hard Rock / Glam", scale: "arena", price: "See listing", type: "verified", cta: "Get Tickets", source: "KTAR", link: "https://www.desertdiamondarena.com/event/def-leppard-goo-goo-dolls-the-struts/118/" },
+  { date: "2027-05-01", title: "Josiah Queen", venue: "Desert Diamond Arena", city: "Glendale", genre: "pop", sub: "Contemporary Christian", scale: "arena", price: "See listing", type: "verified", cta: "Get Tickets", source: "KTAR", link: "https://www.desertdiamondarena.com/event/josiah-queen/113/" },
+  { date: "2027-05-20", title: "Niall Horan", venue: "Mortgage Matchup Center", city: "Phoenix", genre: "pop", sub: "Pop Rock", scale: "arena", price: "See listing", type: "verified", cta: "Get Tickets", source: "KTAR", link: "https://mortgagematchupcenter.com/events/niall-horan/" },
+  { date: "2027-06-03", title: "Stick Figure", venue: "Talking Stick Resort Amphitheatre", city: "Scottsdale", genre: "rock", sub: "Reggae Rock", scale: "arena", price: "See listing", type: "verified", cta: "Get Tickets", source: "KTAR", link: "https://www.ticketmaster.com/kona-big-wave-presents-stick-figure-phoenix-arizona-06-03-2027/event/190064BCBA4B728D" },
+  { date: "2027-06-12", title: "Matchbox Twenty w/ The Wallflowers", venue: "Talking Stick Resort Amphitheatre", city: "Scottsdale", genre: "rock", sub: "Pop Rock", scale: "arena", price: "See listing", type: "verified", cta: "Get Tickets", source: "KTAR", link: "https://www.ticketmaster.com/matchbox-twenty-30-phoenix-arizona-06-12-2027/event/19006545E178C1A3" },
+  { date: "2027-06-13", title: "A Perfect Circle w/ The Cult", venue: "Talking Stick Resort Amphitheatre", city: "Scottsdale", genre: "rock", sub: "Alt Metal", scale: "arena", price: "See listing", type: "verified", cta: "Get Tickets", source: "KTAR", link: "https://www.ticketmaster.com/a-perfect-circle-phoenix-arizona-06-13-2027/event/19006531CF4A92C7" },
+  { date: "2027-06-16", title: "Papa Roach w/ Ice Nine Kills", venue: "Talking Stick Resort Amphitheatre", city: "Scottsdale", genre: "rock", sub: "Nu Metal", scale: "arena", price: "See listing", type: "verified", cta: "Get Tickets", source: "KTAR", link: "https://www.ticketmaster.com/papa-roach-rise-of-the-roach-phoenix-arizona-06-16-2027/event/1900654EB704651E" },
+  { date: "2027-08-18", title: "Slipknot w/ Bring Me The Horizon, Motionless in White", venue: "Chase Field", city: "Phoenix", genre: "metal", sub: "Nu Metal", scale: "arena", price: "See listing", type: "verified", cta: "Get Tickets", source: "KTAR", link: "https://www.mlb.com/dbacks/ballpark/events/upcoming/slipknot" },
+  { date: "2026-10-23", title: "E.N Young & Imperial Sound w/ Jahtiva, Tomorrows Bad Seeds", venue: "Nile Theater", city: "Mesa", genre: "pop", sub: "Reggae", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43390117-en-young-and-imperial-sound-at-nile-theater" },
+  { date: "2026-10-25", title: "Dead Poet Society & Honey Revenge w/ Broadside", venue: "Nile Theater", city: "Mesa", genre: "rock", sub: "Alt Rock", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43341714-dead-poet-society-at-nile-theater" },
+  { date: "2026-10-25", title: "Jay Roxxx", venue: "Nile Theater", city: "Mesa", genre: "pop", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43328598-jay-roxxx-at-nile-theater" },
+  { date: "2026-10-29", title: "VOILÀ & Ella Red w/ Weathers", venue: "Nile Theater", city: "Mesa", genre: "rock", sub: "Alt Pop-Rock", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43248714-voila-at-nile-theater" },
+  { date: "2026-10-29", title: "Worst Party Ever, Equipment, Ogbert the Nerd, Flight Patterns", venue: "Nile Theater", city: "Mesa", genre: "rock", sub: "Pop Punk", scale: "club", price: "All ages", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://wl.eventim.us/event/worst-party-ever/701794?afflky=TheNileTheater" },
+  { date: "2026-10-30", title: "INOHA w/ Buddha Trixie, Flight by Nothing", venue: "Nile Theater", city: "Mesa", genre: "pop", sub: "Alt Pop", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43289732-inoha-at-nile-theater" },
+  { date: "2026-10-30", title: "Gully Boys & Pollyanna", venue: "Nile Theater", city: "Mesa", genre: "rock", sub: "Punk", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43314852-gully-boys-at-nile-theater" },
+  { date: "2026-10-31", title: "Havok w/ Xoth, Hellripper, Slackjaw", venue: "Nile Theater", city: "Mesa", genre: "metal", sub: "Thrash Metal", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43375880-havok-at-nile-theater" },
+  { date: "2026-11-04", title: "Metal Church & Armored Saint w/ LiveKill", venue: "Nile Theater", city: "Mesa", genre: "metal", sub: "Heavy Metal", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43240692-metal-church-at-nile-theater" },
+  { date: "2026-11-05", title: "Bleood", venue: "Nile Theater", city: "Mesa", genre: "rock", scale: "club", price: "$27.50-112.50 · All ages", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://www.tixr.com/groups/relentlessbeats/events/bleood-203528" },
+  { date: "2026-11-07", title: "Suicide Silence w/ Synestia, AngelMaker, Emmure", venue: "Nile Theater", city: "Mesa", genre: "metal", sub: "Deathcore", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43333513-suicide-silence-at-nile-theater" },
+  { date: "2026-11-10", title: "Turnover & Trauma Ray", venue: "Nile Theater", city: "Mesa", genre: "rock", sub: "Dream Pop / Indie", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43335634-turnover-at-nile-theater" },
+  { date: "2026-11-14", title: "Sparta & Public Opinion", venue: "Nile Theater", city: "Mesa", genre: "rock", sub: "Post-Hardcore", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43373892-sparta-at-nile-theater" },
+  { date: "2026-11-16", title: "cupcakKe", venue: "Nile Theater", city: "Mesa", genre: "hiphop", sub: "Rap", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43369258-cupcakke-at-nile-theater" },
+  { date: "2026-11-17", title: "Lucy Bedroque w/ pinponpanpon", venue: "Nile Theater", city: "Mesa", genre: "pop", sub: "Hyperpop", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43371663-lucy-bedroque-at-nile-theater" },
+  { date: "2026-11-18", title: "Static Dress w/ Car Underwater, sherane, I Promised the World", venue: "Nile Theater", city: "Mesa", genre: "rock", sub: "Post-Hardcore", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43373834-static-dress-at-nile-theater" },
+  { date: "2026-11-19", title: "Boston Manor w/ Ben Quad", venue: "Nile Theater", city: "Mesa", genre: "rock", sub: "Pop Punk / Alt Rock", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43238003-boston-manor-at-nile-theater" },
+  { date: "2026-11-21", title: "Worry Club & The Wrecks w/ Kid Sistr", venue: "Nile Theater", city: "Mesa", genre: "rock", sub: "Pop Punk / Indie Pop", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43289741-worry-club-at-nile-theater" },
+  { date: "2026-11-24", title: "George Clanton", venue: "Nile Theater", city: "Mesa", genre: "pop", sub: "Chillwave / Vaporwave", scale: "club", price: "See listing", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://wl.eventim.us/event/george-clanton/700766?afflky=BestLifePresents" },
+  { date: "2026-11-25", title: "Thoughts on Bowling & MooseCreek Park w/ HummusVacuum", venue: "Nile Theater", city: "Mesa", genre: "rock", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43371951-thoughts-on-bowling-at-nile-theater" },
+  { date: "2026-12-03", title: "Born of Osiris, Miss May I, Convictions w/ Downswing", venue: "Nile Theater", city: "Mesa", genre: "metal", sub: "Progressive Deathcore", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43364258-born-of-osiris-at-nile-theater" },
+  { date: "2026-12-05", title: "Whitey Morgan and the 78's", venue: "Nile Theater", city: "Mesa", genre: "country", sub: "Outlaw Country", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43411725-whitey-morgan-and-the-78s-at-nile-theater" },
+  { date: "2026-12-06", title: "Insomnium & Amorphis w/ Hinayana", venue: "Nile Theater", city: "Mesa", genre: "metal", sub: "Melodic Death Metal", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43394460-insomnium-at-nile-theater" },
+  { date: "2026-12-10", title: "The Format", venue: "Nile Theater", city: "Mesa", genre: "rock", sub: "Power Pop", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43464114-format-at-nile-theater" },
+  { date: "2026-12-11", title: "The Format (night 2)", venue: "Nile Theater", city: "Mesa", genre: "rock", sub: "Power Pop", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43464118-format-at-nile-theater" },
+  { date: "2026-12-13", title: "BigBabyGucci", venue: "Nile Theater", city: "Mesa", genre: "hiphop", sub: "Rage / Trap", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43447643-bigbabygucci-at-nile-theater" },
+  { date: "2026-12-16", title: "Hunxho", venue: "Nile Theater", city: "Mesa", genre: "hiphop", sub: "Southern Rap", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43430548-hunxho-at-nile-theater" },
+  { date: "2027-01-08", title: "Mustard Plug w/ The Planet Smashers, the venomous pinks", venue: "Nile Theater", city: "Mesa", genre: "rock", sub: "Ska Punk", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43465593-mustard-plug-at-nile-theater" },
+  { date: "2027-01-22", title: "TesseracT w/ Entheos, Sunbörn", venue: "Nile Theater", city: "Mesa", genre: "metal", sub: "Djent / Prog Metal", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43454403-tesseract-at-nile-theater" },
+  { date: "2027-02-05", title: "Wolves In the Throne Room w/ Stygian Bough, Spirit Possession", venue: "Nile Theater", city: "Mesa", genre: "metal", sub: "Atmospheric Black Metal", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43453246-wolves-in-the-throne-room-at-nile-theater" },
+  { date: "2027-02-11", title: "Naethan Apollo", venue: "Nile Theater", city: "Mesa", genre: "pop", sub: "Pop", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43464096-naethan-apollo-at-nile-theater" },
+  { date: "2027-02-14", title: "Northlane w/ Reliqa, ALLT, Aviana", venue: "Nile Theater", city: "Mesa", genre: "metal", sub: "Progressive Metalcore", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43438902-northlane-at-nile-theater" },
+  { date: "2027-03-06", title: "Eluveitie & Ni-Ni", venue: "Nile Theater", city: "Mesa", genre: "metal", sub: "Folk Metal", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43417744-eluveitie-at-nile-theater" },
+  { date: "2027-03-10", title: "Coroner & Nile w/ Syn Absence", venue: "Nile Theater", city: "Mesa", genre: "metal", sub: "Technical Thrash", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43419988-coroner-at-nile-theater" },
+  { date: "2027-03-18", title: "VNV Nation", venue: "Nile Theater", city: "Mesa", genre: "pop", sub: "Futurepop / EBM", scale: "club", price: "$40.21 · All ages", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://wl.eventim.us/event/VNV-Nation/696463?afflky=TheNileTheater" },
+  { date: "2026-10-19", title: "Paradox & The Paradox Band w/ Meet Me @ The Altar", venue: "The Rebel Lounge", city: "Phoenix", genre: "rock", sub: "Pop Punk", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43277617-paradox-at-rebel-lounge" },
+  { date: "2026-10-20", title: "Pertinence w/ Pariah Pete", venue: "The Rebel Lounge", city: "Phoenix", genre: "rock", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43196361-pertinence-at-rebel-lounge" },
+  { date: "2026-10-21", title: "Juice w/ Lovetrain", venue: "The Rebel Lounge", city: "Phoenix", genre: "rock", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43321031-juice-at-rebel-lounge" },
+  { date: "2026-10-22", title: "Kyle Gordon w/ Mojohand", venue: "The Rebel Lounge", city: "Phoenix", genre: "pop", sub: "Pop Parody", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43470574-kyle-gordon-at-rebel-lounge" },
+  { date: "2026-10-23", title: "Daley", venue: "The Rebel Lounge", city: "Phoenix", genre: "hiphop", sub: "R&B / Soul", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43275342-daley-at-rebel-lounge" },
+  { date: "2026-10-25", title: "Justin Nozuka", venue: "The Rebel Lounge", city: "Phoenix", genre: "pop", sub: "Singer-Songwriter", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43240666-justin-nozuka-at-rebel-lounge" },
+  { date: "2026-10-26", title: "Flying Tuna Can", venue: "The Rebel Lounge", city: "Phoenix", genre: "rock", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43411638-flying-tuna-can-at-rebel-lounge" },
+  { date: "2026-10-27", title: "Improvement Movement", venue: "The Rebel Lounge", city: "Phoenix", genre: "pop", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43321961-improvement-movement-at-rebel-lounge" },
+  { date: "2026-10-28", title: "Lauren Sanderson w/ Xkylar", venue: "The Rebel Lounge", city: "Phoenix", genre: "hiphop", sub: "Pop Rap", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43248726-lauren-sanderson-at-rebel-lounge" },
+  { date: "2026-10-29", title: "MISSIO, Kent Osborne, Fifteen0eight", venue: "The Rebel Lounge", city: "Phoenix", genre: "rock", sub: "Alt Pop", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43365911-missio-at-rebel-lounge" },
+  { date: "2026-10-30", title: "Sad & Boujee w/ Sorry X", venue: "The Rebel Lounge", city: "Phoenix", genre: "rock", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43389419-sad-and-boujee-at-rebel-lounge" },
+  { date: "2026-10-31", title: "The Rock and Roll Playhouse", venue: "The Rebel Lounge", city: "Phoenix", genre: "rock", sub: "Family Tribute", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43432797-rock-and-roll-playhouse-at-rebel-lounge" },
+  { date: "2026-10-31", title: "SPIN LIZZY & Desire Armed", venue: "The Rebel Lounge", city: "Phoenix", genre: "rock", sub: "Thin Lizzy Tribute", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43445729-spin-lizzy-at-rebel-lounge" },
+  { date: "2026-11-01", title: "Agriculture w/ Uniform, Pure Hex", venue: "The Rebel Lounge", city: "Phoenix", genre: "metal", sub: "Ecstatic Black Metal", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43299981-agriculture-at-rebel-lounge" },
+  { date: "2026-11-03", title: "Surprise Chef", venue: "The Rebel Lounge", city: "Phoenix", genre: "jazz", sub: "Funk / Soul Jazz", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43361791-surprise-chef-at-rebel-lounge" },
+  { date: "2026-11-05", title: "Chrissy Chlapecka", venue: "The Rebel Lounge", city: "Phoenix", genre: "pop", sub: "Dance-Pop", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43312493-chrissy-chlapecka-at-rebel-lounge" },
+  { date: "2026-11-06", title: "Archetypes Collide w/ At My Mercy, Gemm, CZYK", venue: "The Rebel Lounge", city: "Phoenix", genre: "rock", sub: "Post-Hardcore", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43423684-archetypes-collide-at-rebel-lounge" },
+  { date: "2026-11-07", title: "Taylor Bickett w/ OSTON, MORI", venue: "The Rebel Lounge", city: "Phoenix", genre: "pop", sub: "Singer-Songwriter", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43206101-taylor-bickett-at-rebel-lounge" },
+  { date: "2026-11-08", title: "Sitting on Saturn", venue: "The Rebel Lounge", city: "Phoenix", genre: "rock", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43373910-sitting-on-saturn-at-rebel-lounge" },
+  { date: "2026-11-09", title: "We Are Scientists", venue: "The Rebel Lounge", city: "Phoenix", genre: "rock", sub: "Indie Rock", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43274871-we-are-scientists-at-rebel-lounge" },
+  { date: "2026-11-10", title: "Waves In April w/ Smelling Salts", venue: "The Rebel Lounge", city: "Phoenix", genre: "rock", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43455159-waves-in-april-at-rebel-lounge" },
+  { date: "2026-11-12", title: "Dave Hause w/ crimewave 66, Ghost in the Willow", venue: "The Rebel Lounge", city: "Phoenix", genre: "rock", sub: "Punk / Heartland Rock", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43201865-dave-hause-at-rebel-lounge" },
+  { date: "2026-11-13", title: "Violet Grohl w/ Suzy Clue", venue: "The Rebel Lounge", city: "Phoenix", genre: "rock", sub: "Indie Rock", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43247233-violet-grohl-at-rebel-lounge" },
+  { date: "2026-11-14", title: "Slothrust", venue: "The Rebel Lounge", city: "Phoenix", genre: "rock", sub: "Alt Rock / Grunge", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43281652-slothrust-at-rebel-lounge" },
+  { date: "2026-11-15", title: "Stop Light Observations w/ Runner and Bobby", venue: "The Rebel Lounge", city: "Phoenix", genre: "rock", sub: "Indie Soul", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43251947-stop-light-observations-at-rebel-lounge" },
+  { date: "2026-11-19", title: "Ayria", venue: "The Rebel Lounge", city: "Phoenix", genre: "techno", sub: "Industrial / Electropop", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43338928-ayria-at-rebel-lounge" },
+  { date: "2026-11-20", title: "Broadway Rave", venue: "The Rebel Lounge", city: "Phoenix", genre: "house", sub: "Themed Dance Party", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43394425-broadway-rave-at-rebel-lounge" },
+  { date: "2026-11-22", title: "Adam Doleac", venue: "The Rebel Lounge", city: "Phoenix", genre: "country", sub: "Country Pop", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43353755-adam-doleac-at-rebel-lounge" },
+  { date: "2026-11-23", title: "LAdrones", venue: "The Rebel Lounge", city: "Phoenix", genre: "rock", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43417727-ladrones-at-rebel-lounge" },
+  { date: "2026-11-24", title: "Strawberry Girls w/ Andres", venue: "The Rebel Lounge", city: "Phoenix", genre: "rock", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43446938-strawberry-girls-at-rebel-lounge" },
+  { date: "2026-11-25", title: "Jejune w/ The Ritornello Form", venue: "The Rebel Lounge", city: "Phoenix", genre: "rock", sub: "Emo / Indie Rock", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43431074-jejune-at-rebel-lounge" },
+  { date: "2026-11-27", title: "All Your Friends", venue: "The Rebel Lounge", city: "Phoenix", genre: "rock", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43429241-all-your-friends-at-rebel-lounge" },
+  { date: "2026-11-29", title: "N8NoFace & Ho99o9 w/ Slay Squad", venue: "The Rebel Lounge", city: "Phoenix", genre: "hiphop", sub: "Punk Rap", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43312506-n8noface-at-rebel-lounge" },
+  { date: "2026-12-02", title: "One Way Sky w/ iiwaa, Mogley and the Zoniez", venue: "The Rebel Lounge", city: "Phoenix", genre: "rock", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43458775-one-way-sky-at-rebel-lounge" },
+  { date: "2026-12-03", title: "Babe Haven w/ Spaced, Scarlet DeMore", venue: "The Rebel Lounge", city: "Phoenix", genre: "rock", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43275443-babe-haven-at-rebel-lounge" },
+  { date: "2026-12-06", title: "Silk Stockings", venue: "The Rebel Lounge", city: "Phoenix", genre: "rock", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43435505-silk-stockings-at-rebel-lounge" },
+  { date: "2026-12-08", title: "Foreign Hands", venue: "The Rebel Lounge", city: "Phoenix", genre: "metal", sub: "Deathcore", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43469735-foreign-hands-at-rebel-lounge" },
+  { date: "2026-12-09", title: "Tantric w/ Illumina A.D.", venue: "The Rebel Lounge", city: "Phoenix", genre: "rock", sub: "Post-Grunge", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43439257-tantric-at-rebel-lounge" },
+  { date: "2026-12-12", title: "Gimme Gimme Disco", venue: "The Rebel Lounge", city: "Phoenix", genre: "pop", sub: "Disco / ABBA Tribute", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43441777-gimme-gimme-disco-at-rebel-lounge" },
+  { date: "2026-12-16", title: "Mini Trees", venue: "The Rebel Lounge", city: "Phoenix", genre: "rock", sub: "Alt Rock", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43394469-mini-trees-at-rebel-lounge" },
+  { date: "2026-12-19", title: "Sad & Boujee", venue: "The Rebel Lounge", city: "Phoenix", genre: "rock", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43431098-sad-and-boujee-at-rebel-lounge" },
+  { date: "2027-01-07", title: "93FEETOFSMOKE w/ Fats'e, smrtdeath, polearm, swords2, awesomecat2011", venue: "The Rebel Lounge", city: "Phoenix", genre: "hiphop", sub: "Underground Rap", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43450482-93feetofsmoke-at-rebel-lounge" },
+  { date: "2027-01-08", title: "Media w/ Lead Into Gold, US Grave", venue: "The Rebel Lounge", city: "Phoenix", genre: "rock", sub: "Industrial Rock", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43468029-media-at-rebel-lounge" },
+  { date: "2027-01-09", title: "Chris Simpson", venue: "The Rebel Lounge", city: "Phoenix", genre: "pop", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43444104-chris-simpson-at-rebel-lounge" },
+  { date: "2026-10-19", title: "Protomartyr w/ Accessory", venue: "Crescent Ballroom", city: "Phoenix", genre: "rock", sub: "Post-Punk", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43315044-protomartyr-at-crescent-ballroom" },
+  { date: "2026-10-20", title: "Joy Oladokun", venue: "Crescent Ballroom", city: "Phoenix", genre: "pop", sub: "Folk Pop", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43341275-joy-oladokun-at-crescent-ballroom" },
+  { date: "2026-10-21", title: "Kishi Bashi", venue: "Crescent Ballroom", city: "Phoenix", genre: "pop", sub: "Art Pop", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43127163-kishi-bashi-at-crescent-ballroom" },
+  { date: "2026-10-22", title: "Amble", venue: "Crescent Ballroom", city: "Phoenix", genre: "pop", sub: "Indie Folk", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43274534-amble-at-crescent-ballroom" },
+  { date: "2026-10-23", title: "THE WLDLFE w/ Landon Conrath", venue: "Crescent Ballroom", city: "Phoenix", genre: "rock", sub: "Indie Rock", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43287624-wldlfe-at-crescent-ballroom" },
+  { date: "2026-10-24", title: "Ax and the Hatchetmen w/ The Rare Occasions", venue: "Crescent Ballroom", city: "Phoenix", genre: "rock", sub: "Punk / Alt Rock", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43225864-ax-and-the-hatchetmen-at-crescent-ballroom" },
+  { date: "2026-10-25", title: "Sawyer Hill", venue: "Crescent Ballroom", city: "Phoenix", genre: "pop", sub: "Folk / Singer-Songwriter", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43261419-sawyer-hill-at-crescent-ballroom" },
+  { date: "2026-10-26", title: "City of the Sun", venue: "Crescent Ballroom", city: "Phoenix", genre: "rock", sub: "Instrumental Post-Rock", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43322688-city-of-the-sun-at-crescent-ballroom" },
+  { date: "2026-10-27", title: "Blessing Offor", venue: "Crescent Ballroom", city: "Phoenix", genre: "hiphop", sub: "Gospel Soul", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43333243-blessing-offor-at-crescent-ballroom" },
+  { date: "2026-10-28", title: "Failure", venue: "Crescent Ballroom", city: "Phoenix", genre: "rock", sub: "Space Rock", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43170779-failure-at-crescent-ballroom" },
+  { date: "2026-10-29", title: "The Black Angels w/ Ghostwoman", venue: "Crescent Ballroom", city: "Phoenix", genre: "rock", sub: "Psychedelic Rock", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43162353-black-angels-at-crescent-ballroom" },
+  { date: "2026-10-30", title: "Emo Nite", venue: "Crescent Ballroom", city: "Phoenix", genre: "rock", sub: "Emo Night", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43417411-emo-nite-at-crescent-ballroom" },
+  { date: "2026-10-31", title: "Slow Pulp w/ Snuggle", venue: "Crescent Ballroom", city: "Phoenix", genre: "rock", sub: "Indie Rock", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43208640-slow-pulp-at-crescent-ballroom" },
+  { date: "2026-11-01", title: "Clejan w/ DAMOYEE", venue: "Crescent Ballroom", city: "Phoenix", genre: "pop", sub: "Alt Pop", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43346834-clejan-at-crescent-ballroom" },
+  { date: "2026-11-02", title: "The Wildwoods", venue: "Crescent Ballroom", city: "Phoenix", genre: "pop", sub: "Indie Folk", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43315834-wildwoods-at-crescent-ballroom" },
+  { date: "2026-11-03", title: "Stella Lefty", venue: "Crescent Ballroom", city: "Phoenix", genre: "rock", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43227745-stella-lefty-at-crescent-ballroom" },
+  { date: "2026-11-04", title: "Armand Hammer", venue: "Crescent Ballroom", city: "Phoenix", genre: "hiphop", sub: "Abstract Hip-Hop", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/42976898-armand-hammer-at-crescent-ballroom" },
+  { date: "2026-11-05", title: "Olivia O'Brien — The Pixie Tour", venue: "Crescent Ballroom", city: "Phoenix", genre: "pop", sub: "Alt Pop", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43246464-olivia-obrien-at-crescent-ballroom" },
+  { date: "2026-11-06", title: "bunii", venue: "Crescent Ballroom", city: "Phoenix", genre: "pop", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43375366-bunii-at-crescent-ballroom" },
+  { date: "2026-11-07", title: "Stephen Day w/ Emily Brimlow", venue: "Crescent Ballroom", city: "Phoenix", genre: "pop", sub: "Singer-Songwriter", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43259722-stephen-day-at-crescent-ballroom" },
+  { date: "2026-11-08", title: "Helado Negro", venue: "Crescent Ballroom", city: "Phoenix", genre: "pop", sub: "Art Pop / Latin Electronic", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43270935-helado-negro-at-crescent-ballroom" },
+  { date: "2026-11-09", title: "Luke Kidgell", venue: "Crescent Ballroom", city: "Phoenix", genre: "pop", sub: "Singer-Songwriter", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43270923-luke-kidgell-at-crescent-ballroom" },
+  { date: "2026-11-10", title: "King Buffalo w/ L.A. Witch", venue: "Crescent Ballroom", city: "Phoenix", genre: "rock", sub: "Psych / Stoner Rock", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43224147-king-buffalo-at-crescent-ballroom" },
+  { date: "2026-11-11", title: "The Army, The Navy w/ Ella Woolsey", venue: "Crescent Ballroom", city: "Phoenix", genre: "rock", sub: "Indie Rock", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43269541-army-the-navy-at-crescent-ballroom" },
+  { date: "2026-11-12", title: "The Underachievers", venue: "Crescent Ballroom", city: "Phoenix", genre: "hiphop", sub: "Alt Hip-Hop", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43419384-underachievers-at-crescent-ballroom" },
+  { date: "2026-11-13", title: "Aterciopelados", venue: "Crescent Ballroom", city: "Phoenix", genre: "rock", sub: "Rock en Español", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43343423-aterciopelados-at-crescent-ballroom" },
+  { date: "2026-11-15", title: "John Craigie w/ Lucy Clearwater", venue: "Crescent Ballroom", city: "Phoenix", genre: "country", sub: "Folk / Americana", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43341213-john-craigie-at-crescent-ballroom" },
+  { date: "2026-11-17", title: "Tank and the Bangas", venue: "Crescent Ballroom", city: "Phoenix", genre: "hiphop", sub: "Neo-Soul", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43116719-tank-and-the-bangas-at-crescent-ballroom" },
+  { date: "2026-11-20", title: "Sueco w/ Port London", venue: "Crescent Ballroom", city: "Phoenix", genre: "rock", sub: "Pop Punk", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43323166-sueco-at-crescent-ballroom" },
+  { date: "2026-11-22", title: "As I Lay Dying", venue: "Crescent Ballroom", city: "Phoenix", genre: "metal", sub: "Metalcore", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43212315-as-i-lay-dying-at-crescent-ballroom" },
+  { date: "2026-11-24", title: "Pretty Sick", venue: "Crescent Ballroom", city: "Phoenix", genre: "rock", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43365409-pretty-sick-at-crescent-ballroom" },
+  { date: "2026-12-01", title: "Ripe", venue: "Crescent Ballroom", city: "Phoenix", genre: "rock", sub: "Indie Pop-Rock", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43389139-ripe-at-crescent-ballroom" },
+  { date: "2026-12-05", title: "The Pineapple Thief", venue: "Crescent Ballroom", city: "Phoenix", genre: "rock", sub: "Progressive Rock", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43159284-pineapple-thief-at-crescent-ballroom" },
+  { date: "2026-12-10", title: "Rave Jesus", venue: "Crescent Ballroom", city: "Phoenix", genre: "house", sub: "Christian EDM", scale: "club", price: "$37.33", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://www.ticketweb.com/event/id/14291264" },
+  { date: "2026-12-13", title: "Strike", venue: "Crescent Ballroom", city: "Phoenix", genre: "rock", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43405185-strike-at-crescent-ballroom" },
+  { date: "2026-12-15", title: "Venna (UK)", venue: "Crescent Ballroom", city: "Phoenix", genre: "pop", sub: "Alt Pop", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43361987-venna-uk-at-crescent-ballroom" },
+  { date: "2026-12-16", title: "Yaelokre w/ Ben Caplan", venue: "Crescent Ballroom", city: "Phoenix", genre: "rock", sub: "Folk Rock", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43281755-yaelokre-at-crescent-ballroom" },
+  { date: "2026-12-19", title: "Eyes Set to Kill w/ Sicksense, Twist It, Sorry X", venue: "Crescent Ballroom", city: "Phoenix", genre: "metal", sub: "Metalcore", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43343464-eyes-set-to-kill-at-crescent-ballroom" },
+  { date: "2027-01-26", title: "Winona Fighter", venue: "Crescent Ballroom", city: "Phoenix", genre: "rock", sub: "Pop Punk", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43456040-winona-fighter-at-crescent-ballroom" },
+  { date: "2027-01-27", title: "Vansire w/ eliza mclamb", venue: "Crescent Ballroom", city: "Phoenix", genre: "pop", sub: "Bedroom Pop", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43341751-vansire-at-crescent-ballroom" },
+  { date: "2027-01-28", title: "Ballyhoo!", venue: "Crescent Ballroom", city: "Phoenix", genre: "rock", sub: "Reggae Rock", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43443815-ballyhoo-at-crescent-ballroom" },
+  { date: "2027-02-12", title: "AJJ", venue: "Crescent Ballroom", city: "Phoenix", genre: "rock", sub: "Folk Punk", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43355177-ajj-at-crescent-ballroom" },
+  { date: "2027-02-23", title: "Jack Kays", venue: "Crescent Ballroom", city: "Phoenix", genre: "pop", sub: "Pop Punk", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43438042-jack-kays-at-crescent-ballroom" },
+  { date: "2027-02-27", title: "The Lemonheads", venue: "Crescent Ballroom", city: "Phoenix", genre: "rock", sub: "Alt Rock", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43416796-lemonheads-at-crescent-ballroom" },
+  { date: "2027-03-01", title: "Rayland Baxter", venue: "Crescent Ballroom", city: "Phoenix", genre: "rock", sub: "Folk Rock", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43428830-rayland-baxter-at-crescent-ballroom" },
+  { date: "2027-03-03", title: "Valley w/ Moody Joody", venue: "Crescent Ballroom", city: "Phoenix", genre: "pop", sub: "Indie Pop", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43423403-valley-at-crescent-ballroom" },
+  { date: "2027-03-04", title: "James Marriott", venue: "Crescent Ballroom", city: "Phoenix", genre: "pop", sub: "Singer-Songwriter", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43426078-james-marriott-at-crescent-ballroom" },
+  { date: "2027-03-07", title: "Alex Sampson", venue: "Crescent Ballroom", city: "Phoenix", genre: "pop", sub: "Singer-Songwriter", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43472313-alex-sampson-at-crescent-ballroom" },
+  { date: "2027-03-11", title: "Ruby Waters", venue: "Crescent Ballroom", city: "Phoenix", genre: "pop", sub: "Alt Pop", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43472610-ruby-waters-at-crescent-ballroom" },
+  { date: "2026-10-23", title: "Bingo Loco", venue: "Marquee Theatre", city: "Tempe", genre: "rock", sub: "Party Band", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43363861-bingo-loco-at-marquee-theatre" },
+  { date: "2026-10-24", title: "Saosin w/ Silent Planet, Like Moths to Flames, Save Us", venue: "Marquee Theatre", city: "Tempe", genre: "rock", sub: "Post-Hardcore", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43212386-saosin-at-marquee-theatre" },
+  { date: "2026-10-27", title: "AFI w/ Choir Boy", venue: "Marquee Theatre", city: "Tempe", genre: "rock", sub: "Punk / Goth Rock", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43195526-afi-at-marquee-theatre" },
+  { date: "2026-10-29", title: "Dizgo", venue: "Marquee Theatre", city: "Tempe", genre: "pop", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43271486-dizgo-at-marquee-theatre" },
+  { date: "2026-10-30", title: "Wage War w/ We Came As Romans, Varials, Cane Hill", venue: "Marquee Theatre", city: "Tempe", genre: "metal", sub: "Metalcore", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43263220-wage-war-at-marquee-theatre" },
+  { date: "2026-11-01", title: "Catch Your Breath w/ TX2, Arankai, Colorblind", venue: "Marquee Theatre", city: "Tempe", genre: "metal", sub: "Metalcore", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43244434-catch-your-breath-at-marquee-theatre" },
+  { date: "2026-11-04", title: "Paul Cauthen", venue: "Marquee Theatre", city: "Tempe", genre: "country", sub: "Country Soul", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43296332-paul-cauthen-at-marquee-theatre" },
+  { date: "2026-11-12", title: "A Vengeance", venue: "Marquee Theatre", city: "Tempe", genre: "rock", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43343742-a-vengeance-at-marquee-theatre" },
+  { date: "2026-11-13", title: "Baby Smoove", venue: "Marquee Theatre", city: "Tempe", genre: "hiphop", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43426053-baby-smoove-at-marquee-theatre" },
+  { date: "2026-11-14", title: "The Black Moods", venue: "Marquee Theatre", city: "Tempe", genre: "blues", sub: "Blues Rock", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43125106-black-moods-at-marquee-theatre" },
+  { date: "2026-11-15", title: "Donavon Frankenreiter w/ The Band of Heathens", venue: "Marquee Theatre", city: "Tempe", genre: "rock", sub: "Surf Folk", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43341119-donavon-frankenreiter-at-marquee-theatre" },
+  { date: "2026-11-17", title: "Gwar", venue: "Marquee Theatre", city: "Tempe", genre: "metal", sub: "Shock Metal", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43163235-gwar-at-marquee-theatre" },
+  { date: "2026-11-20", title: "Isaiah Rashad", venue: "Marquee Theatre", city: "Tempe", genre: "hiphop", sub: "Southern Hip-Hop", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43407717-isaiah-rashad-at-marquee-theatre" },
+  { date: "2026-12-03", title: "Giovannie and the Hired Guns", venue: "Marquee Theatre", city: "Tempe", genre: "rock", sub: "Southern Rock", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43313753-giovannie-and-the-hired-guns-at-marquee-theatre" },
+  { date: "2026-12-04", title: "Thee Phantom", venue: "Marquee Theatre", city: "Tempe", genre: "rock", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43334215-thee-phantom-at-marquee-theatre" },
+  { date: "2026-12-05", title: "Night Lovell", venue: "Marquee Theatre", city: "Tempe", genre: "hiphop", sub: "Dark Trap", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43437673-night-lovell-at-marquee-theatre" },
+  { date: "2026-12-11", title: "Earlybirds Club", venue: "Marquee Theatre", city: "Tempe", genre: "pop", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43453078-earlybirds-club-at-marquee-theatre" },
+  { date: "2026-12-12", title: "Bingo Loco", venue: "Marquee Theatre", city: "Tempe", genre: "rock", sub: "Party Band", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43423948-bingo-loco-at-marquee-theatre" },
+  { date: "2026-12-15", title: "The Grouch & Eligh w/ Brother Ali, Amp Live, Lyrics Born", venue: "Marquee Theatre", city: "Tempe", genre: "hiphop", sub: "Underground Hip-Hop", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43398397-grouch-and-eligh-at-marquee-theatre" },
+  { date: "2027-01-02", title: "Atomic Punks", venue: "Marquee Theatre", city: "Tempe", genre: "rock", sub: "Van Halen Tribute", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43423474-atomic-punks-at-marquee-theatre" },
+  { date: "2027-01-08", title: "Mickey Avalon", venue: "Marquee Theatre", city: "Tempe", genre: "hiphop", sub: "Hip-Hop", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43435274-mickey-avalon-at-marquee-theatre" },
+  { date: "2027-01-16", title: "Leftover Salmon w/ Keller Williams", venue: "Marquee Theatre", city: "Tempe", genre: "country", sub: "Jamgrass", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43441157-leftover-salmon-at-marquee-theatre" },
+  { date: "2027-01-23", title: "Dogs in a Pile", venue: "Marquee Theatre", city: "Tempe", genre: "rock", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43463895-dogs-in-a-pile-at-marquee-theatre" },
+  { date: "2027-02-02", title: "Death from Above 1979", venue: "Marquee Theatre", city: "Tempe", genre: "rock", sub: "Dance-Punk", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43226391-death-from-above-1979-at-marquee-theatre" },
+  { date: "2027-02-03", title: "Dark Star Orchestra", venue: "Marquee Theatre", city: "Tempe", genre: "rock", sub: "Grateful Dead Tribute", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43441217-dark-star-orchestra-at-marquee-theatre" },
+  { date: "2027-02-06", title: "Dropkick Murphys w/ The Home Front, Spiritual Cramp", venue: "Marquee Theatre", city: "Tempe", genre: "rock", sub: "Celtic Punk", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43438520-dropkick-murphys-at-marquee-theatre" },
+  { date: "2027-03-05", title: "Anthony Gomes", venue: "Marquee Theatre", city: "Tempe", genre: "blues", sub: "Blues Rock", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43419728-anthony-gomes-at-marquee-theatre" },
+  { date: "2027-03-11", title: "Michelle Branch", venue: "Marquee Theatre", city: "Tempe", genre: "pop", sub: "Pop Rock", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43373439-michelle-branch-at-marquee-theatre" },
+  { date: "2027-03-12", title: "Wheeler Walker, Jr.", venue: "Marquee Theatre", city: "Tempe", genre: "country", sub: "Outlaw Country", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43271915-wheeler-walker-jr-at-marquee-theatre" },
+  { date: "2027-03-19", title: "The Interrupters w/ Mainliners", venue: "Marquee Theatre", city: "Tempe", genre: "rock", sub: "Ska Punk", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43429069-interrupters-at-marquee-theatre" },
+  { date: "2027-05-19", title: "Powerman 2027 — Powerman 5000 & Aesthetic Perfection", venue: "Marquee Theatre", city: "Tempe", genre: "metal", sub: "Industrial Metal", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/festivals/1179558-powerman/id/43428787-powerman-2027" },
+  { date: "2026-10-19", title: "Edgehill — The Moving Out Tour", venue: "Valley Bar", city: "Phoenix", genre: "rock", scale: "club", price: "21+", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://www.ticketweb.com/event/edgehill-the-moving-valley-bar-tickets/14915773?REFERRAL_ID=twfb" },
+  { date: "2026-10-20", title: "Ghoul w/ Dry Socket", venue: "The Nile", city: "Mesa", genre: "metal", sub: "Thrash Metal", scale: "club", price: "All ages", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://wl.eventim.us/event/ghoul-dry-socket/703011?afflky=13thFloorEntertainment" },
+  { date: "2026-10-21", title: "Boy Harsher", venue: "The Van Buren", city: "Phoenix", genre: "techno", sub: "Darkwave", scale: "club", price: "See listing", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://www.ticketmaster.com/event/190064C4BDDD8109" },
+  { date: "2026-10-21", title: "Homestyle Dinner Rolls", venue: "Last Exit Live", city: "Phoenix", genre: "rock", scale: "club", price: "21+", type: "verified", cta: "Event Info", source: "19hz", link: "https://www.facebook.com/events/1700204597932944/" },
+  { date: "2026-10-21", title: "Jenna Davis", venue: "191 Toole", city: "Tucson", genre: "rock", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "19hz", link: "https://www.facebook.com/events/1027271873313323/" },
+  { date: "2026-10-22", title: "House Rewind", venue: "Stacy's at Melrose", city: "Phoenix", genre: "house", sub: "Disco / Throwback", scale: "club", price: "Free w/ RSVP", type: "verified", cta: "Event Info", source: "19hz", link: "https://partiful.com/e/y7Slgf3KyKeQlpy7Xvgi" },
+  { date: "2026-10-22", title: "4play", venue: "Club Contact", city: "Phoenix", genre: "house", scale: "club", price: "$6 · 21+", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://ra.co/events/2558452" },
+  { date: "2026-10-23", title: "Road To Dusk Battle Of The Bands", venue: "191 Toole", city: "Tucson", genre: "rock", sub: "Battle of the Bands", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "19hz", link: "https://www.facebook.com/events/1127638539738126/" },
+  { date: "2026-10-23", title: "Flip Phone Events: Butttootking", venue: "Walter Studios", city: "Phoenix", genre: "house", scale: "club", price: "See listing", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://wl.eventim.us/event/butttootking/690843?afflky=WalterStudios" },
+  { date: "2026-10-23", title: "Paul Oakenfold & The Crystal Method (Mission Underground)", venue: "Walter Where?House", city: "Phoenix", genre: "house", sub: "Breakbeat / Big Beat", scale: "club", price: "21+", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://wl.eventim.us/event/paul-oakenfold-and-the-crystal-method-mission-underground/699764?afflky=WalterWhereHouse" },
+  { date: "2026-10-23", title: "Debí Bailar Más Perreo (Bad Bunny Dance Night)", venue: "Club Contact", city: "Phoenix", genre: "hiphop", sub: "Reggaeton Night", scale: "club", price: "Free · 21+", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://ra.co/events/2512732" },
+  { date: "2026-10-23", title: "Recess w/ Synesthesia Fam Jam, Breauxx, Lugh Haurie, Nood", venue: "The Drop", city: "Phoenix", genre: "house", sub: "House / Techno", scale: "club", price: "$5-10 · 21+", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://thedropphx.com/events/recess-10-23" },
+  { date: "2026-10-23", title: "Blindluck Presents: Dead After Dark ft. Iku", venue: "Tarros Chicali", city: "Yuma", genre: "house", scale: "club", price: "21+", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://posh.vip/e/blindluck-presents-dead-after-dark" },
+  { date: "2026-10-23", title: "Pnk Party", venue: "Sunbar", city: "Tempe", genre: "house", scale: "club", price: "$22+ · 21+", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://www.tixr.com/groups/relentlessbeats/events/pnk-party-203721" },
+  { date: "2026-10-23", title: "Sisto", venue: "Sunbar", city: "Tempe", genre: "house", sub: "Tech House", scale: "club", price: "$9+ · 21+", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://www.tixr.com/groups/relentlessbeats/events/sisto-195852" },
+  { date: "2026-10-23", title: "Lost In Dreams Presents Sabai x Hoang", venue: "9th & Jackson", city: "Phoenix", genre: "bass", sub: "Future Bass", scale: "club", price: "$20 · 21+", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://www.tixr.com/groups/9thandjackson/events/lost-in-dreams-presents-sabai-x-hoang-196448" },
+  { date: "2026-10-24", title: "Breaks and Brews — Spooky Edition", venue: "Location TBA", city: "Phoenix", genre: "dnb", sub: "DnB Day Party", scale: "warehouse", price: "All ages · Rollout DNB AZ", type: "community", cta: "Event Page", source: "19hz", link: "https://posh.vip/f/e5124" },
+  { date: "2026-10-24", title: "Screen To Scream: Fun House 2026", venue: "Location TBA", city: "Chandler", genre: "house", sub: "Halloween Rave", scale: "warehouse", price: "$30 · 21+", type: "community", cta: "Event Page", source: "19hz", link: "https://ra.co/events/2546284" },
+  { date: "2026-10-24", title: "Paul Oakenfold + The Crystal Method", venue: "La Rosa", city: "Tucson", genre: "house", sub: "Breakbeat / Big Beat", scale: "club", price: "$40.48 · 21+", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://wl.eventim.us/event/paul-oakenfold-the-crystal-method/699825?afflky=LaRosaTucson" },
+  { date: "2026-10-24", title: "Enrgy", venue: "Walter Studios", city: "Phoenix", genre: "house", scale: "club", price: "See listing", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://prod-nts-api.seeticketsusa.us/v1.0.0/promote/473eceb8-0942-47af-bf18-e094116f304e/clickthru" },
+  { date: "2026-10-24", title: "Outtaspec! ft Terminal 11, Nullsleep, Polymyth, Deadski", venue: "Brick Box Brewery", city: "Tucson", genre: "techno", sub: "Chiptune / Electro", scale: "club", price: "$12.51 · 21+", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://www.eventbrite.com/e/outtaspec-feat-terminal-11-nullsleep-polymyth-deadski-tickets-2003035508125" },
+  { date: "2026-10-24", title: "MOBIIUS", venue: "The Drop", city: "Phoenix", genre: "house", scale: "club", price: "$20-25 · 21+", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://thedropphx.com/events/mobiius-10-24" },
+  { date: "2026-10-24", title: "Snakehips", venue: "Walter Where?House", city: "Phoenix", genre: "house", sub: "Funky House", scale: "club", price: "$23.76-32.03 · 21+", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://wl.eventim.us/event/snakehips-at-walter-wherehouse/702639?afflky=WalterWhereHouse" },
+  { date: "2026-10-24", title: "X Club", venue: "Warehouse 215", city: "Phoenix", genre: "techno", sub: "Breaks / Electro", scale: "warehouse", price: "$27 · 21+", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://www.tixr.com/groups/relentlessbeats/events/x-club-208507" },
+  { date: "2026-10-24", title: "Fang!", venue: "Walter Studios", city: "Phoenix", genre: "house", scale: "club", price: "21+", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://prod-nts-api.seeticketsusa.us/v1.0.0/promote/25468795-7d03-481c-b9d1-662f724db664/clickthru" },
+  { date: "2026-10-24", title: "Lan Party", venue: "Club Contact", city: "Phoenix", genre: "pop", scale: "club", price: "$6.96+ · 21+", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://wl.eventim.us/event/LAN-Party/698048?afflky=ClubContact" },
+  { date: "2026-10-24", title: "Stoned Level", venue: "Sunbar", city: "Tempe", genre: "bass", sub: "Dubstep", scale: "club", price: "$11+ · 21+", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://www.tixr.com/groups/relentlessbeats/events/stoned-level-205376" },
+  { date: "2026-10-24", title: "Fight Night", venue: "Warehouse 215", city: "Phoenix", genre: "house", scale: "warehouse", price: "$20-60 · 18+", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://www.tixr.com/groups/rbfestivals/events/fight-night-208396" },
+  { date: "2026-10-27", title: "Cardinal Bloom — Burn The House Tour", venue: "Last Exit Live", city: "Phoenix", genre: "rock", sub: "Indie Rock", scale: "club", price: "21+", type: "verified", cta: "Event Info", source: "19hz", link: "https://www.facebook.com/events/1018384211150600/" },
+  { date: "2026-10-29", title: "Rich Dietz @ Fuku", venue: "Fuku Sushi", city: "Tucson", genre: "house", sub: "Tech House", scale: "club", price: "21+ · Fetty Entertainment", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://posh.vip/e/rich-dietz-fuku-tucson" },
+  { date: "2026-10-29", title: "Tantrum Thursday ft Rayburger", venue: "Cry Baby Downtown", city: "Phoenix", genre: "house", sub: "Latin Dance / EDM", scale: "club", price: "21+", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://pear.us/crybaby/post/tantrum-thursday-ft-rayburger" },
+  { date: "2026-10-30", title: "Chris Stussy Halloween", venue: "Rawhide Event Center", city: "Chandler", genre: "house", sub: "Deep / Minimal House", scale: "club", price: "$29+ · 18+", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://www.tixr.com/groups/rbfestivals/events/chris-stassy-halloween-186128" },
+  { date: "2026-10-30", title: "Framework", venue: "Rawhide Event Center", city: "Chandler", genre: "house", scale: "club", price: "$29+ · 18+", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://www.tixr.com/groups/rbfestivals/events/framework-186128" },
+  { date: "2026-10-30", title: "Flipside Funhouse", venue: "Walter Studios", city: "Phoenix", genre: "house", scale: "club", price: "See listing", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://prod-nts-api.seeticketsusa.us/v1.0.0/promote/26ef9e95-0793-42ec-9563-7d5609e4ceb8/clickthru" },
+  { date: "2026-10-30", title: "Neon Indian (DJ Set)", venue: "Thunderbird Lounge", city: "Phoenix", genre: "pop", sub: "Chillwave", scale: "club", price: "$21.32 · 21+", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://www.ticketweb.com/event/id/15041723" },
+  { date: "2026-10-30", title: "Shrek Rave", venue: "Orpheum Theater", city: "Flagstaff", genre: "house", sub: "Meme Rave", scale: "club", price: "$38.43-67.55 · 18+", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://wl.eventim.us/event/shrek-rave/698988?afflky=OrpheumTheater" },
+  { date: "2026-10-30", title: "Rich Dietz", venue: "Bandos", city: "Flagstaff", genre: "house", sub: "Tech House", scale: "club", price: "21+ · Fetty Entertainment", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://posh.vip/e/rich-dietz-bandos-flagstaff" },
+  { date: "2026-10-31", title: "Insomnia Festival Vol 18", venue: "2136 West Fillmore Street", city: "Phoenix", genre: "techno", sub: "All-Night Festival", scale: "warehouse", price: "Free-$35 · 21+", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://shotgun.live/en/events/30th-lovision" },
+  { date: "2026-10-31", title: "Souls Festival — Afriqua (2-day pass)", venue: "Grass Clippings Rolling Hills", city: "Tempe", genre: "house", sub: "Afro House", scale: "arena", price: "$95.75", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://dice.fm/event/g5vgq6-souls-2-day-pass-31st-oct-grass-clippings-rolling-hills-tempe-tickets" },
+  { date: "2026-10-31", title: "Nightshift 001: Mile High Car Guy, Cama Leone, Gobln, Juan Wick", venue: "Location TBA", city: "Prescott", genre: "house", scale: "warehouse", price: "See listing", type: "community", cta: "Event Page", source: "19hz", link: "https://partiful.com/e/FGSSj7e6yBJrPEwKy5Uj?c=3iN-rQAb" },
+  { date: "2026-10-31", title: "Ragers Hollow III", venue: "The Phoenix Masonic Temple", city: "Phoenix", genre: "house", sub: "Halloween Rave", scale: "club", price: "$30-109 · 21+", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://www.eventbrite.com/e/down-low-ragers-hollow-iii-tickets-2001954417554" },
+  { date: "2026-10-31", title: "Blade Rave", venue: "Walter Studios", city: "Phoenix", genre: "house", sub: "Themed Rave", scale: "club", price: "$22.69-38.20 · 21+", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://wl.eventim.us/event/blade-rave/705883?afflky=WalterStudios" },
+  { date: "2026-10-31", title: "Emoween Tempe / Phoenix 2026", venue: "Sunbar", city: "Tempe", genre: "rock", sub: "Emo Night", scale: "club", price: "21+ · Emo Carnival", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://emoweentemp26.eventbrite.com/" },
+  { date: "2026-10-31", title: "Screamoween Tempe / Phoenix 2026", venue: "Sunbar", city: "Tempe", genre: "rock", sub: "Screamo / Emo Night", scale: "club", price: "Emo Carnival", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://screamtempe.eventbrite.com/" },
+  { date: "2026-10-31", title: "Club De Combat & Kidoo: Walter 17th Annual Halloween Costume Party", venue: "Walter Where?House", city: "Phoenix", genre: "house", sub: "Tech House / Minimal", scale: "club", price: "21+", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://wl.eventim.us/event/walter-halloween-costume-party-w-club-de-combat-and-kidoo/703241?afflky=WalterWhereHouse" },
+  { date: "2026-10-31", title: "Club Eternal — Halloween Night", venue: "Central Records", city: "Phoenix", genre: "techno", sub: "Goth / Industrial", scale: "club", price: "Free w/ RSVP · 21+", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://www.eventbrite.com/e/club-eternal-halloween-night-door-sales-only-tickets-2000007562458" },
+  { date: "2026-10-31", title: "Rave 2the Grave 6 w/ Gammer (UK), Rize, Emile, 20ft Neon Jesus, Nintiendo", venue: "Poe's Art House", city: "Tucson", genre: "bass", sub: "Hardcore Dance", scale: "warehouse", price: "$23.66-47.32", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://www.tickettailor.com/events/truvibecollective/2444459" },
+  { date: "2026-11-01", title: "DJ Tennis (Souls Day 2)", venue: "Grass Clippings Rolling Hills", city: "Tempe", genre: "house", sub: "Progressive House", scale: "arena", price: "$71.71", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://dice.fm/event/bbq67m-souls-day-2-dia-de-los-muertos-1st-nov-grass-clippings-rolling-hills-tempe-tickets" },
+  { date: "2026-11-01", title: "Pull Up, Get Down: Young Franco", venue: "Sunbar", city: "Tempe", genre: "house", sub: "Funky House", scale: "club", price: "$12.51-28.52 · 21+", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://www.eventbrite.com/e/pull-up-get-down-young-franco-tickets-2000312619893" },
+  { date: "2026-11-04", title: "Eelke Kleijn", venue: "Walter Studios", city: "Phoenix", genre: "house", sub: "Progressive House", scale: "club", price: "$35 · 18+", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://prod-nts-api.seeticketsusa.us/v1.0.0/promote/YWZmOlNUVVMtNzA1Mjg1Ojc=/clickthru" },
+  { date: "2026-11-04", title: "Supertaste", venue: "Valley Bar", city: "Phoenix", genre: "pop", scale: "club", price: "$20-25 · 21+", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://www.ticketweb.com/event/id/14250564" },
+  { date: "2026-11-06", title: "Dance Of The Dead Night 1 ft Sorne", venue: "267 S Avenida Del Convento", city: "Tucson", genre: "house", sub: "Organic House", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "19hz", link: "https://www.viewcy.com/event/dance_of_the_dead_ni" },
+  { date: "2026-11-06", title: "Roz", venue: "Rialto Theatre", city: "Tucson", genre: "house", sub: "Latin House", scale: "club", price: "See listing", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://www.ticketmaster.com/event/190064C37B623934" },
+  { date: "2026-11-06", title: "Idgafnk w/ Mersiv & Jaenga", venue: "Walter Where?House", city: "Phoenix", genre: "bass", sub: "Dubstep", scale: "club", price: "21+", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://wl.eventim.us/event/idgafnk-w-mersiv-and-jaenga-at-walter-wherehouse/705457?afflky=WalterWhereHouse" },
+  { date: "2026-11-06", title: "Haliene", venue: "Sunbar", city: "Tempe", genre: "pop", sub: "Vocal Trance", scale: "club", price: "$10+ · 21+", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://www.tixr.com/groups/relentlessbeats/events/haliene-206411" },
+  { date: "2026-11-06", title: "Obskur", venue: "Sunbar", city: "Tempe", genre: "house", sub: "Tech House", scale: "club", price: "$24+ · 21+", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://www.tixr.com/groups/relentlessbeats/events/obsk-r-204378" },
+  { date: "2026-11-07", title: "Space Cadet Fest", venue: "Walter Studios", city: "Phoenix", genre: "pop", scale: "club", price: "$36.13 · All ages", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://wl.eventim.us/event/space-cadet-fest/690841?afflky=WalterStudios" },
+  { date: "2026-11-07", title: "Dice", venue: "Last Exit Live", city: "Phoenix", genre: "rock", scale: "club", price: "21+ · Psyko Steve", type: "verified", cta: "Event Info", source: "19hz", link: "https://www.facebook.com/events/1001390342380449/" },
+  { date: "2026-11-07", title: "Sage Armstrong — Dance of the Dead Night Two", venue: "MSA Annex Festival Grounds", city: "Tucson", genre: "house", sub: "Organic House", scale: "club", price: "$30+", type: "verified", cta: "Event Info", source: "19hz", link: "https://www.viewcy.com/event/dance_of_the_dead_nig" },
+  { date: "2026-11-07", title: "Nightshift 002", venue: "218 W Gurley St", city: "Prescott", genre: "house", scale: "warehouse", price: "See listing", type: "verified", cta: "Event Info", source: "19hz", link: "https://partiful.com/e/eKeGIubWTNLME28tayFg" },
+  { date: "2026-11-07", title: "The Resistance", venue: "Sunbar", city: "Tempe", genre: "house", scale: "club", price: "Free · 21+", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://www.tixr.com/groups/relentlessbeats/events/the-resistance-200457" },
+  { date: "2026-11-07", title: "Dub Plate", venue: "2321 E University Dr", city: "Phoenix", genre: "dnb", sub: "Jungle / UK Garage", scale: "warehouse", price: "Dub_Plate_ (UK garage, jungle, DnB)", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://posh.vip/e/dub-plate" },
+  { date: "2026-11-08", title: "Christian Löffler (Live)", venue: "Thunderbird Lounge", city: "Phoenix", genre: "house", sub: "Melodic / Ambient House", scale: "club", price: "$11.47 · 21+", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://www.ticketweb.com/event/id/15021733" },
+  { date: "2026-11-08", title: "Roz", venue: "The Van Buren", city: "Phoenix", genre: "house", sub: "Latin House", scale: "club", price: "See listing", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://www.ticketmaster.com/event/190064C1BAC88589" },
+  { date: "2026-11-08", title: "Fox Stevenson / Mystery Skulls", venue: "Walter Studios", city: "Phoenix", genre: "dnb", sub: "Pop / Liquid DnB", scale: "club", price: "$38.11 · All ages", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://wl.eventim.us/event/fox-stevenson-mystery-skulls/703392?afflky=WalterStudios" },
+  { date: "2026-11-09", title: "Bonobo", venue: "The Van Buren", city: "Phoenix", genre: "house", sub: "Downtempo", scale: "club", price: "$42-55 · 13+", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://www.ticketmaster.com/event/190064C10DF7E70A" },
+  { date: "2026-11-13", title: "Dusk Music Festival (2 days)", venue: "Jacome Plaza", city: "Tucson", genre: "house", sub: "Multi-Genre Festival", scale: "arena", price: "Free (10) / $155+ · All ages", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://www.tixr.com/groups/rbfestivals/events/dusk-music-festival-2026-188696" },
+  { date: "2026-11-13", title: "Lil Fish w/ Govinda", venue: "1730 W State Rte 89A", city: "Sedona", genre: "bass", sub: "Psydub / Glitch Hop", scale: "club", price: "$48.80-84.01 · 21+", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://www.eventbrite.com/e/lil-fish-with-govinda-at-humankind-sedona-az-tickets-1988786851008" },
+  { date: "2026-11-13", title: "Flamingosis", venue: "Thunderbird Lounge", city: "Phoenix", genre: "hiphop", sub: "Funk / Beat Music", scale: "club", price: "$21-34 · 21+", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://www.ticketweb.com/event/id/14982523" },
+  { date: "2026-11-13", title: "Costa", venue: "Sunbar", city: "Tempe", genre: "house", scale: "club", price: "Free · 21+", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://www.tixr.com/groups/relentlessbeats/events/costa-190652" },
+  { date: "2026-11-13", title: "Kyle Watson w/ Caleb Jackson", venue: "Walter Where?House", city: "Phoenix", genre: "house", sub: "Tech House", scale: "club", price: "$19-33 · 21+", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://wl.eventim.us/event/kyle-watson-w-caleb-jackson-at-walter-wherehouse/698180?afflky=WalterWhereHouse" },
+  { date: "2026-11-13", title: "Pineapple Express", venue: "2136 West Fillmore Street", city: "Phoenix", genre: "techno", scale: "warehouse", price: "$15", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://shotgun.live/en/events/pineapple-express" },
+  { date: "2026-11-14", title: "Definitive Three Year Anniversary", venue: "Formation Brewing", city: "Phoenix", genre: "house", scale: "club", price: "$19.99 · 21+", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://posh.vip/e/definitive-three-year-anniversary" },
+  { date: "2026-11-14", title: "Troyboi — Hear2move", venue: "The Van Buren", city: "Phoenix", genre: "bass", sub: "Trap / Bass", scale: "club", price: "18+", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://www.ticketmaster.com/event/190064E67CF12009" },
+  { date: "2026-11-14", title: "Alix Perez, Onhell & Hijinx (1985 Label Showcase)", venue: "Walter Where?House", city: "Phoenix", genre: "dnb", sub: "Half-Time / DnB", scale: "club", price: "$24.80-33.07 · 21+", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://wl.eventim.us/event/alix-perez-onhell-and-hijinx-1985-label-showcase/703034?afflky=WalterWhereHouse" },
+  { date: "2026-11-14", title: "Avello", venue: "Sunbar", city: "Tempe", genre: "bass", sub: "Dubstep", scale: "club", price: "$20+ · 21+", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://www.tixr.com/groups/relentlessbeats/events/avello-192687" },
+  { date: "2026-11-14", title: "Sqishi", venue: "Walter Studios", city: "Phoenix", genre: "house", scale: "club", price: "$23.39-37.18 · 18+", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://wl.eventim.us/event/sqishi/703373?afflky=WalterStudios" },
+  { date: "2026-11-14", title: "Basscon Presents Lil Texas", venue: "9th & Jackson", city: "Phoenix", genre: "bass", sub: "Hardcore Dance", scale: "club", price: "$19.99 · 21+", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://www.tixr.com/groups/9thandjackson/events/basscon-presents-lil-texas-191597" },
+  { date: "2026-11-14", title: "Cheyenne Giles", venue: "Almost Famous", city: "Scottsdale", genre: "house", scale: "club", price: "Free · 21+", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://www.tixr.com/groups/relentlessbeats/events/cheyenne-giles-210324" },
+  { date: "2026-11-14", title: "Secret Warehouse Party 5", venue: "Location TBA", city: "Phoenix", genre: "techno", sub: "Warehouse Techno", scale: "warehouse", price: "$15+ · 21+ · Fraktured Phoenix", type: "community", cta: "Event Page", source: "19hz", link: "https://frakturedphoenix.com/l/secret-warehouse-party-5-fb-event" },
+  { date: "2026-11-19", title: "Calcium", venue: "Orpheum Theater", city: "Flagstaff", genre: "bass", sub: "Dubstep", scale: "club", price: "$17.87-30.60 · 18+", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://wl.eventim.us/event/calcium/696046?afflky=OrpheumTheater" },
+  { date: "2026-11-20", title: "Infiniti House: DJ Swisha", venue: "Walter Studios", city: "Phoenix", genre: "house", sub: "Juke / Footwork", scale: "club", price: "$10.29-25.80 · 21+", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://wl.eventim.us/event/infiniti-house-dj-swisha-at-walter-studios/706257?afflky=WalterStudios" },
+  { date: "2026-11-20", title: "Calcium", venue: "Gentle Ben's", city: "Tucson", genre: "bass", sub: "Dubstep", scale: "club", price: "$17 · 18+", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://www.tixr.com/groups/relentlessbeats/events/calcium-206277" },
+  { date: "2026-11-20", title: "Julian Fijma", venue: "Roosevelt", city: "Phoenix", genre: "house", scale: "club", price: "Free · 21+", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://www.tixr.com/groups/roosevelt/events/julian-fijma-209488" },
+  { date: "2026-11-20", title: "Marco Strous", venue: "Sunbar", city: "Tempe", genre: "house", sub: "Tech House", scale: "club", price: "$24+ · 21+", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://www.tixr.com/groups/relentlessbeats/events/marco-strous-205624" },
+  { date: "2026-11-20", title: "Reaper", venue: "Sunbar", city: "Tempe", genre: "house", scale: "club", price: "Free · 21+", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://www.tixr.com/groups/relentlessbeats/events/reaper-206223" },
+  { date: "2026-11-20", title: "Biscits (Insomniac)", venue: "9th & Jackson", city: "Phoenix", genre: "house", sub: "Tech House", scale: "club", price: "$20 · 21+", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://www.tixr.com/groups/9thandjackson/events/insomniac-presents-biscits-207700" },
+  { date: "2026-11-20", title: "Night Shift ft Usaybflow", venue: "The Fillmore", city: "Phoenix", genre: "bass", sub: "Riddim", scale: "club", price: "Twin Flame Events", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://posh.vip/e/nightshift-featuring-usaybflow" },
+  { date: "2026-11-21", title: "Disconnect: FJAAK", venue: "1609 East Jackson Street", city: "Phoenix", genre: "techno", sub: "Industrial Techno", scale: "warehouse", price: "$17.62-22.03 · Techno Snobs", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://shotgun.live/en/events/disconnect-fjaak" },
+  { date: "2026-11-21", title: "Bag Raiders", venue: "Thunderbird Lounge", city: "Phoenix", genre: "pop", sub: "Nu-Disco", scale: "club", price: "$21.32 · 21+", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://www.ticketweb.com/event/id/15041393" },
+  { date: "2026-11-21", title: "Calcium", venue: "Sunbar", city: "Tempe", genre: "bass", sub: "Dubstep", scale: "club", price: "$11+ · 21+", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://www.tixr.com/groups/relentlessbeats/events/calcium-206271" },
+  { date: "2026-11-21", title: "Bark! After Dark", venue: "Kobalt Bar", city: "Phoenix", genre: "house", sub: "Electro / Pop House", scale: "club", price: "$10 · 21+", type: "verified", cta: "Event Info", source: "19hz", link: "https://www.instagram.com/barkafterdark.party" },
+  { date: "2026-11-21", title: "El Pozo", venue: "Solar Culture", city: "Tucson", genre: "techno", scale: "club", price: "$10-11 · 21+ · Malice Entity", type: "verified", cta: "Event Info", source: "19hz", link: "https://www.instagram.com/p/Ddyi4WEll3j2LD9heeM6TD5SNs1y2wwU5i_ENs0/" },
+  { date: "2026-11-21", title: "Night Shift ft Usaybflow (night 2)", venue: "The Fillmore", city: "Phoenix", genre: "bass", sub: "Riddim", scale: "club", price: "Twin Flame Events", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://posh.vip/e/nightshift-featuring-usaybflow" },
+  { date: "2026-11-22", title: "Pull Up, Get Down: Max Low", venue: "Sunbar", city: "Tempe", genre: "house", sub: "Tech House", scale: "club", price: "Free w/ RSVP · 21+", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://www.eventbrite.com/e/pull-up-get-down-max-low-tickets-2002749579906" },
+  { date: "2026-11-23", title: "George Clanton", venue: "La Rosa", city: "Tucson", genre: "pop", sub: "Chillwave / Vaporwave", scale: "club", price: "$40.48-135.54", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://wl.eventim.us/event/george-clanton/700430?afflky=LaRosaTucson" },
+  { date: "2026-11-27", title: "Svdden Death", venue: "Warehouse 215", city: "Phoenix", genre: "bass", sub: "Heavy Dubstep", scale: "warehouse", price: "Free · 18+", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://www.tixr.com/groups/rbfestivals/events/svdden-death-201785" },
+  { date: "2026-11-27", title: "Lee Ann Roberts", venue: "Warehouse 215", city: "Phoenix", genre: "techno", sub: "Hard Groove Techno", scale: "warehouse", price: "Relentless Beats", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://tixr.com/e/210240" },
+  { date: "2026-11-27", title: "Oden & Fatzo (Somehow It Flies Tour) w/ M.O.N.R.O.E.", venue: "Walter Where?House", city: "Phoenix", genre: "house", sub: "Deep House", scale: "club", price: "$29.93-33.03 · 21+", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://wl.eventim.us/event/oden-and-fatzo-somehow-it-flies-album-tour-w-monroe/703631?afflky=WalterWhereHouse" },
+  { date: "2026-11-27", title: "Lumasi", venue: "Sunbar", city: "Tempe", genre: "bass", sub: "Dubstep", scale: "club", price: "Free · 21+", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://www.tixr.com/groups/relentlessbeats/events/lumasi-202304" },
+  { date: "2026-11-28", title: "Fovos", venue: "Warehouse 215", city: "Phoenix", genre: "techno", sub: "Big Room Techno", scale: "warehouse", price: "Relentless Beats", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://tixr.com/e/206573" },
+  { date: "2026-11-28", title: "Steller w/ Xotix (idgaFNK)", venue: "Walter Studios", city: "Phoenix", genre: "bass", sub: "Dubstep", scale: "club", price: "$25.80-33.03 · 21+", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://wl.eventim.us/event/idgafnk-steller-w-xotix-at-walter-studios/702830?afflky=WalterStudios" },
+  { date: "2026-11-28", title: "Lan Party", venue: "Club Contact", city: "Phoenix", genre: "pop", scale: "club", price: "$6.96+ · 21+", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://wl.eventim.us/event/LAN-Party/698049?afflky=ClubContact" },
+  { date: "2026-12-03", title: "Fraxiom", venue: "Yucca Tap Room", city: "Tempe", genre: "bass", scale: "club", price: "$20.76 · 21+", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://www.ticketweb.com/event/id/15024793" },
+  { date: "2026-12-04", title: "JSTJR", venue: "La Rosa", city: "Tucson", genre: "bass", sub: "Moombahton / Trap", scale: "club", price: "$21.52-23.60 · 21+", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://wl.eventim.us/event/jstjr/702458?afflky=LaRosaTucson" },
+  { date: "2026-12-04", title: "Tvboo", venue: "Sunbar", city: "Tempe", genre: "bass", sub: "Trap / Glitch", scale: "club", price: "$19+ · 21+", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://www.tixr.com/groups/relentlessbeats/events/tvboo-200935" },
+  { date: "2026-12-05", title: "Truth, Wraz x Hypho, Contra: Deep, Dark & Dangerous", venue: "Walter Where?House", city: "Phoenix", genre: "bass", sub: "Deep Dubstep", scale: "club", price: "$36.13-38.20 · 21+", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://wl.eventim.us/event/truth-wraz-x-hypho-contra-deep-dark-and-dangerous/707601?afflky=WalterWhereHouse" },
+  { date: "2026-12-07", title: "Savage Master", venue: "Last Exit Live", city: "Phoenix", genre: "metal", sub: "Occult Heavy Metal", scale: "club", price: "21+", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://wl.eventim.us/event/savage-master/706551?afflky=13thFloorEntertainment" },
+  { date: "2026-12-11", title: "Zulan", venue: "The Van Buren", city: "Phoenix", genre: "house", scale: "club", price: "$39-111 · 18+", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://www.ticketmaster.com/event/1900653CA3975336" },
+  { date: "2026-12-11", title: "Hamro", venue: "Sunbar", city: "Tempe", genre: "bass", sub: "Dubstep", scale: "club", price: "$12+ · 21+", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://www.tixr.com/groups/relentlessbeats/events/hamro-205381" },
+  { date: "2026-12-11", title: "Infekt (Bassrush)", venue: "9th & Jackson", city: "Phoenix", genre: "bass", sub: "Dubstep", scale: "club", price: "Free · 21+", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://www.tixr.com/groups/9thandjackson/events/bassrush-presents-infekt-193524" },
+  { date: "2026-12-12", title: "Eelke Kleijn", venue: "La Rosa", city: "Tucson", genre: "house", sub: "Progressive House", scale: "club", price: "$21.26-27.49 · 21+", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://wl.eventim.us/event/eelke-kleijn/704804?afflky=LaRosaTucson" },
+  { date: "2026-12-12", title: "Barely Alive", venue: "Sunbar", city: "Tempe", genre: "bass", sub: "Dubstep / Electro", scale: "club", price: "$21+ · 21+", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://www.tixr.com/groups/relentlessbeats/events/barely-alive-202790" },
+  { date: "2026-12-12", title: "Idgafnk: Zingara (The Girls Are Making Riddim Tour)", venue: "Walter Where?House", city: "Phoenix", genre: "bass", sub: "Riddim", scale: "club", price: "$30.97-108.49 · 21+", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://wl.eventim.us/event/idgafnk-zingara-the-girls-are-making-riddim-tour/698391?afflky=WalterWhereHouse" },
+  { date: "2026-12-18", title: "Phyphr", venue: "Thunderbird Lounge", city: "Phoenix", genre: "house", scale: "club", price: "$8.21 · 21+", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://www.ticketweb.com/event/id/14331314" },
+  { date: "2026-12-18", title: "Eli & Fur", venue: "Walter Where?House", city: "Phoenix", genre: "house", sub: "Progressive House", scale: "club", price: "$30.97-33.03 · 21+", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://wl.eventim.us/event/eli-and-fur-at-walter-wherehouse/707867?afflky=WalterWhereHouse" },
+  { date: "2026-12-24", title: "Wub Wednesday", venue: "15 N Wc Riles", city: "Flagstaff", genre: "bass", sub: "Dubstep / DnB", scale: "club", price: "Yucca North", type: "verified", cta: "Event Info", source: "19hz", link: "https://www.facebook.com/events/1558213312269475/" },
+  { date: "2026-12-26", title: "Opiuo, Chmura & Duffrey", venue: "Walter Where?House", city: "Phoenix", genre: "bass", sub: "Glitch Hop", scale: "club", price: "$15-35 · 21+", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://wl.eventim.us/event/opiuo-chmura-and-duffrey-at-walter-wherehouse/708133?afflky=WalterWhereHouse" },
+  { date: "2026-12-26", title: "Lan Party", venue: "Club Contact", city: "Phoenix", genre: "pop", scale: "club", price: "$6.96+ · 21+", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://wl.eventim.us/event/LAN-Party/698050?afflky=ClubContact" },
+  { date: "2026-12-31", title: "New Year's Eve: Mindchatter (DJ Set)", venue: "Walter Where?House", city: "Phoenix", genre: "house", sub: "Downtempo House", scale: "club", price: "$46.47-67.15 · 21+", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://wl.eventim.us/event/new-years-eve-mindchatter-dj-set-at-walter-wherehouse/706863?afflky=WalterWhereHouse" },
+  { date: "2027-01-02", title: "Mindchatter (DJ Set)", venue: "La Rosa", city: "Tucson", genre: "house", sub: "Downtempo House", scale: "club", price: "$28.53-37.88 · 21+", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://wl.eventim.us/event/mindchatter-dj-set/706845?afflky=LaRosaTucson" },
+  { date: "2027-01-15", title: "Seth David's R&Bass Tour w/ Jason Leech", venue: "Walter Studios", city: "Phoenix", genre: "bass", sub: "Hybrid Trap", scale: "club", price: "$30.97 · 21+ · idgaFNK", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://wl.eventim.us/event/seth-davids-randbass-tour-w-jason-leech-at-walter-studios/695846?afflky=WalterStudios" },
+  { date: "2027-01-15", title: "Krewella", venue: "Sunbar", city: "Tempe", genre: "bass", sub: "Electro House / Trap", scale: "club", price: "$19.50+ · 21+", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://www.tixr.com/groups/relentlessbeats/events/krewella-206014" },
+  { date: "2027-01-16", title: "2000s Rave", venue: "La Rosa", city: "Tucson", genre: "pop", sub: "2000s Throwback", scale: "club", price: "$17 · 21+", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://wl.eventim.us/event/2000s-rave/704791?afflky=LaRosaTucson" },
+  { date: "2027-01-28", title: "Alleycvt w/ Machaki", venue: "La Rosa", city: "Tucson", genre: "bass", sub: "Dubstep", scale: "club", price: "$40+ · 21+", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://wl.eventim.us/event/alleycvt/708017?afflky=LaRosaTucson" },
+  { date: "2027-01-29", title: "Alleycvt", venue: "The Van Buren", city: "Phoenix", genre: "bass", sub: "Dubstep", scale: "club", price: "$36-110 · 18+", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://www.ticketmaster.com/event/1900654910BF8008" },
+  { date: "2027-01-29", title: "Night Shift ft Rzrkt b2b Vastive", venue: "The Fillmore", city: "Phoenix", genre: "bass", sub: "Riddim", scale: "club", price: "Twin Flame Events", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://posh.vip/e/nightshift-rzrkt-12927" },
+  { date: "2027-03-02", title: "Sylvan Esso", venue: "The Van Buren", city: "Phoenix", genre: "pop", sub: "Indie Electropop", scale: "club", price: "$67-155", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://www.ticketmaster.com/event/190064C4B9FA7DCC" },
+  { date: "2027-03-05", title: "M3F Music Festival 2027 ft Fisher, Joji, Thundercat, Sammy Virji, Disco Lines, Lola Young + more", venue: "Steele Indian School Park", city: "Phoenix", genre: "house", sub: "Multi-Genre Festival", scale: "arena", price: "$161-780.69 · All ages", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://www.tixr.com/groups/m3f/events/m3f-music-festival-2027-190489" },
+  { date: "2027-03-15", title: "Saxsquatch — The Conspiracy Theory Tour", venue: "Walter Studios", city: "Phoenix", genre: "pop", sub: "Live Looping", scale: "club", price: "$29 · All ages · Psyko Steve", type: "verified", cta: "Get Tickets", source: "19hz", link: "https://wl.eventim.us/event/saxsquatch/708039?afflky=WalterStudios" },
+  { date: "2026-10-19", title: "Rachel Gold Trio", venue: "Eddie V's", city: "Scottsdale", genre: "jazz", sub: "Vocal Jazz", scale: "club", price: "See venue", type: "verified", cta: "Event Info", source: "KJZZ Jazz PHX", link: "https://eddiev.com" },
+  { date: "2026-10-21", title: "Renee Patrick & Nicole Pesce", venue: "Eddie V's", city: "Scottsdale", genre: "jazz", sub: "Vocal Jazz", scale: "club", price: "See venue", type: "verified", cta: "Event Info", source: "KJZZ Jazz PHX", link: "https://eddiev.com" },
+  { date: "2026-10-22", title: "Jazz Casual Thursday: Charles Lewis Trio", venue: "The Nash", city: "Phoenix", genre: "jazz", sub: "Straight-Ahead", scale: "club", price: "See listing", type: "verified", cta: "Get Tickets", source: "The Nash", link: "https://thenash.org/events/jazz-casual-thursday-with-charles-lewis-his-trio-74/" },
+  { date: "2026-10-22", title: "Pita Jungle Jazz Jam: Dave Ihlenfeld, Justin Brotman, Dillan Yandell", venue: "Pita Jungle Chandler", city: "Chandler", genre: "jazz", sub: "Jam Session", scale: "club", price: "Free", type: "verified", cta: "Event Info", source: "KJZZ Jazz PHX", link: "https://pitajungle.com" },
+  { date: "2026-10-22", title: "Zazu West (Sacred Grounds Jazz Coffeehouse)", venue: "Scottsdale Congregational UCC", city: "Scottsdale", genre: "jazz", sub: "Swing / Gypsy Jazz", scale: "club", price: "$8 donation", type: "verified", cta: "Event Info", source: "KJZZ Jazz PHX", link: "https://jazz.kjzz.org/jazz-venues-and-organizations" },
+  { date: "2026-10-22", title: "Hormel Jazz Series: Nicole Pesce, Andrew Gross, Dwight Kilian, Dom Moio", venue: "Wrigley Mansion", city: "Phoenix", genre: "jazz", sub: "Straight-Ahead", scale: "club", price: "See venue", type: "verified", cta: "Event Info", source: "KJZZ Jazz PHX", link: "https://wrigleymansion.com" },
+  { date: "2026-10-23", title: "Typhanie Monique", venue: "The Nash", city: "Phoenix", genre: "jazz", sub: "Vocal Jazz", scale: "club", price: "See listing", type: "verified", cta: "Get Tickets", source: "The Nash", link: "https://thenash.org/events/typhanie-monique-2/" },
+  { date: "2026-10-23", title: "Late Night No Cover: Eric Rasmussen Trio", venue: "The Nash", city: "Phoenix", genre: "jazz", sub: "Piano Trio", scale: "club", price: "No cover", type: "verified", cta: "Get Tickets", source: "The Nash", link: "https://thenash.org/events/eric-rasmussen-trio-late-night-no-cover/" },
+  { date: "2026-10-23", title: "We3 — 10th Anniversary Celebration", venue: "MIM Music Theater", city: "Phoenix", genre: "jazz", sub: "Vocal Jazz", scale: "club", price: "$44.50-49.50", type: "verified", cta: "Event Info", source: "KJZZ Jazz PHX", link: "https://mim.org" },
+  { date: "2026-10-20", title: "The Sideguys — The Music of David Sanborn", venue: "MIM Music Theater", city: "Phoenix", genre: "jazz", sub: "Smooth Jazz", scale: "club", price: "$44.50-49.50", type: "verified", cta: "Event Info", source: "KJZZ Jazz PHX", link: "https://mim.org" },
+  { date: "2026-10-24", title: "Jeremy Pelt Quintet (2 shows: 7 & 9 pm)", venue: "The Nash", city: "Phoenix", genre: "jazz", sub: "Hard Bop", scale: "club", price: "$52-56", type: "verified", cta: "Get Tickets", source: "The Nash", link: "https://thenash.org/events/jeremy-pelt-quintet/" },
+  { date: "2026-10-24", title: "Diana Lee Quartet", venue: "Eddie V's", city: "Scottsdale", genre: "jazz", sub: "Vocal Jazz", scale: "club", price: "See venue", type: "verified", cta: "Event Info", source: "KJZZ Jazz PHX", link: "https://eddiev.com" },
+  { date: "2026-10-25", title: "Sunday Jam Session led by Dillan Yandell", venue: "The Nash", city: "Phoenix", genre: "jazz", sub: "Jam Session", scale: "club", price: "$10 ($5 students)", type: "verified", cta: "Event Info", source: "JazzNearYou", link: "https://www.jazznearyou.com/phoenix/events/jam-session-dillan-yandell-at-the-nash-on-october-25" },
+  { date: "2026-10-26", title: "Rachel Gold Trio", venue: "Eddie V's", city: "Scottsdale", genre: "jazz", sub: "Vocal Jazz", scale: "club", price: "See venue", type: "verified", cta: "Event Info", source: "KJZZ Jazz PHX", link: "https://eddiev.com" },
+  { date: "2026-10-27", title: "Julian Lage Quartet ft John Medeski, Jorge Roeder, Kenny Wollesen", venue: "MIM Music Theater", city: "Phoenix", genre: "jazz", sub: "Jazz Guitar", scale: "club", price: "$56.50-66.50", type: "verified", cta: "Event Info", source: "KJZZ Jazz PHX", link: "https://mim.org" },
+  { date: "2026-10-28", title: "John Scofield's Electrospective", venue: "Mesa Arts Center", city: "Mesa", genre: "jazz", sub: "Jazz Fusion", scale: "club", price: "From $52.50", type: "verified", cta: "Event Info", source: "KJZZ Jazz PHX", link: "https://mesaartscenter.com" },
+  { date: "2026-10-28", title: "Dennis Rowland (vocalist)", venue: "Warren's Supper Club", city: "Chandler", genre: "jazz", sub: "Vocal Jazz", scale: "club", price: "See venue", type: "verified", cta: "Event Info", source: "KJZZ Jazz PHX", link: "https://jazz.kjzz.org/jazz-venues-and-organizations" },
+  { date: "2026-10-28", title: "Renee Patrick & Nicole Pesce", venue: "Eddie V's", city: "Scottsdale", genre: "jazz", sub: "Vocal Jazz", scale: "club", price: "See venue", type: "verified", cta: "Event Info", source: "KJZZ Jazz PHX", link: "https://eddiev.com" },
+  { date: "2026-10-29", title: "Jazz Casual Thursday: Charles Lewis Trio", venue: "The Nash", city: "Phoenix", genre: "jazz", sub: "Straight-Ahead", scale: "club", price: "See listing", type: "verified", cta: "Get Tickets", source: "The Nash", link: "https://thenash.org/events/jazz-casual-thursday-with-charles-lewis-his-trio-75/" },
+  { date: "2026-10-29", title: "Pita Jungle Jazz Jam: Howard Alden, Chris Ross, Buddy Banks", venue: "Pita Jungle Chandler", city: "Chandler", genre: "jazz", sub: "Jam Session", scale: "club", price: "Free", type: "verified", cta: "Event Info", source: "KJZZ Jazz PHX", link: "https://pitajungle.com" },
+  { date: "2026-10-29", title: "Tribute to Brubeck: Pam Morita Quartet (Sacred Grounds)", venue: "Scottsdale Congregational UCC", city: "Scottsdale", genre: "jazz", sub: "Cool Jazz", scale: "club", price: "$8 donation", type: "verified", cta: "Event Info", source: "KJZZ Jazz PHX", link: "https://jazz.kjzz.org/jazz-venues-and-organizations" },
+  { date: "2026-10-29", title: "Hormel Jazz Series: Raul Yanez, Dwight Kilian, Dom Moio", venue: "Wrigley Mansion", city: "Phoenix", genre: "jazz", sub: "Straight-Ahead", scale: "club", price: "See venue", type: "verified", cta: "Event Info", source: "KJZZ Jazz PHX", link: "https://wrigleymansion.com" },
+  { date: "2026-10-30", title: "Jeff Libman Trio", venue: "The Nash", city: "Phoenix", genre: "jazz", sub: "Piano Trio", scale: "club", price: "See listing", type: "verified", cta: "Get Tickets", source: "The Nash", link: "https://thenash.org/events/jeff-libman-trio/" },
+  { date: "2026-10-31", title: "Jaleo", venue: "The Nash", city: "Phoenix", genre: "jazz", sub: "Latin Jazz", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "JazzNearYou", link: "https://www.jazznearyou.com/phoenix/events/jaleo-at-the-nash-on-october-31" },
+  { date: "2026-10-31", title: "Khani Cole", venue: "MIM Music Theater", city: "Phoenix", genre: "jazz", sub: "Vocal Jazz", scale: "club", price: "$38.50-49.50", type: "verified", cta: "Event Info", source: "KJZZ Jazz PHX", link: "https://mim.org" },
+  { date: "2026-10-31", title: "Diana Lee Quartet", venue: "Eddie V's", city: "Scottsdale", genre: "jazz", sub: "Vocal Jazz", scale: "club", price: "See venue", type: "verified", cta: "Event Info", source: "KJZZ Jazz PHX", link: "https://eddiev.com" },
+  { date: "2026-11-04", title: "Jazz Funk Soul Crusaders Tribute ft Everette Harp, Jeff Lorber, Paul Jackson Jr.", venue: "Mesa Arts Center", city: "Mesa", genre: "jazz", sub: "Jazz Funk", scale: "club", price: "From $52.50", type: "verified", cta: "Event Info", source: "KJZZ Jazz PHX", link: "https://mesaartscenter.com" },
+  { date: "2026-11-05", title: "Westside Monthly Jam Session", venue: "Westside Blues & Jazz", city: "Glendale", genre: "jazz", sub: "Blues & Jazz Jam", scale: "club", price: "See venue", type: "verified", cta: "Get Tickets", source: "Westside box office", link: "https://boxoffice.westsideblues.com/events/westsidebluesjazzmore/1968270?date=2026-11-05" },
+  { date: "2026-11-06", title: "The Nash Collective ft Camille Thurman, Ashlin Parker, Rachel Eckroth, Lewis Nash (7 & 9 pm)", venue: "The Nash", city: "Phoenix", genre: "jazz", sub: "Post-Bop", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "JazzNearYou", link: "https://www.jazznearyou.com/phoenix/events/the-nash-collective-at-the-nash-on-november-6" },
+  { date: "2026-11-06", title: "Rachael Gold and Shannon Wallace", venue: "ASU Kerr Cultural Center", city: "Scottsdale", genre: "jazz", sub: "Vocal Jazz", scale: "club", price: "$46.85-58.35", type: "verified", cta: "Event Info", source: "KJZZ Jazz PHX", link: "https://asukerr.com" },
+  { date: "2026-11-08", title: "Second Sunday Jazz Vespers: Beth Lederman w/ Joe Corral, Feliz Sainz", venue: "Mount of Olives Church", city: "Phoenix", genre: "jazz", sub: "Sacred Jazz", scale: "club", price: "Free-will", type: "verified", cta: "Event Info", source: "KJZZ Jazz PHX", link: "https://jazz.kjzz.org/jazz-venues-and-organizations" },
+  { date: "2026-11-13", title: "Hope Morgan & Beth Lederman", venue: "AZ BBQ Shack", city: "Scottsdale", genre: "jazz", sub: "Vocal Jazz", scale: "club", price: "See venue", type: "verified", cta: "Event Info", source: "KJZZ Jazz PHX", link: "https://azbbqshackscottsdale.com" },
+  { date: "2026-11-14", title: "Rachel & Vilray", venue: "MIM Music Theater", city: "Phoenix", genre: "jazz", sub: "Swing / Jazz-Pop", scale: "club", price: "$66.50-76.50", type: "verified", cta: "Event Info", source: "KJZZ Jazz PHX", link: "https://mim.org" },
+  { date: "2026-11-14", title: "Lizzy & The Triggermen", venue: "Mesa Arts Center", city: "Mesa", genre: "jazz", sub: "Swing", scale: "club", price: "From $53", type: "verified", cta: "Event Info", source: "KJZZ Jazz PHX", link: "https://mesaartscenter.com" },
+  { date: "2026-11-21", title: "Chris Botti (2 nights)", venue: "MIM Music Theater", city: "Phoenix", genre: "jazz", sub: "Smooth Jazz", scale: "club", price: "$95.50-145.50", type: "verified", cta: "Event Info", source: "KJZZ Jazz PHX", link: "https://mim.org" },
+  { date: "2026-11-21", title: "Tony Bennett Centennial Celebration w/ Tommy Gearhart", venue: "Ravenscroft Hall", city: "Scottsdale", genre: "jazz", sub: "Vocal Standards", scale: "club", price: "$75-90", type: "verified", cta: "Event Info", source: "KJZZ Jazz PHX", link: "https://theravenscroft.com/events/category/concert-series/" },
+  { date: "2026-12-04", title: "Alicia Waller & The Excursion", venue: "ASU Kerr Cultural Center", city: "Scottsdale", genre: "jazz", sub: "Modern Jazz", scale: "club", price: "$62.15", type: "verified", cta: "Event Info", source: "KJZZ Jazz PHX", link: "https://asukerr.com" },
+  { date: "2026-12-06", title: "Herb Alpert & The Tijuana Brass Band", venue: "Mesa Arts Center", city: "Mesa", genre: "jazz", sub: "Latin Brass", scale: "club", price: "From $52.50", type: "verified", cta: "Event Info", source: "KJZZ Jazz PHX", link: "https://mesaartscenter.com" },
+  { date: "2026-12-08", title: "Storm Large Holiday Ordeal", venue: "MIM Music Theater", city: "Phoenix", genre: "jazz", sub: "Cabaret", scale: "club", price: "$59.50-74.50", type: "verified", cta: "Event Info", source: "KJZZ Jazz PHX", link: "https://mim.org" },
+  { date: "2026-12-12", title: "A Charlie Brown Christmas w/ Nicole Pesce (4 & 7 pm)", venue: "Ravenscroft Hall", city: "Scottsdale", genre: "jazz", sub: "Holiday Jazz", scale: "club", price: "$75-90", type: "verified", cta: "Event Info", source: "KJZZ Jazz PHX", link: "https://theravenscroft.com/events/category/concert-series/" },
+  { date: "2026-12-14", title: "The Wooten Brothers", venue: "MIM Music Theater", city: "Phoenix", genre: "jazz", sub: "Jazz Funk", scale: "club", price: "$49.50-59.50", type: "verified", cta: "Event Info", source: "KJZZ Jazz PHX", link: "https://mim.org" },
+  { date: "2026-12-15", title: "David Benoit — A Charlie Brown Christmas (2 nights)", venue: "MIM Music Theater", city: "Phoenix", genre: "jazz", sub: "Holiday Jazz", scale: "club", price: "$64.50-80.50", type: "verified", cta: "Event Info", source: "KJZZ Jazz PHX", link: "https://mim.org" },
+  { date: "2026-12-16", title: "Dave Koz & Friends Christmas 2026", venue: "Mesa Arts Center", city: "Mesa", genre: "jazz", sub: "Smooth Jazz", scale: "club", price: "From $77.50", type: "verified", cta: "Event Info", source: "KJZZ Jazz PHX", link: "https://mesaartscenter.com" },
+  { date: "2026-12-17", title: "Mike Stern", venue: "MIM Music Theater", city: "Phoenix", genre: "jazz", sub: "Jazz Fusion", scale: "club", price: "$38.50-49.50", type: "verified", cta: "Event Info", source: "KJZZ Jazz PHX", link: "https://mim.org" },
+  { date: "2026-12-20", title: "Mindi Abair — I Can't Wait for Christmas Tour (2 nights)", venue: "MIM Music Theater", city: "Phoenix", genre: "jazz", sub: "Smooth Jazz", scale: "club", price: "$49.50-59.50", type: "verified", cta: "Event Info", source: "KJZZ Jazz PHX", link: "https://mim.org" },
+  { date: "2027-01-21", title: "Pink Martini", venue: "Mesa Arts Center", city: "Mesa", genre: "jazz", sub: "Lounge Pop", scale: "club", price: "From $62", type: "verified", cta: "Event Info", source: "KJZZ Jazz PHX", link: "https://mesaartscenter.com" },
+  { date: "2027-01-22", title: "Trombone Shorty & Orleans Avenue", venue: "Scottsdale Center for the Performing Arts", city: "Scottsdale", genre: "jazz", sub: "New Orleans Funk", scale: "club", price: "From $80.50", type: "verified", cta: "Event Info", source: "KJZZ Jazz PHX", link: "https://scottsperformingarts.org" },
+  { date: "2027-01-23", title: "Booker T. Jones", venue: "Scottsdale Center for the Performing Arts", city: "Scottsdale", genre: "hiphop", sub: "Soul / Funk", scale: "club", price: "$64-84", type: "verified", cta: "Event Info", source: "KJZZ Jazz PHX", link: "https://scottsperformingarts.org" },
+  { date: "2027-02-10", title: "Delfeayo Marsalis and the Uptown Jazz Orchestra", venue: "MIM Music Theater", city: "Phoenix", genre: "jazz", sub: "Big Band", scale: "club", price: "$69.50-80.50", type: "verified", cta: "Event Info", source: "KJZZ Jazz PHX", link: "https://mim.org" },
+  { date: "2027-02-16", title: "Bob James (2 nights)", venue: "MIM Music Theater", city: "Phoenix", genre: "jazz", sub: "Smooth Jazz", scale: "club", price: "$54.50-59.50", type: "verified", cta: "Event Info", source: "KJZZ Jazz PHX", link: "https://mim.org" },
+  { date: "2027-02-27", title: "Jazz at Lincoln Center Orchestra w/ Wynton Marsalis", venue: "Mesa Arts Center", city: "Mesa", genre: "jazz", sub: "Big Band", scale: "club", price: "From $47", type: "verified", cta: "Event Info", source: "KJZZ Jazz PHX", link: "https://mesaartscenter.com" },
+  { date: "2027-03-03", title: "Charles Lewis Quintet + 1", venue: "ASU Kerr Cultural Center", city: "Scottsdale", genre: "jazz", sub: "Straight-Ahead", scale: "club", price: "$47.85-65.50", type: "verified", cta: "Event Info", source: "KJZZ Jazz PHX", link: "https://asukerr.com" },
+  { date: "2027-03-12", title: "Gabriel Bey and Friends", venue: "ASU Kerr Cultural Center", city: "Scottsdale", genre: "jazz", sub: "Modern Jazz", scale: "club", price: "$40.90", type: "verified", cta: "Event Info", source: "KJZZ Jazz PHX", link: "https://asukerr.com" },
+  { date: "2027-03-16", title: "The Hot Sardines (2 nights)", venue: "MIM Music Theater", city: "Phoenix", genre: "jazz", sub: "Hot Jazz", scale: "club", price: "$49.50-59.50", type: "verified", cta: "Event Info", source: "KJZZ Jazz PHX", link: "https://mim.org" },
+  { date: "2027-03-18", title: "Native Rhythms, Native Jazz: R. Carlos Nakai, Amochip Dabney, Will Clipman", venue: "Mesa Arts Center", city: "Mesa", genre: "jazz", sub: "World Jazz", scale: "club", price: "From $37", type: "verified", cta: "Event Info", source: "KJZZ Jazz PHX", link: "https://mesaartscenter.com" },
+  { date: "2027-03-19", title: "Bob Shimizu", venue: "ASU Kerr Cultural Center", city: "Scottsdale", genre: "jazz", sub: "Modern Jazz", scale: "club", price: "$47.90", type: "verified", cta: "Event Info", source: "KJZZ Jazz PHX", link: "https://asukerr.com" },
+  { date: "2027-04-16", title: "Stanley Clarke & Hiromi ft Publiquartet", venue: "Mesa Arts Center", city: "Mesa", genre: "jazz", sub: "Jazz Fusion", scale: "club", price: "From $64.50", type: "verified", cta: "Event Info", source: "KJZZ Jazz PHX", link: "https://mesaartscenter.com" },
+  { date: "2026-10-23", title: "Jazzbird Nights: Nick MacGregor & Friends", venue: "Ravenscroft Jazzbird Lounge", city: "Scottsdale", genre: "jazz", sub: "Modern Jazz", scale: "club", price: "$35-60", type: "verified", cta: "Get Tickets", source: "Ravenscroft", link: "https://theravenscroft.com/event/jazzbird-nights-nick-macgregor-and-friends-5/" },
+  { date: "2026-11-06", title: "Jazzbird Nights: Twin Tenors (benefit)", venue: "Ravenscroft Jazzbird Lounge", city: "Scottsdale", genre: "jazz", sub: "Hard Bop", scale: "club", price: "$35-60", type: "verified", cta: "Get Tickets", source: "Ravenscroft", link: "https://theravenscroft.com/event/jazzbird-nights-twin-tenors/" },
+  { date: "2026-11-13", title: "Jazzbird Nights: Michael Collins Trio — West Side Story", venue: "Ravenscroft Jazzbird Lounge", city: "Scottsdale", genre: "jazz", sub: "Piano Trio", scale: "club", price: "$35-60", type: "verified", cta: "Get Tickets", source: "Ravenscroft", link: "https://theravenscroft.com/event/jazzbird-nights-michael-collins-trio-2/" },
+  { date: "2026-11-15", title: "Jazzbird Nights: Sarah Hanahan Quartet", venue: "Ravenscroft Jazzbird Lounge", city: "Scottsdale", genre: "jazz", sub: "Hard Bop", scale: "club", price: "$40-70", type: "verified", cta: "Get Tickets", source: "Ravenscroft", link: "https://theravenscroft.com/event/jazzbird-nights-sarah-hanahan-quartet/" },
+  { date: "2026-11-20", title: "Jazzbird Nights: Denny Monce & Dave Schmidt", venue: "Ravenscroft Jazzbird Lounge", city: "Scottsdale", genre: "jazz", sub: "Hard Bop", scale: "club", price: "$40-70", type: "verified", cta: "Get Tickets", source: "Ravenscroft", link: "https://theravenscroft.com/event/jazzbird-nights-denny-monce-quintet/" },
+  { date: "2026-12-04", title: "Jazzbird Nights: Dmitri Matheny Group — Santa's Got A Brand New Bag", venue: "Ravenscroft Jazzbird Lounge", city: "Scottsdale", genre: "jazz", sub: "Holiday Jazz", scale: "club", price: "$35-60", type: "verified", cta: "Get Tickets", source: "Ravenscroft", link: "https://theravenscroft.com/event/jazzbird-nights-dmitri-matheny-group-santas-got-a-brand-new-bag/" },
+  { date: "2026-12-18", title: "Jazzbird Nights: Paul Cornish — Yuletide & Jazz", venue: "Ravenscroft Jazzbird Lounge", city: "Scottsdale", genre: "jazz", sub: "Holiday Jazz", scale: "club", price: "$40-70", type: "verified", cta: "Get Tickets", source: "Ravenscroft", link: "https://theravenscroft.com/event/jazzbird-nights-paul-cornish/" },
+  { date: "2027-01-08", title: "Jazzbird Nights: Jazzbirds (Angelo Versace, John Dawson, Nick MacGregor)", venue: "Ravenscroft Jazzbird Lounge", city: "Scottsdale", genre: "jazz", sub: "Modern Jazz", scale: "club", price: "$35-60", type: "verified", cta: "Get Tickets", source: "Ravenscroft", link: "https://theravenscroft.com/event/jazzbird-nights-jazzbirds-5/" },
+  { date: "2027-01-15", title: "Jazzbird Nights: Todd Johnson Quartet", venue: "Ravenscroft Jazzbird Lounge", city: "Scottsdale", genre: "jazz", sub: "Straight-Ahead", scale: "club", price: "$35-60", type: "verified", cta: "Get Tickets", source: "Ravenscroft", link: "https://theravenscroft.com/event/jazzbird-nights-todd-johnson-quartet-2/" },
+  { date: "2027-01-22", title: "Jazzbird Nights: Michael Ragonese", venue: "Ravenscroft Jazzbird Lounge", city: "Scottsdale", genre: "jazz", sub: "Modern Jazz", scale: "club", price: "$35-60", type: "verified", cta: "Get Tickets", source: "Ravenscroft", link: "https://theravenscroft.com/event/jazzbird-nights-michael-ragonese-2/" },
+  { date: "2027-01-29", title: "Jazzbird Nights: Anthony Fung Trio", venue: "Ravenscroft Jazzbird Lounge", city: "Scottsdale", genre: "jazz", sub: "Modern Jazz", scale: "club", price: "$35-60", type: "verified", cta: "Get Tickets", source: "Ravenscroft", link: "https://theravenscroft.com/event/jazzbird-nights-anthony-fung-trio/" },
+  { date: "2027-02-05", title: "Jazzbird Nights: Lee Lambert Quintet (Mardi Gras)", venue: "Ravenscroft Jazzbird Lounge", city: "Scottsdale", genre: "jazz", sub: "New Orleans Jazz", scale: "club", price: "$35-60", type: "verified", cta: "Get Tickets", source: "Ravenscroft", link: "https://theravenscroft.com/event/jazzbird-nights-lee-lambert-quintet/" },
+  { date: "2027-02-19", title: "Jazzbird Nights: Alex Cuba", venue: "Ravenscroft Jazzbird Lounge", city: "Scottsdale", genre: "pop", sub: "Latin Singer-Songwriter", scale: "club", price: "$35-60", type: "verified", cta: "Get Tickets", source: "Ravenscroft", link: "https://theravenscroft.com/event/jazzbird-nights-alex-cuba/" },
+  { date: "2027-02-26", title: "Jazzbird Nights: Corner Pocket Quartet — Milt Jackson tribute", venue: "Ravenscroft Jazzbird Lounge", city: "Scottsdale", genre: "jazz", sub: "Hard Bop", scale: "club", price: "$35-60", type: "verified", cta: "Get Tickets", source: "Ravenscroft", link: "https://theravenscroft.com/event/jazzbird-nights-corner-pocket-quartet-5/" },
+  { date: "2027-03-05", title: "Jazzbird Nights: James Fernando Trio", venue: "Ravenscroft Jazzbird Lounge", city: "Scottsdale", genre: "jazz", sub: "Piano Trio", scale: "club", price: "$35-60", type: "verified", cta: "Get Tickets", source: "Ravenscroft", link: "https://theravenscroft.com/event/jazzbird-nights-james-fernando-trio-5/" },
+  { date: "2027-03-12", title: "Jazzbird Nights: Kelly Green Quartet", venue: "Ravenscroft Jazzbird Lounge", city: "Scottsdale", genre: "jazz", sub: "Vocal Jazz", scale: "club", price: "$35-60", type: "verified", cta: "Get Tickets", source: "Ravenscroft", link: "https://theravenscroft.com/event/jazzbird-nights-kelly-green-quartet-5/" },
+  { date: "2027-03-14", title: "Jazzbird Nights: Sandra Bassett — Tribute to Etta James", venue: "Ravenscroft Jazzbird Lounge", city: "Scottsdale", genre: "blues", sub: "Soul Blues", scale: "club", price: "$35-60", type: "verified", cta: "Get Tickets", source: "Ravenscroft", link: "https://theravenscroft.com/event/jazzbird-nights-sandra-basset-a-tribute-to-etta-james-5/" },
+  { date: "2027-04-02", title: "Jazzbird Nights: Schmidt/Monce Quintet — Miles Davis", venue: "Ravenscroft Jazzbird Lounge", city: "Scottsdale", genre: "jazz", sub: "Modal Jazz", scale: "club", price: "$35-60", type: "verified", cta: "Get Tickets", source: "Ravenscroft", link: "https://theravenscroft.com/event/jazzbird-nights-schmidt-monce-quintet-5/" },
+  { date: "2027-04-09", title: "Jazzbird Nights: Corcoran Holt Quintet — Duke Ellington", venue: "Ravenscroft Jazzbird Lounge", city: "Scottsdale", genre: "jazz", sub: "Swing", scale: "club", price: "$35-60", type: "verified", cta: "Get Tickets", source: "Ravenscroft", link: "https://theravenscroft.com/event/jazzbird-nights-corcoran-holt-5/" },
+  { date: "2027-04-16", title: "Jazzbird Nights: Twin Tenors — Coltrane", venue: "Ravenscroft Jazzbird Lounge", city: "Scottsdale", genre: "jazz", sub: "Post-Bop", scale: "club", price: "$35-60", type: "verified", cta: "Get Tickets", source: "Ravenscroft", link: "https://theravenscroft.com/event/jazzbird-nights-twin-tenors-2/" },
+  { date: "2027-04-23", title: "Jazzbird Nights: Brooke Leigh Davis", venue: "Ravenscroft Jazzbird Lounge", city: "Scottsdale", genre: "jazz", sub: "Vocal Jazz", scale: "club", price: "$35-60", type: "verified", cta: "Get Tickets", source: "Ravenscroft", link: "https://theravenscroft.com/event/jazzbird-nights-brooke-leigh-davis-2/" },
+  { date: "2027-04-30", title: "Jazzbird Nights: Nick Finzer Quartet", venue: "Ravenscroft Jazzbird Lounge", city: "Scottsdale", genre: "jazz", sub: "Modern Jazz", scale: "club", price: "$35-60", type: "verified", cta: "Get Tickets", source: "Ravenscroft", link: "https://theravenscroft.com/event/jazzbird-nights-nick-finzer-quartet-5/" },
+  { date: "2027-05-07", title: "Jazzbird Nights: Eric Rasmussen NYC Quartet", venue: "Ravenscroft Jazzbird Lounge", city: "Scottsdale", genre: "jazz", sub: "Modern Jazz", scale: "club", price: "$35-60", type: "verified", cta: "Get Tickets", source: "Ravenscroft", link: "https://theravenscroft.com/event/jazzbird-nights-eric-rasmussen-nyc-quartet-2/" },
+  { date: "2027-05-14", title: "Jazzbird Nights: Rhys Montanarello Quartet Plays Pat Metheny", venue: "Ravenscroft Jazzbird Lounge", city: "Scottsdale", genre: "jazz", sub: "Jazz Fusion", scale: "club", price: "$35-60", type: "verified", cta: "Get Tickets", source: "Ravenscroft", link: "https://theravenscroft.com/event/jazzbird-nights-rhys-montanarello-quartet-plays-pat-metheny/" },
+  { date: "2027-05-21", title: "Jazzbird Nights: The Swingtime Sisters", venue: "Ravenscroft Jazzbird Lounge", city: "Scottsdale", genre: "jazz", sub: "Swing", scale: "club", price: "$35-60", type: "verified", cta: "Get Tickets", source: "Ravenscroft", link: "https://theravenscroft.com/event/jazzbird-nights-the-swingtime-sisters-5/" },
+  { date: "2027-05-28", title: "Jazzbird Nights: Katherine Byrnes — Gershwin", venue: "Ravenscroft Jazzbird Lounge", city: "Scottsdale", genre: "jazz", sub: "Vocal Standards", scale: "club", price: "$35-60", type: "verified", cta: "Get Tickets", source: "Ravenscroft", link: "https://theravenscroft.com/event/jazzbird-nights-katherine-byrnes-5/" },
+  { date: "2027-06-04", title: "Jazzbird Nights: Nick MacGregor & Friends", venue: "Ravenscroft Jazzbird Lounge", city: "Scottsdale", genre: "jazz", sub: "Modern Jazz", scale: "club", price: "$35-60", type: "verified", cta: "Get Tickets", source: "Ravenscroft", link: "https://theravenscroft.com/event/jazzbird-nights-nick-macgregor-friends-5/" },
+  { date: "2027-06-11", title: "Jazzbird Nights: Hope Morgan", venue: "Ravenscroft Jazzbird Lounge", city: "Scottsdale", genre: "jazz", sub: "Vocal Jazz", scale: "club", price: "$35-60", type: "verified", cta: "Get Tickets", source: "Ravenscroft", link: "https://theravenscroft.com/event/jazzbird-nights-hope-morgan-5/" },
+  { date: "2027-06-18", title: "Jazzbird Nights: Francine Reed", venue: "Ravenscroft Jazzbird Lounge", city: "Scottsdale", genre: "jazz", sub: "Vocal Jazz", scale: "club", price: "$35-60", type: "verified", cta: "Get Tickets", source: "Ravenscroft", link: "https://theravenscroft.com/event/jazzbird-nights-francine-reed-5/" },
+  { date: "2027-06-25", title: "Jazzbird Nights: Kevin Hays Trio", venue: "Ravenscroft Jazzbird Lounge", city: "Scottsdale", genre: "jazz", sub: "Modern Jazz", scale: "club", price: "$35-60", type: "verified", cta: "Get Tickets", source: "Ravenscroft", link: "https://theravenscroft.com/event/jazzbird-nights-kevin-hays-trio-5/" },
+  { date: "2026-10-25", title: "Max Goldschmid", venue: "The Century Room", city: "Tucson", genre: "jazz", sub: "Modern Jazz", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43442168-max-goldschmid-at-century-room" },
+  { date: "2026-11-07", title: "Ben Wolfe w/ Joel Ross, Nicole Glover, Aaron Kimmel", venue: "The Century Room", city: "Tucson", genre: "jazz", sub: "Straight-Ahead", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43281799-ben-wolfe-at-century-room" },
+  { date: "2026-11-08", title: "Max Goldschmid", venue: "The Century Room", city: "Tucson", genre: "jazz", sub: "Modern Jazz", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43459851-max-goldschmid-at-century-room" },
+  { date: "2026-11-14", title: "Sarah Hanahan", venue: "The Century Room", city: "Tucson", genre: "jazz", sub: "Hard Bop", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43399131-sarah-hanahan-at-century-room" },
+  { date: "2026-11-19", title: "Peter Bernstein", venue: "The Century Room", city: "Tucson", genre: "jazz", sub: "Jazz Guitar", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43418401-peter-bernstein-at-century-room" },
+  { date: "2026-11-20", title: "Peter Bernstein", venue: "The Century Room", city: "Tucson", genre: "jazz", sub: "Jazz Guitar", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43418411-peter-bernstein-at-century-room" },
+  { date: "2026-11-21", title: "Peter Bernstein", venue: "The Century Room", city: "Tucson", genre: "jazz", sub: "Jazz Guitar", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43418413-peter-bernstein-at-century-room" },
+  { date: "2026-11-22", title: "Max Goldschmid & Peter Bernstein", venue: "The Century Room", city: "Tucson", genre: "jazz", sub: "Modern Jazz", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43420372-max-goldschmid-at-century-room" },
+  { date: "2026-11-27", title: "Brian Bromberg", venue: "The Century Room", city: "Tucson", genre: "jazz", sub: "Contemporary Jazz", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43442315-brian-bromberg-at-century-room" },
+  { date: "2026-11-28", title: "Brian Bromberg", venue: "The Century Room", city: "Tucson", genre: "jazz", sub: "Contemporary Jazz", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43442318-brian-bromberg-at-century-room" },
+  { date: "2026-12-26", title: "Benny Benack III", venue: "The Century Room", city: "Tucson", genre: "jazz", sub: "Swing", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43466533-benny-benack-iii-at-century-room" },
+  { date: "2026-12-27", title: "Benny Benack III", venue: "The Century Room", city: "Tucson", genre: "jazz", sub: "Swing", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43466534-benny-benack-iii-at-century-room" },
+  { date: "2026-12-28", title: "Benny Benack III", venue: "The Century Room", city: "Tucson", genre: "jazz", sub: "Swing", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43466535-benny-benack-iii-at-century-room" },
+  { date: "2027-01-15", title: "Vincent Herring & Eric Alexander", venue: "The Century Room", city: "Tucson", genre: "jazz", sub: "Hard Bop", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43423103-vincent-herring-at-century-room" },
+  { date: "2027-01-16", title: "Brandon Woody", venue: "The Century Room", city: "Tucson", genre: "jazz", sub: "Modern Jazz", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43423104-brandon-woody-at-century-room" },
+  { date: "2027-01-18", title: "Keyon Harrold", venue: "The Century Room", city: "Tucson", genre: "jazz", sub: "Modern Jazz", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43423105-keyon-harrold-at-century-room" },
+  { date: "2027-01-19", title: "Keyon Harrold", venue: "The Century Room", city: "Tucson", genre: "jazz", sub: "Modern Jazz", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43423106-keyon-harrold-at-century-room" },
+  { date: "2027-01-20", title: "Christian Sands", venue: "The Century Room", city: "Tucson", genre: "jazz", sub: "Modern Jazz", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43423107-christian-sands-at-century-room" },
+  { date: "2027-01-21", title: "Camille Thurman & Darrell Green", venue: "The Century Room", city: "Tucson", genre: "jazz", sub: "Vocal Jazz", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43423108-camille-thurman-at-century-room" },
+  { date: "2027-01-22", title: "Nicole Zuraitis", venue: "The Century Room", city: "Tucson", genre: "jazz", sub: "Vocal Jazz", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43423109-nicole-zuraitis-at-century-room" },
+  { date: "2027-01-23", title: "Melissa Aldana", venue: "The Century Room", city: "Tucson", genre: "jazz", sub: "Modern Jazz", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43423110-melissa-aldana-at-century-room" },
+  { date: "2027-02-18", title: "José James", venue: "The Century Room", city: "Tucson", genre: "jazz", sub: "Soul Jazz", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Songkick", link: "https://www.songkick.com/concerts/43438436-jose-james-at-century-room" },
+  { date: "2026-10-25", title: "Brice Winston Quartet (3 pm)", venue: "The Nash", city: "Phoenix", genre: "jazz", sub: "Hard Bop", scale: "club", price: "See listing", type: "verified", cta: "Get Tickets", source: "The Nash", link: "https://thenash.org/events/brice-winston-quintet/" },
+  { date: "2026-10-30", title: "Nicole Pesce Trio — Late Night, No Cover", venue: "The Nash", city: "Phoenix", genre: "jazz", sub: "Piano Trio", scale: "club", price: "No cover", type: "verified", cta: "Get Tickets", source: "The Nash", link: "https://thenash.org/events/nicole-pesci-trio-late-night-no-cover/" },
+  { date: "2026-10-31", title: "Hot Dogs & Jazz", venue: "The Nash", city: "Phoenix", genre: "jazz", sub: "Standards", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "JazzNearYou", link: "https://www.jazznearyou.com/phoenix/events/hot-dogs-and-jazz-at-the-nash-on-october-31" },
+  { date: "2026-11-01", title: "Matinee: Francine Reed", venue: "The Nash", city: "Phoenix", genre: "jazz", sub: "Vocal Jazz", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "JazzNearYou", link: "https://www.jazznearyou.com/phoenix/events/matinee-francine-reed-at-the-nash-on-november-1" },
+  { date: "2026-11-01", title: "Scottsdale Community College Jazz Orchestra w/ Michael Rodriguez", venue: "The Nash", city: "Phoenix", genre: "jazz", sub: "Big Band", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "JazzNearYou", link: "https://www.jazznearyou.com/phoenix/events/scottsdale-community-college-jazz-orchestra-with-special-guest-michael-rodriguez-at-the-nash-on-november-1" },
+  { date: "2026-11-03", title: "SCC & CGCC Big Bands", venue: "The Nash", city: "Phoenix", genre: "jazz", sub: "Big Band", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "JazzNearYou", link: "https://www.jazznearyou.com/phoenix/events/scc-and-cgcc-big-bands-at-the-nash-on-november-3" },
+  { date: "2026-11-05", title: "Pita Jungle Jazz Jam", venue: "Pita Jungle Chandler", city: "Chandler", genre: "jazz", sub: "Jam Session", scale: "club", price: "Free", type: "verified", cta: "Event Info", source: "JazzNearYou", link: "https://www.jazznearyou.com/phoenix/events/pita-jungle-jazz-jam-at-pita-jungle-restaurant-on-november-5" },
+  { date: "2026-10-21", title: "Pat James Trio (Country Western)", venue: "Westside Blues & Jazz", city: "Glendale", genre: "country", sub: "Country Western", scale: "club", price: "See listing (2-drink min)", type: "verified", cta: "Get Tickets", source: "Westside box office", link: "https://boxoffice.westsideblues.com/events/westsidebluesjazzmore/2441440?date=2026-10-21" },
+  { date: "2026-10-22", title: "Jacob Is Dead (Jacob Luttrell) R&B, Soul & Hip Hop", venue: "Westside Blues & Jazz", city: "Glendale", genre: "hiphop", sub: "R&B / Hip-Hop", scale: "club", price: "See listing (2-drink min)", type: "verified", cta: "Get Tickets", source: "Westside box office", link: "https://boxoffice.westsideblues.com/events/westsidebluesjazzmore/2152388?date=2026-10-22" },
+  { date: "2026-10-23", title: "Stevie and the Big Easy (New Orleans Style Funk)", venue: "Westside Blues & Jazz", city: "Glendale", genre: "jazz", sub: "New Orleans Funk", scale: "club", price: "See listing (2-drink min)", type: "verified", cta: "Get Tickets", source: "Westside box office", link: "https://boxoffice.westsideblues.com/events/westsidebluesjazzmore/2094841?date=2026-10-23" },
+  { date: "2026-10-24", title: "COLD SHOTT & THE HURRICANE HORNS (Funk/Blues/Soul)", venue: "Westside Blues & Jazz", city: "Glendale", genre: "blues", sub: "Funk / Soul Blues", scale: "club", price: "See listing (2-drink min)", type: "verified", cta: "Get Tickets", source: "Westside box office", link: "https://boxoffice.westsideblues.com/events/westsidebluesjazzmore/1971171?date=2026-10-24" },
+  { date: "2026-10-25", title: "RICHIMAN & GROOVE NICE (Korean Blues Band)", venue: "Westside Blues & Jazz", city: "Glendale", genre: "blues", sub: "Blues Rock", scale: "club", price: "See listing (2-drink min)", type: "verified", cta: "Get Tickets", source: "Westside box office", link: "https://boxoffice.westsideblues.com/events/westsidebluesjazzmore/2080960?date=2026-10-25" },
+  { date: "2026-10-28", title: "Juniper Ridge + Ernie Nuñez (Indie/Psych-Jazz + Rock/Latin/R&B)", venue: "Westside Blues & Jazz", city: "Glendale", genre: "jazz", sub: "Psych Jazz", scale: "club", price: "See listing (2-drink min)", type: "verified", cta: "Get Tickets", source: "Westside box office", link: "https://boxoffice.westsideblues.com/events/westsidebluesjazzmore/2441536?date=2026-10-28" },
+  { date: "2026-10-30", title: "JW-Jones Trio (Blues)", venue: "Westside Blues & Jazz", city: "Glendale", genre: "blues", sub: "Electric Blues", scale: "club", price: "See listing (2-drink min)", type: "verified", cta: "Get Tickets", source: "Westside box office", link: "https://boxoffice.westsideblues.com/events/westsidebluesjazzmore/2340047?date=2026-10-30" },
+  { date: "2026-10-31", title: "Soulitify (Latin/R&B/Soul)", venue: "Westside Blues & Jazz", city: "Glendale", genre: "hiphop", sub: "Latin Soul / R&B", scale: "club", price: "See listing (2-drink min)", type: "verified", cta: "Get Tickets", source: "Westside box office", link: "https://boxoffice.westsideblues.com/events/westsidebluesjazzmore/1976542?date=2026-10-31" },
+  { date: "2026-11-01", title: "Marmalade Skies: A Tribute To The Beatles", venue: "Westside Blues & Jazz", city: "Glendale", genre: "rock", sub: "Beatles Tribute", scale: "club", price: "See listing (2-drink min)", type: "verified", cta: "Get Tickets", source: "Westside box office", link: "https://boxoffice.westsideblues.com/events/westsidebluesjazzmore/1970994?date=2026-11-01" },
+  { date: "2026-11-04", title: "Every First Wednesday with Jesse Weston ~ Piano Man", venue: "Westside Blues & Jazz", city: "Glendale", genre: "pop", sub: "Piano Man Covers", scale: "club", price: "See listing (2-drink min)", type: "verified", cta: "Get Tickets", source: "Westside box office", link: "https://boxoffice.westsideblues.com/events/westsidebluesjazzmore/1980639?date=2026-11-04" },
+  { date: "2026-11-06", title: "Lucius Parr & Badd Boyz Blues Band (Soul Blues/Old-School R&B/Funk)", venue: "Westside Blues & Jazz", city: "Glendale", genre: "blues", sub: "Soul Blues", scale: "club", price: "See listing (2-drink min)", type: "verified", cta: "Get Tickets", source: "Westside box office", link: "https://boxoffice.westsideblues.com/events/westsidebluesjazzmore/2441579?date=2026-11-06" },
+  { date: "2026-11-07", title: "Soul Power Band (Soul/R&B)", venue: "Westside Blues & Jazz", city: "Glendale", genre: "hiphop", sub: "Soul / R&B", scale: "club", price: "See listing (2-drink min)", type: "verified", cta: "Get Tickets", source: "Westside box office", link: "https://boxoffice.westsideblues.com/events/westsidebluesjazzmore/1970969?date=2026-11-07" },
+  { date: "2026-11-08", title: "Double Dynamite: Tribute to Otis Redding/Sam & Dave (Soul/R&B)", venue: "Westside Blues & Jazz", city: "Glendale", genre: "hiphop", sub: "Soul Tribute", scale: "club", price: "See listing (2-drink min)", type: "verified", cta: "Get Tickets", source: "Westside box office", link: "https://boxoffice.westsideblues.com/events/westsidebluesjazzmore/2420427?date=2026-11-08" },
+  { date: "2026-11-12", title: "Fred & Friends (R&B/Jazz Fusion)", venue: "Westside Blues & Jazz", city: "Glendale", genre: "jazz", sub: "R&B / Jazz Fusion", scale: "club", price: "See listing (2-drink min)", type: "verified", cta: "Get Tickets", source: "Westside box office", link: "https://boxoffice.westsideblues.com/events/westsidebluesjazzmore/2441978?date=2026-11-12" },
+  { date: "2026-11-13", title: "Sandra Bassett & September Soul (R&B/Motown/Jazz)", venue: "Westside Blues & Jazz", city: "Glendale", genre: "jazz", sub: "Motown / Soul Jazz", scale: "club", price: "See listing (2-drink min)", type: "verified", cta: "Get Tickets", source: "Westside box office", link: "https://boxoffice.westsideblues.com/events/westsidebluesjazzmore/1971214?date=2026-11-13" },
+  { date: "2026-11-14", title: "911: DANGEROUS BAND (R&B, OLD-SCHOOL, SOUL)", venue: "Westside Blues & Jazz", city: "Glendale", genre: "hiphop", sub: "Old-School R&B", scale: "club", price: "See listing (2-drink min)", type: "verified", cta: "Get Tickets", source: "Westside box office", link: "https://boxoffice.westsideblues.com/events/westsidebluesjazzmore/1971153?date=2026-11-14" },
+  { date: "2026-11-15", title: "Dirty Yachtin' Scoundrels (Yacht Rock)", venue: "Westside Blues & Jazz", city: "Glendale", genre: "rock", sub: "Yacht Rock", scale: "club", price: "See listing (2-drink min)", type: "verified", cta: "Get Tickets", source: "Westside box office", link: "https://boxoffice.westsideblues.com/events/westsidebluesjazzmore/1971053?date=2026-11-15" },
+  { date: "2026-11-18", title: "Pat James Trio (Country Western)", venue: "Westside Blues & Jazz", city: "Glendale", genre: "country", sub: "Country Western", scale: "club", price: "See listing (2-drink min)", type: "verified", cta: "Get Tickets", source: "Westside box office", link: "https://boxoffice.westsideblues.com/events/westsidebluesjazzmore/2441440?date=2026-11-18" },
+  { date: "2026-11-19", title: "Westside Presents: Old School, New School, Blue School (Blues Variety Show)", venue: "Westside Blues & Jazz", city: "Glendale", genre: "blues", sub: "Blues Variety Show", scale: "club", price: "See listing (2-drink min)", type: "verified", cta: "Get Tickets", source: "Westside box office", link: "https://boxoffice.westsideblues.com/events/westsidebluesjazzmore/1995269?date=2026-11-19" },
+  { date: "2026-11-20", title: "Leah Jay & Steve Gripp with the Summit Avenue Band: a Minneapolis Groove Session", venue: "Westside Blues & Jazz", city: "Glendale", genre: "pop", sub: "Minneapolis Funk", scale: "club", price: "See listing (2-drink min)", type: "verified", cta: "Get Tickets", source: "Westside box office", link: "https://boxoffice.westsideblues.com/events/westsidebluesjazzmore/2252939?date=2026-11-20" },
+  { date: "2026-11-21", title: "Jacob Is Dead (Jacob Luttrell) R&B, Soul & Hip Hop", venue: "Westside Blues & Jazz", city: "Glendale", genre: "hiphop", sub: "R&B / Hip-Hop", scale: "club", price: "See listing (2-drink min)", type: "verified", cta: "Get Tickets", source: "Westside box office", link: "https://boxoffice.westsideblues.com/events/westsidebluesjazzmore/2152388?date=2026-11-21" },
+  { date: "2026-11-22", title: "Carmela y Mas (Latin Salsa)", venue: "Westside Blues & Jazz", city: "Glendale", genre: "jazz", sub: "Salsa / Latin Jazz", scale: "club", price: "See listing (2-drink min)", type: "verified", cta: "Get Tickets", source: "Westside box office", link: "https://boxoffice.westsideblues.com/events/westsidebluesjazzmore/1971103?date=2026-11-22" },
+  { date: "2026-11-25", title: "Thaddeus Rose Band (Dance Rock)", venue: "Westside Blues & Jazz", city: "Glendale", genre: "rock", sub: "Dance Rock", scale: "club", price: "See listing (2-drink min)", type: "verified", cta: "Get Tickets", source: "Westside box office", link: "https://boxoffice.westsideblues.com/events/westsidebluesjazzmore/1968293?date=2026-11-25" },
+  { date: "2026-11-27", title: "Reminisce Band (R&B/Soul/Top 40)", venue: "Westside Blues & Jazz", city: "Glendale", genre: "hiphop", sub: "R&B / Top 40 Covers", scale: "club", price: "See listing (2-drink min)", type: "verified", cta: "Get Tickets", source: "Westside box office", link: "https://boxoffice.westsideblues.com/events/westsidebluesjazzmore/1978432?date=2026-11-27" },
+  { date: "2026-11-28", title: "COLD SHOTT & THE HURRICANE HORNS (Funk/Blues/Soul)", venue: "Westside Blues & Jazz", city: "Glendale", genre: "blues", sub: "Funk / Soul Blues", scale: "club", price: "See listing (2-drink min)", type: "verified", cta: "Get Tickets", source: "Westside box office", link: "https://boxoffice.westsideblues.com/events/westsidebluesjazzmore/1971171?date=2026-11-28" },
+  { date: "2026-11-29", title: "We 3 (Jazz & More)", venue: "Westside Blues & Jazz", city: "Glendale", genre: "jazz", sub: "Vocal Jazz", scale: "club", price: "See listing (2-drink min)", type: "verified", cta: "Get Tickets", source: "Westside box office", link: "https://boxoffice.westsideblues.com/events/westsidebluesjazzmore/2080988?date=2026-11-29" },
+  { date: "2026-12-02", title: "Every First Wednesday with Jesse Weston ~ Piano Man", venue: "Westside Blues & Jazz", city: "Glendale", genre: "pop", sub: "Piano Man Covers", scale: "club", price: "See listing (2-drink min)", type: "verified", cta: "Get Tickets", source: "Westside box office", link: "https://boxoffice.westsideblues.com/events/westsidebluesjazzmore/1980639?date=2026-12-02" },
+  { date: "2026-12-03", title: "Westside's Jam Night!! (Musicians = Free Entry)", venue: "Westside Blues & Jazz", city: "Glendale", genre: "jazz", sub: "Blues & Jazz Jam", scale: "club", price: "See listing (2-drink min)", type: "verified", cta: "Get Tickets", source: "Westside box office", link: "https://boxoffice.westsideblues.com/events/westsidebluesjazzmore/1968270?date=2026-12-03" },
+  { date: "2026-12-04", title: "Soul Power Band (Soul/R&B)", venue: "Westside Blues & Jazz", city: "Glendale", genre: "hiphop", sub: "Soul / R&B", scale: "club", price: "See listing (2-drink min)", type: "verified", cta: "Get Tickets", source: "Westside box office", link: "https://boxoffice.westsideblues.com/events/westsidebluesjazzmore/1970969?date=2026-12-04" },
+  { date: "2026-12-05", title: "Sandra Bassett & September Soul (R&B/Motown/Jazz)", venue: "Westside Blues & Jazz", city: "Glendale", genre: "jazz", sub: "Motown / Soul Jazz", scale: "club", price: "See listing (2-drink min)", type: "verified", cta: "Get Tickets", source: "Westside box office", link: "https://boxoffice.westsideblues.com/events/westsidebluesjazzmore/1971214?date=2026-12-05" },
+  { date: "2026-12-12", title: "The Fast Lane - Tribute to the Eagles (American/Arena/Classic Rock)", venue: "Westside Blues & Jazz", city: "Glendale", genre: "rock", sub: "Eagles Tribute", scale: "club", price: "See listing (2-drink min)", type: "verified", cta: "Get Tickets", source: "Westside box office", link: "https://boxoffice.westsideblues.com/events/westsidebluesjazzmore/2480960?date=2026-12-12" },
+  { date: "2026-12-13", title: "Dirty Yachtin' Scoundrels (Yacht Rock)", venue: "Westside Blues & Jazz", city: "Glendale", genre: "rock", sub: "Yacht Rock", scale: "club", price: "See listing (2-drink min)", type: "verified", cta: "Get Tickets", source: "Westside box office", link: "https://boxoffice.westsideblues.com/events/westsidebluesjazzmore/1971053?date=2026-12-13" },
+  { date: "2026-12-16", title: "Pat James Trio (Country Western)", venue: "Westside Blues & Jazz", city: "Glendale", genre: "country", sub: "Country Western", scale: "club", price: "See listing (2-drink min)", type: "verified", cta: "Get Tickets", source: "Westside box office", link: "https://boxoffice.westsideblues.com/events/westsidebluesjazzmore/2441440?date=2026-12-16" },
+  { date: "2026-12-17", title: "Westside Presents: Old School, New School, Blue School (Blues Variety Show)", venue: "Westside Blues & Jazz", city: "Glendale", genre: "blues", sub: "Blues Variety Show", scale: "club", price: "See listing (2-drink min)", type: "verified", cta: "Get Tickets", source: "Westside box office", link: "https://boxoffice.westsideblues.com/events/westsidebluesjazzmore/1995269?date=2026-12-17" },
+  { date: "2026-12-18", title: "Carmela y Mas (Latin Salsa)", venue: "Westside Blues & Jazz", city: "Glendale", genre: "jazz", sub: "Salsa / Latin Jazz", scale: "club", price: "See listing (2-drink min)", type: "verified", cta: "Get Tickets", source: "Westside box office", link: "https://boxoffice.westsideblues.com/events/westsidebluesjazzmore/1971103?date=2026-12-18" },
+  { date: "2026-12-19", title: "911: DANGEROUS BAND (R&B, OLD-SCHOOL, SOUL)", venue: "Westside Blues & Jazz", city: "Glendale", genre: "hiphop", sub: "Old-School R&B", scale: "club", price: "See listing (2-drink min)", type: "verified", cta: "Get Tickets", source: "Westside box office", link: "https://boxoffice.westsideblues.com/events/westsidebluesjazzmore/1971153?date=2026-12-19" },
+  { date: "2026-12-20", title: "The Black Coal w/ Band of Yules Holiday Party (Blues & Rock 'n Roll)", venue: "Westside Blues & Jazz", city: "Glendale", genre: "blues", sub: "Blues Rock", scale: "club", price: "See listing (2-drink min)", type: "verified", cta: "Get Tickets", source: "Westside box office", link: "https://boxoffice.westsideblues.com/events/westsidebluesjazzmore/2480156?date=2026-12-20" },
+  { date: "2026-12-23", title: "Thaddeus Rose Band (Dance Rock)", venue: "Westside Blues & Jazz", city: "Glendale", genre: "rock", sub: "Dance Rock", scale: "club", price: "See listing (2-drink min)", type: "verified", cta: "Get Tickets", source: "Westside box office", link: "https://boxoffice.westsideblues.com/events/westsidebluesjazzmore/1968293?date=2026-12-23" },
+  { date: "2026-12-26", title: "COLD SHOTT & THE HURRICANE HORNS (Funk/Blues/Soul)", venue: "Westside Blues & Jazz", city: "Glendale", genre: "blues", sub: "Funk / Soul Blues", scale: "club", price: "See listing (2-drink min)", type: "verified", cta: "Get Tickets", source: "Westside box office", link: "https://boxoffice.westsideblues.com/events/westsidebluesjazzmore/1971171?date=2026-12-26" },
+  { date: "2026-12-27", title: "Azz Izz Band (Reggae/Latin/Worldbeat Grooves)", venue: "Westside Blues & Jazz", city: "Glendale", genre: "pop", sub: "Reggae / Worldbeat", scale: "club", price: "See listing (2-drink min)", type: "verified", cta: "Get Tickets", source: "Westside box office", link: "https://boxoffice.westsideblues.com/events/westsidebluesjazzmore/2289360?date=2026-12-27" },
+  { date: "2026-10-23", title: "Nico B. + The Squad (Heavenstone Presents)", venue: "The Womack", city: "Phoenix", genre: "jazz", sub: "Soul Vocal", scale: "club", price: "See listing", type: "verified", cta: "Get Tickets", source: "Eventbrite", link: "https://www.eventbrite.com/e/nico-b-the-squad-at-the-womack-tickets-2002763660020" },
+  { date: "2026-10-23", title: "The Sugar Thieves", venue: "Rhythm Room", city: "Phoenix", genre: "blues", sub: "Roots Blues", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Phoenix New Times", link: "https://rhythmroom.com" },
+  { date: "2026-10-24", title: "Eric Steckel", venue: "Rhythm Room", city: "Phoenix", genre: "blues", sub: "Blues Rock", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Phoenix New Times", link: "https://rhythmroom.com" },
+  { date: "2026-10-28", title: "Jennifer Knapp", venue: "Rhythm Room", city: "Phoenix", genre: "pop", sub: "Singer-Songwriter", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Phoenix New Times", link: "https://rhythmroom.com" },
+  { date: "2026-10-30", title: "Big Sandy and His Fly-Rite Boys", venue: "Rhythm Room", city: "Phoenix", genre: "rock", sub: "Rockabilly", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Phoenix New Times", link: "https://rhythmroom.com" },
+  { date: "2026-10-31", title: "Southern Culture on the Skids", venue: "Rhythm Room", city: "Phoenix", genre: "rock", sub: "Swamp Rock", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Phoenix New Times", link: "https://rhythmroom.com" },
+  { date: "2026-11-01", title: "Kaleidoscope Redrocks", venue: "Rhythm Room", city: "Phoenix", genre: "rock", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Phoenix New Times", link: "https://rhythmroom.com" },
+  { date: "2026-11-14", title: "Bill Tarsha's Birthday Party w/ The Rocket 88's", venue: "Rhythm Room", city: "Phoenix", genre: "blues", sub: "Jump Blues", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Phoenix New Times", link: "https://rhythmroom.com" },
+  { date: "2026-11-20", title: "Igor and the Red Elvises", venue: "Rhythm Room", city: "Phoenix", genre: "rock", sub: "Surf Rockabilly", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Phoenix New Times", link: "https://rhythmroom.com" },
+  { date: "2026-11-25", title: "An Evening With Fred Eaglesmith", venue: "Rhythm Room", city: "Phoenix", genre: "country", sub: "Alt-Country", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Phoenix New Times", link: "https://rhythmroom.com" },
+  { date: "2026-11-29", title: "Summer of Love", venue: "Rhythm Room", city: "Phoenix", genre: "rock", sub: "'60s Tribute", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Phoenix New Times", link: "https://rhythmroom.com" },
+  { date: "2026-12-10", title: "Mark Hummel and Junior Watson w/ Anson Funderburgh", venue: "Rhythm Room", city: "Phoenix", genre: "blues", sub: "Harmonica Blues", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Phoenix New Times", link: "https://rhythmroom.com" },
+  { date: "2026-12-11", title: "Raven's Rockin' R&B Holiday Party w/ ALIBI", venue: "Rhythm Room", city: "Phoenix", genre: "blues", sub: "R&B Holiday Party", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Phoenix New Times", link: "https://rhythmroom.com" },
+  { date: "2026-12-17", title: "Gary Hoey: Ho Ho Hoey Christmas Show", venue: "Rhythm Room", city: "Phoenix", genre: "rock", sub: "Guitar Rock / Holiday", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Phoenix New Times", link: "https://rhythmroom.com" },
+  { date: "2026-12-24", title: "Christmas Eve Blues w/ Billy Watson, Bill Tarsha and the Rocket 88's", venue: "Rhythm Room", city: "Phoenix", genre: "blues", sub: "Holiday Blues", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Phoenix New Times", link: "https://rhythmroom.com" },
+  { date: "2026-12-31", title: "New Year's Eve w/ Jimi \"Primetime\" Smith, Bob Corritore, Carla Denise", venue: "Rhythm Room", city: "Phoenix", genre: "blues", sub: "Chicago Blues", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "Phoenix New Times", link: "https://rhythmroom.com" },
+  { date: "2026-11-05", title: "Jazz Casual Thursday: Charles Lewis Trio", venue: "The Nash", city: "Phoenix", genre: "jazz", sub: "Straight-Ahead", scale: "club", price: "See listing", type: "verified", cta: "Event Info", source: "JazzNearYou", link: "https://www.jazznearyou.com/phoenix/events/jazz-casual-thursday-with-charles-lewis-and-his-trio-at-the-nash-on-november-5" },
+];
+let events = FALLBACK_EVENTS;
+
+async function loadEvents() {
+  // Prefer live data from fetch_events.py's output when deployed with it.
+  // Falls back to the snapshot above when events.json isn't present (e.g.
+  // viewing this file standalone, like right now).
+  try {
+    const resp = await fetch('events.json', { cache: 'no-store' });
+    if (resp.ok) {
+      const live = await resp.json();
+      // Only trust the live feed when it looks complete; a partial or broken
+      // scrape must never replace the curated listings below.
+      if (Array.isArray(live) && live.length >= 150) events = live;
+    }
+  } catch (err) {
+    // events.json not reachable — expected when not deployed with the script yet.
+  }
+  render();
+}
+
+const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;');
+
+function fmtDate(iso) {
+  const d = new Date(iso + "T12:00:00");
+  return {
+    dow: d.toLocaleDateString('en-US', { weekday: 'short' }).toUpperCase(),
+    num: d.getDate()
+  };
+}
+
+function render() {
+  const genre = document.getElementById('genreFilter').value;
+  const city = document.getElementById('cityFilter').value;
+  const scale = document.getElementById('scaleFilter').value;
+  const sortMode = document.getElementById('sortBy').value;
+  const query = document.getElementById('searchBox').value.trim().toLowerCase();
+  const showCommunity = document.getElementById('communityToggle').checked;
+  const today = new Date(); today.setHours(0,0,0,0);
+
+  const feed = document.getElementById('feed');
+  feed.innerHTML = '';
+
+  const visible = events
+    .filter(e => new Date(e.date + "T23:59:59") >= today)   // auto-drop past events
+    .filter(e => genre === 'all' || e.genre === genre)
+    .filter(e => city === 'all' || e.city === city)
+    .filter(e => scale === 'all' || e.scale === scale)
+    .filter(e => showCommunity || e.type === 'verified')
+    .filter(e => !query || e.title.toLowerCase().includes(query) || e.venue.toLowerCase().includes(query));
+
+  if (sortMode === 'date-desc') {
+    visible.sort((a,b) => b.date.localeCompare(a.date));
+  } else if (sortMode === 'venue') {
+    visible.sort((a,b) => a.venue.localeCompare(b.venue) || a.date.localeCompare(b.date));
+  } else {
+    visible.sort((a,b) => a.date.localeCompare(b.date));
+  }
+
+  document.getElementById('count').textContent = `${visible.length} upcoming`;
+
+  if (!visible.length) {
+    feed.innerHTML = '<div class="no-results">No events match these filters — try clearing one.</div>';
+    return;
+  }
+
+  visible.forEach(e => {
+    const { dow, num } = fmtDate(e.date);
+    const row = document.createElement('div');
+    row.className = `event ${e.type}`;
+    row.style.setProperty('--genre-color', genreColors[e.genre] || 'var(--blue)');
+    row.innerHTML = `
+      <div class="date-block">
+        <div class="dow">${dow}</div>
+        <div class="num">${num}</div>
+      </div>
+      <div class="details">
+        ${e.sub
+          ? `<span class="gpill" title="${genreLabels[e.genre]} · ${esc(e.sub)}"><span class="g">${genreLabels[e.genre]}</span><span class="s">${esc(e.sub)}</span></span>`
+          : `<span class="tag">${genreLabels[e.genre]}</span>`}
+        <span class="tag status ${e.type}">${e.type === 'verified' ? 'Verified' : 'Underground'}</span>
+        <span class="tag scale">${scaleLabels[e.scale]}</span>
+        <h3>${e.title}</h3>
+        <p class="meta">${e.venue} · ${e.city} · ${e.price} · via ${e.source || 'Unknown'}</p>
+      </div>
+      <div class="action">
+        <a class="btn ${e.type === 'verified' && e.cta === 'Get Tickets' ? 'tickets' : 'info'}" href="${e.link}" target="_blank" rel="noopener">
+          ${e.cta}
+        </a>
+      </div>
+    `;
+    feed.appendChild(row);
+  });
+}
+
+['genreFilter','cityFilter','scaleFilter','sortBy','communityToggle'].forEach(id =>
+  document.getElementById(id).addEventListener('change', render)
+);
+document.getElementById('searchBox').addEventListener('input', render);
+document.getElementById('clearFilters').addEventListener('click', () => {
+  document.getElementById('genreFilter').value = 'all';
+  document.getElementById('cityFilter').value = 'all';
+  document.getElementById('scaleFilter').value = 'all';
+  document.getElementById('sortBy').value = 'date-asc';
+  document.getElementById('searchBox').value = '';
+  document.getElementById('communityToggle').checked = true;
+  render();
+});
+loadEvents();
+</script>
+
+</body>
+</html>
