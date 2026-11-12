@@ -56,10 +56,11 @@ GENRE_WORDS = [
     ("hiphop", r"hip.?hop|\brap\b|r&b|rnb|soul|urban"),
     ("jazz", r"jazz|swing|big band|bebop"),
     ("blues", r"blues|funk"),
+    # Country before Folk: SeatGeek tags many country acts "Country / Folk".
+    ("country", r"country|western"),
     ("folk", r"americana|bluegrass|\bfolk\b|singer.?songwriter|acoustic|celtic|appalachian"),
     ("world", r"\blatin|latino|\bglobal\b|world music|cumbia|norte[nñ]o|banda\b|regional mexican|"
               r"tejano|mariachi|reggaeton|salsa|bachata|flamenco|afrobeat|reggae|klezmer"),
-    ("country", r"country|western"),
     ("rock", r"rock|punk|indie|alternative|emo|grunge|shoegaze|ska"),
     ("pop", r"pop|k-pop|r&b|other"),
 ]
