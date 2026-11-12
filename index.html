@@ -446,7 +446,7 @@
 <div class="feed" id="feed"></div>
 
 <div class="note">
-  <strong>Verified</strong> = a confirmed listing. <strong>Underground</strong> = venue is TBA or released by the promoter the day of. The gray badge is room size: Large (Arena), Medium (Club/Theater) or Underground (Warehouse/DIY). Genre tags can carry a sub-genre (like Rock | Pop Punk) for flavor — it isn't a filter. Each listing names where it was found, since no single source catches everything. Listings are compiled from public sources and can change, sell out or be canceled — confirm with the venue or ticket page before you go. Last updated Oct 19, 2026.
+  <strong>Verified</strong> = a confirmed listing. <strong>Underground</strong> = venue is TBA or released by the promoter the day of. The gray badge is room size: Large (Arena), Medium (Club/Theater) or Underground (Warehouse/DIY). Genre tags can carry a sub-genre (like Rock | Pop Punk) for flavor — it isn't a filter. Each listing names where it was found, since no single source catches everything. Listings are compiled from public sources and can change, sell out or be canceled — confirm with the venue or ticket page before you go. Listings refresh daily.
 </div>
 
 <script>
@@ -996,9 +996,15 @@ async function loadEvents() {
     const resp = await fetch('events.json', { cache: 'no-store' });
     if (resp.ok) {
       const live = await resp.json();
-      // Only trust the live feed when it looks complete; a partial or broken
-      // scrape must never replace the curated listings below.
-      if (Array.isArray(live) && live.length >= 150) events = live;
+      // events.json is written daily by scripts/refresh_events.py as
+      // { updated: "YYYY-MM-DD", events: [...] }. The script refuses to write
+      // a short list, and the checks here keep a broken file from blanking the page.
+      if (live && Array.isArray(live.events) && live.events.length >= 30) {
+        events = live.events;
+        if (/^\d{4}-\d{2}-\d{2}$/.test(live.updated || '')) LAST_UPDATED = live.updated;
+      } else if (Array.isArray(live) && live.length >= 150) {
+        events = live;
+      }
     }
   } catch (err) {
     // events.json not reachable — expected when not deployed with the script yet.
@@ -1006,8 +1012,8 @@ async function loadEvents() {
   render();
 }
 
-// [10] Change this date whenever you refresh the listings.
-const LAST_UPDATED = '2026-10-19';
+// [10] Date of the embedded snapshot. events.json overrides it with its own date.
+let LAST_UPDATED = '2026-10-19';
 
 // [7] Escape everything that comes from the data, and only allow http(s) links.
 const esc = s => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
