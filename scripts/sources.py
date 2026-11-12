@@ -46,7 +46,7 @@ def _title_case_if_shouty(s):
     return s.title() if s.isupper() and len(s) > 3 else s
 
 
-# Words in a genre/tag/title -> the site's 11 genres. First match wins.
+# Words in a genre/tag/title -> the site's 13 genres. First match wins.
 GENRE_WORDS = [
     ("dnb", r"drum ?(&|and|n)? ?bass|\bdnb\b|jungle"),
     ("techno", r"techno|industrial|minimal|acid|hard ?groove"),
@@ -56,9 +56,12 @@ GENRE_WORDS = [
     ("hiphop", r"hip.?hop|\brap\b|r&b|rnb|soul|urban"),
     ("jazz", r"jazz|swing|big band|bebop"),
     ("blues", r"blues|funk"),
-    ("country", r"country|americana|bluegrass|folk|western|cumbia|norte|banda|regional mexican"),
-    ("rock", r"rock|punk|indie|alternative|emo|grunge|shoegaze|ska|singer.?songwriter"),
-    ("pop", r"pop|latin|reggae|world|k-pop|r&b|tejano|mariachi|other"),
+    ("folk", r"americana|bluegrass|\bfolk\b|singer.?songwriter|acoustic|celtic|appalachian"),
+    ("world", r"\blatin|latino|\bglobal\b|world music|cumbia|norte[nñ]o|banda\b|regional mexican|"
+              r"tejano|mariachi|reggaeton|salsa|bachata|flamenco|afrobeat|reggae|klezmer"),
+    ("country", r"country|western"),
+    ("rock", r"rock|punk|indie|alternative|emo|grunge|shoegaze|ska"),
+    ("pop", r"pop|k-pop|r&b|other"),
 ]
 NOT_MUSIC = re.compile(
     r"comedy|comedian|stand.?up|trivia|jeopardy|haunted|tarot|flea\b|dating|singles|mingle|^closed$|quiz|karaoke|bingo|yoga|workshop|market|podcast|"
@@ -390,7 +393,7 @@ def schema_pages(venue_scale):
 # SUBMISSIONS_CSV_URL secret. Promoters need no account to submit.
 
 SITE_GENRES = {"house", "techno", "bass", "dnb", "rock", "hiphop", "country",
-               "pop", "jazz", "metal", "blues"}
+               "pop", "jazz", "metal", "blues", "folk", "world"}
 
 
 def _form_date(s):
@@ -427,11 +430,50 @@ def submissions(venue_scale):
     return out
 
 
+# ----------------------------------------- 7. MIM (Musical Instrument Museum)
+# WordPress "The Events Calendar" JSON feed, no key. Only the Concerts category,
+# so kids' classes and gallery events stay out. Its own categories map onto the
+# site's genres; Members Only previews are skipped.
+MIM_URL = "https://mim.org/wp-json/tribe/events/v1/events"
+MIM_GENRES = [  # MIM category -> site genre, in priority order
+    ("jazz", "jazz"), ("blues", "blues"), ("bluegrass", "folk"),
+    ("americana and folk", "folk"), ("global", "world"),
+    ("soul, r&b, and funk", "hiphop"), ("rock", "rock"),
+    ("singer-songwriter", "folk"), ("american traditions", "folk"), ("pop", "pop"),
+]
+MIM_GENERIC = {"concerts", "holiday", "weekly spotlights", "just added!", "members only",
+               "i am az music®", "classical"}
+
+
+def mim(venue_scale):
+    out, page = [], 1
+    while page <= 6:
+        data = _json(f"{MIM_URL}?categories=concerts&per_page=50&page={page}")
+        for ev in data.get("events", []):
+            cats = [html.unescape(c.get("name", "")).strip() for c in ev.get("categories", [])]
+            low = [c.lower() for c in cats]
+            if "concerts" not in low or "members only" in low:
+                continue
+            genre = next((g for name, g in MIM_GENRES if name in low), None)
+            title = _clean(ev.get("title"))
+            if not genre or not title or NOT_MUSIC.search(title):
+                continue
+            style = next((c for c in cats if c.lower() not in MIM_GENERIC), "")
+            out.append(make(str(ev.get("start_date", ""))[:10], title, "MIM Music Theater", "Phoenix",
+                            genre, style, ev.get("cost") or "", "MIM", ev.get("url") or "https://mim.org",
+                            scale="club"))
+        if page >= int(data.get("total_pages") or 1):
+            break
+        page += 1
+    return out
+
+
 # Order matters: earlier sources win when two describe the same show.
 SOURCES = [
     ("Community", submissions),
     ("Venue sites (TicketWeb)", ticketweb_venues),
     ("Venue sites (schema.org)", schema_pages),
+    ("MIM", mim),
     ("Ticketmaster", ticketmaster),
     ("SeatGeek", seatgeek),
     # Edmtrain is left out on purpose: its API terms forbid combining its events

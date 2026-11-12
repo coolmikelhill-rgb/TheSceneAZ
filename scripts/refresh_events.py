@@ -36,7 +36,7 @@ MIN_EVENTS = 30
 AZ = dt.timezone(dt.timedelta(hours=-7))  # Arizona has no daylight saving time
 
 GENRES = {"house", "techno", "bass", "dnb", "rock", "hiphop", "country",
-          "pop", "jazz", "metal", "blues"}
+          "pop", "jazz", "metal", "blues", "folk", "world"}
 KEYS = ["date", "title", "venue", "city", "genre", "sub", "scale",
         "price", "type", "cta", "source", "link"]
 

@@ -37,6 +37,8 @@
     --gold2: #C9A876;
     --steel: #8E9BB0;
     --indigo: #5E7CE2;
+    --sage: #9CCB7A;
+    --coral: #FF8F6B;
   }
 
   * { box-sizing: border-box; }
@@ -399,6 +401,8 @@
     <option value="jazz">Jazz</option>
     <option value="metal">Metal</option>
     <option value="blues">Blues</option>
+    <option value="folk">Folk / Americana</option>
+    <option value="world">World / Latin</option>
   </select>
   <select id="cityFilter" aria-label="City">
     <option value="all">All cities</option>
@@ -452,11 +456,13 @@
 <script>
 const genreColors = {
   house: 'var(--blue)', techno: 'var(--orange)', bass: 'var(--violet)', dnb: 'var(--teal)',
-  rock: 'var(--red)', hiphop: 'var(--pink)', country: 'var(--amber)', pop: 'var(--cyan)', jazz: 'var(--gold2)', metal: 'var(--steel)', blues: 'var(--indigo)'
+  rock: 'var(--red)', hiphop: 'var(--pink)', country: 'var(--amber)', pop: 'var(--cyan)', jazz: 'var(--gold2)', metal: 'var(--steel)', blues: 'var(--indigo)',
+  folk: 'var(--sage)', world: 'var(--coral)'
 };
 const genreLabels = {
   house: 'House', techno: 'Techno', bass: 'Bass', dnb: 'D&B',
-  rock: 'Rock', hiphop: 'Hip-Hop / R&B', country: 'Country', pop: 'Pop', jazz: 'Jazz', metal: 'Metal', blues: 'Blues'
+  rock: 'Rock', hiphop: 'Hip-Hop / R&B', country: 'Country', pop: 'Pop', jazz: 'Jazz', metal: 'Metal', blues: 'Blues',
+  folk: 'Folk / Americana', world: 'World / Latin'
 };
 const scaleLabels = { arena: 'Large (Arena)', club: 'Medium (Club/Theater)', warehouse: 'Underground (Warehouse/DIY)' };
 
