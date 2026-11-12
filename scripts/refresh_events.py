@@ -25,6 +25,9 @@ import sys
 import urllib.request
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import sources  # noqa: E402  (scripts/sources.py: the other feeds)
+
 ROOT = Path(__file__).resolve().parent.parent
 INDEX = ROOT / "index.html"
 OUT = ROOT / "events.json"
@@ -32,6 +35,8 @@ HZ_URL = "https://19hz.info/eventlisting_Phoenix.php"
 MIN_EVENTS = 30
 AZ = dt.timezone(dt.timedelta(hours=-7))  # Arizona has no daylight saving time
 
+GENRES = {"house", "techno", "bass", "dnb", "rock", "hiphop", "country",
+          "pop", "jazz", "metal", "blues"}
 KEYS = ["date", "title", "venue", "city", "genre", "sub", "scale",
         "price", "type", "cta", "source", "link"]
 
@@ -157,15 +162,25 @@ def parse_19hz(page, venue_scale):
     return out
 
 
+def venue_key(v):
+    return re.sub(r"^the ", "", norm(v))
+
+
 def is_duplicate(new, existing_by_date, links):
+    """Same link, or same day with mostly the same title words.
+
+    A room that hosts two shows in one night (early and late) keeps both,
+    unless the titles share a word.
+    """
     if new["link"] in links:
         return True
-    nv, nt = norm(new["venue"]), tokens(new["title"])
+    nv, nt = venue_key(new["venue"]), tokens(new["title"])
     for old in existing_by_date.get(new["date"], []):
-        if nv and nv == norm(old["venue"]) and nv != "location tba":
-            return True
         ot = tokens(old["title"])
-        if nt and ot and len(nt & ot) / min(len(nt), len(ot)) >= 0.5:
+        overlap = len(nt & ot) / min(len(nt), len(ot)) if nt and ot else 0
+        if overlap >= 0.5:
+            return True
+        if nv and nv == venue_key(old["venue"]) and nv != "location tba" and (overlap > 0 or not nt or not ot):
             return True
     return False
 
@@ -202,6 +217,22 @@ def main():
     except Exception as exc:  # keep going: a source outage must not stop the prune
         log(f"19hz skipped: {exc}")
     log(f"added {added} new shows from 19hz")
+
+    for name, fetch_source in sources.SOURCES:
+        n = 0
+        try:
+            got = fetch_source(venue_scale)
+            for e in got:
+                if (e["date"] < today or not valid(e) or e.get("genre") not in GENRES
+                        or is_duplicate(e, by_date, links)):
+                    continue
+                kept.append(e)
+                by_date.setdefault(e["date"], []).append(e)
+                links.add(e["link"])
+                n += 1
+            log(f"{name}: {len(got)} found, {n} new")
+        except Exception as exc:  # one broken source never stops the rest
+            log(f"{name} skipped: {exc}")
 
     if len(kept) < MIN_EVENTS:
         log(f"only {len(kept)} shows; refusing to write events.json")

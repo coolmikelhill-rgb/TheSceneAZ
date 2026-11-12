@@ -1009,6 +1009,14 @@ async function loadEvents() {
   } catch (err) {
     // events.json not reachable — expected when not deployed with the script yet.
   }
+  // New sources bring new towns (Gilbert, Prescott Valley, Lake Havasu City...).
+  // Add any city in the data that the dropdown doesn't list yet, then re-read
+  // the URL so a shared ?city=Gilbert link still works.
+  const cityEl = $('cityFilter');
+  const known = new Set([...cityEl.options].map(o => o.value));
+  [...new Set(events.map(e => e.city))].filter(c => c && !known.has(c)).sort()
+    .forEach(c => cityEl.add(new Option(c, c)));
+  readUrl();
   render();
 }
 

@@ -23,6 +23,11 @@ jobs:
 
       - name: Refresh events.json
         run: python3 scripts/refresh_events.py
+        env:
+          # Settings > Secrets and variables > Actions. A missing one just skips that source.
+          TICKETMASTER_KEY: ${{ secrets.TICKETMASTER_KEY }}
+          SEATGEEK_CLIENT_ID: ${{ secrets.SEATGEEK_CLIENT_ID }}
+          SUBMISSIONS_CSV_URL: ${{ secrets.SUBMISSIONS_CSV_URL }}
 
       - name: Commit if anything changed
         id: commit
