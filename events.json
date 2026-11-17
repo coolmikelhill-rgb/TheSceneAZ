@@ -1,76 +1,6 @@
 {
- "updated": "2026-11-16",
+ "updated": "2026-11-17",
  "events": [
-  {
-   "date": "2026-11-16",
-   "title": "An Evening With Band Of Horses",
-   "venue": "The Van Buren",
-   "city": "Phoenix",
-   "genre": "rock",
-   "sub": "",
-   "scale": "club",
-   "price": "See listing",
-   "type": "verified",
-   "cta": "Get Tickets",
-   "source": "The Van Buren",
-   "link": "https://www.ticketmaster.com/an-evening-with-band-of-horses-phoenix-arizona-11-16-2026/event/190064A7E1849DBD"
-  },
-  {
-   "date": "2026-11-16",
-   "title": "cupcakKe",
-   "venue": "Nile Theater",
-   "city": "Mesa",
-   "genre": "hiphop",
-   "sub": "Rap",
-   "scale": "club",
-   "price": "See listing",
-   "type": "verified",
-   "cta": "Event Info",
-   "source": "Songkick",
-   "link": "https://www.songkick.com/concerts/43369258-cupcakke-at-nile-theater"
-  },
-  {
-   "date": "2026-11-16",
-   "title": "Teddy Swims",
-   "venue": "Mortgage Matchup Center",
-   "city": "Phoenix",
-   "genre": "pop",
-   "sub": "Soul Pop",
-   "scale": "arena",
-   "price": "See listing",
-   "type": "verified",
-   "cta": "Get Tickets",
-   "source": "KTAR",
-   "link": "https://mortgagematchupcenter.com/events/teddy-swims/"
-  },
-  {
-   "date": "2026-11-16",
-   "title": "The Hails",
-   "venue": "Valley Bar",
-   "city": "Phoenix",
-   "genre": "rock",
-   "sub": "",
-   "scale": "club",
-   "price": "8:00 PM",
-   "type": "verified",
-   "cta": "Get Tickets",
-   "source": "Valley Bar",
-   "link": "https://www.valleybarphx.com/tm-event/the-hails/"
-  },
-  {
-   "date": "2026-11-16",
-   "title": "TJI Ellington Big Band | Century Jazz Orchestra",
-   "venue": "The Century Room",
-   "city": "Tucson",
-   "genre": "jazz",
-   "sub": "",
-   "scale": "club",
-   "price": "See listing",
-   "type": "verified",
-   "cta": "Get Tickets",
-   "source": "The Century Room",
-   "link": "https://link.dice.fm/Faf99c1c03ad"
-  },
   {
    "date": "2026-11-17",
    "title": "Buzzcocks",
@@ -9626,6 +9556,20 @@
    "link": "https://seatgeek.com/the-wailin-jennys-tickets/chandler-arizona-chandler-center-for-the-arts-az-2027-02-20-7-30-pm/concert/18236496"
   },
   {
+   "date": "2027-02-21",
+   "title": "gabriel jacoby - gutta child tour",
+   "venue": "Crescent Ballroom",
+   "city": "Phoenix",
+   "genre": "rock",
+   "sub": "",
+   "scale": "club",
+   "price": "8:00 PM",
+   "type": "verified",
+   "cta": "Get Tickets",
+   "source": "Crescent Ballroom",
+   "link": "https://www.crescentphx.com/tm-event/gabriel-jacoby-gutta-child-tour/"
+  },
+  {
    "date": "2027-02-22",
    "title": "Ciaran",
    "venue": "The Rebel Lounge - Phoenix",
@@ -10579,6 +10523,20 @@
   },
   {
    "date": "2027-03-13",
+   "title": "Boots in the Park - Gilbert - with Jon Pardi, Koe Wetzel, and more",
+   "venue": "Gilbert Regional Park",
+   "city": "Gilbert",
+   "genre": "country",
+   "sub": "Country / Folk",
+   "scale": "club",
+   "price": "See listing",
+   "type": "verified",
+   "cta": "Get Tickets",
+   "source": "SeatGeek",
+   "link": "https://seatgeek.com/boots-in-the-park-tickets/gilbert-arizona-gilbert-regional-park-2027-03-13-1-30-pm/music-festival/18780184"
+  },
+  {
+   "date": "2027-03-13",
    "title": "Chvrches Live 2027",
    "venue": "The Van Buren",
    "city": "Phoenix",
@@ -10789,6 +10747,20 @@
   },
   {
    "date": "2027-03-19",
+   "title": "Asiris - The Summerside Final Lap Tour",
+   "venue": "Valley Bar",
+   "city": "Phoenix",
+   "genre": "rock",
+   "sub": "",
+   "scale": "club",
+   "price": "7:30 PM",
+   "type": "verified",
+   "cta": "Get Tickets",
+   "source": "Valley Bar",
+   "link": "https://www.valleybarphx.com/tm-event/asiris-the-summerside-final-lap-tour/"
+  },
+  {
+   "date": "2027-03-19",
    "title": "Bob Shimizu",
    "venue": "ASU Kerr Cultural Center",
    "city": "Scottsdale",
@@ -10800,6 +10772,20 @@
    "cta": "Event Info",
    "source": "KJZZ Jazz PHX",
    "link": "https://asukerr.com"
+  },
+  {
+   "date": "2027-03-19",
+   "title": "Mod Sun: Don'T Be A Poet Tour",
+   "venue": "Crescent Ballroom",
+   "city": "Phoenix",
+   "genre": "rock",
+   "sub": "",
+   "scale": "club",
+   "price": "8:00 PM",
+   "type": "verified",
+   "cta": "Get Tickets",
+   "source": "Crescent Ballroom",
+   "link": "https://www.crescentphx.com/tm-event/mod-sun-dont-be-a-poet-tour/"
   },
   {
    "date": "2027-03-19",
@@ -10887,6 +10873,20 @@
   },
   {
    "date": "2027-03-21",
+   "title": "Chiodos with Emery, Hail the Sun, Buried in Spring",
+   "venue": "Marquee Theatre - Tempe, AZ",
+   "city": "Tempe",
+   "genre": "rock",
+   "sub": "Pop / Rock / Alternative / Hard Rock",
+   "scale": "club",
+   "price": "See listing",
+   "type": "verified",
+   "cta": "Get Tickets",
+   "source": "SeatGeek",
+   "link": "https://seatgeek.com/chiodos-tickets/tempe-arizona-marquee-theatre-tempe-az-2027-03-21-7-pm/concert/18784598"
+  },
+  {
+   "date": "2027-03-21",
    "title": "Clutch with Corrosion Of Conformity",
    "venue": "The Van Buren",
    "city": "Phoenix",
@@ -10954,6 +10954,20 @@
    "cta": "Get Tickets",
    "source": "Valley Bar",
    "link": "https://www.valleybarphx.com/tm-event/oscar-lindsey-sunshine-tour/"
+  },
+  {
+   "date": "2027-03-23",
+   "title": "BigXthaPlug (13+)",
+   "venue": "The Van Buren",
+   "city": "Phoenix",
+   "genre": "rock",
+   "sub": "",
+   "scale": "club",
+   "price": "See listing",
+   "type": "verified",
+   "cta": "Get Tickets",
+   "source": "SeatGeek",
+   "link": "https://seatgeek.com/bigxthaplug-tickets/phoenix-arizona-the-van-buren-2027-03-23-7-pm/concert/18780280"
   },
   {
    "date": "2027-03-23",
@@ -11237,6 +11251,20 @@
   },
   {
    "date": "2027-04-01",
+   "title": "Chapterhouse",
+   "venue": "Crescent Ballroom",
+   "city": "Phoenix",
+   "genre": "house",
+   "sub": "",
+   "scale": "club",
+   "price": "8:00 PM",
+   "type": "verified",
+   "cta": "Get Tickets",
+   "source": "Crescent Ballroom",
+   "link": "https://www.crescentphx.com/tm-event/chapterhouse/"
+  },
+  {
+   "date": "2027-04-01",
    "title": "Declan J Donovan",
    "venue": "Valley Bar",
    "city": "Phoenix",
@@ -11472,6 +11500,20 @@
    "cta": "Get Tickets",
    "source": "Ravenscroft",
    "link": "https://theravenscroft.com/event/jazzbird-nights-corcoran-holt-5/"
+  },
+  {
+   "date": "2027-04-09",
+   "title": "Narrow Head",
+   "venue": "Crescent Ballroom",
+   "city": "Phoenix",
+   "genre": "rock",
+   "sub": "",
+   "scale": "club",
+   "price": "7:00 PM",
+   "type": "verified",
+   "cta": "Get Tickets",
+   "source": "Crescent Ballroom",
+   "link": "https://www.crescentphx.com/tm-event/narrow-head/"
   },
   {
    "date": "2027-04-09",
@@ -11880,6 +11922,20 @@
    "link": "https://seatgeek.com/melissa-etheridge-tickets/chandler-arizona-gila-river-hotels-casinos-wild-horse-pass-2027-04-23-8-pm/concert/18754727"
   },
   {
+   "date": "2027-04-23",
+   "title": "Sasha Keable with EJ Ross",
+   "venue": "The Van Buren",
+   "city": "Phoenix",
+   "genre": "hiphop",
+   "sub": "Indie / Rnb / Soul",
+   "scale": "club",
+   "price": "See listing",
+   "type": "verified",
+   "cta": "Get Tickets",
+   "source": "SeatGeek",
+   "link": "https://seatgeek.com/sasha-keable-tickets/phoenix-arizona-the-van-buren-2027-04-23-8-30-pm/concert/18784485"
+  },
+  {
    "date": "2027-04-24",
    "title": "Haute & Freddy",
    "venue": "The Van Buren",
@@ -11976,6 +12032,20 @@
    "cta": "Get Tickets",
    "source": "KTAR",
    "link": "https://www.desertdiamondarena.com/event/def-leppard-goo-goo-dolls-the-struts/118/"
+  },
+  {
+   "date": "2027-04-29",
+   "title": "Jhene Aiko with Swae Lee, Karri and H.E.R.",
+   "venue": "Mortgage Matchup Center",
+   "city": "Phoenix",
+   "genre": "hiphop",
+   "sub": "Rnb / Soul / Hip-hop / Rap / Alternative",
+   "scale": "arena",
+   "price": "See listing",
+   "type": "verified",
+   "cta": "Get Tickets",
+   "source": "SeatGeek",
+   "link": "https://seatgeek.com/jhene-aiko-tickets/phoenix-arizona-mortgage-matchup-center-2027-04-29-7-30-pm/concert/18783904"
   },
   {
    "date": "2027-04-29",
@@ -12130,6 +12200,20 @@
    "cta": "Get Tickets",
    "source": "SeatGeek",
    "link": "https://seatgeek.com/hotel-mira-tickets/phoenix-arizona-the-rebel-lounge-phoenix-2027-05-04-7-30-pm/concert/18773661"
+  },
+  {
+   "date": "2027-05-05",
+   "title": "Racing Mount Pleasant",
+   "venue": "Crescent Ballroom",
+   "city": "Phoenix",
+   "genre": "rock",
+   "sub": "",
+   "scale": "club",
+   "price": "8:00 PM",
+   "type": "verified",
+   "cta": "Get Tickets",
+   "source": "Crescent Ballroom",
+   "link": "https://www.crescentphx.com/tm-event/racing-mount-pleasant/"
   },
   {
    "date": "2027-05-06",
