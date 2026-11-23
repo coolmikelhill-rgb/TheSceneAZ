@@ -1,0 +1,23 @@
+{
+ "_how_to_edit": "Weekend Picks shown above the list in the 'This weekend' view. Up to 3 show, in this order. Each pick points at an event in events.json by its exact 'link' AND 'date' (copy both from events.json; some venue links are shared by several shows, so the date is required). Title, venue, price and ticket link all come from events.json. 'label' is a short tag; 'goIf' is one sentence and should only use facts the listing actually states. Picks whose date has passed, or that are outside the current weekend, drop out on their own.",
+ "picks": [
+  {
+   "link": "https://www.tixr.com/groups/relentlessbeats/events/lumasi-202304",
+   "date": "2026-11-27",
+   "label": "Free night out",
+   "goIf": "Go if you want a dubstep night in Tempe that won't cost you a cover — it's listed as free, 21+."
+  },
+  {
+   "link": "https://www.tixr.com/groups/rbfestivals/events/svdden-death-201785",
+   "date": "2026-11-27",
+   "label": "Warehouse night",
+   "goIf": "Go if you want heavy dubstep in a warehouse room in Phoenix — it's listed as free and 18+."
+  },
+  {
+   "link": "https://www.crescentphx.com/tm-event/emma-ruth-rundle-these-killing-times/",
+   "date": "2026-11-29",
+   "label": "Sunday show",
+   "goIf": "Go if you want to end the weekend with a Sunday-night rock show at Crescent Ballroom, listed for 7:00 PM."
+  }
+ ]
+}

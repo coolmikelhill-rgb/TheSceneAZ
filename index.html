@@ -332,9 +332,9 @@
   }
   .quick button[aria-pressed="true"] { background: var(--text); color: var(--bg); border-color: var(--text); }
 
-  /* [2] collapsible filter panel (desktop: inline as before) */
-  .filter-panel { display: contents; }
-  .more-btn { display: none; }
+  /* [2] secondary controls live under "More filters" */
+  .filter-panel { display: none; }
+  .filters.open .filter-panel { display: flex; flex-wrap: wrap; gap: 8px; flex-basis: 100%; align-items: center; }
 
   /* [6] add to calendar */
   .action { display: flex; flex-direction: column; gap: 6px; align-items: stretch; text-align: center; }
@@ -351,92 +351,113 @@
   }
   .btn.info { color: var(--text); }
 
-  @media (max-width: 560px) {
-    .filters { padding: 10px 16px; gap: 8px; }
-    .search-box { flex: 1; min-width: 0; font-size: 16px; } /* 16px stops iOS zoom-on-focus */
-    .more-btn {
-      display: inline-flex; align-items: center; gap: 6px; background: var(--bg-raised);
-      border: 1px solid var(--line); color: var(--text); font: 600 14px 'Inter', sans-serif;
-      padding: 8px 12px; border-radius: 6px; cursor: pointer;
-    }
-    .more-btn .badge { background: var(--violet); color: var(--bg); border-radius: 10px; padding: 0 6px; font-size: 11px; }
-    .filter-panel { display: none; }
-    .filters.open .filter-panel { display: flex; flex-wrap: wrap; gap: 8px; flex-basis: 100%; }
-    .filters.open .filter-panel select { flex: 1 1 45%; font-size: 16px; }
-    .toggle { margin-left: 0; }
-    .count { flex-basis: 100%; padding: 0; }
-    .masthead { padding: 28px 16px 16px; }
-    .masthead p { font-size: 14px; }
-    .event .action { flex-direction: row; align-items: center; }
-  }
   /* [11] Long genre pills pushed cards past the edge on 320px phones. */
   .details { min-width: 0; }
   .gpill { max-width: 100%; }
   .gpill .s { overflow: hidden; text-overflow: ellipsis; }
+
+  /* ===== Weekend discovery redesign ===== */
+  .masthead .brand {
+    display: none; font-family: 'Archivo', sans-serif; font-stretch: 125%; font-weight: 800;
+    font-size: 15px; letter-spacing: 0.02em; color: var(--blue); margin-bottom: 6px;
+  }
+  .wk-dates { color: var(--text) !important; font-weight: 600; font-size: 15px; }
+  body.wk .masthead { padding-top: 28px; padding-bottom: 14px; }
+  body.wk .masthead .brand { display: block; }
+  body.wk .masthead .kicker, body.wk .masthead .intro { display: none; }
+  body.wk .masthead h1 { font-size: 32px; line-height: 1.15; margin-bottom: 6px; }
+
+  .filters > * { min-width: 0; }
+  .main-row { display: flex; flex-wrap: wrap; gap: 8px; flex-basis: 100%; }
+  .main-row .search-box { flex: 1 1 260px; font-size: 14px; padding: 9px 12px; }
+  .main-row select { flex: 0 1 auto; font-size: 14px; font-weight: 600; padding: 9px 12px; border-color: #3A4262; }
+  .wk-row { display: flex; flex-wrap: wrap; gap: 6px; flex-basis: 100%; align-items: center; }
+  .wk-row[hidden] { display: none; }
+  .day-chips { display: contents; }
+  .chip {
+    background: var(--bg-raised); border: 1px solid #3A4262; color: var(--text);
+    font: 600 13px 'Inter', sans-serif; padding: 6px 12px; border-radius: 20px; cursor: pointer;
+  }
+  .chip .d { color: var(--text-muted); font-weight: 500; margin-left: 3px; }
+  .chip[aria-pressed="true"] { background: var(--teal); border-color: var(--teal); color: var(--bg); }
+  .chip[aria-pressed="true"] .d { color: var(--bg); }
+  .more-row { display: flex; align-items: center; gap: 12px; flex-basis: 100%; }
+  .more-btn {
+    display: inline-flex; align-items: center; gap: 6px; background: transparent;
+    border: 1px solid var(--line); color: var(--text-muted); font: 600 12px 'Inter', sans-serif;
+    padding: 6px 10px; border-radius: 6px; cursor: pointer;
+  }
+  .more-btn:hover, .more-btn[aria-expanded="true"] { color: var(--text); border-color: var(--text-muted); }
+  .more-btn .badge { background: var(--violet); color: var(--bg); border-radius: 10px; padding: 0 6px; font-size: 11px; }
+  .more-row .count { margin-left: auto; }
+
+  /* Weekend Picks */
+  .picks { max-width: 820px; margin: 0 auto; padding: 14px 24px 0; }
+  .picks[hidden] { display: none; }
+  .picks-head, .day-head {
+    font-family: 'Archivo', sans-serif; font-stretch: 125%; font-weight: 800;
+    font-size: 14px; letter-spacing: 0.1em; text-transform: uppercase; margin: 6px 0 2px; padding-left: 4px;
+  }
+  .picks-head { color: var(--gold); }
+  .event.pick { border-color: color-mix(in srgb, var(--gold) 45%, var(--line)); border-left-color: var(--gold); }
+  .pick-label {
+    display: inline-block; font-size: 11px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--bg); background: var(--gold); padding: 2px 8px; border-radius: 4px; margin-bottom: 6px;
+  }
+  .goif { margin: 8px 0 0; font-size: 14px; color: var(--text); }
+  .goif strong { color: var(--gold); }
+  .day-head { color: var(--text); margin-top: 26px; display: flex; gap: 10px; align-items: baseline; }
+  .day-head:first-child { margin-top: 12px; }
+  .day-head .n { font: 500 12px 'Inter', sans-serif; letter-spacing: 0; text-transform: none; color: var(--text-muted); }
+  .no-results button { margin-top: 12px; }
+
+  /* Decision-first card: who, where, when, how much, ages — then badges and provenance */
+  .details h3 { font-size: 17px; font-weight: 700; line-height: 1.3; margin: 0 0 2px; overflow-wrap: anywhere; }
+  .where { margin: 0 0 6px; font-size: 14px; font-weight: 600; color: var(--text); }
+  .where .city { color: var(--text-muted); font-weight: 500; }
+  .facts { list-style: none; display: flex; flex-wrap: wrap; gap: 4px 14px; margin: 0 0 8px; padding: 0; font-size: 14px; font-weight: 600; }
+  .facts li { min-width: 0; overflow-wrap: anywhere; }
+  .facts .k { color: var(--text-muted); font-weight: 500; font-size: 12px; margin-right: 4px; }
+  .facts .missing { color: var(--text-muted); font-weight: 500; font-style: italic; }
+  .facts .free { color: var(--teal); }
+  .facts .ages-all { color: var(--teal); }
+  .badges { line-height: 1; }
+  .badges .tag, .badges .gpill { font-size: 10.5px; opacity: 0.85; }
+  .src { margin: 8px 0 0; font-size: 11.5px; color: var(--text-muted); }
+  .src .ok { color: var(--teal); }
+  .src .ug { color: var(--gold); }
+  .btn.primary { background: linear-gradient(90deg, var(--blue), var(--violet)); color: #0A0E1A; border: 0; }
+  .sub-actions { display: flex; gap: 4px; justify-content: center; }
+
+  @media (max-width: 560px) {
+    .filters { position: relative; top: auto; padding: 10px 16px; gap: 8px; }
+    .main-row .search-box { flex-basis: 100%; font-size: 16px; } /* 16px stops iOS zoom-on-focus */
+    .main-row select { flex: 1 1 40%; font-size: 16px; }
+    .filters.open .filter-panel select { flex: 1 1 45%; font-size: 16px; }
+    .toggle { margin-left: 0; }
+    .masthead { padding: 28px 16px 16px; }
+    body.wk .masthead { padding: 18px 16px 10px; }
+    body.wk .masthead h1 { font-size: 24px; }
+    .masthead p { font-size: 14px; }
+    .wk-dates { font-size: 14px !important; }
+    .picks { padding: 10px 16px 0; }
+    .feed { padding: 8px 16px 60px; }
+    .event .action { flex-direction: row; align-items: center; flex-wrap: wrap; }
+    .chip { padding: 6px 11px; }
+  }
 </style>
 </head>
 <body>
 
-<div class="masthead">
+<header class="masthead">
+  <div class="brand" aria-hidden="true">TheSceneAZ</div>
   <div class="kicker">Phoenix · Tempe · Scottsdale · Mesa · Tucson</div>
-  <h1>TheSceneAZ</h1>
-  <p>Arizona's live music in one place — arena tours, club nights, jazz rooms, metal shows and underground raves. Compiled from venue calendars, ticketing pages and community trackers like 19hz.info and Jazz PHX. Filter by genre, city and room size.</p>
-</div>
+  <h1 id="pageTitle">TheSceneAZ</h1>
+  <p class="wk-dates" id="wkDates" hidden></p>
+  <p class="intro">Arizona's live music in one place — arena tours, club nights, jazz rooms, metal shows and underground raves. Compiled from venue calendars, ticketing pages and community trackers like 19hz.info and Jazz PHX. Filter by genre, city and room size.</p>
+</header>
 
 <div class="filters" id="filters">
-  <label for="searchBox" class="sr-only">Search artist, venue or city</label>
-  <input type="search" id="searchBox" class="search-box" placeholder="Search artist, venue, city…" autocomplete="off">
-  <button type="button" class="more-btn" id="moreFilters" aria-expanded="false" aria-controls="filterPanel">Filters <span class="badge" id="activeCount" hidden></span></button>
-  <div class="filter-panel" id="filterPanel">
-  <select id="genreFilter" aria-label="Genre">
-    <option value="all">All genres</option>
-    <option value="house">House</option>
-    <option value="techno">Techno</option>
-    <option value="bass">Bass / Dubstep</option>
-    <option value="dnb">Drum & Bass</option>
-    <option value="rock">Rock</option>
-    <option value="hiphop">Hip-Hop / R&B</option>
-    <option value="country">Country</option>
-    <option value="pop">Pop</option>
-    <option value="jazz">Jazz</option>
-    <option value="metal">Metal</option>
-    <option value="blues">Blues</option>
-    <option value="folk">Folk / Americana</option>
-    <option value="world">World / Latin</option>
-  </select>
-  <select id="cityFilter" aria-label="City">
-    <option value="all">All cities</option>
-    <option value="Phoenix">Phoenix</option>
-    <option value="Tempe">Tempe</option>
-    <option value="Tucson">Tucson</option>
-    <option value="Mesa">Mesa</option>
-    <option value="Scottsdale">Scottsdale</option>
-    <option value="Glendale">Glendale</option>
-    <option value="Chandler">Chandler</option>
-    <option value="Mayer">Mayer</option>
-    <option value="Avondale">Avondale</option>
-    <option value="Sedona">Sedona</option>
-    <option value="Flagstaff">Flagstaff</option>
-    <option value="Prescott">Prescott</option>
-    <option value="Yuma">Yuma</option>
-  </select>
-  <select id="scaleFilter" aria-label="Room size">
-    <option value="all">All sizes</option>
-    <option value="arena">Large (Arena)</option>
-    <option value="club">Medium (Club/Theater)</option>
-    <option value="warehouse">Underground (Warehouse/DIY)</option>
-  </select>
-  <select id="sortBy" aria-label="Sort order">
-    <option value="date-asc">Soonest first</option>
-    <option value="date-desc">Latest first</option>
-    <option value="venue">Venue A–Z</option>
-  </select>
-  <label class="toggle">
-    <input type="checkbox" id="communityToggle" checked>
-    Include underground / TBA-venue
-  </label>
-  <button type="button" class="clear-btn" id="clearFilters">Clear filters</button>
-  </div>
   <div class="quick" role="group" aria-label="When">
     <button type="button" data-when="all" aria-pressed="true">Any date</button>
     <button type="button" data-when="tonight" aria-pressed="false">Tonight</button>
@@ -444,8 +465,75 @@
     <button type="button" data-when="week" aria-pressed="false">Next 7 days</button>
     <button type="button" data-when="month" aria-pressed="false">Next 30 days</button>
   </div>
-  <span class="count" id="count" role="status" aria-live="polite"></span>
+  <div class="main-row">
+    <label for="searchBox" class="sr-only">Search artist, venue or city</label>
+    <input type="search" id="searchBox" class="search-box" placeholder="Search artist, venue, city…" autocomplete="off">
+    <select id="cityFilter" aria-label="City">
+      <option value="all">All cities</option>
+      <option value="Phoenix">Phoenix</option>
+      <option value="Tempe">Tempe</option>
+      <option value="Tucson">Tucson</option>
+      <option value="Mesa">Mesa</option>
+      <option value="Scottsdale">Scottsdale</option>
+      <option value="Glendale">Glendale</option>
+      <option value="Chandler">Chandler</option>
+      <option value="Mayer">Mayer</option>
+      <option value="Avondale">Avondale</option>
+      <option value="Sedona">Sedona</option>
+      <option value="Flagstaff">Flagstaff</option>
+      <option value="Prescott">Prescott</option>
+      <option value="Yuma">Yuma</option>
+    </select>
+    <select id="genreFilter" aria-label="Genre">
+      <option value="all">All genres</option>
+      <option value="house">House</option>
+      <option value="techno">Techno</option>
+      <option value="bass">Bass / Dubstep</option>
+      <option value="dnb">Drum & Bass</option>
+      <option value="rock">Rock</option>
+      <option value="hiphop">Hip-Hop / R&B</option>
+      <option value="country">Country</option>
+      <option value="pop">Pop</option>
+      <option value="jazz">Jazz</option>
+      <option value="metal">Metal</option>
+      <option value="blues">Blues</option>
+      <option value="folk">Folk / Americana</option>
+      <option value="world">World / Latin</option>
+    </select>
+  </div>
+  <div class="wk-row" id="wkRow" role="group" aria-label="Weekend quick filters" hidden>
+    <span id="dayChips" class="day-chips"></span>
+    <button type="button" class="chip" id="freeBtn" aria-pressed="false">Free</button>
+    <button type="button" class="chip" id="agesBtn" aria-pressed="false">All ages</button>
+  </div>
+  <div class="more-row">
+    <button type="button" class="more-btn" id="moreFilters" aria-expanded="false" aria-controls="filterPanel">More filters <span class="badge" id="activeCount" hidden></span></button>
+    <span class="count" id="count" role="status" aria-live="polite"></span>
+  </div>
+  <div class="filter-panel" id="filterPanel">
+    <select id="scaleFilter" aria-label="Room size">
+      <option value="all">All sizes</option>
+      <option value="arena">Large (Arena)</option>
+      <option value="club">Medium (Club/Theater)</option>
+      <option value="warehouse">Underground (Warehouse/DIY)</option>
+    </select>
+    <select id="sortBy" aria-label="Sort order">
+      <option value="date-asc">Soonest first</option>
+      <option value="date-desc">Latest first</option>
+      <option value="venue">Venue A–Z</option>
+    </select>
+    <label class="toggle">
+      <input type="checkbox" id="communityToggle" checked>
+      Include underground / TBA-venue
+    </label>
+    <button type="button" class="clear-btn" id="clearFilters">Clear filters</button>
+  </div>
 </div>
+
+<section class="picks" id="picks" aria-labelledby="picksHead" hidden>
+  <h2 class="picks-head" id="picksHead">Weekend Picks</h2>
+  <div id="pickList"></div>
+</section>
 
 <div class="feed" id="feed"></div>
 
@@ -1015,6 +1103,19 @@ async function loadEvents() {
   } catch (err) {
     // events.json not reachable — expected when not deployed with the script yet.
   }
+  // Weekend Picks: hand-edited each week in picks.json (see the note at the top of that file).
+  try {
+    const resp = await fetch('picks.json', { cache: 'no-store' });
+    if (resp.ok) {
+      const data = await resp.json();
+      if (data && Array.isArray(data.picks)) {
+        pickDefs = data.picks.filter(x => x && typeof x.link === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(x.date || '')
+          && typeof x.label === 'string' && typeof x.goIf === 'string');
+      }
+    }
+  } catch (err) {
+    // No picks file (e.g. viewing index.html standalone): the section just stays hidden.
+  }
   // New sources bring new towns (Gilbert, Prescott Valley, Lake Havasu City...).
   // Add any city in the data that the dropdown doesn't list yet, then re-read
   // the URL so a shared ?city=Gilbert link still works.
@@ -1076,6 +1177,13 @@ let when = 'all';
 const PARAMS = { q: 'searchBox', genre: 'genreFilter', city: 'cityFilter', size: 'scaleFilter', sort: 'sortBy' };
 const DEFAULTS = { genreFilter: 'all', cityFilter: 'all', scaleFilter: 'all', sortBy: 'date-asc', searchBox: '' };
 
+// Weekend-only quick filters. They apply (and go in the URL) only in the "This weekend" view.
+let day = '';          // '' = whole weekend, else 'fri' | 'sat' | 'sun'
+let freeOnly = false;  // only listings whose price is explicitly "Free"
+let allAgesOnly = false; // only listings explicitly marked "All ages"
+let pickDefs = [];     // from picks.json
+const DOW_KEYS = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
+
 function readUrl() {
   const p = new URLSearchParams(location.search);
   for (const [key, id] of Object.entries(PARAMS)) {
@@ -1087,6 +1195,11 @@ function readUrl() {
   }
   if (p.get('ug') === '0') $('communityToggle').checked = false;
   if (whenRange(p.get('when'))) when = p.get('when');
+  if (when === 'weekend') {
+    day = ['fri', 'sat', 'sun'].includes(p.get('day')) ? p.get('day') : '';
+    freeOnly = p.get('free') === '1';
+    allAgesOnly = p.get('allages') === '1';
+  }
 }
 
 function writeUrl() {
@@ -1097,8 +1210,54 @@ function writeUrl() {
   }
   if (!$('communityToggle').checked) p.set('ug', '0');
   if (when !== 'all') p.set('when', when);
+  if (when === 'weekend') {
+    if (day) p.set('day', day);
+    if (freeOnly) p.set('free', '1');
+    if (allAgesOnly) p.set('allages', '1');
+  }
   const qs = p.toString();
   history.replaceState(null, '', qs ? `?${qs}` : location.pathname);
+}
+
+// The data's "price" field carries whatever the source gave, joined by " · ":
+// a start time, a price, an age limit and/or a promoter ("9pm-2am · $10 · 21+").
+// Split it so cards can show each fact on its own. Labels like Free / All ages
+// are only set when the listing says so explicitly.
+function facts(e) {
+  const f = { time: '', price: '', age: '', notes: [], extra: [], free: false, allAges: false };
+  for (const raw of String(e.price || '').split('·')) {
+    const s = raw.trim();
+    if (!s) continue;
+    if (/^see listing/i.test(s)) { const m = s.match(/\(([^)]+)\)/); if (m) f.notes.push(m[1]); continue; }
+    if (/^\d{1,2}(:\d{2})?\s*[ap]m(\s*-\s*\d{1,2}(:\d{2})?\s*[ap]m)?$/i.test(s)) { f.time = s.replace(/\s*-\s*/, '–'); continue; }
+    if (/^all ages$/i.test(s)) { f.age = 'All ages'; f.allAges = true; continue; }
+    if (/^\d{1,2}\+$/.test(s)) { f.age = s; continue; }
+    if (/^free( w\/ rsvp)?$/i.test(s)) { f.price = 'Free' + s.slice(4); f.free = true; continue; }
+    if (/^(from )?\$|^free\b/i.test(s)) { f.price = s.charAt(0).toUpperCase() + s.slice(1); continue; }
+    f.extra.push(s);
+  }
+  return f;
+}
+
+function longDay(iso, opts = { weekday: 'long', month: 'short', day: 'numeric' }) {
+  return new Date(iso + 'T12:00:00').toLocaleDateString('en-US', opts);
+}
+
+// Plain-text plan for texting a friend.
+function planText(e) {
+  const f = facts(e);
+  const bits = [longDay(e.date, { weekday: 'short', month: 'short', day: 'numeric' }), f.time, `${e.venue}, ${e.city}`, f.price, f.age].filter(Boolean);
+  return `${e.title} — ${bits.join(' · ')}`;
+}
+
+async function sharePlan(e, btn) {
+  const text = planText(e);
+  try {
+    if (navigator.share) { await navigator.share({ title: e.title, text, url: e.link }); return; }
+    await navigator.clipboard.writeText(`${text}\n${e.link}`);
+    btn.textContent = 'Copied!';
+    setTimeout(() => { btn.textContent = 'Share'; }, 1600);
+  } catch (err) { /* share sheet dismissed or clipboard blocked */ }
 }
 
 // [6] Add-to-calendar: builds a .ics file (all-day, since listings have no start time).
@@ -1136,6 +1295,90 @@ function updateJsonLd(list) {
 
 let upcomingForSeo = [];
 
+function eventCard(e, pick) {
+  const { dow, soon, num, mon } = fmtDate(e.date);
+  const f = facts(e);
+  const row = document.createElement('article');
+  row.className = `event ${e.type === 'community' ? 'community' : 'verified'}${pick ? ' pick' : ''}`;
+  row.style.setProperty('--genre-color', genreColors[e.genre] || 'var(--blue)');
+  const gl = esc(genreLabels[e.genre] || e.genre);
+  const cta = e.cta === 'Get Tickets' ? 'Get Tickets' : 'Event Info';
+  const priceHtml = f.price
+    ? `<span class="${f.free ? 'free' : ''}">${esc(f.price)}</span>`
+    : `<span class="missing">Check ticket price</span>`;
+  const notes = f.notes.length ? ` <span class="k">(${esc(f.notes.join(', '))})</span>` : '';
+  const status = e.type === 'verified' ? '<span class="ok">✓ Verified</span>' : '<span class="ug">Underground · venue may be TBA</span>';
+  row.innerHTML = `
+    <div class="date-block">
+      <div class="dow${soon ? ' soon' : ''}">${dow}</div>
+      <div class="num">${num}</div>
+      <div class="mon">${mon}</div>
+    </div>
+    <div class="details">
+      ${pick ? `<div class="pick-label">${esc(pick.label)}</div>` : ''}
+      <h3>${esc(e.title)}</h3>
+      <p class="where">${esc(e.venue)} <span class="city">· ${esc(e.city)}</span></p>
+      <ul class="facts">
+        <li><span class="k">Starts</span>${f.time ? esc(f.time) : '<span class="missing">Check start time</span>'}</li>
+        <li><span class="k">Price</span>${priceHtml}${notes}</li>
+        ${f.age ? `<li><span class="k">Ages</span><span class="${f.allAges ? 'ages-all' : ''}">${esc(f.age)}</span></li>` : ''}
+      </ul>
+      <div class="badges">
+        ${e.sub
+          ? `<span class="gpill" title="${gl} · ${esc(e.sub)}"><span class="g">${gl}</span><span class="s">${esc(e.sub)}</span></span>`
+          : `<span class="tag">${gl}</span>`}
+        ${scaleLabels[e.scale] ? `<span class="tag scale">${esc(scaleLabels[e.scale])}</span>` : ''}
+      </div>
+      ${pick ? `<p class="goif"><strong>Go if</strong> ${esc(pick.goIf.replace(/^go if\s*/i, ''))}</p>` : ''}
+      <p class="src">${status} · via ${esc(e.source || 'Unknown')}${f.extra.length ? ' · ' + esc(f.extra.join(' · ')) : ''}</p>
+    </div>
+    <div class="action">
+      <a class="btn primary" href="${safeUrl(e.link)}" target="_blank" rel="noopener"
+         aria-label="${cta}: ${esc(e.title)}, ${mon} ${num} (opens in new tab)">${cta}</a>
+      <div class="sub-actions">
+        <button type="button" class="cal-btn" data-act="cal" aria-label="Add ${esc(e.title)} to calendar">+ Calendar</button>
+        <button type="button" class="cal-btn" data-act="share" aria-label="Share ${esc(e.title)}">Share</button>
+      </div>
+    </div>
+  `;
+  row.querySelector('[data-act="cal"]').addEventListener('click', () => downloadIcs(e));
+  const sb = row.querySelector('[data-act="share"]');
+  sb.addEventListener('click', () => sharePlan(e, sb));
+  return row;
+}
+
+function weekendDays(range) {
+  const out = [];
+  for (let d = new Date(range[0] + 'T12:00:00'); isoDay(d) <= range[1]; d.setDate(d.getDate() + 1)) {
+    out.push({ iso: isoDay(d), key: DOW_KEYS[d.getDay()] });
+  }
+  return out;
+}
+
+function renderHeader(range, days) {
+  const wk = when === 'weekend';
+  document.body.classList.toggle('wk', wk);
+  $('pageTitle').textContent = wk ? 'Live music in Arizona this weekend' : 'TheSceneAZ';
+  document.title = wk ? 'Live music in Arizona this weekend · TheSceneAZ' : 'TheSceneAZ — Arizona live music & events';
+  $('wkDates').hidden = !wk;
+  $('wkRow').hidden = !wk;
+  if (!wk) return;
+  const short = { weekday: 'short', month: 'short', day: 'numeric' };
+  $('wkDates').textContent = range[0] === range[1] ? longDay(range[0], short) : `${longDay(range[0], short)} – ${longDay(range[1], short)}`;
+  // Day chips for the days left in this weekend (on Saturday, Friday is gone).
+  const wrap = $('dayChips');
+  const sig = days.map(d => d.iso).join();
+  if (wrap.dataset.sig !== sig) {
+    wrap.dataset.sig = sig;
+    wrap.innerHTML = days.map(d =>
+      `<button type="button" class="chip" data-day="${d.key}" aria-pressed="false">${longDay(d.iso, { weekday: 'short' })}<span class="d">${new Date(d.iso + 'T12:00:00').getDate()}</span></button>`).join('');
+    wrap.querySelectorAll('button').forEach(b => b.addEventListener('click', () => { day = day === b.dataset.day ? '' : b.dataset.day; render(); }));
+  }
+  wrap.querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.day === day)));
+  $('freeBtn').setAttribute('aria-pressed', String(freeOnly));
+  $('agesBtn').setAttribute('aria-pressed', String(allAgesOnly));
+}
+
 function render() {
   const genre = $('genreFilter').value;
   const city = $('cityFilter').value;
@@ -1145,6 +1388,12 @@ function render() {
   const showCommunity = $('communityToggle').checked;
   const todayIso = isoDay(new Date());
   const range = whenRange(when);
+  const wk = when === 'weekend';
+  const days = wk ? weekendDays(range) : [];
+  if (wk && day && !days.some(d => d.key === day)) day = ''; // that day has passed
+  const dayIso = wk && day ? days.find(d => d.key === day).iso : '';
+
+  renderHeader(range, days);
 
   const feed = $('feed');
   feed.innerHTML = '';
@@ -1153,6 +1402,9 @@ function render() {
   upcomingForSeo = upcoming;
   const visible = upcoming
     .filter(e => !range || (e.date >= range[0] && e.date <= range[1]))
+    .filter(e => !dayIso || e.date === dayIso)
+    .filter(e => !wk || !freeOnly || facts(e).free)
+    .filter(e => !wk || !allAgesOnly || facts(e).allAges)
     .filter(e => genre === 'all' || e.genre === genre)
     .filter(e => city === 'all' || e.city === city)
     .filter(e => scale === 'all' || e.scale === scale)
@@ -1169,58 +1421,63 @@ function render() {
 
   // [10] Freshness shown right next to the count.
   const upd = new Date(LAST_UPDATED + 'T12:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
-  $('count').textContent = `${visible.length} upcoming · updated ${upd}`;
+  $('count').textContent = wk
+    ? `${visible.length} ${visible.length === 1 ? 'show' : 'shows'} · updated ${upd}`
+    : `${visible.length} upcoming · updated ${upd}`;
 
-  // [2] Active-filter badge on the mobile "Filters" button.
-  const active = ['genreFilter','cityFilter','scaleFilter'].filter(id => $(id).value !== 'all').length + (showCommunity ? 0 : 1);
+  // [2] Badge on "More filters" counts the active settings hidden inside it.
+  const active = (scale !== 'all') + (sortMode !== 'date-asc') + (showCommunity ? 0 : 1);
   $('activeCount').hidden = !active; $('activeCount').textContent = active;
 
   document.querySelectorAll('.quick button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.when === when)));
   writeUrl();
 
+  // Weekend Picks: same filters as the list, up to three, expired ones drop out.
+  const pickList = $('pickList');
+  pickList.innerHTML = '';
+  const picks = !wk ? [] : pickDefs
+    .map(p => ({ p, e: visible.find(e => e.link === p.link && e.date === p.date) }))
+    .filter(x => x.e)
+    .slice(0, 3);
+  picks.forEach(({ p, e }) => pickList.appendChild(eventCard(e, p)));
+  $('picks').hidden = !picks.length;
+
   if (!visible.length) {
-    feed.innerHTML = '<div class="no-results">No events match these filters — try clearing one.</div>';
+    if (wk) {
+      feed.innerHTML = '<div class="no-results">No weekend shows match these filters.<br><button type="button" class="clear-btn" id="resetWeekend">See all weekend shows</button></div>';
+      $('resetWeekend').addEventListener('click', () => {
+        for (const [id, v] of Object.entries(DEFAULTS)) $(id).value = v;
+        $('communityToggle').checked = true;
+        day = ''; freeOnly = false; allAgesOnly = false;
+        render();
+      });
+    } else {
+      feed.innerHTML = '<div class="no-results">No events match these filters — try clearing one.</div>';
+    }
     return;
   }
 
-  let lastMonth = '';
+  let lastGroup = '';
+  const counts = {};
+  visible.forEach(e => { counts[e.date] = (counts[e.date] || 0) + 1; });
   visible.forEach(e => {
-    const { dow, soon, num, mon, monthYear } = fmtDate(e.date);
-    if (sortMode !== 'venue' && monthYear !== lastMonth) {
-      const h = document.createElement('h2');
-      h.className = 'month-head';
-      h.textContent = monthYear;
-      feed.appendChild(h);
-      lastMonth = monthYear;
+    if (sortMode !== 'venue') {
+      // Weekend view groups by day; other views keep the month dividers.
+      const group = wk ? e.date : fmtDate(e.date).monthYear;
+      if (group !== lastGroup) {
+        const h = document.createElement('h2');
+        if (wk) {
+          h.className = 'day-head';
+          h.innerHTML = `${esc(longDay(e.date))} <span class="n">${counts[e.date]} ${counts[e.date] === 1 ? 'show' : 'shows'}</span>`;
+        } else {
+          h.className = 'month-head';
+          h.textContent = group;
+        }
+        feed.appendChild(h);
+        lastGroup = group;
+      }
     }
-    const row = document.createElement('div');
-    row.className = `event ${e.type === 'community' ? 'community' : 'verified'}`;
-    row.style.setProperty('--genre-color', genreColors[e.genre] || 'var(--blue)');
-    const gl = esc(genreLabels[e.genre] || e.genre);
-    const cta = esc(e.cta || 'Event Info');
-    row.innerHTML = `
-      <div class="date-block">
-        <div class="dow${soon ? ' soon' : ''}">${dow}</div>
-        <div class="num">${num}</div>
-        <div class="mon">${mon}</div>
-      </div>
-      <div class="details">
-        ${e.sub
-          ? `<span class="gpill" title="${gl} · ${esc(e.sub)}"><span class="g">${gl}</span><span class="s">${esc(e.sub)}</span></span>`
-          : `<span class="tag">${gl}</span>`}
-        <span class="tag status ${e.type === 'community' ? 'community' : 'verified'}">${e.type === 'verified' ? 'Verified' : 'Underground'}</span>
-        <span class="tag scale">${esc(scaleLabels[e.scale] || '')}</span>
-        <h3>${esc(e.title)}</h3>
-        <p class="meta">${esc(e.venue)} · ${esc(e.city)} · ${esc(e.price)} · via ${esc(e.source || 'Unknown')}</p>
-      </div>
-      <div class="action">
-        <a class="btn ${e.type === 'verified' && e.cta === 'Get Tickets' ? 'tickets' : 'info'}" href="${safeUrl(e.link)}" target="_blank" rel="noopener"
-           aria-label="${cta}: ${esc(e.title)}, ${mon} ${num} (opens in new tab)">${cta}</a>
-        <button type="button" class="cal-btn" aria-label="Add ${esc(e.title)} to calendar">+ Calendar</button>
-      </div>
-    `;
-    row.querySelector('.cal-btn').addEventListener('click', () => downloadIcs(e));
-    feed.appendChild(row);
+    feed.appendChild(eventCard(e));
   });
 }
 
@@ -1229,8 +1486,14 @@ function render() {
 );
 $('searchBox').addEventListener('input', render);
 document.querySelectorAll('.quick button').forEach(b =>
-  b.addEventListener('click', () => { when = b.dataset.when; render(); })
+  b.addEventListener('click', () => {
+    when = b.dataset.when;
+    if (when !== 'weekend') { day = ''; freeOnly = false; allAgesOnly = false; }
+    render();
+  })
 );
+$('freeBtn').addEventListener('click', () => { freeOnly = !freeOnly; render(); });
+$('agesBtn').addEventListener('click', () => { allAgesOnly = !allAgesOnly; render(); });
 $('moreFilters').addEventListener('click', () => {
   const open = $('filters').classList.toggle('open');
   $('moreFilters').setAttribute('aria-expanded', String(open));
@@ -1238,6 +1501,7 @@ $('moreFilters').addEventListener('click', () => {
 $('clearFilters').addEventListener('click', () => {
   for (const [id, v] of Object.entries(DEFAULTS)) $(id).value = v;
   $('communityToggle').checked = true;
+  day = ''; freeOnly = false; allAgesOnly = false;
   when = 'all';
   render();
 });
