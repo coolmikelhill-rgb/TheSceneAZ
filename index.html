@@ -1293,6 +1293,83 @@ function updateJsonLd(list) {
   }))).replace(/</g, '\\u003c');
 }
 
+// ===== Automatic Weekend Picks =====
+// Picks are chosen fresh from the listings every time the page loads, so nobody
+// has to edit them. Each rule below is a kind of night out; the first event that
+// fits a rule becomes a pick. Every "Go if" sentence is built only from facts in
+// the listing (room size, price, ages, start time, venue, city, genre).
+// Optional: entries in picks.json (link + date + label + goIf) are shown first.
+const genreName = e => {
+  const g = String(e.sub || genreLabels[e.genre] || 'live music').split('/')[0].trim();
+  return g.toLowerCase().replace(/\bedm\b/, 'EDM').replace(/\br&b\b/, 'R&B').replace(/\bdj\b/, 'DJ');
+};
+function withFacts(e, f, skip = {}) {
+  const bits = [];
+  if (f.time && !skip.time) bits.push(f.time.includes('–') ? `runs ${f.time}` : `starts ${f.time}`);
+  if (f.price && !f.free && !skip.price) bits.push(f.price);
+  if (f.age && !skip.age) bits.push(f.age === 'All ages' ? 'all ages' : f.age);
+  return bits.length ? ` (${bits.join(', ')})` : '';
+}
+function startHour(t) {
+  const m = String(t).match(/^(\d{1,2})(?::\d{2})?\s*([ap])m/i);
+  if (!m) return null;
+  return (+m[1] % 12) + (m[2].toLowerCase() === 'p' ? 12 : 0);
+}
+function lowPrice(f) {
+  const m = !f.free && f.price.match(/\$(\d+(?:\.\d+)?)/);
+  return m ? +m[1] : null;
+}
+const an = w => /^[aeiou]/i.test(w) ? 'an' : 'a';
+const PICK_RULES = [
+  { label: 'Warehouse night', fits: (e, f) => e.scale === 'warehouse',
+    goIf: (e, f) => `Go if you want an underground ${genreName(e)} night in a warehouse or DIY room${f.free ? ' — it’s listed as free' : ''}${withFacts(e, f)}.` },
+  { label: 'Free night out', fits: (e, f) => f.free,
+    goIf: (e, f) => `Go if you want a night out that’s listed as free — ${genreName(e)} in ${e.city}${withFacts(e, f)}.` },
+  { label: 'Big room show', fits: (e, f) => e.scale === 'arena',
+    goIf: (e, f) => `Go if you want a big, arena-size show in ${e.city}${withFacts(e, f)}.` },
+  { label: 'Cheap night', fits: (e, f) => { const p = lowPrice(f); return p !== null && p <= 15; },
+    goIf: (e, f) => `Go if you want ${an(genreName(e))} ${genreName(e)} night that won’t cost much — tickets are listed at ${f.price}${withFacts(e, f, { price: 1 })}.` },
+  { label: 'All ages', fits: (e, f) => f.allAges,
+    goIf: (e, f) => `Go if you’re bringing someone under 21 — it’s listed as all ages${withFacts(e, f, { age: 1 })}.` },
+  { label: 'Late night', fits: (e, f) => { const h = startHour(f.time); return h !== null && (h >= 21 || h <= 4); },
+    goIf: (e, f) => `Go if you want to stay out late — ${genreName(e)}, listed ${f.time}${withFacts(e, f, { time: 1 })}.` },
+  { label: 'Jazz night', fits: (e, f) => e.genre === 'jazz',
+    goIf: (e, f) => `Go if you want live jazz in ${e.city}${withFacts(e, f)}.` },
+  { label: 'Sunday show', fits: (e, f) => new Date(e.date + 'T12:00:00').getDay() === 0,
+    goIf: (e, f) => `Go if you want one more show before the week starts — ${genreName(e)} in ${e.city}${withFacts(e, f)}.` },
+  { label: 'Band night', fits: (e, f) => ['rock', 'metal', 'folk', 'blues', 'country'].includes(e.genre) && e.scale === 'club' && !!f.time,
+    goIf: (e, f) => `Go if you want to see a band in a club-size room — ${genreName(e)}, listed ${f.time}${withFacts(e, f, { time: 1 })}.` },
+];
+
+function choosePicks(visible) {
+  const out = [], used = new Set(), days = new Set();
+  const key = e => e.link + '|' + e.date;
+  const add = (e, p) => { out.push({ e, p }); used.add(key(e)); days.add(e.date); };
+  // 1. Optional hand-made picks from picks.json.
+  for (const p of pickDefs) {
+    const e = visible.find(e => e.link === p.link && e.date === p.date);
+    if (e && !used.has(key(e)) && out.length < 3) add(e, p);
+  }
+  // 2. Automatic picks. Prefer verified listings with the most known details,
+  //    and spread picks across different days.
+  const known = f => !!f.time + !!f.price + !!f.age;
+  for (const rule of PICK_RULES) {
+    if (out.length >= 3) break;
+    const cands = visible
+      .map(e => ({ e, f: facts(e) }))
+      .filter(({ e, f }) => !used.has(key(e)) && rule.fits(e, f));
+    if (!cands.length) continue;
+    cands.sort((a, b) =>
+      (days.has(a.e.date) - days.has(b.e.date)) ||
+      ((b.e.type === 'verified') - (a.e.type === 'verified')) ||
+      (known(b.f) - known(a.f)) ||
+      a.e.date.localeCompare(b.e.date) || a.e.title.localeCompare(b.e.title));
+    const { e, f } = cands[0];
+    add(e, { label: rule.label, goIf: rule.goIf(e, f) });
+  }
+  return out;
+}
+
 let upcomingForSeo = [];
 
 function eventCard(e, pick) {
@@ -1435,10 +1512,7 @@ function render() {
   // Weekend Picks: same filters as the list, up to three, expired ones drop out.
   const pickList = $('pickList');
   pickList.innerHTML = '';
-  const picks = !wk ? [] : pickDefs
-    .map(p => ({ p, e: visible.find(e => e.link === p.link && e.date === p.date) }))
-    .filter(x => x.e)
-    .slice(0, 3);
+  const picks = wk ? choosePicks(visible) : [];
   picks.forEach(({ p, e }) => pickList.appendChild(eventCard(e, p)));
   $('picks').hidden = !picks.length;
 
