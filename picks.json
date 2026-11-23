@@ -1,0 +1,4 @@
+{
+ "_how_it_works": "You don't need to edit this file. Weekend Picks are chosen automatically from events.json every time the page loads (see PICK_RULES in index.html). Optional: to force a specific show to the top, add {\"link\": ..., \"date\": ..., \"label\": ..., \"goIf\": ...} to the list below, copying link and date from events.json.",
+ "picks": []
+}
