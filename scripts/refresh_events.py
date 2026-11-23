@@ -37,8 +37,10 @@ AZ = dt.timezone(dt.timedelta(hours=-7))  # Arizona has no daylight saving time
 
 GENRES = {"house", "techno", "bass", "dnb", "rock", "hiphop", "country",
           "pop", "jazz", "metal", "blues", "folk", "world"}
+# "confirmed" is optional: doors/show/ends/price/ages checked by hand against the
+# official listing. Existing shows are never re-scraped, so it survives each refresh.
 KEYS = ["date", "title", "venue", "city", "genre", "sub", "scale",
-        "price", "type", "cta", "source", "link"]
+        "price", "type", "cta", "source", "link", "confirmed"]
 
 # 19hz tag words -> the site's genre values. First match wins.
 GENRE_RULES = [

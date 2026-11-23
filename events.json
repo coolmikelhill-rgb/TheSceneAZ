@@ -306,7 +306,15 @@
    "type": "verified",
    "cta": "Get Tickets",
    "source": "Valley Bar",
-   "link": "https://www.valleybarphx.com/tm-event/bayonne-the-filters-tour/"
+   "link": "https://www.valleybarphx.com/tm-event/bayonne-the-filters-tour/",
+   "confirmed": {
+    "doors": "7:00 PM",
+    "show": "7:30 PM",
+    "price": "$20 adv · $25 day of show (+ fees)",
+    "ages": "16+",
+    "checked": "2026-11-23",
+    "source": "https://www.valleybarphx.com/tm-event/bayonne-the-filters-tour/"
+   }
   },
   {
    "date": "2026-11-24",
@@ -528,7 +536,16 @@
    "type": "verified",
    "cta": "Get Tickets",
    "source": "19hz",
-   "link": "https://wl.eventim.us/event/seth-troxler-extended-set-slacker-phoenix-holiday-special/707866?afflky=WalterWhereHouse&nts_trk=a9e71352-915a-4f20-8ead-c18765e4a3cc"
+   "link": "https://wl.eventim.us/event/seth-troxler-extended-set-slacker-phoenix-holiday-special/707866?afflky=WalterWhereHouse&nts_trk=a9e71352-915a-4f20-8ead-c18765e4a3cc",
+   "confirmed": {
+    "doors": "9:00 PM",
+    "show": "9:00 PM",
+    "ends": "2:00 AM",
+    "price": "$28 adv · $30 at the door",
+    "ages": "21+",
+    "checked": "2026-11-23",
+    "source": "https://wl.eventim.us/event/seth-troxler-extended-set-slacker-phoenix-holiday-special/707866?afflky=WalterWhereHouse"
+   }
   },
   {
    "date": "2026-11-25",
@@ -1323,7 +1340,15 @@
    "type": "verified",
    "cta": "Get Tickets",
    "source": "Crescent Ballroom",
-   "link": "https://www.crescentphx.com/tm-event/emma-ruth-rundle-these-killing-times/"
+   "link": "https://www.crescentphx.com/tm-event/emma-ruth-rundle-these-killing-times/",
+   "confirmed": {
+    "doors": "6:00 PM",
+    "show": "7:00 PM",
+    "price": "$25–27 (+ fees)",
+    "ages": "16+",
+    "checked": "2026-11-23",
+    "source": "https://www.crescentphx.com/tm-event/emma-ruth-rundle-these-killing-times/"
+   }
   },
   {
    "date": "2026-11-29",
