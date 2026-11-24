@@ -1980,7 +1980,14 @@
    "type": "verified",
    "cta": "Get Tickets",
    "source": "KTAR",
-   "link": "https://www.desertdiamondarena.com/event/rush/52/"
+   "link": "https://www.desertdiamondarena.com/event/rush/52/",
+   "details": {
+    "url": "https://www.desertdiamondarena.com/event/rush/52/",
+    "official": true,
+    "checked": "2026-11-24",
+    "tried": "2026-11-24T14:53-07:00",
+    "goIf": "Go if you're in the mood for prog rock."
+   }
   },
   {
    "date": "2026-12-03",
@@ -5320,7 +5327,11 @@
    "type": "verified",
    "cta": "Get Tickets",
    "source": "The Van Buren",
-   "link": "https://www.ticketmaster.com/president-gator-25th-anniversary-show-miniature-phoenix-arizona-12-19-2026/event/190064FD00FDC9DF"
+   "link": "https://www.ticketmaster.com/president-gator-25th-anniversary-show-miniature-phoenix-arizona-12-19-2026/event/190064FD00FDC9DF",
+   "details": {
+    "tried": "2026-11-24T14:53-07:00",
+    "note": "page unavailable"
+   }
   },
   {
    "date": "2026-12-19",

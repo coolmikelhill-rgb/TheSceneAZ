@@ -1,0 +1,126 @@
+{
+ "_how_it_works": "Suggestions only. Each candidate has one strong signal or two different supporting signals from the show's official page or listings. An editor checks the evidence links, rewrites suggestedWhy as a specific one-line tip, and copies approved shows into hot.json (link, date, why, evidence, checked). Nothing here appears on the site by itself.",
+ "generated": "2026-11-24",
+ "window": [
+  "2026-11-24",
+  "2026-12-23"
+ ],
+ "fetches": 135,
+ "candidates": [
+  {
+   "link": "https://www.valleybarphx.com/tm-event/quinn-ayres-album-release-show-with-mo-maduro-mario-why-ms-moody/",
+   "date": "2026-11-27",
+   "title": "Quinn Ayres Album Release Show With Mo Maduro / Mario Why / Ms. Moody",
+   "venue": "Valley Bar",
+   "city": "Phoenix",
+   "strength": "strong",
+   "signals": [
+    {
+     "kind": "release_show",
+     "strength": "strong",
+     "label": "Release or homecoming show",
+     "quote": "Quinn Ayres Album Release Show With Mo Maduro / Mario Why / Ms. Moody",
+     "source": "https://www.valleybarphx.com/tm-event/quinn-ayres-album-release-show-with-mo-maduro-mario-why-ms-moody/"
+    }
+   ],
+   "evidence": [
+    "https://www.valleybarphx.com/tm-event/quinn-ayres-album-release-show-with-mo-maduro-mario-why-ms-moody/"
+   ],
+   "suggestedWhy": "Quinn Ayres Album Release Show With Mo Maduro / Mario Why / Ms. Moody is celebrating a new release on stage — Quinn Ayres Album Release Show With Mo Maduro / Mario Why / Ms. Moody.",
+   "checked": "2026-11-24",
+   "approved": false
+  },
+  {
+   "link": "https://www.songkick.com/concerts/43442315-brian-bromberg-at-century-room",
+   "date": "2026-11-27",
+   "title": "Brian Bromberg",
+   "venue": "The Century Room",
+   "city": "Tucson",
+   "strength": "two supporting",
+   "signals": [
+    {
+     "kind": "release_news",
+     "strength": "supporting",
+     "label": "New release or award news",
+     "quote": "rate Me Home, showcasing his ability to blend jazz, R&B, and Latin rhythms. With numerous chart-topping albums, Bromberg remains a dynamic force in jazz, continually pushing musical boundaries",
+     "source": "https://dice.fm/event/92nve6-brian-bromberg-classic-jazz-quintet-27th-nov-the-century-room-tucson-tickets?_branch_match_id=1653893235874711705&utm_medium=partners_api&_branch_referrer=H4sIAAAAAAAAA8soKSkottLXz8nMy9ZLyUxO1UvL1S9LtTRNMjRMskw1SLWvK0pNSy0qysxLj08qyi8vTi2ydc4oys9NBQBgs78LOwAAAA%3D%3D"
+    },
+    {
+     "kind": "multi_night",
+     "strength": "supporting",
+     "label": "Multi-night run",
+     "source": "https://www.songkick.com/concerts/43442315-brian-bromberg-at-century-room",
+     "quote": "Dates at this venue: 2026-11-27, 2026-11-28"
+    }
+   ],
+   "evidence": [
+    "https://dice.fm/event/92nve6-brian-bromberg-classic-jazz-quintet-27th-nov-the-century-room-tucson-tickets?_branch_match_id=1653893235874711705&utm_medium=partners_api&_branch_referrer=H4sIAAAAAAAAA8soKSkottLXz8nMy9ZLyUxO1UvL1S9LtTRNMjRMskw1SLWvK0pNSy0qysxLj08qyi8vTi2ydc4oys9NBQBgs78LOwAAAA%3D%3D",
+    "https://www.songkick.com/concerts/43442315-brian-bromberg-at-century-room"
+   ],
+   "suggestedWhy": "Brian Bromberg at The Century Room: rate Me Home, showcasing his ability to blend jazz, R&B, and Latin rhythms. With numerous chart-topping albums.",
+   "checked": "2026-11-24",
+   "approved": false
+  },
+  {
+   "link": "https://www.songkick.com/concerts/43442318-brian-bromberg-at-century-room",
+   "date": "2026-11-28",
+   "title": "Brian Bromberg",
+   "venue": "The Century Room",
+   "city": "Tucson",
+   "strength": "two supporting",
+   "signals": [
+    {
+     "kind": "release_news",
+     "strength": "supporting",
+     "label": "New release or award news",
+     "quote": "rate Me Home, showcasing his ability to blend jazz, R&B, and Latin rhythms. With numerous chart-topping albums, Bromberg remains a dynamic force in jazz, continually pushing musical boundaries",
+     "source": "https://dice.fm/event/q2d32y-brian-bromberg-classic-jazz-quintet-28th-nov-the-century-room-tucson-tickets?_branch_match_id=1653893410097143470&utm_medium=partners_api&_branch_referrer=H4sIAAAAAAAAA8soKSkottLXz8nMy9ZLyUxO1UvL1XdNSrUwSTFMNjaxTLavK0pNSy0qysxLj08qyi8vTi2ydc4oys9NBQAOe%2BeAOwAAAA%3D%3D"
+    },
+    {
+     "kind": "multi_night",
+     "strength": "supporting",
+     "label": "Multi-night run",
+     "source": "https://www.songkick.com/concerts/43442318-brian-bromberg-at-century-room",
+     "quote": "Dates at this venue: 2026-11-27, 2026-11-28"
+    }
+   ],
+   "evidence": [
+    "https://dice.fm/event/q2d32y-brian-bromberg-classic-jazz-quintet-28th-nov-the-century-room-tucson-tickets?_branch_match_id=1653893410097143470&utm_medium=partners_api&_branch_referrer=H4sIAAAAAAAAA8soKSkottLXz8nMy9ZLyUxO1UvL1XdNSrUwSTFMNjaxTLavK0pNSy0qysxLj08qyi8vTi2ydc4oys9NBQAOe%2BeAOwAAAA%3D%3D",
+    "https://www.songkick.com/concerts/43442318-brian-bromberg-at-century-room"
+   ],
+   "suggestedWhy": "Brian Bromberg at The Century Room: rate Me Home, showcasing his ability to blend jazz, R&B, and Latin rhythms. With numerous chart-topping albums.",
+   "checked": "2026-11-24",
+   "approved": false
+  },
+  {
+   "link": "https://mim.org/events/david-benoit-dec-15-2026/2026-12-16/",
+   "date": "2026-12-16",
+   "title": "David Benoit",
+   "venue": "MIM Music Theater",
+   "city": "Phoenix",
+   "strength": "two supporting",
+   "signals": [
+    {
+     "kind": "release_news",
+     "strength": "supporting",
+     "label": "New release or award news",
+     "quote": "di brings the joy and fun of A Charlie Brown Christmas to the audience. For four decades, Grammy-nominated pianist, composer, and",
+     "source": "https://mim.org/events/david-benoit-dec-15-2026/2026-12-16/"
+    },
+    {
+     "kind": "multi_night",
+     "strength": "supporting",
+     "label": "Multi-night run",
+     "source": "https://mim.org/events/david-benoit-dec-15-2026/2026-12-16/",
+     "quote": "Dates at this venue: 2026-12-15, 2026-12-16"
+    }
+   ],
+   "evidence": [
+    "https://mim.org/events/david-benoit-dec-15-2026/2026-12-16/"
+   ],
+   "suggestedWhy": "David Benoit at MIM Music Theater: di brings the joy and fun of A Charlie Brown Christmas to the audience. For four decades, Grammy-nominated pia.",
+   "checked": "2026-11-24",
+   "approved": false
+  }
+ ]
+}

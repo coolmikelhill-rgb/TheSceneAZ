@@ -43,10 +43,19 @@ jobs:
         timeout-minutes: 15
         run: python3 scripts/enrich_events.py ${{ inputs.force && '--force' || '' }}
 
+      - name: Suggest Can't-Miss candidates (Mondays)
+        # Writes hot-candidates.json for the weekly editor review. Only hot.json
+        # (editor-approved) is featured on the site. Skips itself except on
+        # Mondays or when the last list is over a week old.
+        continue-on-error: true
+        timeout-minutes: 15
+        run: python3 scripts/suggest_hot.py ${{ inputs.force && '--force' || '' }}
+
       - name: Commit if anything changed
         id: commit
         run: |
-          if git diff --quiet --exit-code -- events.json && git ls-files --error-unmatch events.json >/dev/null 2>&1; then
+          if git diff --quiet --exit-code -- events.json hot-candidates.json && git ls-files --error-unmatch events.json >/dev/null 2>&1 \
+             && { [ ! -f hot-candidates.json ] || git ls-files --error-unmatch hot-candidates.json >/dev/null 2>&1; }; then
             echo "No changes."
             echo "changed=false" >> "$GITHUB_OUTPUT"
             exit 0
@@ -54,6 +63,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add events.json
+          [ -f hot-candidates.json ] && git add hot-candidates.json
           git commit -m "Refresh listings $(TZ=America/Phoenix date '+%F %H:%M')"
           # Another job (e.g. the weekly Scene Picks) may have pushed meanwhile.
           git push || { git pull --rebase && git push; }

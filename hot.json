@@ -1,0 +1,55 @@
+{
+ "_how_it_works": "Can't-Miss Shows (HOT) in the Next 30 Days view. Only shows listed here are featured, up to 5 at a time, soonest first. Each entry names an event in events.json by its exact 'link' AND 'date' (the site's event ID), gives one specific 'why' line, the 'evidence' links that back it up, the 'signals' it meets, and the date the evidence was 'checked'. A show qualifies with one strong signal (demand-added date, venue upgrade, rare Arizona stop or reunion, hometown release show, one-off collaboration) or two different supporting signals. Suggestions arrive weekly in hot-candidates.json; check the evidence before approving. Past, canceled and sold-out shows drop off the featured list automatically and stay in the calendar.",
+ "approved": [
+  {
+   "link": "https://www.desertdiamondarena.com/event/rush/52/",
+   "date": "2026-12-03",
+   "title": "Rush (night 2)",
+   "why": "Rush is back: Geddy Lee and Alex Lifeson's reunion tour, with Anika Nilles on drums, added this second Glendale night on top of Dec. 1.",
+   "signals": [
+    "added_by_demand",
+    "rare_stop"
+   ],
+   "evidence": [
+    {
+     "label": "KTAR",
+     "url": "https://ktar.com/arizona-news/rush-phoenix-arizona-reunion/5763606/"
+    },
+    {
+     "label": "ABC15",
+     "url": "https://www.abc15.com/entertainment/events/rush-expands-the-2026-fifty-something-tour-with-new-concerts-including-a-desert-diamond-show-in-glendale"
+    },
+    {
+     "label": "Arena event page",
+     "url": "https://www.desertdiamondarena.com/event/rush/52/"
+    }
+   ],
+   "checked": "2026-11-24"
+  },
+  {
+   "link": "https://www.ticketmaster.com/president-gator-25th-anniversary-show-miniature-phoenix-arizona-12-19-2026/event/190064FD00FDC9DF",
+   "date": "2026-12-19",
+   "title": "President Gator 25th Anniversary Show - Miniature Tigers",
+   "why": "President Gator's 25th-anniversary party puts Phoenix-born Miniature Tigers on the same Van Buren bill as Tempe's Gospel Claws, with Pollen and Breakup Shoes rounding it out.",
+   "signals": [
+    "anniversary",
+    "local_showcase"
+   ],
+   "evidence": [
+    {
+     "label": "Live Nation lineup",
+     "url": "https://www.livenation.com/event/17k8v0G62VZTjEL/president-gator-25th-anniversary-show-miniature-tigers"
+    },
+    {
+     "label": "Miniature Tigers bio",
+     "url": "https://en.wikipedia.org/wiki/Miniature_Tigers"
+    },
+    {
+     "label": "Gospel Claws bio",
+     "url": "https://en.wikipedia.org/wiki/Gospel_Claws"
+    }
+   ],
+   "checked": "2026-11-24"
+  }
+ ]
+}

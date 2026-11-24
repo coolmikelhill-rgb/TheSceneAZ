@@ -479,6 +479,46 @@
     .event .action .btn { flex: 0 0 auto; }
     .facts { font-size: 14px; gap: 3px 12px; }
   }
+
+  /* ===== Next 30 Days: Can't-Miss Shows ===== */
+  .hot { max-width: 820px; margin: 0 auto; padding: 16px 24px 4px; }
+  .hot[hidden] { display: none; }
+  .hot-head {
+    font-family: 'Archivo', sans-serif; font-stretch: 125%; font-weight: 800; font-size: 14px;
+    letter-spacing: 0.1em; text-transform: uppercase; color: #FF7A55; margin: 4px 0 2px; padding-left: 4px;
+  }
+  .hot-sub { margin: 0 0 10px; padding-left: 4px; font-size: 13px; color: var(--text-muted); }
+  .hot-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 10px; }
+  .hot-card {
+    display: flex; flex-direction: column; gap: 4px; padding: 14px 14px 12px; border-radius: 10px;
+    background: var(--bg-raised); border: 1px solid color-mix(in srgb, #FF5A36 45%, var(--line));
+    border-top: 3px solid #FF5A36; min-width: 0;
+  }
+  .hot-badge {
+    display: inline-block; background: #FF5A36; color: #160803; font: 800 11px/1.5 'Inter', sans-serif;
+    letter-spacing: 0.12em; padding: 1px 7px; border-radius: 4px;
+  }
+  .hot-badge.sm { font-size: 10px; padding: 0 6px; margin-right: 8px; vertical-align: 2px; }
+  .hot-top { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .hot-when { font-weight: 700; font-size: 13px; color: var(--text); }
+  .hot-card .status-chip { margin: 0; }
+  .hot-card h3 { margin: 2px 0 0; font-size: 17px; font-weight: 700; line-height: 1.25; overflow-wrap: anywhere; }
+  .hot-card .where { margin: 0; font-size: 13.5px; }
+  .hot-why { margin: 4px 0 6px; font-size: 14px; line-height: 1.45; color: var(--text); flex: 1; }
+  .hot-foot { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+  .hot-price { font-weight: 700; font-size: 14px; }
+  .hot-card .src { margin: 6px 0 0; }
+  .week-head {
+    font-family: 'Archivo', sans-serif; font-stretch: 125%; font-weight: 800; font-size: 16px; letter-spacing: 0.02em;
+    color: var(--text); margin: 34px 0 0; padding: 10px 4px 0; border-top: 1px solid var(--line);
+  }
+  .week-head:first-child { margin-top: 10px; border-top: 0; padding-top: 0; }
+  .week-head .n { font: 500 12.5px 'Inter', sans-serif; color: var(--text-muted); margin-left: 8px; }
+  .week-head + .day-head { margin-top: 8px; }
+  @media (max-width: 560px) {
+    .hot { padding: 12px 16px 0; }
+    .hot-grid { grid-template-columns: 1fr; gap: 8px; }
+  }
 </style>
 </head>
 <body>
@@ -561,6 +601,12 @@
     <button type="button" class="clear-btn" id="clearFilters">Clear filters</button>
   </div>
 </div>
+
+<section class="hot" id="hot" aria-labelledby="hotHead" hidden>
+  <h2 class="hot-head" id="hotHead">Can't-Miss Shows</h2>
+  <p class="hot-sub">Worth buying tickets for now — each one has a specific, checked reason. Full listings stay in the calendar below.</p>
+  <div class="hot-grid" id="hotList"></div>
+</section>
 
 <section class="picks" id="picks" aria-labelledby="picksHead" hidden>
   <h2 class="picks-head" id="picksHead">Scene Picks</h2>
@@ -1148,6 +1194,20 @@ async function loadEvents() {
   } catch (err) {
     // No picks file (e.g. viewing index.html standalone): the section just stays hidden.
   }
+  // Can't-Miss Shows: editor-approved list in hot.json (see the note at the top of that file).
+  try {
+    const resp = await fetch('hot.json', { cache: 'no-store' });
+    if (resp.ok) {
+      const data = await resp.json();
+      if (data && Array.isArray(data.approved)) {
+        hotDefs = data.approved.filter(x => x && typeof x.link === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(x.date || '')
+          && typeof x.why === 'string' && x.why.trim());
+        hotKeys = new Set(hotDefs.map(x => x.link + '|' + x.date));
+      }
+    }
+  } catch (err) {
+    // No hot.json: the Can't-Miss section stays hidden and the calendar shows first.
+  }
   // New sources bring new towns (Gilbert, Prescott Valley, Lake Havasu City...).
   // Add any city in the data that the dropdown doesn't list yet, then re-read
   // the URL so a shared ?city=Gilbert link still works.
@@ -1214,6 +1274,8 @@ let day = '';            // '' = every day in the range, else 'mon' … 'sun' (w
 let freeOnly = false;    // only listings whose price is explicitly "Free"
 let allAgesOnly = false; // only listings explicitly marked "All ages"
 let pickDefs = [];       // curated Scene Picks from picks.json
+let hotDefs = [];        // editor-approved Can't-Miss Shows from hot.json
+let hotKeys = new Set(); // "link|date" of each approved show
 const DOW_KEYS = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
 
 function readUrl() {
@@ -1455,6 +1517,50 @@ function choosePicks(visible) {
 
 let upcomingForSeo = [];
 
+// Can't-Miss Shows: approved shows in today .. today+29 (Arizona time) that pass
+// every active filter, up to five, soonest first. Canceled, postponed and sold-out
+// shows drop out here but keep their normal calendar listing.
+const isHot = e => hotKeys.has(e.link + '|' + e.date);
+function chooseHot(visible) {
+  const today = azToday(), last = addDays(today, 29);
+  const byKey = new Map(visible.map(e => [e.link + '|' + e.date, e]));
+  return hotDefs
+    .map(h => ({ h, e: byKey.get(h.link + '|' + h.date) }))
+    .filter(({ e }) => e && e.date >= today && e.date <= last)
+    .filter(({ e }) => { const f = facts(e); return !f.bad && !f.soldOut; })
+    .sort((a, b) => a.e.date.localeCompare(b.e.date))
+    .slice(0, 5);
+}
+
+function hotCard(e, h) {
+  const f = facts(e);
+  const card = document.createElement('article');
+  card.className = 'hot-card';
+  card.style.setProperty('--genre-color', genreColors[e.genre] || 'var(--blue)');
+  const when = longDay(e.date, { weekday: 'short', month: 'short', day: 'numeric' });
+  const price = f.free ? `Free${f.freeCond ? ' ' + f.freeCond : ''}` : f.price;
+  const cta = (e.cta === 'Get Tickets' || (f.official && f.source && (f.price || f.free))) ? 'Get Tickets' : 'Event Info';
+  const ev = (Array.isArray(h.evidence) ? h.evidence : []).filter(x => x && /^https?:/.test(x.url || ''));
+  const checked = /^\d{4}-\d{2}-\d{2}$/.test(h.checked || '') ? longDay(h.checked, { month: 'short', day: 'numeric' }) : '';
+  card.innerHTML = `
+    <div class="hot-top">
+      <span class="hot-badge">HOT</span>
+      <span class="hot-when">${esc(when)}</span>
+      ${f.status ? `<span class="status-chip">${esc(f.status)}</span>` : ''}
+    </div>
+    <h3>${esc(e.title)}</h3>
+    <p class="where">${esc(e.venue)} <span class="city">· ${esc(e.city)}</span></p>
+    <p class="hot-why">${esc(h.why)}</p>
+    <div class="hot-foot">
+      ${price ? `<span class="hot-price">${esc(price)}</span>` : ''}
+      <a class="btn primary" href="${safeUrl(bestLink(e, f))}" target="_blank" rel="noopener"
+         aria-label="${cta}: ${esc(e.title)}, ${esc(when)} (opens in new tab)">${cta}</a>
+    </div>
+    ${ev.length ? `<p class="src">Why it's hot: ${ev.slice(0, 3).map((x, i) => `<a href="${safeUrl(x.url)}" target="_blank" rel="noopener">${esc(x.label || 'source ' + (i + 1))}</a>`).join(' · ')}${checked ? ` · checked ${esc(checked)}` : ''}</p>` : ''}
+  `;
+  return card;
+}
+
 function eventCard(e, pick) {
   const { dow, soon, num, mon } = fmtDate(e.date);
   const f = facts(e);
@@ -1513,7 +1619,7 @@ function eventCard(e, pick) {
     </div>
     <div class="head">
       ${pick ? `<div class="pick-label">${esc(pick.label)}</div>` : ''}
-      <h3>${statusChip}${esc(e.title)}</h3>
+      <h3>${isHot(e) && !f.bad && !f.soldOut ? '<span class="hot-badge sm" title="Can\'t-Miss Show">HOT</span>' : ''}${statusChip}${esc(e.title)}</h3>
       <p class="where">${esc(e.venue)} <span class="city">· ${esc(e.city)}</span></p>
       ${(() => {
         const list = f.bad
@@ -1651,9 +1757,18 @@ function render() {
   // Scene Picks: same filters as the list, up to three from the next seven days.
   const pickList = $('pickList');
   pickList.innerHTML = '';
-  const picks = choosePicks(visible);
+  const month = when === 'month';
+  const picks = month ? [] : choosePicks(visible);
   picks.forEach(({ p, e }) => pickList.appendChild(eventCard(e, p)));
   $('picks').hidden = !picks.length;
+
+  // Next 30 Days leads with Can't-Miss Shows. They are extra cards, not extra
+  // results: each show keeps its one listing below and is counted once.
+  const hotList = $('hotList');
+  hotList.innerHTML = '';
+  const hot = month ? chooseHot(visible) : [];
+  hot.forEach(({ h, e }) => hotList.appendChild(hotCard(e, h)));
+  $('hot').hidden = !hot.length;
 
   if (!visible.length) {
     const scope = RANGE_NAMES[when];
@@ -1662,14 +1777,29 @@ function render() {
     return;
   }
 
-  // Short ranges are grouped by day ("Tuesday, Nov 24"); longer ones by month.
-  const byDay = when === 'tonight' || when === 'week' || when === 'weekend';
+  // Tonight / weekend / 7 days / 30 days are grouped by day ("Tuesday, Nov 24");
+  // the 30-day calendar adds week headings so a month is easy to scan. Any date: by month.
+  const byDay = when !== 'all';
+  const today = azToday();
+  const weekOf = iso => addDays(iso, -((dowOf(iso) + 6) % 7));   // Monday of that week
+  const thisWeek = weekOf(today);
+  let lastWeek = '';
   let lastGroup = '';
   const counts = {};
   visible.forEach(e => { counts[e.date] = (counts[e.date] || 0) + 1; });
   visible.forEach(e => {
     if (sortMode !== 'venue') {
       const group = byDay ? e.date : fmtDate(e.date).monthYear;
+      if (month && sortMode === 'date-asc' && weekOf(e.date) !== lastWeek) {
+        lastWeek = weekOf(e.date);
+        const w = document.createElement('h2');
+        w.className = 'week-head';
+        const sun = addDays(lastWeek, 6) < range[1] ? addDays(lastWeek, 6) : range[1];
+        const span = `${longDay(lastWeek > today ? lastWeek : today, { month: 'short', day: 'numeric' })} – ${longDay(sun, { month: 'short', day: 'numeric' })}`;
+        w.innerHTML = lastWeek === thisWeek ? `This week <span class="n">${esc(span)}</span>`
+          : lastWeek === addDays(thisWeek, 7) ? `Next week <span class="n">${esc(span)}</span>` : esc(span);
+        feed.appendChild(w);
+      }
       if (group !== lastGroup) {
         const h = document.createElement('h2');
         if (byDay) {
