@@ -1536,7 +1536,11 @@
    "type": "verified",
    "cta": "Get Tickets",
    "source": "KTAR",
-   "link": "https://mortgagematchupcenter.com/events/the-neighbourhood/"
+   "link": "https://mortgagematchupcenter.com/events/the-neighbourhood/",
+   "details": {
+    "tried": "2026-11-24T16:49-07:00",
+    "note": "date not confirmed on page"
+   }
   },
   {
    "date": "2026-11-30",
@@ -3120,7 +3124,11 @@
    "type": "verified",
    "cta": "Get Tickets",
    "source": "KTAR",
-   "link": "https://www.ticketmaster.com/desert-diamond-arena-tickets-glendale/venue/204917?startDate=2026-12-09&endDate=2026-12-10"
+   "link": "https://www.ticketmaster.com/desert-diamond-arena-tickets-glendale/venue/204917?startDate=2026-12-09&endDate=2026-12-10",
+   "details": {
+    "tried": "2026-11-24T16:49-07:00",
+    "note": "page unavailable"
+   }
   },
   {
    "date": "2026-12-09",
@@ -3134,7 +3142,11 @@
    "type": "verified",
    "cta": "Get Tickets",
    "source": "SeatGeek",
-   "link": "https://seatgeek.com/hudson-westbrook-tickets/tempe-arizona-mullett-arena-2026-12-09-7-pm/concert/18370892"
+   "link": "https://seatgeek.com/hudson-westbrook-tickets/tempe-arizona-mullett-arena-2026-12-09-7-pm/concert/18370892",
+   "details": {
+    "tried": "2026-11-24T16:49-07:00",
+    "note": "only a resale or homepage link, and no venue event page found"
+   }
   },
   {
    "date": "2026-12-09",
@@ -3260,7 +3272,11 @@
    "type": "verified",
    "cta": "Get Tickets",
    "source": "SeatGeek",
-   "link": "https://seatgeek.com/gracie-abrams-tickets/glendale-arizona-desert-diamond-arena-2026-12-10-8-pm/concert/18270515"
+   "link": "https://seatgeek.com/gracie-abrams-tickets/glendale-arizona-desert-diamond-arena-2026-12-10-8-pm/concert/18270515",
+   "details": {
+    "tried": "2026-11-24T16:49-07:00",
+    "note": "only a resale or homepage link, and no venue event page found"
+   }
   },
   {
    "date": "2026-12-10",
@@ -3400,7 +3416,14 @@
    "type": "verified",
    "cta": "Event Info",
    "source": "Songkick",
-   "link": "https://www.songkick.com/concerts/43464114-format-at-nile-theater"
+   "link": "https://www.songkick.com/concerts/43464114-format-at-nile-theater",
+   "details": {
+    "url": "https://www.songkick.com/concerts/43464114-format-at-nile-theater",
+    "official": false,
+    "listed": "7:30 PM",
+    "checked": "2026-11-24",
+    "tried": "2026-11-24T16:49-07:00"
+   }
   },
   {
    "date": "2026-12-10",
@@ -3721,7 +3744,14 @@
    "type": "verified",
    "cta": "Event Info",
    "source": "Songkick",
-   "link": "https://www.songkick.com/concerts/43464118-format-at-nile-theater"
+   "link": "https://www.songkick.com/concerts/43464118-format-at-nile-theater",
+   "details": {
+    "url": "https://www.songkick.com/concerts/43464118-format-at-nile-theater",
+    "official": false,
+    "listed": "7:30 PM",
+    "checked": "2026-11-24",
+    "tried": "2026-11-24T16:49-07:00"
+   }
   },
   {
    "date": "2026-12-11",
@@ -3735,7 +3765,14 @@
    "type": "verified",
    "cta": "Get Tickets",
    "source": "KTAR",
-   "link": "https://www.desertdiamondarena.com/event/alt-az-93-3-presents%3a-ugly-sweater-holiday-party-with-sublime-slightly-stoopid-and-codefendants/108/"
+   "link": "https://www.desertdiamondarena.com/event/alt-az-93-3-presents%3a-ugly-sweater-holiday-party-with-sublime-slightly-stoopid-and-codefendants/108/",
+   "details": {
+    "url": "https://www.desertdiamondarena.com/event/alt-az-93-3-presents%3a-ugly-sweater-holiday-party-with-sublime-slightly-stoopid-and-codefendants/108/",
+    "official": true,
+    "checked": "2026-11-24",
+    "tried": "2026-11-24T16:49-07:00",
+    "goIf": "Go if you want a holiday show of reggae rock."
+   }
   },
   {
    "date": "2026-12-11",

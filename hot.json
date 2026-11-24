@@ -1,11 +1,51 @@
 {
- "_how_it_works": "Can't-Miss Shows (HOT) in the Next 30 Days view. Only shows listed here are featured. Order = priority: the site features the first 5 that are in the next 30 days, pass the visitor's filters and aren't canceled, postponed or sold out, and shows them soonest first; when one passes, the next moves up. Each entry names an event in events.json by its exact 'link' AND 'date' (the site's event ID), with one specific 'why' line, the 'signals' it meets, short 'evidence' links and the date the evidence was 'checked'. A show qualifies with ONE STRONG signal: breakout momentum (a rising artist with a recent, citable breakout in roughly the last 12-18 months: outgrowing rooms since their last Arizona show, dates selling out or upgraded this tour, a first Hot 100/Billboard 200 entry, a viral single with real coverage, a Best New Artist nod, a fast climb up festival bills); a multi-night run in a big room; a date added or venue upgraded because of demand; a rare or returning Arizona stop (first time in years, reunion, comeback, farewell tour, an artist who rarely tours or usually skips Arizona); a hometown release show or homecoming; a one-off collaboration. Or TWO different SUPPORTING signals: headliner scale (size alone isn't enough, so legacy acts need a second, specific reason), a multi-night club run, an earlier sold-out run, new release or award news, an anniversary show, a co-headline or distinctive local lineup, low tickets reported by the seller. Never use follower or stream counts on their own. Suggestions arrive weekly in hot-candidates.json; check the evidence before approving.",
+ "_how_it_works": "Can't-Miss Shows (HOT) in the Next 30 Days view. Only shows listed here are featured. Order = priority: the site features the first 5 that are in the next 30 days, pass the visitor's filters and aren't canceled, postponed or sold out, and shows them soonest first; when one passes, the next moves up. Each entry names an event in events.json by its exact 'link' AND 'date' (the site's event ID); a multi-night pick also lists every night in 'nights' (each its own link + date, plus a verified event-specific 'tickets' URL when one exists) and, when the seller only has one page for all nights, a 'sharedTickets' {url, label}. The first approved pick is shown as the full-width lead card. with one specific 'why' line, the 'signals' it meets, short 'evidence' links and the date the evidence was 'checked'. A show qualifies with ONE STRONG signal: breakout momentum (a rising artist with a recent, citable breakout in roughly the last 12-18 months: outgrowing rooms since their last Arizona show, dates selling out or upgraded this tour, a first Hot 100/Billboard 200 entry, a viral single with real coverage, a Best New Artist nod, a fast climb up festival bills); a multi-night run in a big room; a date added or venue upgraded because of demand; a rare or returning Arizona stop (first time in years, reunion, comeback, farewell tour, an artist who rarely tours or usually skips Arizona); a hometown release show or homecoming; a one-off collaboration. Or TWO different SUPPORTING signals: headliner scale (size alone isn't enough, so legacy acts need a second, specific reason), a multi-night club run, an earlier sold-out run, new release or award news, an anniversary show, a co-headline or distinctive local lineup, low tickets reported by the seller. Never use follower or stream counts on their own. Suggestions arrive weekly in hot-candidates.json; check the evidence before approving.",
  "approved": [
+  {
+   "link": "https://www.songkick.com/concerts/43464114-format-at-nile-theater",
+   "date": "2026-12-10",
+   "title": "The Format",
+   "why": "Two unplugged hometown shows at the Nile from Nate Ruess and Sam Means.",
+   "signals": [
+    "release_show",
+    "rare_stop",
+    "multi_night"
+   ],
+   "evidence": [
+    {
+     "label": "Phoenix New Times",
+     "url": "https://www.phoenixnewtimes.com/music/the-format-is-bringing-two-acoustic-shows-to-this-phoenix-venue-40707128/"
+    },
+    {
+     "label": "V13",
+     "url": "https://v13.net/2026/10/the-format-reveal-unplugged-december-tour/"
+    },
+    {
+     "label": "Boycott Heaven",
+     "url": "https://en.wikipedia.org/wiki/Boycott_Heaven"
+    }
+   ],
+   "checked": "2026-11-24",
+   "nights": [
+    {
+     "date": "2026-12-10",
+     "link": "https://www.songkick.com/concerts/43464114-format-at-nile-theater"
+    },
+    {
+     "date": "2026-12-11",
+     "link": "https://www.songkick.com/concerts/43464118-format-at-nile-theater"
+    }
+   ],
+   "sharedTickets": {
+    "url": "https://www.axs.com/artists/1120738/the-format-tickets",
+    "label": "AXS (both nights)"
+   }
+  },
   {
    "link": "https://www.desertdiamondarena.com/event/rush/52/",
    "date": "2026-12-03",
    "title": "Rush (night 2)",
-   "why": "Rush is back: Geddy Lee and Alex Lifeson's reunion tour, with Anika Nilles on drums, added this second Glendale night on top of Dec. 1.",
+   "why": "Geddy Lee and Alex Lifeson's Rush reunion added a second Glendale night.",
    "signals": [
     "added_by_demand",
     "rare_stop",
@@ -32,7 +72,7 @@
    "link": "https://mortgagematchupcenter.com/events/the-neighbourhood/",
    "date": "2026-11-30",
    "title": "The Neighbourhood w/ Nessa Barrett",
-   "why": "The Neighbourhood's Wourld Tour sold out nearly every first-round date within minutes, and Phoenix came in the batch of extra arena dates added for demand.",
+   "why": "Their world tour sold out in minutes, and Phoenix is one of the dates added for demand.",
    "signals": [
     "added_by_demand",
     "headliner_scale"
@@ -50,36 +90,10 @@
    "checked": "2026-11-24"
   },
   {
-   "link": "https://www.songkick.com/concerts/43464114-format-at-nile-theater",
-   "date": "2026-12-10",
-   "title": "The Format",
-   "why": "The Format's Nate Ruess and Sam Means bring two unplugged hometown nights to the Nile (Dec. 10 and 11) behind their new album Boycott Heaven, fresh off headlining Radio City Music Hall.",
-   "signals": [
-    "release_show",
-    "rare_stop",
-    "multi_night"
-   ],
-   "evidence": [
-    {
-     "label": "Phoenix New Times",
-     "url": "https://www.phoenixnewtimes.com/music/the-format-is-bringing-two-acoustic-shows-to-this-phoenix-venue-40707128/"
-    },
-    {
-     "label": "V13",
-     "url": "https://v13.net/2026/10/the-format-reveal-unplugged-december-tour/"
-    },
-    {
-     "label": "Boycott Heaven",
-     "url": "https://en.wikipedia.org/wiki/Boycott_Heaven"
-    }
-   ],
-   "checked": "2026-11-24"
-  },
-  {
    "link": "https://www.ticketmaster.com/desert-diamond-arena-tickets-glendale/venue/204917?startDate=2026-12-09&endDate=2026-12-10",
    "date": "2026-12-09",
    "title": "Gracie Abrams w/ Rachel Chinouriri (2 nights)",
-   "why": "Gracie Abrams went from the Lollapalooza 2025 headline bill to her first headlining arena tour, and Glendale gets two nights of it (Dec. 9 and 10) with Rachel Chinouriri opening.",
+   "why": "A Lollapalooza headliner on her first arena tour, with two Glendale nights.",
    "signals": [
     "multi_night_big",
     "breakout",
@@ -99,38 +113,25 @@
      "url": "https://www.phoenixnewtimes.com/music/gracie-abrams-glendale-concerts-december-2026-40670102/"
     }
    ],
-   "checked": "2026-11-24"
-  },
-  {
-   "link": "https://seatgeek.com/hudson-westbrook-tickets/tempe-arizona-mullett-arena-2026-12-09-7-pm/concert/18370892",
-   "date": "2026-12-09",
-   "title": "Hudson Westbrook (Rescheduled from 10/02/26)",
-   "why": "Hudson Westbrook's \"House Again\" gave him his first Hot 100 hit in 2025 and has since gone double platinum; this rescheduled Mullett Arena date catches him on the way up.",
-   "signals": [
-    "breakout",
-    "headliner_scale"
-   ],
-   "evidence": [
+   "checked": "2026-11-24",
+   "nights": [
     {
-     "label": "Billboard: first Hot 100 entries of 2025",
-     "url": "https://www.billboard.com/lists/first-hot-100-chart-hits-2025/"
+     "date": "2026-12-09",
+     "link": "https://www.ticketmaster.com/desert-diamond-arena-tickets-glendale/venue/204917?startDate=2026-12-09&endDate=2026-12-10",
+     "tickets": "https://www.livenation.com/event/17k8v0G652SMnjW/gracie-abrams-the-look-at-my-life-tour-presented-by-capital-one"
     },
     {
-     "label": "Double platinum",
-     "url": "https://parade.com/entertainment/hudson-westbrook-house-again-double-platinum-milestone-country-hit"
-    },
-    {
-     "label": "Live Nation dates",
-     "url": "https://www.livenation.com/artist/K8vZ917qePV/hudson-westbrook-events"
+     "date": "2026-12-10",
+     "link": "https://seatgeek.com/gracie-abrams-tickets/glendale-arizona-desert-diamond-arena-2026-12-10-8-pm/concert/18270515",
+     "tickets": "https://www.livenation.com/event/17k8v0G65839WDS/gracie-abrams-the-look-at-my-life-tour-presented-by-capital-one"
     }
-   ],
-   "checked": "2026-11-24"
+   ]
   },
   {
    "link": "https://www.ticketmaster.com/president-gator-25th-anniversary-show-miniature-phoenix-arizona-12-19-2026/event/190064FD00FDC9DF",
    "date": "2026-12-19",
    "title": "President Gator 25th Anniversary Show - Miniature Tigers",
-   "why": "President Gator's 25th-anniversary party puts Phoenix-born Miniature Tigers on the same Van Buren bill as Tempe's Gospel Claws, with Pollen and Breakup Shoes rounding it out.",
+   "why": "Phoenix-born Miniature Tigers and Tempe's Gospel Claws share one 25th-anniversary bill.",
    "signals": [
     "anniversary",
     "local_showcase"
@@ -152,10 +153,35 @@
    "checked": "2026-11-24"
   },
   {
+   "link": "https://seatgeek.com/hudson-westbrook-tickets/tempe-arizona-mullett-arena-2026-12-09-7-pm/concert/18370892",
+   "date": "2026-12-09",
+   "title": "Hudson Westbrook (Rescheduled from 10/02/26)",
+   "why": "“House Again” made him a first-time Hot 100 artist in 2025; now he's playing an arena.",
+   "signals": [
+    "breakout",
+    "headliner_scale"
+   ],
+   "evidence": [
+    {
+     "label": "Billboard: first Hot 100 entries of 2025",
+     "url": "https://www.billboard.com/lists/first-hot-100-chart-hits-2025/"
+    },
+    {
+     "label": "Double platinum",
+     "url": "https://parade.com/entertainment/hudson-westbrook-house-again-double-platinum-milestone-country-hit"
+    },
+    {
+     "label": "Live Nation dates",
+     "url": "https://www.livenation.com/artist/K8vZ917qePV/hudson-westbrook-events"
+    }
+   ],
+   "checked": "2026-11-24"
+  },
+  {
    "link": "https://www.desertdiamondarena.com/event/alt-az-93-3-presents%3a-ugly-sweater-holiday-party-with-sublime-slightly-stoopid-and-codefendants/108/",
    "date": "2026-12-11",
    "title": "Ugly Sweater Holiday Party: Sublime, Slightly Stoopid, Codefendants",
-   "why": "Sublime and Slightly Stoopid share an arena bill for ALT AZ 93.3's holiday party, which the station is tying to the 30th anniversary of Sublime's self-titled album.",
+   "why": "Sublime and Slightly Stoopid co-headline ALT AZ 93.3's holiday party.",
    "signals": [
     "headliner_scale",
     "co_headline",
