@@ -420,7 +420,6 @@
   .facts { list-style: none; display: flex; flex-wrap: wrap; gap: 4px 14px; margin: 0 0 8px; padding: 0; font-size: 14px; font-weight: 600; }
   .facts li { min-width: 0; overflow-wrap: anywhere; }
   .facts .k { color: var(--text-muted); font-weight: 500; font-size: 12px; margin-right: 4px; }
-  .facts .missing { color: var(--text-muted); font-weight: 500; font-style: italic; }
   .facts .free { color: var(--teal); }
   .facts .ages-all { color: var(--teal); }
   .badges { line-height: 1; }
@@ -1466,9 +1465,8 @@ function eventCard(e, pick) {
   // The official event page that lists prices is where tickets are sold.
   const cta = f.bad || f.soldOut ? 'Event Info' : (e.cta === 'Get Tickets' || (f.official && f.source && (f.price || f.free))) ? 'Get Tickets' : 'Event Info';
   const checkedDay = f.checked ? longDay(f.checked, { month: 'short', day: 'numeric' }) : '';
-  // "Not published" once we've looked at the event page; "Check …" if nobody has yet.
-  const looked = !!f.checked;
-  const none = (k, v) => `<li><span class="k">${k}</span><span class="missing">${v}</span></li>`;
+  // Only details we actually have are shown; a missing time, price or age
+  // limit is simply left off (the ticket button covers the rest).
   const item = (k, v, cls = '') => `<li><span class="k">${k}</span><span class="${cls}">${esc(v)}</span></li>`;
 
   // When: doors and show stay separate; one unexplained time is a "Listed time".
@@ -1478,19 +1476,17 @@ function eventCard(e, pick) {
     when += item(f.sets.length > 1 ? 'Sets' : 'Set', f.sets.map(s => s.time).join(' · '));
   } else if (f.doors || f.show) {
     if (f.doors) when += item('Doors', f.doors);
-    when += f.show ? item('Show', f.show, 'strong') : none('Show', 'not published');
+    if (f.show) when += item('Show', f.show, 'strong');
   } else if (f.listed) {
     when += item('Listed time', f.listed);
-  } else {
-    when += none('Time', looked ? 'Start time not published' : 'Check start time');
   }
   if (f.ends) when += item('Ends', f.ends);
 
   const price = f.free
     ? item('Price', `Free${f.freeCond ? ' ' + f.freeCond : ''}${f.price ? ` · ${f.price} after` : ''}`, 'free')
-    : f.price ? item('Price', f.price) : none('Price', looked ? 'Not published' : 'Check ticket price');
+    : f.price ? item('Price', f.price) : '';
   const notes = f.notes.length ? `<li class="note">${esc(f.notes.join(' · '))}</li>` : '';
-  const ages = f.age ? item('Ages', f.age, f.allAges ? 'ages-all' : '') : looked ? none('Ages', 'Not published') : '';
+  const ages = f.age ? item('Ages', f.age, f.allAges ? 'ages-all' : '') : '';
 
   // Published schedule, in order: doors, each set, end.
   const named = f.sets.filter(s => s.name);
@@ -1519,9 +1515,12 @@ function eventCard(e, pick) {
       ${pick ? `<div class="pick-label">${esc(pick.label)}</div>` : ''}
       <h3>${statusChip}${esc(e.title)}</h3>
       <p class="where">${esc(e.venue)} <span class="city">· ${esc(e.city)}</span></p>
-      <ul class="facts">${f.bad
-        ? `<li class="note">This show is ${esc(f.status.toLowerCase())}. Check the event page for a new date or refund details.</li>`
-        : when + price + ages + notes}</ul>
+      ${(() => {
+        const list = f.bad
+          ? `<li class="note">This show is ${esc(f.status.toLowerCase())}. Check the event page for a new date or refund details.</li>`
+          : when + price + ages + notes;
+        return list ? `<ul class="facts">${list}</ul>` : '';
+      })()}
     </div>
     <div class="action">
       <a class="btn primary" href="${safeUrl(bestLink(e, f))}" target="_blank" rel="noopener"
