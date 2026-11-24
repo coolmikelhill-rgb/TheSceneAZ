@@ -1,89 +1,6 @@
 {
- "updated": "2026-11-23",
+ "updated": "2026-11-24",
  "events": [
-  {
-   "date": "2026-11-23",
-   "title": "George Clanton",
-   "venue": "La Rosa",
-   "city": "Tucson",
-   "genre": "pop",
-   "sub": "Chillwave / Vaporwave",
-   "scale": "club",
-   "price": "$40.48-135.54",
-   "type": "verified",
-   "cta": "Get Tickets",
-   "source": "19hz",
-   "link": "https://wl.eventim.us/event/george-clanton/700430?afflky=LaRosaTucson"
-  },
-  {
-   "date": "2026-11-23",
-   "title": "Harriet",
-   "venue": "Higley Center for the Performing Arts",
-   "city": "Gilbert",
-   "genre": "pop",
-   "sub": "Pop",
-   "scale": "club",
-   "price": "See listing",
-   "type": "verified",
-   "cta": "Get Tickets",
-   "source": "SeatGeek",
-   "link": "https://seatgeek.com/harriet-tickets/gilbert-arizona-higley-center-for-the-performing-arts-2026-11-23-7-pm/concert/18735635"
-  },
-  {
-   "date": "2026-11-23",
-   "title": "LAdrones",
-   "venue": "The Rebel Lounge",
-   "city": "Phoenix",
-   "genre": "rock",
-   "scale": "club",
-   "price": "See listing",
-   "type": "verified",
-   "cta": "Event Info",
-   "source": "Songkick",
-   "link": "https://www.songkick.com/concerts/43417727-ladrones-at-rebel-lounge"
-  },
-  {
-   "date": "2026-11-23",
-   "title": "No Cure",
-   "venue": "The Rosetta Room",
-   "city": "Mesa",
-   "genre": "rock",
-   "sub": "",
-   "scale": "club",
-   "price": "See listing",
-   "type": "verified",
-   "cta": "Get Tickets",
-   "source": "SeatGeek",
-   "link": "https://seatgeek.com/no-cure-tickets/mesa-arizona-the-rosetta-room-2026-11-23-7-pm/concert/18736110"
-  },
-  {
-   "date": "2026-11-23",
-   "title": "Peter Bernstein with the UA Studio Jazz Ensemble",
-   "venue": "The Century Room",
-   "city": "Tucson",
-   "genre": "jazz",
-   "sub": "",
-   "scale": "club",
-   "price": "See listing",
-   "type": "verified",
-   "cta": "Get Tickets",
-   "source": "The Century Room",
-   "link": "https://link.dice.fm/Ra87a9719f97"
-  },
-  {
-   "date": "2026-11-23",
-   "title": "Steep Canyon Rangers",
-   "venue": "MIM Music Theater",
-   "city": "Phoenix",
-   "genre": "folk",
-   "sub": "Bluegrass",
-   "scale": "club",
-   "price": "See listing",
-   "type": "verified",
-   "cta": "Get Tickets",
-   "source": "MIM",
-   "link": "https://mim.org/events/steep-canyon-rangers-nov-23-2026/2026-11-23/1/"
-  },
   {
    "date": "2026-11-24",
    "title": "As I Lay Dying",
@@ -693,6 +610,20 @@
   },
   {
    "date": "2026-11-27",
+   "title": "130 CLUB: HIP HOP + R&B w/ DJ RECO",
+   "venue": "Valley Bar",
+   "city": "Phoenix",
+   "genre": "hiphop",
+   "sub": "",
+   "scale": "club",
+   "price": "10:00 PM",
+   "type": "verified",
+   "cta": "Get Tickets",
+   "source": "Valley Bar",
+   "link": "https://www.valleybarphx.com/tm-event/130-club-hip-hop-rb-w-dj-reco-2/"
+  },
+  {
+   "date": "2026-11-27",
    "title": "All Your Friends",
    "venue": "The Rebel Lounge",
    "city": "Phoenix",
@@ -1220,6 +1151,20 @@
    "cta": "Get Tickets",
    "source": "SeatGeek",
    "link": "https://seatgeek.com/mannheim-steamroller-christmas-tickets/mesa-arizona-mesa-arts-center-ikeda-theater-2026-11-28-3-pm/concert/18392248"
+  },
+  {
+   "date": "2026-11-28",
+   "title": "Mitch Freedom // Lo Fi / Beats / Instrumental Hip Hop",
+   "venue": "Valley Bar",
+   "city": "Phoenix",
+   "genre": "hiphop",
+   "sub": "",
+   "scale": "club",
+   "price": "6:30 PM",
+   "type": "verified",
+   "cta": "Get Tickets",
+   "source": "Valley Bar",
+   "link": "https://www.valleybarphx.com/tm-event/mitch-freedom-lo-fi-beats-instrumental-hip-hop-4/"
   },
   {
    "date": "2026-11-28",
@@ -2047,6 +1992,20 @@
   },
   {
    "date": "2026-12-04",
+   "title": "7Th Annual Law Rocks: Phoenix",
+   "venue": "Crescent Ballroom",
+   "city": "Phoenix",
+   "genre": "rock",
+   "sub": "",
+   "scale": "club",
+   "price": "6:30 PM",
+   "type": "verified",
+   "cta": "Get Tickets",
+   "source": "Crescent Ballroom",
+   "link": "https://www.crescentphx.com/tm-event/7th-annual-law-rocks-phoenix/"
+  },
+  {
+   "date": "2026-12-04",
    "title": "Alchemy: A Dark Dance Party w/ MIJITO",
    "venue": "Club Congress",
    "city": "Tucson",
@@ -2128,6 +2087,20 @@
    "cta": "Get Tickets",
    "source": "Valley Bar",
    "link": "https://www.valleybarphx.com/tm-event/diva-bleach/"
+  },
+  {
+   "date": "2026-12-04",
+   "title": "Dj Mygodcomplex // Hip Hop / Funk / Soul / World / Disco",
+   "venue": "Valley Bar",
+   "city": "Phoenix",
+   "genre": "house",
+   "sub": "",
+   "scale": "club",
+   "price": "6:30 PM",
+   "type": "verified",
+   "cta": "Get Tickets",
+   "source": "Valley Bar",
+   "link": "https://www.valleybarphx.com/tm-event/dj-mygodcomplex-hip-hop-funk-soul-world-disco-2/"
   },
   {
    "date": "2026-12-04",
@@ -2379,6 +2352,20 @@
    "cta": "Get Tickets",
    "source": "19hz",
    "link": "https://www.tixr.com/groups/relentlessbeats/events/tvboo-200935"
+  },
+  {
+   "date": "2026-12-05",
+   "title": "130 CLUB: HIP HOP + R&B w/ DJ ACRONYM",
+   "venue": "Valley Bar",
+   "city": "Phoenix",
+   "genre": "hiphop",
+   "sub": "",
+   "scale": "club",
+   "price": "10:00 PM",
+   "type": "verified",
+   "cta": "Get Tickets",
+   "source": "Valley Bar",
+   "link": "https://www.valleybarphx.com/tm-event/130-club-hip-hop-rb-w-dj-acronym-3/"
   },
   {
    "date": "2026-12-05",
@@ -3207,6 +3194,20 @@
   },
   {
    "date": "2026-12-09",
+   "title": "Trippie Redd",
+   "venue": "9th & Jackson",
+   "city": "Phoenix",
+   "genre": "hiphop",
+   "sub": "Hip-hop / Rap",
+   "scale": "club",
+   "price": "See listing",
+   "type": "verified",
+   "cta": "Get Tickets",
+   "source": "SeatGeek",
+   "link": "https://seatgeek.com/trippie-redd-tickets/phoenix-arizona-9th-jackson-2026-12-09-7-pm/concert/18835377"
+  },
+  {
+   "date": "2026-12-09",
    "title": "Whitechapel - 20th Anniversary Tour",
    "venue": "The Van Buren",
    "city": "Phoenix",
@@ -3556,6 +3557,20 @@
   },
   {
    "date": "2026-12-11",
+   "title": "Earthsurfaceopen // Soul / Reggae / House / Amapiano / Dancehall",
+   "venue": "Valley Bar",
+   "city": "Phoenix",
+   "genre": "house",
+   "sub": "",
+   "scale": "club",
+   "price": "6:30 PM",
+   "type": "verified",
+   "cta": "Get Tickets",
+   "source": "Valley Bar",
+   "link": "https://www.valleybarphx.com/tm-event/earthsurfaceopen-soul-reggae-house-amapiano-dancehall-3/"
+  },
+  {
+   "date": "2026-12-11",
    "title": "Hamro",
    "venue": "Sunbar",
    "city": "Tempe",
@@ -3860,6 +3875,20 @@
    "cta": "Get Tickets",
    "source": "19hz",
    "link": "https://shotgun.live/events/disconnect-mija-invites?uhandle=jenniferwr&utm_campaign=share_event&utm_term=jenniferwr"
+  },
+  {
+   "date": "2026-12-12",
+   "title": "Earthsurfaceopen // Soul / Reggae / House / Amapiano / Dancehall",
+   "venue": "Valley Bar",
+   "city": "Phoenix",
+   "genre": "house",
+   "sub": "",
+   "scale": "club",
+   "price": "6:30 PM",
+   "type": "verified",
+   "cta": "Get Tickets",
+   "source": "Valley Bar",
+   "link": "https://www.valleybarphx.com/tm-event/earthsurfaceopen-soul-reggae-house-amapiano-dancehall-4/"
   },
   {
    "date": "2026-12-12",
@@ -4954,6 +4983,20 @@
   },
   {
    "date": "2026-12-18",
+   "title": "Dj Boomer // Soul / Funk / World / Hip-Hop",
+   "venue": "Valley Bar",
+   "city": "Phoenix",
+   "genre": "hiphop",
+   "sub": "",
+   "scale": "club",
+   "price": "6:30 PM",
+   "type": "verified",
+   "cta": "Get Tickets",
+   "source": "Valley Bar",
+   "link": "https://www.valleybarphx.com/tm-event/dj-boomer-soul-funk-world-hip-hop/"
+  },
+  {
+   "date": "2026-12-18",
    "title": "El Vez : 2026 X-Mas Tour",
    "venue": "Valley Bar",
    "city": "Phoenix",
@@ -5135,6 +5178,20 @@
   },
   {
    "date": "2026-12-19",
+   "title": "Alyssa Jolee (21+)",
+   "venue": "Sunbar Tempe",
+   "city": "Tempe",
+   "genre": "rock",
+   "sub": "",
+   "scale": "club",
+   "price": "See listing",
+   "type": "verified",
+   "cta": "Get Tickets",
+   "source": "SeatGeek",
+   "link": "https://seatgeek.com/alyssa-jolee-tickets/tempe-arizona-sunbar-tempe-2026-12-19-9-pm/concert/18869148"
+  },
+  {
+   "date": "2026-12-19",
    "title": "Deja Vu",
    "venue": "Casino Arizona",
    "city": "Scottsdale",
@@ -5219,6 +5276,20 @@
   },
   {
    "date": "2026-12-19",
+   "title": "J. Worra (21+)",
+   "venue": "Walter Where House - Phoenix",
+   "city": "Phoenix",
+   "genre": "house",
+   "sub": "Electronic",
+   "scale": "club",
+   "price": "See listing",
+   "type": "verified",
+   "cta": "Get Tickets",
+   "source": "SeatGeek",
+   "link": "https://seatgeek.com/j-worra-tickets/phoenix-arizona-walter-where-house-phoenix-2026-12-19-9-pm/concert/18869200"
+  },
+  {
+   "date": "2026-12-19",
    "title": "Late Night | Soul Revue with Mica Carillo & Grant Bloom",
    "venue": "The Century Room",
    "city": "Tucson",
@@ -5272,6 +5343,20 @@
    "cta": "Get Tickets",
    "source": "SeatGeek",
    "link": "https://seatgeek.com/merry-achi-christmas-tickets/tucson-arizona-fox-tucson-theatre-2026-12-19-7-30-pm/concert/18843930"
+  },
+  {
+   "date": "2026-12-19",
+   "title": "Mitch Freedom // Lo Fi / Beats / Instrumental Hip Hop",
+   "venue": "Valley Bar",
+   "city": "Phoenix",
+   "genre": "hiphop",
+   "sub": "",
+   "scale": "club",
+   "price": "6:30 PM",
+   "type": "verified",
+   "cta": "Get Tickets",
+   "source": "Valley Bar",
+   "link": "https://www.valleybarphx.com/tm-event/mitch-freedom-lo-fi-beats-instrumental-hip-hop-5/"
   },
   {
    "date": "2026-12-19",
@@ -5558,6 +5643,20 @@
   },
   {
    "date": "2026-12-23",
+   "title": "A Skylit Drive",
+   "venue": "Tempe Improv",
+   "city": "Tempe",
+   "genre": "rock",
+   "sub": "Pop / Rock / Alternative / Hard Rock",
+   "scale": "club",
+   "price": "See listing",
+   "type": "verified",
+   "cta": "Get Tickets",
+   "source": "SeatGeek",
+   "link": "https://seatgeek.com/a-skylit-drive-tickets/tempe-arizona-tempe-improv-2026-12-23-7-30-pm/concert/18868228"
+  },
+  {
+   "date": "2026-12-23",
    "title": "Dom Flemons",
    "venue": "MIM Music Theater",
    "city": "Phoenix",
@@ -5681,6 +5780,20 @@
    "cta": "Get Tickets",
    "source": "Westside box office",
    "link": "https://boxoffice.westsideblues.com/events/westsidebluesjazzmore/1971171?date=2026-12-26"
+  },
+  {
+   "date": "2026-12-26",
+   "title": "Dj Matty Rob // Funk / Disco / Hip Hop / R&B / Electronic / House",
+   "venue": "Valley Bar",
+   "city": "Phoenix",
+   "genre": "house",
+   "sub": "",
+   "scale": "club",
+   "price": "6:30 PM",
+   "type": "verified",
+   "cta": "Get Tickets",
+   "source": "Valley Bar",
+   "link": "https://www.valleybarphx.com/tm-event/dj-matty-rob-funk-disco-hip-hop-rb-electronic-house-2/"
   },
   {
    "date": "2026-12-26",
@@ -6242,6 +6355,20 @@
    "link": "https://seatgeek.com/yachtzilla-tickets/scottsdale-arizona-casino-arizona-2027-01-02-7-30-pm/concert/18758981"
   },
   {
+   "date": "2027-01-03",
+   "title": "Cosmic Coyote",
+   "venue": "MIM Music Theater",
+   "city": "Phoenix",
+   "genre": "rock",
+   "sub": "Rock",
+   "scale": "club",
+   "price": "See listing",
+   "type": "verified",
+   "cta": "Get Tickets",
+   "source": "MIM",
+   "link": "https://mim.org/events/cosmic-coyote/"
+  },
+  {
    "date": "2027-01-05",
    "title": "Fred Wesley and the New JBs",
    "venue": "MIM Music Theater",
@@ -6296,6 +6423,20 @@
    "cta": "Event Info",
    "source": "Songkick",
    "link": "https://www.songkick.com/concerts/43450482-93feetofsmoke-at-rebel-lounge"
+  },
+  {
+   "date": "2027-01-07",
+   "title": "Adam Hersh Trio ft. Gary Novak",
+   "venue": "The Century Room",
+   "city": "Tucson",
+   "genre": "jazz",
+   "sub": "",
+   "scale": "club",
+   "price": "See listing",
+   "type": "verified",
+   "cta": "Get Tickets",
+   "source": "The Century Room",
+   "link": "https://link.dice.fm/s5928f7ea646"
   },
   {
    "date": "2027-01-07",
@@ -6729,6 +6870,20 @@
    "cta": "Get Tickets",
    "source": "Valley Bar",
    "link": "https://www.valleybarphx.com/tm-event/tara-clerkin-trio/"
+  },
+  {
+   "date": "2027-01-14",
+   "title": "The Moth:Signs",
+   "venue": "Crescent Ballroom",
+   "city": "Phoenix",
+   "genre": "rock",
+   "sub": "",
+   "scale": "club",
+   "price": "8:00 PM",
+   "type": "verified",
+   "cta": "Get Tickets",
+   "source": "Crescent Ballroom",
+   "link": "https://www.crescentphx.com/tm-event/the-mothsigns/"
   },
   {
    "date": "2027-01-14",
@@ -7375,6 +7530,20 @@
    "link": "https://seatgeek.com/the-mountain-goats-tickets/flagstaff-arizona-the-orpheum-theater-flagstaff-2027-01-18-7-30-pm/concert/18761561"
   },
   {
+   "date": "2027-01-18",
+   "title": "Tommy Castro and the Painkillers",
+   "venue": "MIM Music Theater",
+   "city": "Phoenix",
+   "genre": "blues",
+   "sub": "Blues",
+   "scale": "club",
+   "price": "See listing",
+   "type": "verified",
+   "cta": "Get Tickets",
+   "source": "MIM",
+   "link": "https://mim.org/events/tommy-castro-and-the-painkillers/2027-01-18/"
+  },
+  {
    "date": "2027-01-19",
    "title": "Bachman-Turner Overdrive",
    "venue": "Fox Tucson Theatre",
@@ -7569,6 +7738,20 @@
    "cta": "Get Tickets",
    "source": "Valley Bar",
    "link": "https://www.valleybarphx.com/tm-event/alan-vuong/"
+  },
+  {
+   "date": "2027-01-22",
+   "title": "Amina Figarova and the Matsiko World Orphan Choir",
+   "venue": "MIM Music Theater",
+   "city": "Phoenix",
+   "genre": "jazz",
+   "sub": "Global",
+   "scale": "club",
+   "price": "See listing",
+   "type": "verified",
+   "cta": "Get Tickets",
+   "source": "MIM",
+   "link": "https://mim.org/events/amina-figarova-and-the-matsiko-world-orphan-choir/"
   },
   {
    "date": "2027-01-22",
@@ -7779,6 +7962,20 @@
    "cta": "Event Info",
    "source": "KJZZ Jazz PHX",
    "link": "https://scottsperformingarts.org"
+  },
+  {
+   "date": "2027-01-23",
+   "title": "Dee Snider",
+   "venue": "Desert Diamond Casino - Sahuarita",
+   "city": "Sahuarita",
+   "genre": "rock",
+   "sub": "Classic Rock / Pop / Rock / Hard Rock",
+   "scale": "arena",
+   "price": "See listing",
+   "type": "verified",
+   "cta": "Get Tickets",
+   "source": "SeatGeek",
+   "link": "https://seatgeek.com/dee-snider-tickets/sahuarita-arizona-desert-diamond-casino-sahuarita-2027-01-23-8-pm/concert/18870098"
   },
   {
    "date": "2027-01-23",
@@ -9892,6 +10089,20 @@
    "cta": "Event Info",
    "source": "Songkick",
    "link": "https://www.songkick.com/concerts/43438042-jack-kays-at-crescent-ballroom"
+  },
+  {
+   "date": "2027-02-23",
+   "title": "Lilly Hiatt with Trever Keith",
+   "venue": "The Rebel Lounge - Phoenix",
+   "city": "Phoenix",
+   "genre": "country",
+   "sub": "Country / Folk",
+   "scale": "club",
+   "price": "See listing",
+   "type": "verified",
+   "cta": "Get Tickets",
+   "source": "SeatGeek",
+   "link": "https://seatgeek.com/lilly-hiatt-tickets/phoenix-arizona-the-rebel-lounge-phoenix-2027-02-23-7-pm/concert/18868885"
   },
   {
    "date": "2027-02-24",
@@ -13422,6 +13633,20 @@
    "link": "https://seatgeek.com/sandra-bernhard-tickets/tucson-arizona-fox-tucson-theatre-2027-04-30-7-30-pm/concert/18843942"
   },
   {
+   "date": "2027-04-30",
+   "title": "Wilco",
+   "venue": "Mesa Amphitheatre",
+   "city": "Mesa",
+   "genre": "country",
+   "sub": "Country / Indie / Pop / Rock / Alternative",
+   "scale": "arena",
+   "price": "See listing",
+   "type": "verified",
+   "cta": "Get Tickets",
+   "source": "SeatGeek",
+   "link": "https://seatgeek.com/wilco-tickets/mesa-arizona-mesa-amphitheatre-2027-04-30-7-pm/concert/18869729"
+  },
+  {
    "date": "2027-05-01",
    "title": "Carly Rae Jepsen",
    "venue": "Arizona Financial Theatre",
@@ -13490,6 +13715,20 @@
    "cta": "Get Tickets",
    "source": "Valley Bar",
    "link": "https://www.valleybarphx.com/tm-event/veaux/"
+  },
+  {
+   "date": "2027-05-01",
+   "title": "Wilco",
+   "venue": "Linda Ronstadt Music Hall",
+   "city": "Tucson",
+   "genre": "country",
+   "sub": "Country / Indie / Pop / Rock / Alternative",
+   "scale": "club",
+   "price": "See listing",
+   "type": "verified",
+   "cta": "Get Tickets",
+   "source": "SeatGeek",
+   "link": "https://seatgeek.com/wilco-tickets/tucson-arizona-linda-ronstadt-music-hall-2027-05-01-8-pm/concert/18869731"
   },
   {
    "date": "2027-05-02",
