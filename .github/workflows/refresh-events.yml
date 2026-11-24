@@ -2,22 +2,29 @@ name: Refresh listings
 
 on:
   schedule:
-    # Every day at 5:17am Arizona time (12:17 UTC). Arizona has no daylight saving.
-    - cron: "17 12 * * *"
+    # Arizona has no daylight saving, so these never drift.
+    - cron: "17 12 * * *"   # 5:17 AM Arizona: new listings + tonight's and tomorrow's details
+    - cron: "43 23 * * *"   # 4:43 PM Arizona: re-check tonight (sell-outs, cancellations, set times)
   workflow_dispatch: # adds a "Run workflow" button on the Actions tab
+    inputs:
+      force:
+        description: "Re-check every show tonight and tomorrow, even ones checked in the last few hours"
+        type: boolean
+        default: false
 
 permissions:
   contents: write
   pages: write
 
 concurrency:
+  # One run at a time: a run that starts while another is going waits its turn.
   group: refresh-listings
   cancel-in-progress: false
 
 jobs:
   refresh:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
 
@@ -28,6 +35,13 @@ jobs:
           TICKETMASTER_KEY: ${{ secrets.TICKETMASTER_KEY }}
           SEATGEEK_CLIENT_ID: ${{ secrets.SEATGEEK_CLIENT_ID }}
           SUBMISSIONS_CSV_URL: ${{ secrets.SUBMISSIONS_CSV_URL }}
+
+      - name: Fill in tonight's and tomorrow's show details
+        # Reads each show's official event page (doors, show, price, ages, status,
+        # lineup) into events.json. If it fails, the refreshed listings still ship.
+        continue-on-error: true
+        timeout-minutes: 15
+        run: python3 scripts/enrich_events.py ${{ inputs.force && '--force' || '' }}
 
       - name: Commit if anything changed
         id: commit
@@ -40,8 +54,9 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add events.json
-          git commit -m "Refresh listings $(TZ=America/Phoenix date +%F)"
-          git push
+          git commit -m "Refresh listings $(TZ=America/Phoenix date '+%F %H:%M')"
+          # Another job (e.g. the weekly Scene Picks) may have pushed meanwhile.
+          git push || { git pull --rebase && git push; }
           echo "changed=true" >> "$GITHUB_OUTPUT"
 
       - name: Rebuild the site
