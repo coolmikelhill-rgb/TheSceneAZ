@@ -1,5 +1,5 @@
 {
- "_how_it_works": "Can't-Miss Shows (HOT) in the Next 30 Days view. Only shows listed here are featured. Order = priority: the site features the first 5 that are in the next 30 days, pass the visitor's filters and aren't canceled, postponed or sold out, and shows them soonest first; when one passes, the next moves up. Each entry names an event in events.json by its exact 'link' AND 'date' (the site's event ID), with one specific 'why' line, the 'signals' it meets, short 'evidence' links and the date the evidence was 'checked'. A show qualifies with ONE STRONG signal: headliner scale (an arena/amphitheater headliner or an act on a major festival's headline bill, on its own tour, not a tribute); a multi-night run in a big room; a date added or venue upgraded because of demand; a rare or returning Arizona stop (first time in years, reunion, comeback, farewell tour, an artist who rarely tours or usually skips Arizona); a hometown release show or homecoming; a one-off collaboration. Or TWO different SUPPORTING signals: a multi-night club run, an earlier sold-out run, new release or award news, an anniversary show, a co-headline or distinctive local lineup, low tickets reported by the seller. Suggestions arrive weekly in hot-candidates.json; check the evidence before approving.",
+ "_how_it_works": "Can't-Miss Shows (HOT) in the Next 30 Days view. Only shows listed here are featured. Order = priority: the site features the first 5 that are in the next 30 days, pass the visitor's filters and aren't canceled, postponed or sold out, and shows them soonest first; when one passes, the next moves up. Each entry names an event in events.json by its exact 'link' AND 'date' (the site's event ID), with one specific 'why' line, the 'signals' it meets, short 'evidence' links and the date the evidence was 'checked'. A show qualifies with ONE STRONG signal: breakout momentum (a rising artist with a recent, citable breakout in roughly the last 12-18 months: outgrowing rooms since their last Arizona show, dates selling out or upgraded this tour, a first Hot 100/Billboard 200 entry, a viral single with real coverage, a Best New Artist nod, a fast climb up festival bills); a multi-night run in a big room; a date added or venue upgraded because of demand; a rare or returning Arizona stop (first time in years, reunion, comeback, farewell tour, an artist who rarely tours or usually skips Arizona); a hometown release show or homecoming; a one-off collaboration. Or TWO different SUPPORTING signals: headliner scale (size alone isn't enough, so legacy acts need a second, specific reason), a multi-night club run, an earlier sold-out run, new release or award news, an anniversary show, a co-headline or distinctive local lineup, low tickets reported by the seller. Never use follower or stream counts on their own. Suggestions arrive weekly in hot-candidates.json; check the evidence before approving.",
  "approved": [
   {
    "link": "https://www.desertdiamondarena.com/event/rush/52/",
@@ -50,13 +50,40 @@
    "checked": "2026-11-24"
   },
   {
+   "link": "https://www.songkick.com/concerts/43464114-format-at-nile-theater",
+   "date": "2026-12-10",
+   "title": "The Format",
+   "why": "The Format's Nate Ruess and Sam Means bring two unplugged hometown nights to the Nile (Dec. 10 and 11) behind their new album Boycott Heaven, fresh off headlining Radio City Music Hall.",
+   "signals": [
+    "release_show",
+    "rare_stop",
+    "multi_night"
+   ],
+   "evidence": [
+    {
+     "label": "Phoenix New Times",
+     "url": "https://www.phoenixnewtimes.com/music/the-format-is-bringing-two-acoustic-shows-to-this-phoenix-venue-40707128/"
+    },
+    {
+     "label": "V13",
+     "url": "https://v13.net/2026/10/the-format-reveal-unplugged-december-tour/"
+    },
+    {
+     "label": "Boycott Heaven",
+     "url": "https://en.wikipedia.org/wiki/Boycott_Heaven"
+    }
+   ],
+   "checked": "2026-11-24"
+  },
+  {
    "link": "https://www.ticketmaster.com/desert-diamond-arena-tickets-glendale/venue/204917?startDate=2026-12-09&endDate=2026-12-10",
    "date": "2026-12-09",
    "title": "Gracie Abrams w/ Rachel Chinouriri (2 nights)",
    "why": "Gracie Abrams went from the Lollapalooza 2025 headline bill to her first headlining arena tour, and Glendale gets two nights of it (Dec. 9 and 10) with Rachel Chinouriri opening.",
    "signals": [
-    "headliner_scale",
-    "multi_night_big"
+    "multi_night_big",
+    "breakout",
+    "headliner_scale"
    ],
    "evidence": [
     {
@@ -75,26 +102,26 @@
    "checked": "2026-11-24"
   },
   {
-   "link": "https://www.desertdiamondarena.com/event/jonas-brothers/112/",
-   "date": "2026-11-27",
-   "title": "Jonas Brothers",
-   "why": "The Jonas Brothers turned their sold-out three-night Burning Up celebration at Madison Square Garden into a 45-city arena tour, and Glendale gets it the night after Thanksgiving.",
+   "link": "https://seatgeek.com/hudson-westbrook-tickets/tempe-arizona-mullett-arena-2026-12-09-7-pm/concert/18370892",
+   "date": "2026-12-09",
+   "title": "Hudson Westbrook (Rescheduled from 10/02/26)",
+   "why": "Hudson Westbrook's \"House Again\" gave him his first Hot 100 hit in 2025 and has since gone double platinum; this rescheduled Mullett Arena date catches him on the way up.",
    "signals": [
-    "headliner_scale",
-    "sold_out_history"
+    "breakout",
+    "headliner_scale"
    ],
    "evidence": [
     {
-     "label": "Pollstar",
-     "url": "https://news.pollstar.com/2026/08/17/jonas-brothers-announce-45-city-the-burning-up-tour-all-over-again/"
+     "label": "Billboard: first Hot 100 entries of 2025",
+     "url": "https://www.billboard.com/lists/first-hot-100-chart-hits-2025/"
     },
     {
-     "label": "azfamily",
-     "url": "https://azfamily.com/2026/08/17/jonas-brothers-making-tour-stop-glendale-this-november"
+     "label": "Double platinum",
+     "url": "https://parade.com/entertainment/hudson-westbrook-house-again-double-platinum-milestone-country-hit"
     },
     {
-     "label": "Arena event page",
-     "url": "https://www.desertdiamondarena.com/event/jonas-brothers/112/"
+     "label": "Live Nation dates",
+     "url": "https://www.livenation.com/artist/K8vZ917qePV/hudson-westbrook-events"
     }
    ],
    "checked": "2026-11-24"

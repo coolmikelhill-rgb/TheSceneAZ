@@ -18,19 +18,22 @@ How a show becomes a suggestion:
     signal counts once, however many sources repeat it.
   - Suggested when it has one STRONG signal or two different SUPPORTING ones.
     STRONG:
-      * headliner scale: an arena/amphitheater headliner (the kind of act that
-        tops a festival bill); flagged from the listing itself, so it works
-        even when the ticket page can't be read; the editor confirms it's the
-        headliner's own tour, not a tribute or a package show;
+      * breakout momentum: a rising artist with a recent, citable breakout --
+        outgrowing rooms (smaller Arizona room last time), dates selling out
+        or upgraded this tour, a first Hot 100/Billboard 200 entry, a viral
+        single with real coverage, a Best New Artist nod, or a fast climb up
+        festival bills -- within roughly the last 12-18 months;
       * a multi-night run in a big room (two or more arena nights);
       * a date added or a venue upgraded because of demand;
       * a rare or returning Arizona stop: first time in Arizona / in years,
         a reunion, a comeback after a hiatus, a farewell or final tour, or an
         artist who rarely tours;
       * a hometown release show or homecoming; a one-off collaboration.
-    SUPPORTING: a multi-night club run, an earlier sold-out run, new release
-    or award news, an anniversary show, a co-headline bill, low tickets
-    reported by the seller.
+    SUPPORTING: headliner scale (an arena/amphitheater headliner, flagged from
+    the listing itself so it works even when the ticket page can't be read;
+    size alone isn't enough, so legacy acts need a second reason), a
+    multi-night club run, an earlier sold-out run, new release or award news,
+    an anniversary show, a co-headline bill, low tickets reported by the seller.
   - Google Trends is not used: there is no supported, keyless data source.
     Missing trend data never affects eligibility.
 
@@ -74,6 +77,11 @@ STRONG = [
      r"(?:farewell|final|last) (?:tour|show|run)|first headlin(?:e|ing) tour|rarely tours"),
     ("release_show", "Release or homecoming show",
      r"(?:album|record|ep|vinyl|single) release (?:show|party|celebration)|hometown (?:show|release|celebration)|homecoming"),
+    ("breakout", "Breakout momentum",
+     r"\bbreakout\b|\bviral\b|best new artist|first (?:ever )?(?:billboard )?hot 100|first (?:ever )?billboard 200|"
+     r"sold out in (?:minutes|hours|seconds)|sold out (?:within|in under) |(?:quickly|instantly) sold out|"
+     r"upgraded to (?:a |the )?(?:larger|bigger)|(?:went|certified) (?:double |triple |multi-?)?platinum|"
+     r"fastest[- ]rising|rising star|on the rise|outgrown"),
     ("one_off", "One-off collaboration or event",
      r"one[- ]night only|one[- ]off|special collaboration|together for the first time|one time only"),
 ]
@@ -81,7 +89,7 @@ SUPPORT = [
     ("sold_out_history", "Earlier Arizona run sold out",
      r"(?:last|previous) (?:show|visit|time|tour)[^.|]{0,50}sold out|sold[- ]out (?:tour|run|shows|crowd)|after selling out"),
     ("release_news", "New release or award news",
-     r"new album|latest album|new record|debut album|new ep\b|(?:album|record|ep) release tour|breakout|"
+     r"new album|latest album|new record|debut album|new ep\b|(?:album|record|ep) release tour|"
      r"grammy[- ](?:nominated|winning|winner)|chart-topping"),
     ("anniversary", "Anniversary show or tour",
      r"\b\d{1,2}(?:st|nd|rd|th) anniversary|anniversary (?:tour|show|celebration)"),
@@ -91,9 +99,10 @@ SUPPORT = [
      r"low tickets|limited tickets|few tickets (?:left|remain)|almost sold out|nearly sold out|selling fast"),
 ]
 # Listing-level kinds that count as strong (no page needed).
-STRONG_KINDS = {k for k, _, _ in STRONG} | {"headliner_scale", "multi_night_big"}
+STRONG_KINDS = {k for k, _, _ in STRONG} | {"multi_night_big"}   # headliner scale alone is supporting
 TRIBUTE = re.compile(r"tribute|salute to|\bexperience\b|plays the music of|celebrating the music|\blegacy of\b", re.I)
 DRAFT = {
+    "breakout": "{artist} is mid-breakout ({quote}) -- catch them in this room while you still can.",
     "headliner_scale": "{artist} is headlining {venue} — arena-scale shows like this are the ones to lock in early.",
     "multi_night_big": "{artist} needed more than one night at {venue}; pick your date before both go.",
     "added_by_demand": "{venue} added another date for {artist} because the first one moved fast — this is the one to grab.",
