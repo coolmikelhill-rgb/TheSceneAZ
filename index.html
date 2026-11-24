@@ -1518,8 +1518,10 @@ function choosePicks(visible) {
 let upcomingForSeo = [];
 
 // Can't-Miss Shows: approved shows in today .. today+29 (Arizona time) that pass
-// every active filter, up to five, soonest first. Canceled, postponed and sold-out
-// shows drop out here but keep their normal calendar listing.
+// every active filter. hot.json order is the editor's priority: the first five
+// that qualify are featured, shown soonest first, and the next one moves up as a
+// show passes or sells out. Canceled, postponed and sold-out shows drop out here
+// but keep their normal calendar listing.
 const isHot = e => hotKeys.has(e.link + '|' + e.date);
 function chooseHot(visible) {
   const today = azToday(), last = addDays(today, 29);
@@ -1528,8 +1530,8 @@ function chooseHot(visible) {
     .map(h => ({ h, e: byKey.get(h.link + '|' + h.date) }))
     .filter(({ e }) => e && e.date >= today && e.date <= last)
     .filter(({ e }) => { const f = facts(e); return !f.bad && !f.soldOut; })
-    .sort((a, b) => a.e.date.localeCompare(b.e.date))
-    .slice(0, 5);
+    .slice(0, 5)
+    .sort((a, b) => a.e.date.localeCompare(b.e.date));
 }
 
 function hotCard(e, h) {

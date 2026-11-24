@@ -2,7 +2,7 @@
 """Suggest Can't-Miss (HOT) candidates for the next 30 days.
 
 Run weekly by .github/workflows/refresh-events.yml (Monday mornings, Arizona
-time). Standard library only; no paid APIs, no follower counts, no fame score.
+time). Standard library only; no paid APIs and no follower counts.
 
 It does NOT decide what is HOT. It writes suggestions to hot-candidates.json;
 an editor checks each one and copies the ones that hold up into hot.json,
@@ -16,11 +16,24 @@ How a show becomes a suggestion:
   - Signals are read from the show's own official event page (description,
     event data, artist bios) and from the listings themselves. Each kind of
     signal counts once, however many sources repeat it.
-  - Suggested when it has one STRONG signal (demand-added date, venue upgrade,
-    rare Arizona stop or reunion, release/homecoming show, one-off
-    collaboration) or two different SUPPORTING signals (multi-night run,
-    earlier sold-out run, new release or award news, anniversary tour,
-    co-headline bill, low tickets reported by the seller).
+  - Suggested when it has one STRONG signal or two different SUPPORTING ones.
+    STRONG:
+      * breakout momentum: a rising artist with a recent, citable breakout --
+        outgrowing rooms (smaller Arizona room last time), dates selling out
+        or upgraded this tour, a first Hot 100/Billboard 200 entry, a viral
+        single with real coverage, a Best New Artist nod, or a fast climb up
+        festival bills -- within roughly the last 12-18 months;
+      * a multi-night run in a big room (two or more arena nights);
+      * a date added or a venue upgraded because of demand;
+      * a rare or returning Arizona stop: first time in Arizona / in years,
+        a reunion, a comeback after a hiatus, a farewell or final tour, or an
+        artist who rarely tours;
+      * a hometown release show or homecoming; a one-off collaboration.
+    SUPPORTING: headliner scale (an arena/amphitheater headliner, flagged from
+    the listing itself so it works even when the ticket page can't be read;
+    size alone isn't enough, so legacy acts need a second reason), a
+    multi-night club run, an earlier sold-out run, new release or award news,
+    an anniversary show, a co-headline bill, low tickets reported by the seller.
   - Google Trends is not used: there is no supported, keyless data source.
     Missing trend data never affects eligibility.
 
@@ -54,12 +67,21 @@ STRONG = [
      r"due to (?:overwhelming|high|popular|incredible) demand"),
     ("venue_upgrade", "Moved to a bigger room",
      r"moved to (?:a |the )?(?:larger|bigger)|venue (?:upgrade|change)|upgraded to (?:a |the )?|new venue"),
-    ("rare_stop", "Rare Arizona stop, reunion or intimate room",
+    ("rare_stop", "Rare or returning Arizona stop",
      r"only (?:arizona|az|phoenix|tucson|southwest) (?:show|date|stop|appearance)|first (?:arizona|phoenix|tucson|az) "
      r"(?:show|appearance|date|headline)s?|first time (?:in|playing) (?:arizona|phoenix|tucson)|reunion tour|reunited for|"
-     r"rare (?:arizona|phoenix|tucson|az) (?:show|appearance|date)"),
+     r"rare (?:arizona|phoenix|tucson|az) (?:show|appearance|date)|"
+     r"first (?:\w+ )?(?:show|tour|time|concert|appearance)[^.|]{0,40}since (?:19|20)\d\d|"
+     r"first [^.|]{0,30}\bin (?:over |more than |nearly )?(?:\d+|two|three|four|five|six|seven|eight|nine|ten|a decade|a dozen) years|"
+     r"\bhiatus\b|\bcomeback\b|returns? to (?:arizona|phoenix|tucson|the road|touring|the stage)|"
+     r"(?:farewell|final|last) (?:tour|show|run)|first headlin(?:e|ing) tour|rarely tours"),
     ("release_show", "Release or homecoming show",
      r"(?:album|record|ep|vinyl|single) release (?:show|party|celebration)|hometown (?:show|release|celebration)|homecoming"),
+    ("breakout", "Breakout momentum",
+     r"\bbreakout\b|\bviral\b|best new artist|first (?:ever )?(?:billboard )?hot 100|first (?:ever )?billboard 200|"
+     r"sold out in (?:minutes|hours|seconds)|sold out (?:within|in under) |(?:quickly|instantly) sold out|"
+     r"upgraded to (?:a |the )?(?:larger|bigger)|(?:went|certified) (?:double |triple |multi-?)?platinum|"
+     r"fastest[- ]rising|rising star|on the rise|outgrown"),
     ("one_off", "One-off collaboration or event",
      r"one[- ]night only|one[- ]off|special collaboration|together for the first time|one time only"),
 ]
@@ -67,7 +89,7 @@ SUPPORT = [
     ("sold_out_history", "Earlier Arizona run sold out",
      r"(?:last|previous) (?:show|visit|time|tour)[^.|]{0,50}sold out|sold[- ]out (?:tour|run|shows|crowd)|after selling out"),
     ("release_news", "New release or award news",
-     r"new album|latest album|new record|debut album|new ep\b|(?:album|record|ep) release tour|breakout|"
+     r"new album|latest album|new record|debut album|new ep\b|(?:album|record|ep) release tour|"
      r"grammy[- ](?:nominated|winning|winner)|chart-topping"),
     ("anniversary", "Anniversary show or tour",
      r"\b\d{1,2}(?:st|nd|rd|th) anniversary|anniversary (?:tour|show|celebration)"),
@@ -76,7 +98,13 @@ SUPPORT = [
     ("low_tickets", "Seller reports low tickets",
      r"low tickets|limited tickets|few tickets (?:left|remain)|almost sold out|nearly sold out|selling fast"),
 ]
+# Listing-level kinds that count as strong (no page needed).
+STRONG_KINDS = {k for k, _, _ in STRONG} | {"multi_night_big"}   # headliner scale alone is supporting
+TRIBUTE = re.compile(r"tribute|salute to|\bexperience\b|plays the music of|celebrating the music|\blegacy of\b", re.I)
 DRAFT = {
+    "breakout": "{artist} is mid-breakout ({quote}) -- catch them in this room while you still can.",
+    "headliner_scale": "{artist} is headlining {venue} — arena-scale shows like this are the ones to lock in early.",
+    "multi_night_big": "{artist} needed more than one night at {venue}; pick your date before both go.",
     "added_by_demand": "{venue} added another date for {artist} because the first one moved fast — this is the one to grab.",
     "venue_upgrade": "{artist} got moved to a bigger room, which tells you how fast this one moved.",
     "rare_stop": "{artist} doesn't come through Arizona often — {quote}.",
@@ -165,25 +193,28 @@ def main(argv):
     fetcher = en.Fetcher(budget=MAX_FETCHES)
     per_host = {}
     by_host = {}
+    no_page = []   # still scanned for listing-level signals (arena headliner, multi-night run)
     for e in pool:
         cands = [u for u, official in en.candidates(e) if official]
         if cands:
             by_host.setdefault(en.host_of(cands[0]), []).append((e, cands[0]))
+        else:
+            no_page.append((e, None))
     order = []
     while any(by_host.values()):
         for h in list(by_host):
             if by_host[h]:
                 order.append(by_host[h].pop(0))
     found = []
-    for e, url in order:
+    for e, url in order + no_page:
         sig = {}
         title_text = e["title"]
         for kind, label, pat in STRONG + SUPPORT:
             m = re.search(pat, title_text, re.I)
             if m:
                 sig[kind] = {"label": label, "quote": title_text, "source": e["link"]}
-        h = en.host_of(url)
-        if per_host.get(h, 0) < PER_HOST:
+        h = en.host_of(url) if url else ""
+        if url and per_host.get(h, 0) < PER_HOST:
             got = fetcher.get(url)
             per_host[h] = per_host.get(h, 0) + 1
             if got:
@@ -199,9 +230,14 @@ def main(argv):
                         sig["low_tickets"] = {"label": "Seller reports low tickets", "quote": "Ticket page: low tickets",
                                               "source": final}
         if e.get("_run"):
-            sig.setdefault("multi_night", {"label": "Multi-night run", "source": e["link"],
-                                           "quote": "Dates at this venue: " + ", ".join(e["_run"])})
-        strong = [k for k in sig if k in {s[0] for s in STRONG}]
+            big = e.get("scale") == "arena"
+            sig.setdefault("multi_night_big" if big else "multi_night",
+                           {"label": "Multi-night run in a big room" if big else "Multi-night run", "source": e["link"],
+                            "quote": "Dates at this venue: " + ", ".join(e["_run"])})
+        if e.get("scale") == "arena" and not TRIBUTE.search(e["title"]):
+            sig.setdefault("headliner_scale", {"label": "Arena/amphitheater headliner", "source": e["link"],
+                                               "quote": f"Headlining {e['venue']} ({e['city']}) — editor to confirm it's the artist's own tour"})
+        strong = [k for k in sig if k in STRONG_KINDS]
         support = [k for k in sig if k not in strong]
         if strong or len(support) >= 2:
             k0 = (strong or support)[0]
