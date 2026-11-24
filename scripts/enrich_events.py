@@ -410,6 +410,8 @@ def read_status(text):
         return "Postponed"
     if re.search(r"\bsold[\s-]?out\b", text, re.I):
         return "Sold out"
+    if re.search(r"\b(?:low tickets|limited tickets|few tickets (?:left|remain)|almost sold out|nearly sold out)\b", text, re.I):
+        return "Low tickets"
     return ""
 
 
@@ -556,6 +558,9 @@ def read_page(e, url, page, final_url, official):
             price = {"min": min(vals), "text": money(min(vals))}
         if offers and all(isinstance(o, dict) and "SoldOut" in str(o.get("availability")) for o in offers):
             d["status"] = "Sold out"
+        elif offers and not d.get("status") and any(isinstance(o, dict) and "LimitedAvailability" in str(o.get("availability"))
+                                                    for o in offers):
+            d["status"] = "Low tickets"   # reported by the official seller's own event data
     if price:
         d["price"] = price
     free = read_free(text, bool(price))
@@ -756,7 +761,21 @@ def main(argv):
     today = now.date()
     window = {(today + dt.timedelta(days=i)).isoformat() for i in range(days)}
     todo = [e for e in events if e.get("date") in window]
-    log(f"enrich: {len(todo)} shows on {', '.join(sorted(window))} (Arizona time)")
+    # Can't-Miss (HOT) shows are re-checked daily across the whole 30-day window,
+    # so a sell-out or cancellation drops them from the featured list quickly.
+    hot_file = ROOT / "hot.json"
+    if hot_file.exists():
+        try:
+            hot = {(h.get("link"), h.get("date")) for h in json.loads(hot_file.read_text(encoding="utf-8")).get("approved", [])}
+        except (ValueError, AttributeError):
+            hot = set()
+        last = (today + dt.timedelta(days=29)).isoformat()
+        extra = [e for e in events if (e.get("link"), e.get("date")) in hot
+                 and today.isoformat() <= e["date"] <= last and e not in todo]
+        todo += extra
+        if extra:
+            log(f"enrich: plus {len(extra)} Can't-Miss shows later this month")
+    log(f"enrich: {len(todo)} shows on {', '.join(sorted(window))} (Arizona time) and featured dates")
 
     fetcher = Fetcher()
     stamp = now.isoformat(timespec="minutes")
