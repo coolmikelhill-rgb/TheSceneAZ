@@ -1,5 +1,5 @@
 {
- "_how_it_works": "Can't-Miss Shows (HOT) in the Next 30 Days view. Only shows listed here are featured, up to 5 at a time, soonest first. Each entry names an event in events.json by its exact 'link' AND 'date' (the site's event ID), gives one specific 'why' line, the 'evidence' links that back it up, the 'signals' it meets, and the date the evidence was 'checked'. A show qualifies with one strong signal (demand-added date, venue upgrade, rare Arizona stop or reunion, hometown release show, one-off collaboration) or two different supporting signals. Suggestions arrive weekly in hot-candidates.json; check the evidence before approving. Past, canceled and sold-out shows drop off the featured list automatically and stay in the calendar.",
+ "_how_it_works": "Can't-Miss Shows (HOT) in the Next 30 Days view. Only shows listed here are featured. Order = priority: the site features the first 5 that are in the next 30 days, pass the visitor's filters and aren't canceled, postponed or sold out, and shows them soonest first; when one passes, the next moves up. Each entry names an event in events.json by its exact 'link' AND 'date' (the site's event ID), with one specific 'why' line, the 'signals' it meets, short 'evidence' links and the date the evidence was 'checked'. A show qualifies with ONE STRONG signal: headliner scale (an arena/amphitheater headliner or an act on a major festival's headline bill, on its own tour, not a tribute); a multi-night run in a big room; a date added or venue upgraded because of demand; a rare or returning Arizona stop (first time in years, reunion, comeback, farewell tour, an artist who rarely tours or usually skips Arizona); a hometown release show or homecoming; a one-off collaboration. Or TWO different SUPPORTING signals: a multi-night club run, an earlier sold-out run, new release or award news, an anniversary show, a co-headline or distinctive local lineup, low tickets reported by the seller. Suggestions arrive weekly in hot-candidates.json; check the evidence before approving.",
  "approved": [
   {
    "link": "https://www.desertdiamondarena.com/event/rush/52/",
@@ -8,7 +8,9 @@
    "why": "Rush is back: Geddy Lee and Alex Lifeson's reunion tour, with Anika Nilles on drums, added this second Glendale night on top of Dec. 1.",
    "signals": [
     "added_by_demand",
-    "rare_stop"
+    "rare_stop",
+    "headliner_scale",
+    "multi_night_big"
    ],
    "evidence": [
     {
@@ -22,6 +24,77 @@
     {
      "label": "Arena event page",
      "url": "https://www.desertdiamondarena.com/event/rush/52/"
+    }
+   ],
+   "checked": "2026-11-24"
+  },
+  {
+   "link": "https://mortgagematchupcenter.com/events/the-neighbourhood/",
+   "date": "2026-11-30",
+   "title": "The Neighbourhood w/ Nessa Barrett",
+   "why": "The Neighbourhood's Wourld Tour sold out nearly every first-round date within minutes, and Phoenix came in the batch of extra arena dates added for demand.",
+   "signals": [
+    "added_by_demand",
+    "headliner_scale"
+   ],
+   "evidence": [
+    {
+     "label": "Venue announcement",
+     "url": "https://mortgagematchupcenter.com/news/the-neighbourhood-announce-phoenix-date-on-world-tour/"
+    },
+    {
+     "label": "Venue event page",
+     "url": "https://mortgagematchupcenter.com/events/the-neighbourhood/"
+    }
+   ],
+   "checked": "2026-11-24"
+  },
+  {
+   "link": "https://www.ticketmaster.com/desert-diamond-arena-tickets-glendale/venue/204917?startDate=2026-12-09&endDate=2026-12-10",
+   "date": "2026-12-09",
+   "title": "Gracie Abrams w/ Rachel Chinouriri (2 nights)",
+   "why": "Gracie Abrams went from the Lollapalooza 2025 headline bill to her first headlining arena tour, and Glendale gets two nights of it (Dec. 9 and 10) with Rachel Chinouriri opening.",
+   "signals": [
+    "headliner_scale",
+    "multi_night_big"
+   ],
+   "evidence": [
+    {
+     "label": "Lollapalooza 2025 headliners",
+     "url": "https://www.udiscovermusic.com/news/olivia-rodrigo-sabrina-carpenter-lollapalooza/"
+    },
+    {
+     "label": "First headlining arena tour",
+     "url": "https://clture.org/gracie-abrams-tour/"
+    },
+    {
+     "label": "Phoenix New Times",
+     "url": "https://www.phoenixnewtimes.com/music/gracie-abrams-glendale-concerts-december-2026-40670102/"
+    }
+   ],
+   "checked": "2026-11-24"
+  },
+  {
+   "link": "https://www.desertdiamondarena.com/event/jonas-brothers/112/",
+   "date": "2026-11-27",
+   "title": "Jonas Brothers",
+   "why": "The Jonas Brothers turned their sold-out three-night Burning Up celebration at Madison Square Garden into a 45-city arena tour, and Glendale gets it the night after Thanksgiving.",
+   "signals": [
+    "headliner_scale",
+    "sold_out_history"
+   ],
+   "evidence": [
+    {
+     "label": "Pollstar",
+     "url": "https://news.pollstar.com/2026/08/17/jonas-brothers-announce-45-city-the-burning-up-tour-all-over-again/"
+    },
+    {
+     "label": "azfamily",
+     "url": "https://azfamily.com/2026/08/17/jonas-brothers-making-tour-stop-glendale-this-november"
+    },
+    {
+     "label": "Arena event page",
+     "url": "https://www.desertdiamondarena.com/event/jonas-brothers/112/"
     }
    ],
    "checked": "2026-11-24"
@@ -47,6 +120,28 @@
     {
      "label": "Gospel Claws bio",
      "url": "https://en.wikipedia.org/wiki/Gospel_Claws"
+    }
+   ],
+   "checked": "2026-11-24"
+  },
+  {
+   "link": "https://www.desertdiamondarena.com/event/alt-az-93-3-presents%3a-ugly-sweater-holiday-party-with-sublime-slightly-stoopid-and-codefendants/108/",
+   "date": "2026-12-11",
+   "title": "Ugly Sweater Holiday Party: Sublime, Slightly Stoopid, Codefendants",
+   "why": "Sublime and Slightly Stoopid share an arena bill for ALT AZ 93.3's holiday party, which the station is tying to the 30th anniversary of Sublime's self-titled album.",
+   "signals": [
+    "headliner_scale",
+    "co_headline",
+    "anniversary"
+   ],
+   "evidence": [
+    {
+     "label": "Station announcement",
+     "url": "https://thepier.org/alt-93-3-in-arizona-announces-ugly-sweater-holiday-party-sublime-slightly-stoopid-codefendants-on-dec-11th/"
+    },
+    {
+     "label": "Arena event page",
+     "url": "https://www.desertdiamondarena.com/event/alt-az-93-3-presents%3a-ugly-sweater-holiday-party-with-sublime-slightly-stoopid-and-codefendants/108/"
     }
    ],
    "checked": "2026-11-24"
