@@ -1,4 +1,23 @@
 {
- "_how_it_works": "You don't need to edit this file. Weekend Picks are chosen automatically from events.json every time the page loads (see PICK_RULES in index.html). Optional: to force a specific show to the top, add {\"link\": ..., \"date\": ..., \"label\": ..., \"goIf\": ...} to the list below, copying link and date from events.json.",
- "picks": []
+ "_how_it_works": "Scene Picks: up to 3 shows from the next 7 days, shown at the top of the homepage. Picks listed here come first, in this order; any empty slots are filled automatically (PICK_RULES in index.html), so the section never goes stale even if you never touch this file. To feature a show, copy its exact 'link' and 'date' from events.json, add a short 'label', and a one-sentence 'goIf' that tells a friend what kind of night it is (the card already shows price, ages and venue). Past picks drop out on their own.",
+ "picks": [
+  {
+   "link": "https://www.valleybarphx.com/tm-event/bayonne-the-filters-tour/",
+   "date": "2026-11-24",
+   "label": "Weeknight standout",
+   "goIf": "Go if you want a Tuesday that feels bigger than a Tuesday — Bayonne builds lush, looping indie-electronic songs live, layer by layer."
+  },
+  {
+   "link": "https://wl.eventim.us/event/seth-troxler-extended-set-slacker-phoenix-holiday-special/707866?afflky=WalterWhereHouse&nts_trk=a9e71352-915a-4f20-8ead-c18765e4a3cc",
+   "date": "2026-11-25",
+   "label": "Thanksgiving Eve",
+   "goIf": "Go if you're off Thursday and want to dance the night before Thanksgiving away — a long, extended set from one of house music's best-known DJs."
+  },
+  {
+   "link": "https://www.crescentphx.com/tm-event/emma-ruth-rundle-these-killing-times/",
+   "date": "2026-11-29",
+   "label": "Sunday wind-down",
+   "goIf": "Go if you want to end the weekend on something haunting and slow-burning — dark, heavy-hearted songs, with Cinder Well opening."
+  }
+ ]
 }

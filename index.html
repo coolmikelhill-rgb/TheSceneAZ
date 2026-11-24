@@ -371,9 +371,10 @@
   .main-row { display: flex; flex-wrap: wrap; gap: 8px; flex-basis: 100%; }
   .main-row .search-box { flex: 1 1 260px; font-size: 14px; padding: 9px 12px; }
   .main-row select { flex: 0 1 auto; font-size: 14px; font-weight: 600; padding: 9px 12px; border-color: #3A4262; }
-  .wk-row { display: flex; flex-wrap: wrap; gap: 6px; flex-basis: 100%; align-items: center; }
-  .wk-row[hidden] { display: none; }
-  .day-chips { display: contents; }
+  .day-row { display: flex; gap: 6px; flex-basis: 100%; overflow-x: auto; scrollbar-width: none; }
+  .day-row::-webkit-scrollbar { display: none; }
+  .day-row[hidden] { display: none; }
+  .day-row .chip { flex: none; }
   .chip {
     background: var(--bg-raised); border: 1px solid #3A4262; color: var(--text);
     font: 600 13px 'Inter', sans-serif; padding: 6px 12px; border-radius: 20px; cursor: pointer;
@@ -381,7 +382,8 @@
   .chip .d { color: var(--text-muted); font-weight: 500; margin-left: 3px; }
   .chip[aria-pressed="true"] { background: var(--teal); border-color: var(--teal); color: var(--bg); }
   .chip[aria-pressed="true"] .d { color: var(--bg); }
-  .more-row { display: flex; align-items: center; gap: 12px; flex-basis: 100%; }
+  .more-row { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; flex-basis: 100%; }
+  .more-row .more-btn { margin-left: 4px; }
   .more-btn {
     display: inline-flex; align-items: center; gap: 6px; background: transparent;
     border: 1px solid var(--line); color: var(--text-muted); font: 600 12px 'Inter', sans-serif;
@@ -426,6 +428,7 @@
   .src { margin: 8px 0 0; font-size: 11.5px; color: var(--text-muted); }
   .src .ok { color: var(--teal); }
   .src .ug { color: var(--gold); }
+  .src a { color: var(--teal); }
   .btn.primary { background: linear-gradient(90deg, var(--blue), var(--violet)); color: #0A0E1A; border: 0; }
   .sub-actions { display: flex; gap: 4px; justify-content: center; }
 
@@ -459,11 +462,11 @@
 
 <div class="filters" id="filters">
   <div class="quick" role="group" aria-label="When">
-    <button type="button" data-when="all" aria-pressed="true">Any date</button>
     <button type="button" data-when="tonight" aria-pressed="false">Tonight</button>
     <button type="button" data-when="weekend" aria-pressed="false">This weekend</button>
-    <button type="button" data-when="week" aria-pressed="false">Next 7 days</button>
+    <button type="button" data-when="week" aria-pressed="true">Next 7 days</button>
     <button type="button" data-when="month" aria-pressed="false">Next 30 days</button>
+    <button type="button" data-when="all" aria-pressed="false">Any date</button>
   </div>
   <div class="main-row">
     <label for="searchBox" class="sr-only">Search artist, venue or city</label>
@@ -501,12 +504,10 @@
       <option value="world">World / Latin</option>
     </select>
   </div>
-  <div class="wk-row" id="wkRow" role="group" aria-label="Weekend quick filters" hidden>
-    <span id="dayChips" class="day-chips"></span>
+  <div class="day-row" id="dayChips" role="group" aria-label="Pick a day" hidden></div>
+  <div class="more-row">
     <button type="button" class="chip" id="freeBtn" aria-pressed="false">Free</button>
     <button type="button" class="chip" id="agesBtn" aria-pressed="false">All ages</button>
-  </div>
-  <div class="more-row">
     <button type="button" class="more-btn" id="moreFilters" aria-expanded="false" aria-controls="filterPanel">More filters <span class="badge" id="activeCount" hidden></span></button>
     <span class="count" id="count" role="status" aria-live="polite"></span>
   </div>
@@ -531,7 +532,7 @@
 </div>
 
 <section class="picks" id="picks" aria-labelledby="picksHead" hidden>
-  <h2 class="picks-head" id="picksHead">Weekend Picks</h2>
+  <h2 class="picks-head" id="picksHead">Scene Picks</h2>
   <div id="pickList"></div>
 </section>
 
@@ -1103,7 +1104,7 @@ async function loadEvents() {
   } catch (err) {
     // events.json not reachable — expected when not deployed with the script yet.
   }
-  // Weekend Picks: hand-edited each week in picks.json (see the note at the top of that file).
+  // Curated Scene Picks: picks.json (optional; empty slots are filled automatically).
   try {
     const resp = await fetch('picks.json', { cache: 'no-store' });
     if (resp.ok) {
@@ -1137,51 +1138,51 @@ const safeUrl = u => /^https?:\/\//i.test(String(u || '')) ? esc(u) : '#';
 // [4] Accent- and case-insensitive matching ("jose" finds "José").
 const norm = s => String(s || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
 
-const dayStart = d => { const x = new Date(d); x.setHours(0,0,0,0); return x; };
-const isoDay = d => `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+// Dates are worked out in Arizona time (no daylight saving), whatever the viewer's clock says.
+const azToday = () => new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Phoenix', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date());
+const addDays = (iso, n) => { const d = new Date(iso + 'T12:00:00Z'); d.setUTCDate(d.getUTCDate() + n); return d.toISOString().slice(0, 10); };
+const dowOf = iso => new Date(iso + 'T12:00:00Z').getUTCDay();
+const dayDiff = (a, b) => Math.round((new Date(b + 'T12:00:00Z') - new Date(a + 'T12:00:00Z')) / 86400000);
+const fmtIso = (iso, opts) => new Date(iso + 'T12:00:00Z').toLocaleDateString('en-US', { timeZone: 'UTC', ...opts });
 
 function fmtDate(iso) {
-  const d = new Date(iso + "T12:00:00");
-  const today = dayStart(new Date());
-  const diff = Math.round((dayStart(d) - today) / 86400000);
+  const diff = dayDiff(azToday(), iso);
   return {
-    dow: diff === 0 ? 'TODAY' : diff === 1 ? 'TMRW' : d.toLocaleDateString('en-US', { weekday: 'short' }).toUpperCase(),
+    dow: diff === 0 ? 'TODAY' : diff === 1 ? 'TMRW' : fmtIso(iso, { weekday: 'short' }).toUpperCase(),
     soon: diff <= 1,
-    num: d.getDate(),
-    mon: d.toLocaleDateString('en-US', { month: 'short' }).toUpperCase(),
-    monthYear: d.toLocaleDateString('en-US', { month: 'long', year: 'numeric' })
+    num: +iso.slice(8, 10),
+    mon: fmtIso(iso, { month: 'short' }).toUpperCase(),
+    monthYear: fmtIso(iso, { month: 'long', year: 'numeric' })
   };
 }
+const longDay = (iso, opts = { weekday: 'long', month: 'short', day: 'numeric' }) => fmtIso(iso, opts);
 
 // [3] Date window for the quick chips. Returns [fromISO, toISO] inclusive.
+const WHENS = ['tonight', 'weekend', 'week', 'month', 'all'];
 function whenRange(when) {
-  const t = dayStart(new Date());
-  const add = n => { const x = new Date(t); x.setDate(x.getDate() + n); return x; };
-  if (when === 'tonight') return [isoDay(t), isoDay(t)];
-  if (when === 'week') return [isoDay(t), isoDay(add(6))];
-  if (when === 'month') return [isoDay(t), isoDay(add(29))];
+  const t = azToday();
+  if (when === 'tonight') return [t, t];
+  if (when === 'week') return [t, addDays(t, 6)];      // today + the next six days
+  if (when === 'month') return [t, addDays(t, 29)];
   if (when === 'weekend') {
-    const dow = t.getDay();                       // 0 Sun … 6 Sat
-    if (dow === 0) return [isoDay(t), isoDay(t)]; // it's Sunday: just today
-    const fri = add(Math.max(0, 5 - dow));        // Mon–Thu: upcoming Fri; Fri/Sat: today
-    const sun = add(7 - dow);
-    return [isoDay(fri), isoDay(sun)];
+    const dow = dowOf(t);                             // 0 Sun … 6 Sat
+    if (dow === 0) return [t, t];                     // it's Sunday: just today
+    return [addDays(t, Math.max(0, 5 - dow)), addDays(t, 7 - dow)];
   }
   return null;
 }
 
 const $ = id => document.getElementById(id);
-let when = 'all';
+let when = 'week';     // the bare homepage opens on "Next 7 days"
 
 // [5] Filters <-> URL, so any view can be bookmarked or shared.
 const PARAMS = { q: 'searchBox', genre: 'genreFilter', city: 'cityFilter', size: 'scaleFilter', sort: 'sortBy' };
 const DEFAULTS = { genreFilter: 'all', cityFilter: 'all', scaleFilter: 'all', sortBy: 'date-asc', searchBox: '' };
 
-// Weekend-only quick filters. They apply (and go in the URL) only in the "This weekend" view.
-let day = '';          // '' = whole weekend, else 'fri' | 'sat' | 'sun'
-let freeOnly = false;  // only listings whose price is explicitly "Free"
+let day = '';            // '' = every day in the range, else 'mon' … 'sun' (week and weekend views)
+let freeOnly = false;    // only listings whose price is explicitly "Free"
 let allAgesOnly = false; // only listings explicitly marked "All ages"
-let pickDefs = [];     // from picks.json
+let pickDefs = [];       // curated Scene Picks from picks.json
 const DOW_KEYS = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
 
 function readUrl() {
@@ -1194,12 +1195,14 @@ function readUrl() {
     el.value = v;
   }
   if (p.get('ug') === '0') $('communityToggle').checked = false;
-  if (whenRange(p.get('when'))) when = p.get('when');
-  if (when === 'weekend') {
-    day = ['fri', 'sat', 'sun'].includes(p.get('day')) ? p.get('day') : '';
-    freeOnly = p.get('free') === '1';
-    allAgesOnly = p.get('allages') === '1';
-  }
+  // An explicit ?when= always wins. With no ?when=, the bare homepage means "Next 7 days";
+  // older shared links that carry filters but no ?when= meant "Any date", so keep that.
+  const w = p.get('when');
+  if (WHENS.includes(w)) when = w;
+  else when = [...p.keys()].length ? 'all' : 'week';
+  day = DOW_KEYS.includes(p.get('day')) ? p.get('day') : '';
+  freeOnly = p.get('free') === '1';
+  allAgesOnly = p.get('allages') === '1';
 }
 
 function writeUrl() {
@@ -1209,22 +1212,22 @@ function writeUrl() {
     if (v && v !== DEFAULTS[id]) p.set(key, v);
   }
   if (!$('communityToggle').checked) p.set('ug', '0');
-  if (when !== 'all') p.set('when', when);
-  if (when === 'weekend') {
-    if (day) p.set('day', day);
-    if (freeOnly) p.set('free', '1');
-    if (allAgesOnly) p.set('allages', '1');
-  }
+  if (day) p.set('day', day);
+  if (freeOnly) p.set('free', '1');
+  if (allAgesOnly) p.set('allages', '1');
+  // Always name the date preset, so "Any date" survives a reload; the plain homepage stays bare.
+  if (when !== 'week' || [...p.keys()].length) p.set('when', when);
   const qs = p.toString();
   history.replaceState(null, '', qs ? `?${qs}` : location.pathname);
 }
 
 // The data's "price" field carries whatever the source gave, joined by " · ":
-// a start time, a price, an age limit and/or a promoter ("9pm-2am · $10 · 21+").
-// Split it so cards can show each fact on its own. Labels like Free / All ages
-// are only set when the listing says so explicitly.
+// a time, a price, an age limit and/or a promoter ("9pm-2am · $10 · 21+").
+// Split it so cards can show each fact on its own. An event's optional
+// "confirmed" block (details checked against the official listing) wins.
+// Labels like Free / All ages are only set when the listing says so explicitly.
 function facts(e) {
-  const f = { time: '', price: '', age: '', notes: [], extra: [], free: false, allAges: false };
+  const f = { time: '', doors: '', price: '', age: '', notes: [], extra: [], free: false, allAges: false, checked: '', checkedUrl: '' };
   for (const raw of String(e.price || '').split('·')) {
     const s = raw.trim();
     if (!s) continue;
@@ -1236,17 +1239,24 @@ function facts(e) {
     if (/^(from )?\$|^free\b/i.test(s)) { f.price = s.charAt(0).toUpperCase() + s.slice(1); continue; }
     f.extra.push(s);
   }
+  const c = e.confirmed;
+  if (c && typeof c === 'object') {
+    if (c.show) f.time = c.ends ? `${c.show}–${c.ends}` : c.show;
+    if (c.doors) f.doors = c.doors;
+    if (c.price) { f.price = c.price; f.free = /^free\b/i.test(c.price) && !/\$/.test(c.price); }
+    if (c.ages) { f.age = c.ages; f.allAges = /^all ages$/i.test(c.ages); }
+    f.checked = /^\d{4}-\d{2}-\d{2}$/.test(c.checked || '') ? c.checked : '';
+    f.checkedUrl = c.source || '';
+    f.confirmed = true;
+  }
   return f;
-}
-
-function longDay(iso, opts = { weekday: 'long', month: 'short', day: 'numeric' }) {
-  return new Date(iso + 'T12:00:00').toLocaleDateString('en-US', opts);
 }
 
 // Plain-text plan for texting a friend.
 function planText(e) {
   const f = facts(e);
-  const bits = [longDay(e.date, { weekday: 'short', month: 'short', day: 'numeric' }), f.time, `${e.venue}, ${e.city}`, f.price, f.age].filter(Boolean);
+  const time = f.doors && f.doors !== f.time ? `doors ${f.doors}, show ${f.time}` : f.time;
+  const bits = [longDay(e.date, { weekday: 'short', month: 'short', day: 'numeric' }), time, `${e.venue}, ${e.city}`, f.price, f.age].filter(Boolean);
   return `${e.title} — ${bits.join(' · ')}`;
 }
 
@@ -1260,23 +1270,23 @@ async function sharePlan(e, btn) {
   } catch (err) { /* share sheet dismissed or clipboard blocked */ }
 }
 
-// [6] Add-to-calendar: builds a .ics file (all-day, since listings have no start time).
+// [6] Add-to-calendar: builds a .ics file (all-day, since most listings have no confirmed start time).
 function downloadIcs(e) {
   const d = e.date.replace(/-/g, '');
-  const next = new Date(e.date + 'T12:00:00'); next.setDate(next.getDate() + 1);
   const ics = s => String(s || '').replace(/([,;\\])/g, '\\$1').replace(/\n/g, '\\n');
+  const slug = norm(e.title).replace(/[^a-z0-9]+/g, '-').slice(0, 40);
   const body = [
     'BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//TheSceneAZ//EN', 'BEGIN:VEVENT',
-    `UID:${d}-${norm(e.title).replace(/[^a-z0-9]+/g, '-').slice(0, 40)}@thesceneaz`,
+    `UID:${d}-${slug}@thesceneaz`,
     `DTSTAMP:${new Date().toISOString().replace(/[-:]/g, '').slice(0, 15)}Z`,
-    `DTSTART;VALUE=DATE:${d}`, `DTEND;VALUE=DATE:${isoDay(next).replace(/-/g, '')}`,
+    `DTSTART;VALUE=DATE:${d}`, `DTEND;VALUE=DATE:${addDays(e.date, 1).replace(/-/g, '')}`,
     `SUMMARY:${ics(e.title)}`, `LOCATION:${ics(`${e.venue}, ${e.city}, AZ`)}`,
-    `DESCRIPTION:${ics(`${e.price} · Check times and tickets: ${e.link}`)}`,
+    `DESCRIPTION:${ics(`${planText(e)} · Check times and tickets: ${e.link}`)}`,
     `URL:${e.link}`, 'END:VEVENT', 'END:VCALENDAR'
   ].join('\r\n');
   const a = document.createElement('a');
   a.href = URL.createObjectURL(new Blob([body], { type: 'text/calendar' }));
-  a.download = `${e.date}-${norm(e.title).replace(/[^a-z0-9]+/g, '-').slice(0, 40)}.ics`;
+  a.download = `${e.date}-${slug}.ics`;
   document.body.appendChild(a); a.click(); a.remove();
   setTimeout(() => URL.revokeObjectURL(a.href), 1000);
 }
@@ -1293,23 +1303,19 @@ function updateJsonLd(list) {
   }))).replace(/</g, '\\u003c');
 }
 
-// ===== Automatic Weekend Picks =====
-// Picks are chosen fresh from the listings every time the page loads, so nobody
-// has to edit them. Each rule below is a kind of night out; the first event that
-// fits a rule becomes a pick. Every "Go if" sentence is built only from facts in
-// the listing (room size, price, ages, start time, venue, city, genre).
-// Optional: entries in picks.json (link + date + label + goIf) are shown first.
-const genreName = e => {
-  const g = String(e.sub || genreLabels[e.genre] || 'live music').split('/')[0].trim();
-  return g.toLowerCase().replace(/\bedm\b/, 'EDM').replace(/\br&b\b/, 'R&B').replace(/\bdj\b/, 'DJ');
+// ===== Scene Picks =====
+// 1. Curated picks from picks.json come first (each names an event by link + date).
+// 2. Any empty slots are filled automatically by the rules below, so the section
+//    never goes stale. Picks only come from the next seven days, follow every
+//    active filter, and drop out once their date has passed.
+// "Go if" lines say what kind of night it is; the card already shows price, ages and venue.
+const VIBES = {
+  house: 'a dance-floor night of house music', techno: 'a dark, driving techno night', bass: 'a heavy, bass-first night',
+  dnb: 'a fast, high-energy drum & bass night', rock: 'a loud night of live rock', metal: 'a heavy, loud metal show',
+  hiphop: 'a hip-hop night', country: 'a night of live country', pop: 'a pop show', jazz: 'a night of live jazz',
+  blues: 'a night of blues and soul', folk: 'an easygoing night of folk and Americana', world: 'a night of Latin and world music'
 };
-function withFacts(e, f, skip = {}) {
-  const bits = [];
-  if (f.time && !skip.time) bits.push(f.time.includes('–') ? `runs ${f.time}` : `starts ${f.time}`);
-  if (f.price && !f.free && !skip.price) bits.push(f.price);
-  if (f.age && !skip.age) bits.push(f.age === 'All ages' ? 'all ages' : f.age);
-  return bits.length ? ` (${bits.join(', ')})` : '';
-}
+const vibe = e => VIBES[e.genre] || 'a night of live music';
 function startHour(t) {
   const m = String(t).match(/^(\d{1,2})(?::\d{2})?\s*([ap])m/i);
   if (!m) return null;
@@ -1319,53 +1325,53 @@ function lowPrice(f) {
   const m = !f.free && f.price.match(/\$(\d+(?:\.\d+)?)/);
   return m ? +m[1] : null;
 }
-const an = w => /^[aeiou]/i.test(w) ? 'an' : 'a';
 const PICK_RULES = [
   { label: 'Warehouse night', fits: (e, f) => e.scale === 'warehouse',
-    goIf: (e, f) => `Go if you want an underground ${genreName(e)} night in a warehouse or DIY room${f.free ? ' — it’s listed as free' : ''}${withFacts(e, f)}.` },
+    goIf: e => `Go if you’d rather be in a warehouse than a nightclub — ${vibe(e)} for people who came to dance.` },
   { label: 'Free night out', fits: (e, f) => f.free,
-    goIf: (e, f) => `Go if you want a night out that’s listed as free — ${genreName(e)} in ${e.city}${withFacts(e, f)}.` },
+    goIf: e => `Go if you want a low-stakes night out — wander in for ${vibe(e)} and see where it goes.` },
+  { label: 'Weeknight pick', fits: (e, f) => dowOf(e.date) >= 1 && dowOf(e.date) <= 4 && e.type === 'verified' && !!(f.time || f.price),
+    goIf: e => `Go if you need something to break up the week — ${vibe(e)} on a ${longDay(e.date, { weekday: 'long' })}.` },
   { label: 'Big room show', fits: (e, f) => e.scale === 'arena',
-    goIf: (e, f) => `Go if you want a big, arena-size show in ${e.city}${withFacts(e, f)}.` },
+    goIf: e => `Go if you want to be part of a huge crowd — ${vibe(e)} at arena scale.` },
   { label: 'Cheap night', fits: (e, f) => { const p = lowPrice(f); return p !== null && p <= 15; },
-    goIf: (e, f) => `Go if you want ${an(genreName(e))} ${genreName(e)} night that won’t cost much — tickets are listed at ${f.price}${withFacts(e, f, { price: 1 })}.` },
-  { label: 'All ages', fits: (e, f) => f.allAges,
-    goIf: (e, f) => `Go if you’re bringing someone under 21 — it’s listed as all ages${withFacts(e, f, { age: 1 })}.` },
+    goIf: e => `Go if you want a proper night out without blowing your budget — ${vibe(e)}.` },
   { label: 'Late night', fits: (e, f) => { const h = startHour(f.time); return h !== null && (h >= 21 || h <= 4); },
-    goIf: (e, f) => `Go if you want to stay out late — ${genreName(e)}, listed ${f.time}${withFacts(e, f, { time: 1 })}.` },
+    goIf: e => `Go if you’re not ready to call it early — ${vibe(e)} that runs late.` },
   { label: 'Jazz night', fits: (e, f) => e.genre === 'jazz',
-    goIf: (e, f) => `Go if you want live jazz in ${e.city}${withFacts(e, f)}.` },
-  { label: 'Sunday show', fits: (e, f) => new Date(e.date + 'T12:00:00').getDay() === 0,
-    goIf: (e, f) => `Go if you want one more show before the week starts — ${genreName(e)} in ${e.city}${withFacts(e, f)}.` },
+    goIf: e => `Go if you want to slow down with a drink and actually listen to the band.` },
+  { label: 'All ages', fits: (e, f) => f.allAges,
+    goIf: e => `Go if you’re bringing younger friends along — ${vibe(e)} the whole crew can get into.` },
+  { label: 'Sunday show', fits: (e, f) => dowOf(e.date) === 0,
+    goIf: e => `Go if you want one more good night before Monday — ${vibe(e)}.` },
   { label: 'Band night', fits: (e, f) => ['rock', 'metal', 'folk', 'blues', 'country'].includes(e.genre) && e.scale === 'club' && !!f.time,
-    goIf: (e, f) => `Go if you want to see a band in a club-size room — ${genreName(e)}, listed ${f.time}${withFacts(e, f, { time: 1 })}.` },
+    goIf: e => `Go if you want to see a band up close in a club-size room — ${vibe(e)}.` },
 ];
 
 function choosePicks(visible) {
+  const today = azToday(), last = addDays(today, 6);
+  const pool = visible.filter(e => e.date >= today && e.date <= last);
   const out = [], used = new Set(), days = new Set();
   const key = e => e.link + '|' + e.date;
   const add = (e, p) => { out.push({ e, p }); used.add(key(e)); days.add(e.date); };
-  // 1. Optional hand-made picks from picks.json.
   for (const p of pickDefs) {
-    const e = visible.find(e => e.link === p.link && e.date === p.date);
-    if (e && !used.has(key(e)) && out.length < 3) add(e, p);
+    if (out.length >= 3) break;
+    const e = pool.find(e => e.link === p.link && e.date === p.date);
+    if (e && !used.has(key(e))) add(e, p);
   }
-  // 2. Automatic picks. Prefer verified listings with the most known details,
-  //    and spread picks across different days.
-  const known = f => !!f.time + !!f.price + !!f.age;
+  // Automatic fill: prefer verified listings with the most known details, spread across days.
+  const known = f => !!f.time + !!f.price + !!f.age + !!f.confirmed;
   for (const rule of PICK_RULES) {
     if (out.length >= 3) break;
-    const cands = visible
-      .map(e => ({ e, f: facts(e) }))
-      .filter(({ e, f }) => !used.has(key(e)) && rule.fits(e, f));
+    const cands = pool.map(e => ({ e, f: facts(e) })).filter(({ e, f }) => !used.has(key(e)) && rule.fits(e, f));
     if (!cands.length) continue;
     cands.sort((a, b) =>
       (days.has(a.e.date) - days.has(b.e.date)) ||
       ((b.e.type === 'verified') - (a.e.type === 'verified')) ||
       (known(b.f) - known(a.f)) ||
       a.e.date.localeCompare(b.e.date) || a.e.title.localeCompare(b.e.title));
-    const { e, f } = cands[0];
-    add(e, { label: rule.label, goIf: rule.goIf(e, f) });
+    const { e } = cands[0];
+    add(e, { label: rule.label, goIf: rule.goIf(e) });
   }
   return out;
 }
@@ -1384,7 +1390,14 @@ function eventCard(e, pick) {
     ? `<span class="${f.free ? 'free' : ''}">${esc(f.price)}</span>`
     : `<span class="missing">Check ticket price</span>`;
   const notes = f.notes.length ? ` <span class="k">(${esc(f.notes.join(', '))})</span>` : '';
+  // Doors and showtime are shown separately only when checked against the official listing;
+  // otherwise the listing's time is shown as-is, since sources don't say which one it is.
+  const timeHtml = f.confirmed && f.time
+    ? `${f.doors ? `<li><span class="k">Doors</span>${esc(f.doors)}</li>` : ''}<li><span class="k">Show</span>${esc(f.time)}</li>`
+    : `<li><span class="k">Time</span>${f.time ? esc(f.time) : '<span class="missing">Check start time</span>'}</li>`;
   const status = e.type === 'verified' ? '<span class="ok">✓ Verified</span>' : '<span class="ug">Underground · venue may be TBA</span>';
+  const checked = f.checked
+    ? ` · <a href="${safeUrl(f.checkedUrl || e.link)}" target="_blank" rel="noopener">details checked ${esc(longDay(f.checked, { month: 'short', day: 'numeric' }))}</a>` : '';
   row.innerHTML = `
     <div class="date-block">
       <div class="dow${soon ? ' soon' : ''}">${dow}</div>
@@ -1396,7 +1409,7 @@ function eventCard(e, pick) {
       <h3>${esc(e.title)}</h3>
       <p class="where">${esc(e.venue)} <span class="city">· ${esc(e.city)}</span></p>
       <ul class="facts">
-        <li><span class="k">Starts</span>${f.time ? esc(f.time) : '<span class="missing">Check start time</span>'}</li>
+        ${timeHtml}
         <li><span class="k">Price</span>${priceHtml}${notes}</li>
         ${f.age ? `<li><span class="k">Ages</span><span class="${f.allAges ? 'ages-all' : ''}">${esc(f.age)}</span></li>` : ''}
       </ul>
@@ -1407,7 +1420,7 @@ function eventCard(e, pick) {
         ${scaleLabels[e.scale] ? `<span class="tag scale">${esc(scaleLabels[e.scale])}</span>` : ''}
       </div>
       ${pick ? `<p class="goif"><strong>Go if</strong> ${esc(pick.goIf.replace(/^go if\s*/i, ''))}</p>` : ''}
-      <p class="src">${status} · via ${esc(e.source || 'Unknown')}${f.extra.length ? ' · ' + esc(f.extra.join(' · ')) : ''}</p>
+      <p class="src">${status} · via ${esc(e.source || 'Unknown')}${f.extra.length ? ' · ' + esc(f.extra.join(' · ')) : ''}${checked}</p>
     </div>
     <div class="action">
       <a class="btn primary" href="${safeUrl(e.link)}" target="_blank" rel="noopener"
@@ -1424,36 +1437,49 @@ function eventCard(e, pick) {
   return row;
 }
 
-function weekendDays(range) {
+function rangeDays(range) {
   const out = [];
-  for (let d = new Date(range[0] + 'T12:00:00'); isoDay(d) <= range[1]; d.setDate(d.getDate() + 1)) {
-    out.push({ iso: isoDay(d), key: DOW_KEYS[d.getDay()] });
-  }
+  for (let iso = range[0]; iso <= range[1]; iso = addDays(iso, 1)) out.push({ iso, key: DOW_KEYS[dowOf(iso)] });
   return out;
 }
 
+const HEADLINES = {
+  tonight: 'Live music in Arizona tonight', weekend: 'Live music in Arizona this weekend',
+  week: 'Live music in Arizona this week', month: 'Live music in Arizona, next 30 days'
+};
+const RANGE_NAMES = { tonight: 'tonight', weekend: 'this weekend', week: 'this week', month: 'in the next 30 days', all: '' };
+
 function renderHeader(range, days) {
-  const wk = when === 'weekend';
-  document.body.classList.toggle('wk', wk);
-  $('pageTitle').textContent = wk ? 'Live music in Arizona this weekend' : 'TheSceneAZ';
-  document.title = wk ? 'Live music in Arizona this weekend · TheSceneAZ' : 'TheSceneAZ — Arizona live music & events';
-  $('wkDates').hidden = !wk;
-  $('wkRow').hidden = !wk;
-  if (!wk) return;
-  const short = { weekday: 'short', month: 'short', day: 'numeric' };
-  $('wkDates').textContent = range[0] === range[1] ? longDay(range[0], short) : `${longDay(range[0], short)} – ${longDay(range[1], short)}`;
-  // Day chips for the days left in this weekend (on Saturday, Friday is gone).
+  const focused = when !== 'all';
+  document.body.classList.toggle('wk', focused); // compact, date-led header
+  $('pageTitle').textContent = focused ? HEADLINES[when] : 'TheSceneAZ';
+  document.title = focused ? `${HEADLINES[when]} · TheSceneAZ` : 'TheSceneAZ — Arizona live music & events';
+  $('wkDates').hidden = !focused;
+  if (focused) {
+    const short = { weekday: 'short', month: 'short', day: 'numeric' };
+    $('wkDates').textContent = range[0] === range[1] ? longDay(range[0], short) : `${longDay(range[0], short)} – ${longDay(range[1], short)}`;
+  }
+  // Day chips: one per day in the week and weekend views.
   const wrap = $('dayChips');
-  const sig = days.map(d => d.iso).join();
+  const showDays = (when === 'week' || when === 'weekend') && days.length > 1;
+  wrap.hidden = !showDays;
+  const sig = showDays ? days.map(d => d.iso).join() : '';
   if (wrap.dataset.sig !== sig) {
     wrap.dataset.sig = sig;
-    wrap.innerHTML = days.map(d =>
-      `<button type="button" class="chip" data-day="${d.key}" aria-pressed="false">${longDay(d.iso, { weekday: 'short' })}<span class="d">${new Date(d.iso + 'T12:00:00').getDate()}</span></button>`).join('');
+    const today = azToday();
+    wrap.innerHTML = !showDays ? '' : days.map(d =>
+      `<button type="button" class="chip" data-day="${d.key}" aria-pressed="false">${d.iso === today ? 'Today' : longDay(d.iso, { weekday: 'short' })}<span class="d">${+d.iso.slice(8, 10)}</span></button>`).join('');
     wrap.querySelectorAll('button').forEach(b => b.addEventListener('click', () => { day = day === b.dataset.day ? '' : b.dataset.day; render(); }));
   }
   wrap.querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.day === day)));
   $('freeBtn').setAttribute('aria-pressed', String(freeOnly));
   $('agesBtn').setAttribute('aria-pressed', String(allAgesOnly));
+}
+
+function resetFilters() {
+  for (const [id, v] of Object.entries(DEFAULTS)) $(id).value = v;
+  $('communityToggle').checked = true;
+  day = ''; freeOnly = false; allAgesOnly = false;
 }
 
 function render() {
@@ -1463,12 +1489,12 @@ function render() {
   const sortMode = $('sortBy').value;
   const query = norm($('searchBox').value.trim());
   const showCommunity = $('communityToggle').checked;
-  const todayIso = isoDay(new Date());
+  const todayIso = azToday();
   const range = whenRange(when);
-  const wk = when === 'weekend';
-  const days = wk ? weekendDays(range) : [];
-  if (wk && day && !days.some(d => d.key === day)) day = ''; // that day has passed
-  const dayIso = wk && day ? days.find(d => d.key === day).iso : '';
+  const days = range ? rangeDays(range) : [];
+  const dayView = (when === 'week' || when === 'weekend') && days.length > 1;
+  if (day && !(dayView && days.some(d => d.key === day))) day = ''; // not a day in this view
+  const dayIso = day ? days.find(d => d.key === day).iso : '';
 
   renderHeader(range, days);
 
@@ -1480,8 +1506,8 @@ function render() {
   const visible = upcoming
     .filter(e => !range || (e.date >= range[0] && e.date <= range[1]))
     .filter(e => !dayIso || e.date === dayIso)
-    .filter(e => !wk || !freeOnly || facts(e).free)
-    .filter(e => !wk || !allAgesOnly || facts(e).allAges)
+    .filter(e => !freeOnly || facts(e).free)
+    .filter(e => !allAgesOnly || facts(e).allAges)
     .filter(e => genre === 'all' || e.genre === genre)
     .filter(e => city === 'all' || e.city === city)
     .filter(e => scale === 'all' || e.scale === scale)
@@ -1497,10 +1523,10 @@ function render() {
   }
 
   // [10] Freshness shown right next to the count.
-  const upd = new Date(LAST_UPDATED + 'T12:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
-  $('count').textContent = wk
-    ? `${visible.length} ${visible.length === 1 ? 'show' : 'shows'} · updated ${upd}`
-    : `${visible.length} upcoming · updated ${upd}`;
+  const upd = longDay(LAST_UPDATED, { month: 'short', day: 'numeric' });
+  $('count').textContent = when === 'all'
+    ? `${visible.length} upcoming · updated ${upd}`
+    : `${visible.length} ${visible.length === 1 ? 'show' : 'shows'} · updated ${upd}`;
 
   // [2] Badge on "More filters" counts the active settings hidden inside it.
   const active = (scale !== 'all') + (sortMode !== 'date-asc') + (showCommunity ? 0 : 1);
@@ -1509,38 +1535,31 @@ function render() {
   document.querySelectorAll('.quick button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.when === when)));
   writeUrl();
 
-  // Weekend Picks: same filters as the list, up to three, expired ones drop out.
+  // Scene Picks: same filters as the list, up to three from the next seven days.
   const pickList = $('pickList');
   pickList.innerHTML = '';
-  const picks = wk ? choosePicks(visible) : [];
+  const picks = choosePicks(visible);
   picks.forEach(({ p, e }) => pickList.appendChild(eventCard(e, p)));
   $('picks').hidden = !picks.length;
 
   if (!visible.length) {
-    if (wk) {
-      feed.innerHTML = '<div class="no-results">No weekend shows match these filters.<br><button type="button" class="clear-btn" id="resetWeekend">See all weekend shows</button></div>';
-      $('resetWeekend').addEventListener('click', () => {
-        for (const [id, v] of Object.entries(DEFAULTS)) $(id).value = v;
-        $('communityToggle').checked = true;
-        day = ''; freeOnly = false; allAgesOnly = false;
-        render();
-      });
-    } else {
-      feed.innerHTML = '<div class="no-results">No events match these filters — try clearing one.</div>';
-    }
+    const scope = RANGE_NAMES[when];
+    feed.innerHTML = `<div class="no-results">No shows match these filters${scope ? ' ' + scope : ''}.<br><button type="button" class="clear-btn" id="resetView">See all shows${scope ? ' ' + scope : ''}</button></div>`;
+    $('resetView').addEventListener('click', () => { resetFilters(); render(); });
     return;
   }
 
+  // Short ranges are grouped by day ("Tuesday, Nov 24"); longer ones by month.
+  const byDay = when === 'tonight' || when === 'week' || when === 'weekend';
   let lastGroup = '';
   const counts = {};
   visible.forEach(e => { counts[e.date] = (counts[e.date] || 0) + 1; });
   visible.forEach(e => {
     if (sortMode !== 'venue') {
-      // Weekend view groups by day; other views keep the month dividers.
-      const group = wk ? e.date : fmtDate(e.date).monthYear;
+      const group = byDay ? e.date : fmtDate(e.date).monthYear;
       if (group !== lastGroup) {
         const h = document.createElement('h2');
-        if (wk) {
+        if (byDay) {
           h.className = 'day-head';
           h.innerHTML = `${esc(longDay(e.date))} <span class="n">${counts[e.date]} ${counts[e.date] === 1 ? 'show' : 'shows'}</span>`;
         } else {
@@ -1560,11 +1579,7 @@ function render() {
 );
 $('searchBox').addEventListener('input', render);
 document.querySelectorAll('.quick button').forEach(b =>
-  b.addEventListener('click', () => {
-    when = b.dataset.when;
-    if (when !== 'weekend') { day = ''; freeOnly = false; allAgesOnly = false; }
-    render();
-  })
+  b.addEventListener('click', () => { when = b.dataset.when; day = ''; render(); })
 );
 $('freeBtn').addEventListener('click', () => { freeOnly = !freeOnly; render(); });
 $('agesBtn').addEventListener('click', () => { allAgesOnly = !allAgesOnly; render(); });
@@ -1573,10 +1588,8 @@ $('moreFilters').addEventListener('click', () => {
   $('moreFilters').setAttribute('aria-expanded', String(open));
 });
 $('clearFilters').addEventListener('click', () => {
-  for (const [id, v] of Object.entries(DEFAULTS)) $(id).value = v;
-  $('communityToggle').checked = true;
-  day = ''; freeOnly = false; allAgesOnly = false;
-  when = 'all';
+  resetFilters();
+  when = 'week';
   render();
 });
 readUrl();
