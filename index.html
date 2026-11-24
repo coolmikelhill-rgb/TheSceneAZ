@@ -210,7 +210,7 @@
     color: var(--genre-color, var(--blue));
   }
 
-  .details h3 { margin: 0 0 4px; font-size: 16px; font-weight: 600; }
+  .details h3, .head h3 { margin: 0 0 4px; font-size: 16px; font-weight: 600; }
 
   .details .meta {
     font-size: 13px;
@@ -238,8 +238,8 @@
 
 
   /* genre + sub-genre: one split pill, e.g.  [ ROCK | Pop Punk ] */
-  .details .tag, .details .gpill { vertical-align: middle; white-space: nowrap; }
-  .details .tag { margin-bottom: 2px; }
+  .details .tag, .details .gpill, .more .tag, .more .gpill { vertical-align: middle; white-space: nowrap; }
+  .details .tag, .more .tag { margin-bottom: 2px; }
   .gpill { margin-bottom: 2px; }
   .gpill {
     display: inline-flex;
@@ -414,7 +414,7 @@
   .no-results button { margin-top: 12px; }
 
   /* Decision-first card: who, where, when, how much, ages — then badges and provenance */
-  .details h3 { font-size: 17px; font-weight: 700; line-height: 1.3; margin: 0 0 2px; overflow-wrap: anywhere; }
+  .details h3, .head h3 { font-size: 17px; font-weight: 700; line-height: 1.3; margin: 0 0 2px; overflow-wrap: anywhere; }
   .where { margin: 0 0 6px; font-size: 14px; font-weight: 600; color: var(--text); }
   .where .city { color: var(--text-muted); font-weight: 500; }
   .facts { list-style: none; display: flex; flex-wrap: wrap; gap: 4px 14px; margin: 0 0 8px; padding: 0; font-size: 14px; font-weight: 600; }
@@ -447,6 +447,38 @@
     .feed { padding: 8px 16px 60px; }
     .event .action { flex-direction: row; align-items: center; flex-wrap: wrap; }
     .chip { padding: 6px 11px; }
+  }
+
+  /* ===== Tonight show guide: logistics first ===== */
+  .event { grid-template-areas: "date head action" "date more action"; row-gap: 6px; }
+  .event .date-block { grid-area: date; }
+  .event .head { grid-area: head; min-width: 0; }
+  .event .more { grid-area: more; min-width: 0; }
+  .event .action { grid-area: action; }
+  .event.off h3 { text-decoration: line-through; text-decoration-color: var(--red); }
+  .event.off .facts { opacity: 0.6; }
+  .status-chip {
+    display: inline-block; vertical-align: 2px; margin-right: 8px; padding: 1px 7px; border-radius: 4px;
+    font: 800 11px 'Inter', sans-serif; letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--bg); background: var(--gold);
+  }
+  .status-chip.bad { background: var(--red); }
+  .status-chip.sold { background: var(--orange); }
+  .facts { gap: 4px 16px; font-size: 15px; margin-bottom: 2px; }
+  .facts .strong { color: var(--text); font-weight: 800; }
+  .facts .note { font-size: 12.5px; font-weight: 500; color: var(--text-muted); }
+  .sched { list-style: none; margin: 4px 0 6px; padding: 0; display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 13px; }
+  .sched b { color: var(--text); margin-right: 4px; }
+  .lineup { margin: 2px 0 6px; font-size: 13px; color: var(--text); }
+  .lineup .k { color: var(--text-muted); font-size: 12px; margin-right: 4px; }
+  .more .goif { margin: 2px 0 8px; }
+  .more .badges { margin-bottom: 2px; }
+
+  @media (max-width: 560px) {
+    .event { grid-template-columns: 48px 1fr; grid-template-areas: "date head" "date action" "date more"; row-gap: 10px; }
+    .event .action { grid-column: auto; justify-self: stretch; flex-direction: row; align-items: center; gap: 12px; }
+    .event .action .btn { flex: 0 0 auto; }
+    .facts { font-size: 14px; gap: 3px 12px; }
   }
 </style>
 </head>
@@ -539,7 +571,7 @@
 <div class="feed" id="feed"></div>
 
 <div class="note">
-  <strong>Verified</strong> = a confirmed listing. <strong>Underground</strong> = venue is TBA or released by the promoter the day of. The gray badge is room size: Large (Arena), Medium (Club/Theater) or Underground (Warehouse/DIY). Genre tags can carry a sub-genre (like Rock | Pop Punk) for flavor — it isn't a filter. Each listing names where it was found, since no single source catches everything. Listings are compiled from public sources and can change, sell out or be canceled — confirm with the venue or ticket page before you go. Listings refresh daily.
+  <strong>Listing confirmed</strong> = we found the show on the venue's, promoter's or ticket seller's own event page and matched the artist, venue and date; the date shown is when its details were last checked. Tonight's and tomorrow's shows are checked automatically every morning and late afternoon. <strong>Listed time</strong> = the source gives one time without saying whether it's doors or showtime. Shows that start before midnight and run past it are listed on the night they start. <strong>Underground</strong> = venue is TBA or released by the promoter the day of. The gray badge is room size: Large (Arena), Medium (Club/Theater) or Underground (Warehouse/DIY). Genre tags can carry a sub-genre (like Rock | Pop Punk) for flavor — it isn't a filter. Each listing names where it was found, since no single source catches everything. Listings are compiled from public sources and can change, sell out or be canceled — confirm with the venue or ticket page before you go. Listings refresh daily.
 </div>
 
 <script>
@@ -1221,42 +1253,85 @@ function writeUrl() {
   history.replaceState(null, '', qs ? `?${qs}` : location.pathname);
 }
 
-// The data's "price" field carries whatever the source gave, joined by " · ":
-// a time, a price, an age limit and/or a promoter ("9pm-2am · $10 · 21+").
-// Split it so cards can show each fact on its own. An event's optional
-// "confirmed" block (details checked against the official listing) wins.
-// Labels like Free / All ages are only set when the listing says so explicitly.
+// Three layers of show details, weakest first:
+//   1. the listing's own "price" field, which carries whatever the source gave,
+//      joined by " · " ("9pm-2am · $10 · 21+");
+//   2. "details": filled in automatically by scripts/enrich_events.py from the
+//      show's official event page (doors, show, set times, price, ages, status...);
+//   3. "confirmed": checked and entered by hand. It always wins.
+// Labels like Free / All ages are only set when a source says so explicitly.
+const T_RE = /^\d{1,2}(:\d{2})?\s*[ap]m$/i;
+const tidyTime = t => String(t || '').trim().replace(/^(\d{1,2})\s*([ap])m$/i, (_, h, ap) => `${h}:00 ${ap.toUpperCase()}M`)
+  .replace(/^(\d{1,2}):(\d{2})\s*([ap])m$/i, (_, h, m, ap) => `${h}:${m} ${ap.toUpperCase()}M`);
 function facts(e) {
-  const f = { time: '', doors: '', price: '', age: '', notes: [], extra: [], free: false, allAges: false, checked: '', checkedUrl: '' };
+  const f = { doors: '', show: '', listed: '', ends: '', sets: [], lineup: [], price: '', free: false, freeCond: '',
+    age: '', allAges: false, status: '', goIf: '', notes: [], extra: [], checked: '', source: '', official: false,
+    confirmed: false, tried: false, hand: false };
   for (const raw of String(e.price || '').split('·')) {
     const s = raw.trim();
     if (!s) continue;
     if (/^see listing/i.test(s)) { const m = s.match(/\(([^)]+)\)/); if (m) f.notes.push(m[1]); continue; }
-    if (/^\d{1,2}(:\d{2})?\s*[ap]m(\s*-\s*\d{1,2}(:\d{2})?\s*[ap]m)?$/i.test(s)) { f.time = s.replace(/\s*-\s*/, '–'); continue; }
+    const rng = s.match(/^(\d{1,2}(?::\d{2})?\s*[ap]m)\s*-\s*(\d{1,2}(?::\d{2})?\s*[ap]m)$/i);
+    if (rng) { f.listed = tidyTime(rng[1]); f.ends = tidyTime(rng[2]); continue; }
+    if (T_RE.test(s)) { f.listed = tidyTime(s); continue; }
     if (/^all ages$/i.test(s)) { f.age = 'All ages'; f.allAges = true; continue; }
     if (/^\d{1,2}\+$/.test(s)) { f.age = s; continue; }
-    if (/^free( w\/ rsvp)?$/i.test(s)) { f.price = 'Free' + s.slice(4); f.free = true; continue; }
+    if (/^free( w\/ rsvp)?$/i.test(s)) { f.free = true; f.freeCond = /rsvp/i.test(s) ? 'with RSVP' : ''; continue; }
     if (/^(from )?\$|^free\b/i.test(s)) { f.price = s.charAt(0).toUpperCase() + s.slice(1); continue; }
     f.extra.push(s);
   }
+  const d = e.details;
+  if (d && typeof d === 'object') {
+    f.tried = !!d.tried;
+    if (d.checked) {
+      if (d.doors || d.show || d.sets || d.listed) { f.doors = d.doors || ''; f.show = d.show || ''; f.listed = d.listed || ''; f.sets = d.sets || []; }
+      if (d.ends) f.ends = d.ends;
+      if (d.price && d.price.text) { f.price = d.price.text + (d.price.fees ? ` ${d.price.fees}` : ''); f.free = false; f.freeCond = ''; }
+      if (d.free) { f.free = true; f.freeCond = d.free.condition || ''; }
+      if (d.ages) { f.age = d.ages; f.allAges = d.ages === 'All ages'; }
+      if (d.status) f.status = d.status;
+      if (d.note && !f.notes.some(n => /drink/i.test(n) && /drink/i.test(d.note))) f.notes.push(d.note);
+      if (Array.isArray(d.lineup)) f.lineup = d.lineup;
+      if (d.goIf) f.goIf = d.goIf;
+      f.checked = d.checked; f.source = d.url || ''; f.official = !!d.official;
+    }
+  }
   const c = e.confirmed;
   if (c && typeof c === 'object') {
-    if (c.show) f.time = c.ends ? `${c.show}–${c.ends}` : c.show;
-    if (c.doors) f.doors = c.doors;
-    if (c.price) { f.price = c.price; f.free = /^free\b/i.test(c.price) && !/\$/.test(c.price); }
+    if (c.show || c.doors) { f.show = c.show || ''; f.doors = c.doors || ''; f.listed = ''; }
+    if (c.ends) f.ends = c.ends;
+    if (c.price) { f.price = c.price; f.free = /^free\b/i.test(c.price) && !/\$/.test(c.price); f.freeCond = ''; }
     if (c.ages) { f.age = c.ages; f.allAges = /^all ages$/i.test(c.ages); }
-    f.checked = /^\d{4}-\d{2}-\d{2}$/.test(c.checked || '') ? c.checked : '';
-    f.checkedUrl = c.source || '';
-    f.confirmed = true;
+    if (c.status) f.status = c.status;
+    if (c.goIf) f.goIf = c.goIf;
+    if (/^\d{4}-\d{2}-\d{2}$/.test(c.checked || '')) { f.checked = c.checked; f.source = c.source || f.source; f.official = true; f.hand = true; }
   }
+  // Listing confirmed = artist, venue and date matched on the official event page.
+  f.confirmed = f.official && !!f.checked;
+  f.time = f.show || f.listed || (f.sets[0] && f.sets[0].time) || '';
+  f.start = f.time || f.doors;
+  f.bad = /cancel|postpon/i.test(f.status);
+  f.soldOut = /sold out/i.test(f.status);
+  // Enough to make a plan: when to arrive, what it costs, and whether you can get in.
+  f.planReady = f.confirmed && !!f.start && !!(f.price || f.free) && !!f.age && !f.bad && !f.soldOut;
   return f;
 }
+// Minutes after noon-ish for sorting a night's shows; after-midnight times sort last.
+function startMinutes(t) {
+  const m = String(t || '').match(/^(\d{1,2}):(\d{2})\s*([AP])M/i);
+  if (!m) return 9999;
+  const h = (+m[1] % 12) + (m[3].toUpperCase() === 'P' ? 12 : 0);
+  return (h < 5 ? h + 24 : h) * 60 + +m[2];
+}
+const bestLink = (e, f) => (f.official && f.source) ? f.source : e.link;
 
 // Plain-text plan for texting a friend.
 function planText(e) {
   const f = facts(e);
-  const time = f.doors && f.doors !== f.time ? `doors ${f.doors}, show ${f.time}` : f.time;
-  const bits = [longDay(e.date, { weekday: 'short', month: 'short', day: 'numeric' }), time, `${e.venue}, ${e.city}`, f.price, f.age].filter(Boolean);
+  const time = f.doors && f.show && f.doors !== f.show ? `doors ${f.doors}, show ${f.show}`
+    : f.show ? `show ${f.show}` : f.listed ? f.listed : f.doors ? `doors ${f.doors}` : '';
+  const price = f.free ? `Free${f.freeCond ? ' ' + f.freeCond : ''}` : f.price;
+  const bits = [longDay(e.date, { weekday: 'short', month: 'short', day: 'numeric' }), time, `${e.venue}, ${e.city}`, price, f.age, f.status].filter(Boolean);
   return `${e.title} — ${bits.join(' · ')}`;
 }
 
@@ -1350,7 +1425,8 @@ const PICK_RULES = [
 
 function choosePicks(visible) {
   const today = azToday(), last = addDays(today, 6);
-  const pool = visible.filter(e => e.date >= today && e.date <= last);
+  // Never feature a show that's canceled, postponed or sold out.
+  const pool = visible.filter(e => e.date >= today && e.date <= last).filter(e => { const f = facts(e); return !f.bad && !f.soldOut; });
   const out = [], used = new Set(), days = new Set();
   const key = e => e.link + '|' + e.date;
   const add = (e, p) => { out.push({ e, p }); used.add(key(e)); days.add(e.date); };
@@ -1359,13 +1435,15 @@ function choosePicks(visible) {
     const e = pool.find(e => e.link === p.link && e.date === p.date);
     if (e && !used.has(key(e))) add(e, p);
   }
-  // Automatic fill: prefer verified listings with the most known details, spread across days.
-  const known = f => !!f.time + !!f.price + !!f.age + !!f.confirmed;
-  for (const rule of PICK_RULES) {
+  // Automatic fill: shows with enough confirmed info to make a plan come first,
+  // then verified listings with the most known details, spread across days.
+  const known = f => !!f.start + !!(f.price || f.free) + !!f.age + !!f.confirmed;
+  for (const readyOnly of [true, false]) for (const rule of PICK_RULES) {
     if (out.length >= 3) break;
-    const cands = pool.map(e => ({ e, f: facts(e) })).filter(({ e, f }) => !used.has(key(e)) && rule.fits(e, f));
+    const cands = pool.map(e => ({ e, f: facts(e) })).filter(({ e, f }) => !used.has(key(e)) && rule.fits(e, f) && (!readyOnly || f.planReady));
     if (!cands.length) continue;
     cands.sort((a, b) =>
+      (b.f.planReady - a.f.planReady) ||
       (days.has(a.e.date) - days.has(b.e.date)) ||
       ((b.e.type === 'verified') - (a.e.type === 'verified')) ||
       (known(b.f) - known(a.f)) ||
@@ -1382,53 +1460,87 @@ function eventCard(e, pick) {
   const { dow, soon, num, mon } = fmtDate(e.date);
   const f = facts(e);
   const row = document.createElement('article');
-  row.className = `event ${e.type === 'community' ? 'community' : 'verified'}${pick ? ' pick' : ''}`;
+  row.className = `event ${e.type === 'community' ? 'community' : 'verified'}${pick ? ' pick' : ''}${f.bad ? ' off' : ''}`;
   row.style.setProperty('--genre-color', genreColors[e.genre] || 'var(--blue)');
   const gl = esc(genreLabels[e.genre] || e.genre);
-  const cta = e.cta === 'Get Tickets' ? 'Get Tickets' : 'Event Info';
-  const priceHtml = f.price
-    ? `<span class="${f.free ? 'free' : ''}">${esc(f.price)}</span>`
-    : `<span class="missing">Check ticket price</span>`;
-  const notes = f.notes.length ? ` <span class="k">(${esc(f.notes.join(', '))})</span>` : '';
-  // Doors and showtime are shown separately only when checked against the official listing;
-  // otherwise the listing's time is shown as-is, since sources don't say which one it is.
-  const timeHtml = f.confirmed && f.time
-    ? `${f.doors ? `<li><span class="k">Doors</span>${esc(f.doors)}</li>` : ''}<li><span class="k">Show</span>${esc(f.time)}</li>`
-    : `<li><span class="k">Time</span>${f.time ? esc(f.time) : '<span class="missing">Check start time</span>'}</li>`;
-  const status = e.type === 'verified' ? '<span class="ok">✓ Verified</span>' : '<span class="ug">Underground · venue may be TBA</span>';
-  const checked = f.checked
-    ? ` · <a href="${safeUrl(f.checkedUrl || e.link)}" target="_blank" rel="noopener">details checked ${esc(longDay(f.checked, { month: 'short', day: 'numeric' }))}</a>` : '';
+  // The official event page that lists prices is where tickets are sold.
+  const cta = f.bad || f.soldOut ? 'Event Info' : (e.cta === 'Get Tickets' || (f.official && f.source && (f.price || f.free))) ? 'Get Tickets' : 'Event Info';
+  const checkedDay = f.checked ? longDay(f.checked, { month: 'short', day: 'numeric' }) : '';
+  // "Not published" once we've looked at the event page; "Check …" if nobody has yet.
+  const looked = !!f.checked;
+  const none = (k, v) => `<li><span class="k">${k}</span><span class="missing">${v}</span></li>`;
+  const item = (k, v, cls = '') => `<li><span class="k">${k}</span><span class="${cls}">${esc(v)}</span></li>`;
+
+  // When: doors and show stay separate; one unexplained time is a "Listed time".
+  let when = '';
+  if (f.sets.length) {
+    if (f.doors) when += item('Doors', f.doors);
+    when += item(f.sets.length > 1 ? 'Sets' : 'Set', f.sets.map(s => s.time).join(' · '));
+  } else if (f.doors || f.show) {
+    if (f.doors) when += item('Doors', f.doors);
+    when += f.show ? item('Show', f.show, 'strong') : none('Show', 'not published');
+  } else if (f.listed) {
+    when += item('Listed time', f.listed);
+  } else {
+    when += none('Time', looked ? 'Start time not published' : 'Check start time');
+  }
+  if (f.ends) when += item('Ends', f.ends);
+
+  const price = f.free
+    ? item('Price', `Free${f.freeCond ? ' ' + f.freeCond : ''}${f.price ? ` · ${f.price} after` : ''}`, 'free')
+    : f.price ? item('Price', f.price) : none('Price', looked ? 'Not published' : 'Check ticket price');
+  const notes = f.notes.length ? `<li class="note">${esc(f.notes.join(' · '))}</li>` : '';
+  const ages = f.age ? item('Ages', f.age, f.allAges ? 'ages-all' : '') : looked ? none('Ages', 'Not published') : '';
+
+  // Published schedule, in order: doors, each set, end.
+  const named = f.sets.filter(s => s.name);
+  const schedule = named.length
+    ? `<ol class="sched">${f.doors ? `<li><b>${esc(f.doors)}</b> Doors</li>` : ''}${named.map(s => `<li><b>${esc(s.time)}</b> ${esc(s.name)}</li>`).join('')}${f.ends ? `<li><b>${esc(f.ends)}</b> Ends</li>` : ''}</ol>` : '';
+  const support = f.lineup.slice(1);
+  const lineup = !named.length && support.length
+    ? `<p class="lineup"><span class="k">With</span> ${support.map(a => esc(a.name)).join(', ')}</p>` : '';
+
+  const goIf = (pick && pick.link ? pick.goIf : (f.goIf || (pick && pick.goIf) || '')).replace(/^go if\s*/i, '');
+  const statusChip = f.status ? `<span class="status-chip${f.bad ? ' bad' : f.soldOut ? ' sold' : ''}">${esc(f.status)}</span>` : '';
+  const src = f.confirmed
+    ? `<span class="ok">✓ Listing confirmed</span> · <a href="${safeUrl(f.source || e.link)}" target="_blank" rel="noopener">details checked ${esc(checkedDay)}</a>`
+    : f.checked
+      ? `Time from <a href="${safeUrl(f.source || e.link)}" target="_blank" rel="noopener">${esc(e.source || 'listing')}</a> (checked ${esc(checkedDay)}) · not yet confirmed with the venue`
+      : e.type === 'verified' ? `Listed by ${esc(e.source || 'Unknown')} · details not yet checked` : '<span class="ug">Underground · venue may be TBA</span>';
+  const promo = f.extra.length ? ' · ' + esc(f.extra.join(' · ')) : '';
+
   row.innerHTML = `
     <div class="date-block">
       <div class="dow${soon ? ' soon' : ''}">${dow}</div>
       <div class="num">${num}</div>
       <div class="mon">${mon}</div>
     </div>
-    <div class="details">
+    <div class="head">
       ${pick ? `<div class="pick-label">${esc(pick.label)}</div>` : ''}
-      <h3>${esc(e.title)}</h3>
+      <h3>${statusChip}${esc(e.title)}</h3>
       <p class="where">${esc(e.venue)} <span class="city">· ${esc(e.city)}</span></p>
-      <ul class="facts">
-        ${timeHtml}
-        <li><span class="k">Price</span>${priceHtml}${notes}</li>
-        ${f.age ? `<li><span class="k">Ages</span><span class="${f.allAges ? 'ages-all' : ''}">${esc(f.age)}</span></li>` : ''}
-      </ul>
+      <ul class="facts">${f.bad
+        ? `<li class="note">This show is ${esc(f.status.toLowerCase())}. Check the event page for a new date or refund details.</li>`
+        : when + price + ages + notes}</ul>
+    </div>
+    <div class="action">
+      <a class="btn primary" href="${safeUrl(bestLink(e, f))}" target="_blank" rel="noopener"
+         aria-label="${cta}: ${esc(e.title)}, ${mon} ${num} (opens in new tab)">${cta}</a>
+      <div class="sub-actions">
+        <button type="button" class="cal-btn" data-act="cal" aria-label="Add ${esc(e.title)} to calendar">+ Calendar</button>
+        <button type="button" class="cal-btn" data-act="share" aria-label="Share ${esc(e.title)}">Share</button>
+      </div>
+    </div>
+    <div class="more">
+      ${schedule}${lineup}
+      ${goIf ? `<p class="goif"><strong>Go if</strong> ${esc(goIf)}</p>` : ''}
       <div class="badges">
         ${e.sub
           ? `<span class="gpill" title="${gl} · ${esc(e.sub)}"><span class="g">${gl}</span><span class="s">${esc(e.sub)}</span></span>`
           : `<span class="tag">${gl}</span>`}
         ${scaleLabels[e.scale] ? `<span class="tag scale">${esc(scaleLabels[e.scale])}</span>` : ''}
       </div>
-      ${pick ? `<p class="goif"><strong>Go if</strong> ${esc(pick.goIf.replace(/^go if\s*/i, ''))}</p>` : ''}
-      <p class="src">${status} · via ${esc(e.source || 'Unknown')}${f.extra.length ? ' · ' + esc(f.extra.join(' · ')) : ''}${checked}</p>
-    </div>
-    <div class="action">
-      <a class="btn primary" href="${safeUrl(e.link)}" target="_blank" rel="noopener"
-         aria-label="${cta}: ${esc(e.title)}, ${mon} ${num} (opens in new tab)">${cta}</a>
-      <div class="sub-actions">
-        <button type="button" class="cal-btn" data-act="cal" aria-label="Add ${esc(e.title)} to calendar">+ Calendar</button>
-        <button type="button" class="cal-btn" data-act="share" aria-label="Share ${esc(e.title)}">Share</button>
-      </div>
+      <p class="src">${src}${promo}</p>
     </div>
   `;
   row.querySelector('[data-act="cal"]').addEventListener('click', () => downloadIcs(e));
@@ -1519,7 +1631,9 @@ function render() {
   } else if (sortMode === 'venue') {
     visible.sort((a,b) => a.venue.localeCompare(b.venue) || a.date.localeCompare(b.date));
   } else {
-    visible.sort((a,b) => a.date.localeCompare(b.date));
+    // Soonest day first; within a day, by start time (unknown times last).
+    const sm = new Map(visible.map(e => { const f = facts(e); return [e, f.bad ? 99999 : startMinutes(f.start)]; }));
+    visible.sort((a,b) => a.date.localeCompare(b.date) || sm.get(a) - sm.get(b));
   }
 
   // [10] Freshness shown right next to the count.

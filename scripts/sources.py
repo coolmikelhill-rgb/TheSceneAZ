@@ -323,7 +323,12 @@ VENUE_GENRE = {"the century room": "jazz", "westside blues jazz more": "blues",
                "rhythm room": "blues", "ravenscroft jazzbird lounge": "jazz"}
 
 
-def _jsonld_events(page):
+def jsonld_objects(page):
+    """Every schema.org *Event object in a page's JSON-LD blocks, as raw dicts.
+
+    Shared by the calendar fetchers below and by enrich_events.py, which reads
+    doorTime, offers, performers and eventStatus from the same objects.
+    """
     for block in re.findall(r"<script[^>]*application/ld\+json[^>]*>(.*?)</script>", page, re.S):
         try:
             data = json.loads(block.strip())
@@ -339,16 +344,21 @@ def _jsonld_events(page):
                 t = it.get("@type")
                 t = " ".join(t) if isinstance(t, list) else str(t or "")
                 if t.endswith("Event") and it.get("startDate"):
-                    loc = it.get("location") or {}
-                    loc = loc[0] if isinstance(loc, list) and loc else loc
-                    addr = loc.get("address") if isinstance(loc, dict) else {}
-                    city = addr.get("addressLocality", "") if isinstance(addr, dict) else ""
-                    offers = it.get("offers") or {}
-                    offers = offers[0] if isinstance(offers, list) and offers else offers
-                    yield {"date": str(it["startDate"])[:10], "title": it.get("name", ""),
-                           "venue": loc.get("name", "") if isinstance(loc, dict) else "",
-                           "city": city, "link": it.get("url") or (offers.get("url") if isinstance(offers, dict) else ""),
-                           "price": f"${offers['price']}" if isinstance(offers, dict) and offers.get("price") else ""}
+                    yield it
+
+
+def _jsonld_events(page):
+    for it in jsonld_objects(page):
+        loc = it.get("location") or {}
+        loc = loc[0] if isinstance(loc, list) and loc else loc
+        addr = loc.get("address") if isinstance(loc, dict) else {}
+        city = addr.get("addressLocality", "") if isinstance(addr, dict) else ""
+        offers = it.get("offers") or {}
+        offers = offers[0] if isinstance(offers, list) and offers else offers
+        yield {"date": str(it["startDate"])[:10], "title": it.get("name", ""),
+               "venue": loc.get("name", "") if isinstance(loc, dict) else "",
+               "city": city, "link": it.get("url") or (offers.get("url") if isinstance(offers, dict) else ""),
+               "price": f"${offers['price']}" if isinstance(offers, dict) and offers.get("price") else ""}
 
 
 def _microdata_events(page, page_url):
