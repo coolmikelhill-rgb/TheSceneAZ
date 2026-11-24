@@ -162,7 +162,8 @@ def main(argv):
     approved = set()
     if HOT.exists():
         for h in json.loads(HOT.read_text(encoding="utf-8")).get("approved", []):
-            approved.add((h.get("link"), h.get("date")))
+            for n in (h.get("nights") or [h]):
+                approved.add((n.get("link"), n.get("date")))
 
     def eligible(e):
         d, c = e.get("details") or {}, e.get("confirmed") or {}

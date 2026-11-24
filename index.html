@@ -483,31 +483,50 @@
   /* ===== Next 30 Days: Can't-Miss Shows ===== */
   .hot { max-width: 820px; margin: 0 auto; padding: 16px 24px 4px; }
   .hot[hidden] { display: none; }
+  .hot-headrow { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin: 4px 0 10px; padding: 0 4px; }
   .hot-head {
     font-family: 'Archivo', sans-serif; font-stretch: 125%; font-weight: 800; font-size: 14px;
-    letter-spacing: 0.1em; text-transform: uppercase; color: #FF7A55; margin: 4px 0 2px; padding-left: 4px;
+    letter-spacing: 0.1em; text-transform: uppercase; color: #FF7A55; margin: 0;
   }
-  .hot-sub { margin: 0 0 10px; padding-left: 4px; font-size: 13px; color: var(--text-muted); }
-  .hot-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 10px; }
+  .hot-jump { font-size: 13px; font-weight: 600; color: var(--text-muted); text-underline-offset: 3px; white-space: nowrap; }
+  .hot-jump:hover { color: var(--text); }
+  /* Lead pick full width; the rest in two columns. A leftover odd card spans the row. */
+  .hot-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; align-items: stretch; }
+  .hot-card.lead, .hot-grid > .hot-card:last-child:nth-child(even) { grid-column: 1 / -1; }
   .hot-card {
-    display: flex; flex-direction: column; gap: 4px; padding: 14px 14px 12px; border-radius: 10px;
+    display: flex; flex-direction: column; padding: 14px 16px 12px; border-radius: 10px; min-width: 0;
     background: var(--bg-raised); border: 1px solid color-mix(in srgb, #FF5A36 45%, var(--line));
-    border-top: 3px solid #FF5A36; min-width: 0;
+    border-top: 3px solid #FF5A36;
   }
+  .hot-card.lead { padding: 18px 20px 14px; background: linear-gradient(180deg, color-mix(in srgb, #FF5A36 9%, var(--bg-raised)), var(--bg-raised) 60%); }
   .hot-badge {
     display: inline-block; background: #FF5A36; color: #160803; font: 800 11px/1.5 'Inter', sans-serif;
     letter-spacing: 0.12em; padding: 1px 7px; border-radius: 4px;
   }
   .hot-badge.sm { font-size: 10px; padding: 0 6px; margin-right: 8px; vertical-align: 2px; }
-  .hot-top { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-  .hot-when { font-weight: 700; font-size: 13px; color: var(--text); }
+  .hot-top { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 6px; }
+  .hot-when { font-weight: 800; font-size: 13.5px; color: var(--text); letter-spacing: 0.01em; }
   .hot-card .status-chip { margin: 0; }
-  .hot-card h3 { margin: 2px 0 0; font-size: 17px; font-weight: 700; line-height: 1.25; overflow-wrap: anywhere; }
-  .hot-card .where { margin: 0; font-size: 13.5px; }
-  .hot-why { margin: 4px 0 6px; font-size: 14px; line-height: 1.45; color: var(--text); flex: 1; }
-  .hot-foot { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
-  .hot-price { font-weight: 700; font-size: 14px; }
-  .hot-card .src { margin: 6px 0 0; }
+  .hot-card h3 { margin: 0; font-size: 17px; font-weight: 700; line-height: 1.25; overflow-wrap: anywhere; }
+  .hot-card.lead h3 { font-family: 'Archivo', sans-serif; font-stretch: 125%; font-weight: 800; font-size: 24px; line-height: 1.15; }
+  .hot-card .where { margin: 3px 0 0; font-size: 13.5px; }
+  .hot-why { margin: 8px 0 12px; font-size: 14px; line-height: 1.45; color: var(--text); }
+  .hot-card.lead .hot-why { font-size: 15.5px; max-width: 60ch; }
+  /* The footer sits at the bottom, so actions line up across a row without fixed heights. */
+  .hot-foot { margin-top: auto; display: flex; flex-direction: column; gap: 8px; }
+  .hot-price { margin: 0; font-weight: 700; font-size: 14px; }
+  .hot-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+  .hot-actions .btn { border: 1px solid transparent; }   /* filled and outlined buttons share one height */
+  .btn.ghost { background: transparent; border: 1px solid var(--text-muted); color: var(--text); }
+  .btn.ghost:hover { border-color: var(--text); }
+  .hot-src { font-size: 12px; color: var(--text-muted); }
+  .hot-src summary { cursor: pointer; width: max-content; padding: 2px 0; text-decoration: underline; text-underline-offset: 3px; }
+  .hot-src summary:hover { color: var(--text); }
+  .hot-src ul { margin: 6px 0 2px; padding-left: 18px; }
+  .hot-src li { margin: 2px 0; }
+  .hot-src a { color: var(--teal); }
+  .hot-src p { margin: 4px 0 0; }
+  .cal-anchor { display: block; height: 0; scroll-margin-top: 190px; outline: none; }
   .week-head {
     font-family: 'Archivo', sans-serif; font-stretch: 125%; font-weight: 800; font-size: 16px; letter-spacing: 0.02em;
     color: var(--text); margin: 34px 0 0; padding: 10px 4px 0; border-top: 1px solid var(--line);
@@ -518,6 +537,9 @@
   @media (max-width: 560px) {
     .hot { padding: 12px 16px 0; }
     .hot-grid { grid-template-columns: 1fr; gap: 8px; }
+    .hot-card.lead h3 { font-size: 21px; }
+    .hot-card.lead { padding: 16px 16px 12px; }
+    .cal-anchor { scroll-margin-top: 12px; }
   }
 </style>
 </head>
@@ -603,8 +625,10 @@
 </div>
 
 <section class="hot" id="hot" aria-labelledby="hotHead" hidden>
-  <h2 class="hot-head" id="hotHead">Can't-Miss Shows</h2>
-  <p class="hot-sub">Worth buying tickets for now — each one has a specific, checked reason. Full listings stay in the calendar below.</p>
+  <div class="hot-headrow">
+    <h2 class="hot-head" id="hotHead">Can't-Miss Shows</h2>
+    <a class="hot-jump" id="jumpCal" href="#calendar">Jump to calendar ↓</a>
+  </div>
   <div class="hot-grid" id="hotList"></div>
 </section>
 
@@ -613,6 +637,7 @@
   <div id="pickList"></div>
 </section>
 
+<div id="calendar" class="cal-anchor" tabindex="-1" aria-label="Full calendar"></div>
 <div class="feed" id="feed"></div>
 
 <div class="note">
@@ -1202,7 +1227,7 @@ async function loadEvents() {
       if (data && Array.isArray(data.approved)) {
         hotDefs = data.approved.filter(x => x && typeof x.link === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(x.date || '')
           && typeof x.why === 'string' && x.why.trim());
-        hotKeys = new Set(hotDefs.map(x => x.link + '|' + x.date));
+        hotKeys = new Set(hotDefs.flatMap(x => nightsOf(x).map(n => n.link + '|' + n.date)));
       }
     }
   } catch (err) {
@@ -1517,48 +1542,104 @@ function choosePicks(visible) {
 
 let upcomingForSeo = [];
 
-// Can't-Miss Shows: approved shows in today .. today+29 (Arizona time) that pass
-// every active filter. hot.json order is the editor's priority: the first five
-// that qualify are featured, shown soonest first, and the next one moves up as a
-// show passes or sells out. Canceled, postponed and sold-out shows drop out here
-// but keep their normal calendar listing.
+// Can't-Miss Shows (Next 30 Days only). hot.json order is the editor's priority:
+// the first five approved picks with at least one eligible night are featured.
+// The first is the full-width lead card; the rest follow by date. A night is
+// eligible when it's in today .. today+29 (Arizona time), passes every active
+// filter, and isn't canceled or postponed. A pick drops out once all its eligible
+// nights are sold out. Featured cards are extra: each night keeps its own normal
+// calendar listing and is counted once.
+const nightsOf = h => (Array.isArray(h.nights) && h.nights.length ? h.nights : [{ date: h.date, link: h.link, tickets: h.tickets }])
+  .filter(n => n && typeof n.link === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(n.date || ''));
 const isHot = e => hotKeys.has(e.link + '|' + e.date);
 function chooseHot(visible) {
   const today = azToday(), last = addDays(today, 29);
   const byKey = new Map(visible.map(e => [e.link + '|' + e.date, e]));
-  return hotDefs
-    .map(h => ({ h, e: byKey.get(h.link + '|' + h.date) }))
-    .filter(({ e }) => e && e.date >= today && e.date <= last)
-    .filter(({ e }) => { const f = facts(e); return !f.bad && !f.soldOut; })
-    .slice(0, 5)
-    .sort((a, b) => a.e.date.localeCompare(b.e.date));
+  const picks = [];
+  for (const h of hotDefs) {
+    if (picks.length >= 5) break;
+    const nights = nightsOf(h)
+      .map(n => ({ n, e: byKey.get(n.link + '|' + n.date) }))
+      .filter(({ e }) => e && e.date >= today && e.date <= last)
+      .map(x => ({ ...x, f: facts(x.e) }))
+      .filter(({ f }) => !f.bad)
+      .sort((a, b) => a.e.date.localeCompare(b.e.date));
+    if (nights.length && nights.some(({ f }) => !f.soldOut)) picks.push({ h, nights });
+  }
+  const [lead, ...rest] = picks;
+  return lead ? [lead, ...rest.sort((a, b) => a.nights[0].e.date.localeCompare(b.nights[0].e.date))] : [];
 }
 
-function hotCard(e, h) {
-  const f = facts(e);
+// A link is "Event info" when it's an aggregator, a venue-wide listing or a homepage.
+function isInfoLink(url) {
+  try {
+    const u = new URL(url);
+    return /songkick|bandsintown|jambase|allevents|concertful/.test(u.hostname)
+      || /\/venue\//.test(u.pathname) || u.pathname === '/' || u.pathname === '';
+  } catch (err) { return true; }
+}
+
+function hotCard({ h, nights }, lead) {
   const card = document.createElement('article');
-  card.className = 'hot-card';
-  card.style.setProperty('--genre-color', genreColors[e.genre] || 'var(--blue)');
-  const when = longDay(e.date, { weekday: 'short', month: 'short', day: 'numeric' });
-  const price = f.free ? `Free${f.freeCond ? ' ' + f.freeCond : ''}` : f.price;
-  const cta = (e.cta === 'Get Tickets' || (f.official && f.source && (f.price || f.free))) ? 'Get Tickets' : 'Event Info';
+  card.className = 'hot-card' + (lead ? ' lead' : '');
+  const first = nights[0].e;
+  card.style.setProperty('--genre-color', genreColors[first.genre] || 'var(--blue)');
+  const day = iso => longDay(iso, { month: 'short', day: 'numeric' });
+  const multi = nights.length > 1;
+  const dates = nights.map(({ e }) => longDay(e.date, { weekday: 'short', month: 'short', day: 'numeric' })).join(' & ');
+
+  // Price: one line when the nights agree, per-night when they differ; nothing when unpublished.
+  const priceOf = f => f.free ? `Free${f.freeCond ? ' ' + f.freeCond : ''}` : f.price;
+  const prices = nights.map(({ e, f }) => ({ d: day(e.date), p: priceOf(f) })).filter(x => x.p);
+  const uniq = [...new Set(prices.map(x => x.p))];
+  const price = !prices.length ? '' : uniq.length === 1 ? uniq[0] : prices.map(x => `${x.d}: ${x.p}`).join(' · ');
+
+  // Status: shown per night on multi-night picks ("Dec 10 · Sold out").
+  const statuses = nights.filter(({ f }) => f.status).map(({ e, f }) => multi ? `${day(e.date)} · ${f.status}` : f.status);
+
+  // Actions: one per night when each night has its own event-specific page; one shared
+  // link when the seller only has a page covering all nights; "Event info" for
+  // informational pages; no ticket link for a sold-out night.
+  const btn = (url, text, primary, aria) =>
+    `<a class="btn ${primary ? 'primary' : 'ghost'}" href="${safeUrl(url)}" target="_blank" rel="noopener" aria-label="${esc(aria)} (opens in new tab)">${esc(text)}</a>`;
+  const per = nights.map(({ n, e, f }) => {
+    const url = n.tickets || bestLink(e, f);
+    return { e, f, url, info: !n.tickets && (isInfoLink(url) || (e.cta !== 'Get Tickets' && !(f.official && (f.price || f.free)))) };
+  });
+  let actions = '';
+  const allOwn = per.every(x => !x.info) && new Set(per.map(x => x.url)).size === per.length;
+  if (!multi) {
+    const x = per[0];
+    actions = x.f.soldOut ? '' : btn(x.url, x.info ? 'Event info' : 'Tickets', true, `${x.info ? 'Event info' : 'Tickets'}: ${first.title}, ${dates}`);
+  } else if (allOwn) {
+    actions = per.filter(x => !x.f.soldOut).map((x, i) => btn(x.url, `${day(x.e.date)} tickets`, i === 0, `Tickets for ${x.e.title}, ${day(x.e.date)}`)).join('');
+  } else if (h.sharedTickets && /^https?:/.test(h.sharedTickets.url || '')) {
+    actions = btn(h.sharedTickets.url, `Tickets · ${nights.map(({ e }) => day(e.date)).join(' & ')}`, true,
+      `Tickets for ${first.title}, ${dates}${h.sharedTickets.label ? ' — ' + h.sharedTickets.label : ''}`);
+  } else {
+    actions = per.filter(x => !x.f.soldOut).map((x, i) => btn(x.url, `${day(x.e.date)} ${x.info ? 'event info' : 'tickets'}`, i === 0,
+      `${x.info ? 'Event info' : 'Tickets'} for ${x.e.title}, ${day(x.e.date)}`)).join('');
+  }
+
   const ev = (Array.isArray(h.evidence) ? h.evidence : []).filter(x => x && /^https?:/.test(x.url || ''));
-  const checked = /^\d{4}-\d{2}-\d{2}$/.test(h.checked || '') ? longDay(h.checked, { month: 'short', day: 'numeric' }) : '';
+  const checked = /^\d{4}-\d{2}-\d{2}$/.test(h.checked || '') ? longDay(h.checked, { month: 'short', day: 'numeric', year: 'numeric' }) : '';
+  const title = multi ? first.title.replace(/\s*\((?:night \d|\d+ nights)\)\s*$/i, '') : first.title;
   card.innerHTML = `
     <div class="hot-top">
       <span class="hot-badge">HOT</span>
-      <span class="hot-when">${esc(when)}</span>
-      ${f.status ? `<span class="status-chip">${esc(f.status)}</span>` : ''}
+      <span class="hot-when">${esc(dates)}</span>
+      ${statuses.map(s => `<span class="status-chip">${esc(s)}</span>`).join('')}
     </div>
-    <h3>${esc(e.title)}</h3>
-    <p class="where">${esc(e.venue)} <span class="city">· ${esc(e.city)}</span></p>
+    <h3>${esc(title)}</h3>
+    <p class="where">${esc(first.venue)} <span class="city">· ${esc(first.city)}</span></p>
     <p class="hot-why">${esc(h.why)}</p>
     <div class="hot-foot">
-      ${price ? `<span class="hot-price">${esc(price)}</span>` : ''}
-      <a class="btn primary" href="${safeUrl(bestLink(e, f))}" target="_blank" rel="noopener"
-         aria-label="${cta}: ${esc(e.title)}, ${esc(when)} (opens in new tab)">${cta}</a>
+      ${price ? `<p class="hot-price">${esc(price)}</p>` : ''}
+      ${actions ? `<div class="hot-actions">${actions}</div>` : ''}
+      ${ev.length ? `<details class="hot-src"><summary>Sources</summary>
+        <ul>${ev.slice(0, 4).map((x, i) => `<li><a href="${safeUrl(x.url)}" target="_blank" rel="noopener">${esc(x.label || 'Source ' + (i + 1))}</a></li>`).join('')}</ul>
+        ${checked ? `<p>Checked ${esc(checked)}</p>` : ''}</details>` : ''}
     </div>
-    ${ev.length ? `<p class="src">Why it's hot: ${ev.slice(0, 3).map((x, i) => `<a href="${safeUrl(x.url)}" target="_blank" rel="noopener">${esc(x.label || 'source ' + (i + 1))}</a>`).join(' · ')}${checked ? ` · checked ${esc(checked)}` : ''}</p>` : ''}
   `;
   return card;
 }
@@ -1769,7 +1850,7 @@ function render() {
   const hotList = $('hotList');
   hotList.innerHTML = '';
   const hot = month ? chooseHot(visible) : [];
-  hot.forEach(({ h, e }) => hotList.appendChild(hotCard(e, h)));
+  hot.forEach((pick, i) => hotList.appendChild(hotCard(pick, i === 0)));
   $('hot').hidden = !hot.length;
 
   if (!visible.length) {
@@ -1827,6 +1908,13 @@ document.querySelectorAll('.quick button').forEach(b =>
   b.addEventListener('click', () => { when = b.dataset.when; day = ''; render(); })
 );
 $('freeBtn').addEventListener('click', () => { freeOnly = !freeOnly; render(); });
+// "Jump to calendar": scroll to the first listing heading without changing the shareable URL.
+$('jumpCal').addEventListener('click', ev => {
+  ev.preventDefault();
+  const target = $('calendar');
+  target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  target.focus({ preventScroll: true });
+});
 $('agesBtn').addEventListener('click', () => { allAgesOnly = !allAgesOnly; render(); });
 $('moreFilters').addEventListener('click', () => {
   const open = $('filters').classList.toggle('open');

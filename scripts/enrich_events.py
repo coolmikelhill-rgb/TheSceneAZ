@@ -766,7 +766,9 @@ def main(argv):
     hot_file = ROOT / "hot.json"
     if hot_file.exists():
         try:
-            hot = {(h.get("link"), h.get("date")) for h in json.loads(hot_file.read_text(encoding="utf-8")).get("approved", [])}
+            hot = {(n.get("link"), n.get("date"))
+                   for h in json.loads(hot_file.read_text(encoding="utf-8")).get("approved", [])
+                   for n in (h.get("nights") or [h])}   # every night of a multi-night pick
         except (ValueError, AttributeError):
             hot = set()
         last = (today + dt.timedelta(days=29)).isoformat()
