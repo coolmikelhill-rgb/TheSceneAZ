@@ -1,278 +1,22 @@
 {
- "updated": "2026-11-24",
+ "updated": "2026-11-25",
  "events": [
   {
-   "date": "2026-11-24",
-   "title": "As I Lay Dying",
-   "venue": "191 Toole",
-   "city": "Tucson",
-   "genre": "rock",
-   "sub": "Pop / Rock / Alternative",
-   "scale": "club",
-   "price": "See listing",
-   "type": "verified",
-   "cta": "Get Tickets",
-   "source": "SeatGeek",
-   "link": "https://seatgeek.com/as-i-lay-dying-tickets/tucson-arizona-191-toole-2026-11-24-7-30-pm/concert/18239353",
-   "details": {
-    "tried": "2026-11-24T22:41-07:00",
-    "note": "only a resale or homepage link, and no venue event page found"
-   }
-  },
-  {
-   "date": "2026-11-24",
-   "title": "ASU Philharmonia",
-   "venue": "ASU Gammage Auditorium",
-   "city": "Tempe",
-   "genre": "rock",
-   "sub": "",
-   "scale": "club",
-   "price": "See listing",
-   "type": "verified",
-   "cta": "Get Tickets",
-   "source": "SeatGeek",
-   "link": "https://seatgeek.com/asu-philharmonia-tickets/tempe-arizona-asu-gammage-auditorium-2026-11-24-7-30-pm/concert/18500470",
-   "details": {
-    "tried": "2026-11-24T22:41-07:00",
-    "note": "only a resale or homepage link, and no venue event page found"
-   }
-  },
-  {
-   "date": "2026-11-24",
-   "title": "Bayonne - The ' Filters' Tour",
+   "date": "2026-11-25",
+   "title": "130 Club W/ Dj Reco",
    "venue": "Valley Bar",
    "city": "Phoenix",
    "genre": "rock",
    "sub": "",
    "scale": "club",
-   "price": "7:30 PM",
+   "price": "10:00 PM",
    "type": "verified",
    "cta": "Get Tickets",
    "source": "Valley Bar",
-   "link": "https://www.valleybarphx.com/tm-event/bayonne-the-filters-tour/",
-   "confirmed": {
-    "doors": "7:00 PM",
-    "show": "7:30 PM",
-    "price": "$20 adv · $25 day of show (+ fees)",
-    "ages": "16+",
-    "checked": "2026-11-23",
-    "source": "https://www.valleybarphx.com/tm-event/bayonne-the-filters-tour/",
-    "goIf": "Go if you like layered indie electronic music and want to see how the songs are built live."
-   },
+   "link": "https://www.valleybarphx.com/tm-event/130-club-w-dj-reco/",
    "details": {
-    "url": "https://www.valleybarphx.com/tm-event/bayonne-the-filters-tour/",
-    "official": true,
-    "doors": "7:00 PM",
-    "show": "7:30 PM",
-    "price": {
-     "min": 20.0,
-     "text": "$20 adv · $25 door",
-     "fees": "+ fees"
-    },
-    "ages": "16+",
-    "minAge": 16,
-    "lineup": [
-     {
-      "name": "Bayonne"
-     },
-     {
-      "name": "Bobbing",
-      "about": "a psych-pop indietronica project"
-     }
-    ],
-    "checked": "2026-11-24",
-    "tried": "2026-11-24T22:41-07:00"
-   }
-  },
-  {
-   "date": "2026-11-24",
-   "title": "Dizasterpiece",
-   "venue": "The 44 Sports Grill and Nightlife",
-   "city": "Glendale",
-   "genre": "rock",
-   "sub": "",
-   "scale": "club",
-   "price": "See listing",
-   "type": "verified",
-   "cta": "Get Tickets",
-   "source": "SeatGeek",
-   "link": "https://seatgeek.com/dizasterpiece-tickets/glendale-arizona-the-44-sports-grill-and-nightlife-2026-11-24-6-pm/concert/18735936",
-   "details": {
-    "tried": "2026-11-24T22:41-07:00",
-    "note": "only a resale or homepage link, and no venue event page found"
-   }
-  },
-  {
-   "date": "2026-11-24",
-   "title": "George Clanton",
-   "venue": "Nile Theater",
-   "city": "Mesa",
-   "genre": "pop",
-   "sub": "Chillwave / Vaporwave",
-   "scale": "club",
-   "price": "See listing",
-   "type": "verified",
-   "cta": "Get Tickets",
-   "source": "19hz",
-   "link": "https://wl.eventim.us/event/george-clanton/700766?afflky=BestLifePresents",
-   "details": {
-    "url": "https://wl.eventim.us/event/george-clanton/700766?afflky=BestLifePresents",
-    "official": true,
-    "status": "Postponed",
-    "checked": "2026-11-24",
-    "tried": "2026-11-24T22:41-07:00"
-   }
-  },
-  {
-   "date": "2026-11-24",
-   "title": "Jaleo",
-   "venue": "MIM Music Theater",
-   "city": "Phoenix",
-   "genre": "world",
-   "sub": "Global",
-   "scale": "club",
-   "price": "See listing",
-   "type": "verified",
-   "cta": "Get Tickets",
-   "source": "MIM",
-   "link": "https://mim.org/events/jaleo-nov-24-2026/",
-   "details": {
-    "url": "https://mim.org/events/jaleo-nov-24-2026/",
-    "official": true,
-    "listed": "7:00 PM",
-    "price": {
-     "min": 33.5,
-     "text": "$33.50–38.50"
-    },
-    "about": "a local Latin band",
-    "checked": "2026-11-24",
-    "tried": "2026-11-24T22:41-07:00",
-    "goIf": "Go if you want to catch a local Latin band — it's the only Latin and world music show in Phoenix on Tuesday."
-   }
-  },
-  {
-   "date": "2026-11-24",
-   "title": "Katseye",
-   "venue": "Mortgage Matchup Center",
-   "city": "Phoenix",
-   "genre": "pop",
-   "sub": "K-Pop",
-   "scale": "arena",
-   "price": "See listing",
-   "type": "verified",
-   "cta": "Get Tickets",
-   "source": "KTAR",
-   "link": "https://mortgagematchupcenter.com/events/katseye/",
-   "details": {
-    "url": "https://mortgagematchupcenter.com/events/katseye/",
-    "official": true,
-    "listed": "8:00 PM",
-    "checked": "2026-11-24",
-    "tried": "2026-11-24T22:41-07:00",
-    "goIf": "Go if you're in the mood for K-Pop — it's the only pop show in Phoenix on Tuesday."
-   }
-  },
-  {
-   "date": "2026-11-24",
-   "title": "Nelly Hawley-Hayes | Senior Recital",
-   "venue": "The Century Room",
-   "city": "Tucson",
-   "genre": "jazz",
-   "sub": "",
-   "scale": "club",
-   "price": "See listing",
-   "type": "verified",
-   "cta": "Get Tickets",
-   "source": "The Century Room",
-   "link": "https://link.dice.fm/sf1653fd019a",
-   "details": {
-    "url": "https://dice.fm/event/w83y5r-nelly-hawley-hayes-senior-recital-24th-nov-the-century-room-tucson-tickets?_branch_match_id=1654011537080593227&utm_medium=partners_api&_branch_referrer=H4sIAAAAAAAAA8soKSkottLXz8nMy9ZLyUxO1UvL1S9OMzQzNU5LMTC0TLSvK0pNSy0qysxLj08qyi8vTi2ydc4oys9NBQBRDTJlOwAAAA%3D%3D",
-    "official": true,
-    "show": "6:30 PM",
-    "doors": "6:00 PM",
-    "price": {
-     "min": 5.0,
-     "text": "$5–10",
-     "fees": "+ fees"
-    },
-    "about": "a Downbeat award winning jazz vocalist from Richmond",
-    "checked": "2026-11-24",
-    "tried": "2026-11-24T22:41-07:00",
-    "goIf": "Go if you want to catch a Downbeat award winning jazz vocalist from Richmond — it's a student recital, and it's the only jazz show in Tucson on Tuesday. Doors are at 6, but the show starts at 6:30."
-   }
-  },
-  {
-   "date": "2026-11-24",
-   "title": "Odyssey Storytelling: Adulting",
-   "venue": "Club Congress",
-   "city": "Tucson",
-   "genre": "rock",
-   "sub": "",
-   "scale": "club",
-   "price": "See listing",
-   "type": "verified",
-   "cta": "Get Tickets",
-   "source": "Club Congress",
-   "link": "https://odyssey-storytelling.square.site/",
-   "details": {
-    "tried": "2026-11-24T22:41-07:00",
-    "note": "only a resale or homepage link, and no venue event page found"
-   }
-  },
-  {
-   "date": "2026-11-24",
-   "title": "Pretty Sick",
-   "venue": "Crescent Ballroom",
-   "city": "Phoenix",
-   "genre": "rock",
-   "scale": "club",
-   "price": "See listing",
-   "type": "verified",
-   "cta": "Event Info",
-   "source": "Songkick",
-   "link": "https://www.songkick.com/concerts/43365409-pretty-sick-at-crescent-ballroom",
-   "details": {
-    "url": "https://www.crescentphx.com/tm-event/pretty-sick/",
-    "official": true,
-    "doors": "7:00 PM",
-    "show": "8:00 PM",
-    "price": {
-     "min": 25.0,
-     "text": "$25 adv · $28 door",
-     "fees": "+ fees"
-    },
-    "ages": "16+",
-    "minAge": 16,
-    "lineup": [
-     {
-      "name": "Pretty Sick"
-     },
-     {
-      "name": "Sex Week"
-     }
-    ],
-    "checked": "2026-11-24",
-    "tried": "2026-11-24T22:41-07:00"
-   }
-  },
-  {
-   "date": "2026-11-24",
-   "title": "Strawberry Girls w/ Andres",
-   "venue": "The Rebel Lounge",
-   "city": "Phoenix",
-   "genre": "rock",
-   "scale": "club",
-   "price": "See listing",
-   "type": "verified",
-   "cta": "Event Info",
-   "source": "Songkick",
-   "link": "https://www.songkick.com/concerts/43446938-strawberry-girls-at-rebel-lounge",
-   "details": {
-    "url": "https://www.songkick.com/concerts/43446938-strawberry-girls-at-rebel-lounge",
-    "official": false,
-    "listed": "7:30 PM",
-    "checked": "2026-11-24",
-    "tried": "2026-11-24T22:41-07:00"
+    "tried": "2026-11-25T14:49-07:00",
+    "note": "date not confirmed on page"
    }
   },
   {
@@ -289,7 +33,7 @@
    "source": "Phoenix New Times",
    "link": "https://rhythmroom.com",
    "details": {
-    "tried": "2026-11-24T13:39-07:00",
+    "tried": "2026-11-25T14:49-07:00",
     "note": "only a resale or homepage link, and no venue event page found"
    }
   },
@@ -307,7 +51,7 @@
    "source": "SeatGeek",
    "link": "https://seatgeek.com/bijou-tickets/phoenix-arizona-roosevelt-row-marketplace-2026-11-25-9-pm/concert/18863828",
    "details": {
-    "tried": "2026-11-24T13:39-07:00",
+    "tried": "2026-11-25T14:49-07:00",
     "note": "only a resale or homepage link, and no venue event page found"
    }
   },
@@ -325,7 +69,7 @@
    "source": "SeatGeek",
    "link": "https://seatgeek.com/el-fantasma-tickets/phoenix-arizona-rancho-ochoa-2026-11-25-6-pm/concert/18736097",
    "details": {
-    "tried": "2026-11-24T13:39-07:00",
+    "tried": "2026-11-25T14:49-07:00",
     "note": "only a resale or homepage link, and no venue event page found"
    }
   },
@@ -343,7 +87,7 @@
    "source": "Club Congress",
    "link": "https://link.dice.fm/Uccf4ed0c212",
    "details": {
-    "url": "https://dice.fm/event/ekg7x2-first-round-25th-nov-club-congress-tucson-tickets?_branch_match_id=1653875184621874595&utm_medium=partners_api&_branch_referrer=H4sIAAAAAAAAA8soKSkottLXz8nMy9ZLyUxO1UvL1Q9NTk4zSU0xSDYyNLKvK0pNSy0qysxLj08qyi8vTi2ydc4oys9NBQB03%2F2bOwAAAA%3D%3D",
+    "url": "https://dice.fm/event/ekg7x2-first-round-25th-nov-club-congress-tucson-tickets?_branch_match_id=1654255125128504853&utm_medium=partners_api&_branch_referrer=H4sIAAAAAAAAA8soKSkottLXz8nMy9ZLyUxO1UvL1Q9NTk4zSU0xSDYyNLKvK0pNSy0qysxLj08qyi8vTi2ydc4oys9NBQB03%2F2bOwAAAA%3D%3D",
     "official": true,
     "doors": "7:00 PM",
     "show": "7:30 PM",
@@ -353,8 +97,8 @@
     "ages": "All ages",
     "minAge": 0,
     "about": "a monthly lineup of songwriters",
-    "checked": "2026-11-24",
-    "tried": "2026-11-24T13:39-07:00",
+    "checked": "2026-11-25",
+    "tried": "2026-11-25T14:49-07:00",
     "goIf": "Go if you want to catch a monthly lineup of songwriters. Doors are at 7, but the show starts at 7:30."
    }
   },
@@ -372,7 +116,7 @@
    "source": "SeatGeek",
    "link": "https://seatgeek.com/hippie-death-cult-tickets/mesa-arizona-the-rosetta-room-2026-11-25-7-pm/concert/18736111",
    "details": {
-    "tried": "2026-11-24T13:39-07:00",
+    "tried": "2026-11-25T14:49-07:00",
     "note": "only a resale or homepage link, and no venue event page found"
    }
   },
@@ -393,8 +137,8 @@
     "url": "https://www.songkick.com/concerts/43431074-jejune-at-rebel-lounge",
     "official": false,
     "listed": "7:30 PM",
-    "checked": "2026-11-24",
-    "tried": "2026-11-24T13:39-07:00"
+    "checked": "2026-11-25",
+    "tried": "2026-11-25T14:49-07:00"
    }
   },
   {
@@ -418,8 +162,8 @@
      "min": 54.5,
      "text": "$54.50–59.50"
     },
-    "checked": "2026-11-24",
-    "tried": "2026-11-24T13:39-07:00",
+    "checked": "2026-11-25",
+    "tried": "2026-11-25T14:49-07:00",
     "goIf": "Go if you want a holiday show of bluegrass — it's the only folk and Americana show in Phoenix on Wednesday."
    }
   },
@@ -451,8 +195,8 @@
     "ends": "2:00 AM",
     "listed": "9:00 PM",
     "price": {
-     "min": 34.12,
-     "text": "$34.12"
+     "min": 35.19,
+     "text": "$35.19"
     },
     "ages": "21+",
     "minAge": 21,
@@ -464,8 +208,8 @@
       "name": "No Stylist"
      }
     ],
-    "checked": "2026-11-24",
-    "tried": "2026-11-24T13:39-07:00",
+    "checked": "2026-11-25",
+    "tried": "2026-11-25T14:49-07:00",
     "goIf": "Go if you want an extended DJ set of tech house — it's the only house show in Phoenix on Wednesday. No Stylist is on the bill too."
    }
   },
@@ -488,8 +232,8 @@
     "doors": "5:00 PM",
     "show": "6:00 PM",
     "note": "two-drink minimum",
-    "checked": "2026-11-24",
-    "tried": "2026-11-24T13:39-07:00",
+    "checked": "2026-11-25",
+    "tried": "2026-11-25T14:49-07:00",
     "goIf": "Go if you're in the mood for dance rock. Doors are at 5, but the show starts at 6."
    }
   },
@@ -507,7 +251,7 @@
    "source": "The Century Room",
    "link": "https://link.dice.fm/B519135c61e0",
    "details": {
-    "url": "https://dice.fm/event/bvlb7x-the-hot-club-of-tucson-hot-jazz-wednesday-25th-nov-the-century-room-tucson-tickets?_branch_match_id=1653875204127937423&utm_medium=partners_api&_branch_referrer=H4sIAAAAAAAAA8soKSkottLXz8nMy9ZLyUxO1UvL1XcyNbQ0NDZNNjNMNbCvK0pNSy0qysxLj08qyi8vTi2ydc4oys9NBQCz4BEyOwAAAA%3D%3D",
+    "url": "https://dice.fm/event/bvlb7x-the-hot-club-of-tucson-hot-jazz-wednesday-25th-nov-the-century-room-tucson-tickets?_branch_match_id=1654255142459196752&utm_medium=partners_api&_branch_referrer=H4sIAAAAAAAAA8soKSkottLXz8nMy9ZLyUxO1UvL1XcyNbQ0NDZNNjNMNbCvK0pNSy0qysxLj08qyi8vTi2ydc4oys9NBQCz4BEyOwAAAA%3D%3D",
     "official": true,
     "show": "6:30 PM",
     "sets": [
@@ -526,8 +270,8 @@
     "ages": "16+",
     "minAge": 16,
     "about": "a swinging Hot Club of Tucson Quartet",
-    "checked": "2026-11-24",
-    "tried": "2026-11-24T13:39-07:00",
+    "checked": "2026-11-25",
+    "tried": "2026-11-25T14:49-07:00",
     "goIf": "Go if you want to catch a swinging Hot Club of Tucson Quartet — it's the earliest start in Tucson on Wednesday. Sets at 6:30 and 8."
    }
   },
@@ -544,7 +288,7 @@
    "source": "Songkick",
    "link": "https://www.songkick.com/concerts/43371951-thoughts-on-bowling-at-nile-theater",
    "details": {
-    "tried": "2026-11-24T13:39-07:00",
+    "tried": "2026-11-25T14:49-07:00",
     "note": "venue 'Nile Theater' not found on page"
    }
   },
@@ -589,8 +333,8 @@
       "about": "a riot grrrl shoegaze band from PHX"
      }
     ],
-    "checked": "2026-11-24",
-    "tried": "2026-11-24T13:39-07:00",
+    "checked": "2026-11-25",
+    "tried": "2026-11-25T14:49-07:00",
     "goIf": "Go if you want to catch an indie rock musician from Phx, AZ — it's the earliest start in Phoenix on Wednesday. Tournament, Belgium Tree and Silverface Twin (riot grrrl shoegaze band from PHX) are on the bill too."
    }
   },
@@ -606,7 +350,11 @@
    "type": "verified",
    "cta": "Get Tickets",
    "source": "Valley Bar",
-   "link": "https://www.valleybarphx.com/tm-event/latin-night-with-dj-reco-13/"
+   "link": "https://www.valleybarphx.com/tm-event/latin-night-with-dj-reco-13/",
+   "details": {
+    "tried": "2026-11-25T14:49-07:00",
+    "note": "page unavailable"
+   }
   },
   {
    "date": "2026-11-27",
@@ -1538,7 +1286,7 @@
    "source": "KTAR",
    "link": "https://mortgagematchupcenter.com/events/the-neighbourhood/",
    "details": {
-    "tried": "2026-11-24T16:49-07:00",
+    "tried": "2026-11-25T14:49-07:00",
     "note": "date not confirmed on page"
    }
   },
@@ -1933,8 +1681,8 @@
    "details": {
     "url": "https://www.desertdiamondarena.com/event/rush/52/",
     "official": true,
-    "checked": "2026-11-24",
-    "tried": "2026-11-24T14:53-07:00",
+    "checked": "2026-11-25",
+    "tried": "2026-11-25T14:49-07:00",
     "goIf": "Go if you're in the mood for prog rock."
    }
   },
@@ -3126,7 +2874,7 @@
    "source": "KTAR",
    "link": "https://www.ticketmaster.com/desert-diamond-arena-tickets-glendale/venue/204917?startDate=2026-12-09&endDate=2026-12-10",
    "details": {
-    "tried": "2026-11-24T16:49-07:00",
+    "tried": "2026-11-25T14:49-07:00",
     "note": "page unavailable"
    }
   },
@@ -3144,7 +2892,7 @@
    "source": "SeatGeek",
    "link": "https://seatgeek.com/hudson-westbrook-tickets/tempe-arizona-mullett-arena-2026-12-09-7-pm/concert/18370892",
    "details": {
-    "tried": "2026-11-24T16:49-07:00",
+    "tried": "2026-11-25T14:49-07:00",
     "note": "only a resale or homepage link, and no venue event page found"
    }
   },
@@ -3274,7 +3022,7 @@
    "source": "SeatGeek",
    "link": "https://seatgeek.com/gracie-abrams-tickets/glendale-arizona-desert-diamond-arena-2026-12-10-8-pm/concert/18270515",
    "details": {
-    "tried": "2026-11-24T16:49-07:00",
+    "tried": "2026-11-25T14:49-07:00",
     "note": "only a resale or homepage link, and no venue event page found"
    }
   },
@@ -3421,8 +3169,8 @@
     "url": "https://www.songkick.com/concerts/43464114-format-at-nile-theater",
     "official": false,
     "listed": "7:30 PM",
-    "checked": "2026-11-24",
-    "tried": "2026-11-24T16:49-07:00"
+    "checked": "2026-11-25",
+    "tried": "2026-11-25T14:49-07:00"
    }
   },
   {
@@ -3749,8 +3497,8 @@
     "url": "https://www.songkick.com/concerts/43464118-format-at-nile-theater",
     "official": false,
     "listed": "7:30 PM",
-    "checked": "2026-11-24",
-    "tried": "2026-11-24T16:49-07:00"
+    "checked": "2026-11-25",
+    "tried": "2026-11-25T14:49-07:00"
    }
   },
   {
@@ -3769,8 +3517,8 @@
    "details": {
     "url": "https://www.desertdiamondarena.com/event/alt-az-93-3-presents%3a-ugly-sweater-holiday-party-with-sublime-slightly-stoopid-and-codefendants/108/",
     "official": true,
-    "checked": "2026-11-24",
-    "tried": "2026-11-24T16:49-07:00",
+    "checked": "2026-11-25",
+    "tried": "2026-11-25T14:49-07:00",
     "goIf": "Go if you want a holiday show of reggae rock."
    }
   },
@@ -5451,7 +5199,7 @@
    "source": "The Van Buren",
    "link": "https://www.ticketmaster.com/president-gator-25th-anniversary-show-miniature-phoenix-arizona-12-19-2026/event/190064FD00FDC9DF",
    "details": {
-    "tried": "2026-11-24T14:53-07:00",
+    "tried": "2026-11-25T14:49-07:00",
     "note": "page unavailable"
    }
   },
@@ -5565,6 +5313,20 @@
    "cta": "Get Tickets",
    "source": "SeatGeek",
    "link": "https://seatgeek.com/deja-vu-tickets/scottsdale-arizona-casino-arizona-2026-12-20-3-pm/concert/18843503"
+  },
+  {
+   "date": "2026-12-20",
+   "title": "In The Christmas Mood - The Glenn Miller Orchestra",
+   "venue": "Elks Theatre",
+   "city": "Prescott",
+   "genre": "jazz",
+   "sub": "Jazz / Pop / Rock / Blues",
+   "scale": "club",
+   "price": "See listing",
+   "type": "verified",
+   "cta": "Get Tickets",
+   "source": "SeatGeek",
+   "link": "https://seatgeek.com/glenn-miller-orchestra-tickets/prescott-arizona-elks-theatre-1-2026-12-20-3-pm/concert/18704936"
   },
   {
    "date": "2026-12-20",
@@ -14676,6 +14438,20 @@
    "cta": "Get Tickets",
    "source": "SeatGeek",
    "link": "https://seatgeek.com/fall-out-boy-tickets/phoenix-arizona-chase-field-2027-08-19-5-30-pm/concert/18753432"
+  },
+  {
+   "date": "2027-08-21",
+   "title": "Los Tucanes de Tijuana",
+   "venue": "Cocopah Casino",
+   "city": "Somerton",
+   "genre": "world",
+   "sub": "Latin",
+   "scale": "club",
+   "price": "See listing",
+   "type": "verified",
+   "cta": "Get Tickets",
+   "source": "SeatGeek",
+   "link": "https://seatgeek.com/los-tucanes-de-tijuana-tickets/somerton-arizona-cocopah-casino-2027-08-21-8-pm/concert/18854481"
   }
  ]
 }
