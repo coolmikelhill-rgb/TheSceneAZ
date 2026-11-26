@@ -1,343 +1,6 @@
 {
- "updated": "2026-11-25",
+ "updated": "2026-11-26",
  "events": [
-  {
-   "date": "2026-11-25",
-   "title": "130 Club W/ Dj Reco",
-   "venue": "Valley Bar",
-   "city": "Phoenix",
-   "genre": "rock",
-   "sub": "",
-   "scale": "club",
-   "price": "10:00 PM",
-   "type": "verified",
-   "cta": "Get Tickets",
-   "source": "Valley Bar",
-   "link": "https://www.valleybarphx.com/tm-event/130-club-w-dj-reco/",
-   "details": {
-    "tried": "2026-11-25T22:28-07:00",
-    "note": "date not confirmed on page"
-   }
-  },
-  {
-   "date": "2026-11-25",
-   "title": "An Evening With Fred Eaglesmith",
-   "venue": "Rhythm Room",
-   "city": "Phoenix",
-   "genre": "country",
-   "sub": "Alt-Country",
-   "scale": "club",
-   "price": "See listing",
-   "type": "verified",
-   "cta": "Event Info",
-   "source": "Phoenix New Times",
-   "link": "https://rhythmroom.com",
-   "details": {
-    "tried": "2026-11-25T22:28-07:00",
-    "note": "only a resale or homepage link, and no venue event page found"
-   }
-  },
-  {
-   "date": "2026-11-25",
-   "title": "Bijou",
-   "venue": "Roosevelt Row Marketplace",
-   "city": "Phoenix",
-   "genre": "rock",
-   "sub": "",
-   "scale": "club",
-   "price": "See listing",
-   "type": "verified",
-   "cta": "Get Tickets",
-   "source": "SeatGeek",
-   "link": "https://seatgeek.com/bijou-tickets/phoenix-arizona-roosevelt-row-marketplace-2026-11-25-9-pm/concert/18863828",
-   "details": {
-    "tried": "2026-11-25T22:28-07:00",
-    "note": "only a resale or homepage link, and no venue event page found"
-   }
-  },
-  {
-   "date": "2026-11-25",
-   "title": "El Fantasma",
-   "venue": "Rancho Ochoa",
-   "city": "Phoenix",
-   "genre": "world",
-   "sub": "Latin",
-   "scale": "club",
-   "price": "See listing",
-   "type": "verified",
-   "cta": "Get Tickets",
-   "source": "SeatGeek",
-   "link": "https://seatgeek.com/el-fantasma-tickets/phoenix-arizona-rancho-ochoa-2026-11-25-6-pm/concert/18736097",
-   "details": {
-    "tried": "2026-11-25T22:28-07:00",
-    "note": "only a resale or homepage link, and no venue event page found"
-   }
-  },
-  {
-   "date": "2026-11-25",
-   "title": "First Round",
-   "venue": "Club Congress",
-   "city": "Tucson",
-   "genre": "rock",
-   "sub": "",
-   "scale": "club",
-   "price": "See listing",
-   "type": "verified",
-   "cta": "Get Tickets",
-   "source": "Club Congress",
-   "link": "https://link.dice.fm/Uccf4ed0c212",
-   "details": {
-    "url": "https://dice.fm/event/ekg7x2-first-round-25th-nov-club-congress-tucson-tickets?_branch_match_id=1654370670954391092&utm_medium=partners_api&_branch_referrer=H4sIAAAAAAAAA8soKSkottLXz8nMy9ZLyUxO1UvL1Q9NTk4zSU0xSDYyNLKvK0pNSy0qysxLj08qyi8vTi2ydc4oys9NBQB03%2F2bOwAAAA%3D%3D",
-    "official": true,
-    "doors": "7:00 PM",
-    "show": "7:30 PM",
-    "free": {
-     "condition": ""
-    },
-    "ages": "All ages",
-    "minAge": 0,
-    "about": "a monthly lineup of songwriters",
-    "checked": "2026-11-25",
-    "tried": "2026-11-25T22:28-07:00",
-    "goIf": "Go if you want to catch a monthly lineup of songwriters. Doors are at 7, but the show starts at 7:30."
-   }
-  },
-  {
-   "date": "2026-11-25",
-   "title": "Hippie Death Cult",
-   "venue": "The Rosetta Room",
-   "city": "Mesa",
-   "genre": "rock",
-   "sub": "Hard Rock",
-   "scale": "club",
-   "price": "See listing",
-   "type": "verified",
-   "cta": "Get Tickets",
-   "source": "SeatGeek",
-   "link": "https://seatgeek.com/hippie-death-cult-tickets/mesa-arizona-the-rosetta-room-2026-11-25-7-pm/concert/18736111",
-   "details": {
-    "tried": "2026-11-25T22:28-07:00",
-    "note": "only a resale or homepage link, and no venue event page found"
-   }
-  },
-  {
-   "date": "2026-11-25",
-   "title": "Jejune w/ The Ritornello Form",
-   "venue": "The Rebel Lounge",
-   "city": "Phoenix",
-   "genre": "rock",
-   "sub": "Emo / Indie Rock",
-   "scale": "club",
-   "price": "See listing",
-   "type": "verified",
-   "cta": "Event Info",
-   "source": "Songkick",
-   "link": "https://www.songkick.com/concerts/43431074-jejune-at-rebel-lounge",
-   "details": {
-    "url": "https://www.songkick.com/concerts/43431074-jejune-at-rebel-lounge",
-    "official": false,
-    "listed": "7:30 PM",
-    "checked": "2026-11-25",
-    "tried": "2026-11-25T22:28-07:00"
-   }
-  },
-  {
-   "date": "2026-11-25",
-   "title": "Mark O’Connor’s An Appalachian Christmas",
-   "venue": "MIM Music Theater",
-   "city": "Phoenix",
-   "genre": "folk",
-   "sub": "Bluegrass",
-   "scale": "club",
-   "price": "See listing",
-   "type": "verified",
-   "cta": "Get Tickets",
-   "source": "MIM",
-   "link": "https://mim.org/events/mark-oconnors-an-appalachian-christmas/",
-   "details": {
-    "url": "https://mim.org/events/mark-oconnors-an-appalachian-christmas/",
-    "official": true,
-    "listed": "7:00 PM",
-    "price": {
-     "min": 54.5,
-     "text": "$54.50–59.50"
-    },
-    "checked": "2026-11-25",
-    "tried": "2026-11-25T22:28-07:00",
-    "goIf": "Go if you want a holiday show of bluegrass — it's the only folk and Americana show in Phoenix on Wednesday."
-   }
-  },
-  {
-   "date": "2026-11-25",
-   "title": "Seth Troxler (Extended Set) Slacker Phoenix Holiday Special",
-   "venue": "Walter Where?House",
-   "city": "Phoenix",
-   "genre": "house",
-   "sub": "Tech House / Deep House",
-   "scale": "club",
-   "price": "9pm-1:25am · $34.07-36.13 · 21+ · Walter Wherehouse",
-   "type": "verified",
-   "cta": "Get Tickets",
-   "source": "19hz",
-   "link": "https://wl.eventim.us/event/seth-troxler-extended-set-slacker-phoenix-holiday-special/707866?afflky=WalterWhereHouse&nts_trk=a9e71352-915a-4f20-8ead-c18765e4a3cc",
-   "confirmed": {
-    "doors": "9:00 PM",
-    "show": "9:00 PM",
-    "ends": "2:00 AM",
-    "price": "$28 adv · $30 at the door",
-    "ages": "21+",
-    "checked": "2026-11-23",
-    "source": "https://wl.eventim.us/event/seth-troxler-extended-set-slacker-phoenix-holiday-special/707866?afflky=WalterWhereHouse"
-   },
-   "details": {
-    "url": "https://wl.eventim.us/event/seth-troxler-extended-set-slacker-phoenix-holiday-special/707866?afflky=WalterWhereHouse&nts_trk=a9e71352-915a-4f20-8ead-c18765e4a3cc",
-    "official": true,
-    "ends": "2:00 AM",
-    "listed": "9:00 PM",
-    "price": {
-     "min": 35.19,
-     "text": "$35.19"
-    },
-    "ages": "21+",
-    "minAge": 21,
-    "lineup": [
-     {
-      "name": "Seth Troxler"
-     },
-     {
-      "name": "No Stylist"
-     }
-    ],
-    "checked": "2026-11-25",
-    "tried": "2026-11-25T22:28-07:00",
-    "goIf": "Go if you want an extended DJ set of tech house — it's the only house show in Phoenix on Wednesday. No Stylist is on the bill too."
-   }
-  },
-  {
-   "date": "2026-11-25",
-   "title": "Thaddeus Rose Band (Dance Rock)",
-   "venue": "Westside Blues & Jazz",
-   "city": "Glendale",
-   "genre": "rock",
-   "sub": "Dance Rock",
-   "scale": "club",
-   "price": "See listing (2-drink min)",
-   "type": "verified",
-   "cta": "Get Tickets",
-   "source": "Westside box office",
-   "link": "https://boxoffice.westsideblues.com/events/westsidebluesjazzmore/1968293?date=2026-11-25",
-   "details": {
-    "url": "https://boxoffice.westsideblues.com/events/westsidebluesjazzmore/1968293?date=2026-11-25",
-    "official": true,
-    "doors": "5:00 PM",
-    "show": "6:00 PM",
-    "note": "two-drink minimum",
-    "checked": "2026-11-25",
-    "tried": "2026-11-25T22:28-07:00",
-    "goIf": "Go if you're in the mood for dance rock. Doors are at 5, but the show starts at 6."
-   }
-  },
-  {
-   "date": "2026-11-25",
-   "title": "The Hot Club of Tucson | Hot Jazz Wednesday",
-   "venue": "The Century Room",
-   "city": "Tucson",
-   "genre": "jazz",
-   "sub": "",
-   "scale": "club",
-   "price": "See listing",
-   "type": "verified",
-   "cta": "Get Tickets",
-   "source": "The Century Room",
-   "link": "https://link.dice.fm/B519135c61e0",
-   "details": {
-    "url": "https://dice.fm/event/bvlb7x-the-hot-club-of-tucson-hot-jazz-wednesday-25th-nov-the-century-room-tucson-tickets?_branch_match_id=1654370689214838707&utm_medium=partners_api&_branch_referrer=H4sIAAAAAAAAA8soKSkottLXz8nMy9ZLyUxO1UvL1XcyNbQ0NDZNNjNMNbCvK0pNSy0qysxLj08qyi8vTi2ydc4oys9NBQCz4BEyOwAAAA%3D%3D",
-    "official": true,
-    "show": "6:30 PM",
-    "sets": [
-     {
-      "time": "6:30 PM"
-     },
-     {
-      "time": "8:00 PM"
-     }
-    ],
-    "price": {
-     "min": 10.0,
-     "text": "$10–15",
-     "fees": "+ fees"
-    },
-    "ages": "16+",
-    "minAge": 16,
-    "about": "a swinging Hot Club of Tucson Quartet",
-    "checked": "2026-11-25",
-    "tried": "2026-11-25T22:28-07:00",
-    "goIf": "Go if you want to catch a swinging Hot Club of Tucson Quartet — it's the earliest start in Tucson on Wednesday. Sets at 6:30 and 8."
-   }
-  },
-  {
-   "date": "2026-11-25",
-   "title": "Thoughts on Bowling & MooseCreek Park w/ HummusVacuum",
-   "venue": "Nile Theater",
-   "city": "Mesa",
-   "genre": "rock",
-   "scale": "club",
-   "price": "See listing",
-   "type": "verified",
-   "cta": "Event Info",
-   "source": "Songkick",
-   "link": "https://www.songkick.com/concerts/43371951-thoughts-on-bowling-at-nile-theater",
-   "details": {
-    "tried": "2026-11-25T22:28-07:00",
-    "note": "venue 'Nile Theater' not found on page"
-   }
-  },
-  {
-   "date": "2026-11-25",
-   "title": "Veronica Everheart",
-   "venue": "Valley Bar",
-   "city": "Phoenix",
-   "genre": "rock",
-   "sub": "",
-   "scale": "club",
-   "price": "6:30 PM",
-   "type": "verified",
-   "cta": "Get Tickets",
-   "source": "Valley Bar",
-   "link": "https://www.valleybarphx.com/tm-event/veronica-everheart/",
-   "details": {
-    "url": "https://www.valleybarphx.com/tm-event/veronica-everheart/",
-    "official": true,
-    "doors": "6:00 PM",
-    "show": "6:30 PM",
-    "price": {
-     "min": 15.0,
-     "text": "$15 adv · $20 door",
-     "fees": "+ fees"
-    },
-    "ages": "16+",
-    "minAge": 16,
-    "lineup": [
-     {
-      "name": "Veronica Everheart",
-      "about": "an indie rock musician from Phx, AZ"
-     },
-     {
-      "name": "Tournament"
-     },
-     {
-      "name": "Belgium Tree"
-     },
-     {
-      "name": "Silverface Twin",
-      "about": "a riot grrrl shoegaze band from PHX"
-     }
-    ],
-    "checked": "2026-11-25",
-    "tried": "2026-11-25T22:28-07:00",
-    "goIf": "Go if you want to catch an indie rock musician from Phx, AZ — it's the earliest start in Phoenix on Wednesday. Tournament, Belgium Tree and Silverface Twin (riot grrrl shoegaze band from PHX) are on the bill too."
-   }
-  },
   {
    "date": "2026-11-26",
    "title": "Latin Night With Dj Reco",
@@ -352,7 +15,7 @@
    "source": "Valley Bar",
    "link": "https://www.valleybarphx.com/tm-event/latin-night-with-dj-reco-13/",
    "details": {
-    "tried": "2026-11-25T14:49-07:00",
+    "tried": "2026-11-26T14:42-07:00",
     "note": "page unavailable"
    }
   },
@@ -368,7 +31,11 @@
    "type": "verified",
    "cta": "Get Tickets",
    "source": "Valley Bar",
-   "link": "https://www.valleybarphx.com/tm-event/130-club-hip-hop-rb-w-dj-reco-2/"
+   "link": "https://www.valleybarphx.com/tm-event/130-club-hip-hop-rb-w-dj-reco-2/",
+   "details": {
+    "tried": "2026-11-26T14:42-07:00",
+    "note": "date not confirmed on page"
+   }
   },
   {
    "date": "2026-11-27",
@@ -381,7 +48,14 @@
    "type": "verified",
    "cta": "Event Info",
    "source": "Songkick",
-   "link": "https://www.songkick.com/concerts/43429241-all-your-friends-at-rebel-lounge"
+   "link": "https://www.songkick.com/concerts/43429241-all-your-friends-at-rebel-lounge",
+   "details": {
+    "url": "https://www.songkick.com/concerts/43429241-all-your-friends-at-rebel-lounge",
+    "official": false,
+    "listed": "9:00 PM",
+    "checked": "2026-11-26",
+    "tried": "2026-11-26T14:42-07:00"
+   }
   },
   {
    "date": "2026-11-27",
@@ -395,7 +69,22 @@
    "type": "verified",
    "cta": "Get Tickets",
    "source": "Plaza Stage",
-   "link": "https://link.dice.fm/Y691e80f364d"
+   "link": "https://link.dice.fm/Y691e80f364d",
+   "details": {
+    "url": "https://dice.fm/event/q2qy7a-an-evening-with-fred-eaglesmith-27th-nov-hotel-congress-plaza-tucson-tickets?_branch_match_id=1654615862192621516&utm_medium=partners_api&_branch_referrer=H4sIAAAAAAAAA8soKSkottLXz8nMy9ZLyUxO1UvL1Y80szRMtTBIMzYzSbGvK0pNSy0qysxLj08qyi8vTi2ydc4oys9NBQBX%2F5XrOwAAAA%3D%3D",
+    "official": true,
+    "doors": "7:00 PM",
+    "show": "7:30 PM",
+    "price": {
+     "min": 50.0,
+     "text": "$50",
+     "fees": "+ fees"
+    },
+    "ages": "21+",
+    "minAge": 21,
+    "checked": "2026-11-26",
+    "tried": "2026-11-26T14:42-07:00"
+   }
   },
   {
    "date": "2026-11-27",
@@ -409,7 +98,15 @@
    "type": "verified",
    "cta": "Get Tickets",
    "source": "MIM",
-   "link": "https://mim.org/events/blind-boys-of-alabama-christmas-show/2026-11-27/"
+   "link": "https://mim.org/events/blind-boys-of-alabama-christmas-show/2026-11-27/",
+   "details": {
+    "url": "https://mim.org/events/blind-boys-of-alabama-christmas-show/2026-11-27/",
+    "official": true,
+    "listed": "7:30 PM",
+    "checked": "2026-11-26",
+    "tried": "2026-11-26T14:42-07:00",
+    "goIf": "Go if you want a holiday show of american traditions — it's the only folk and Americana show in Phoenix on Friday."
+   }
   },
   {
    "date": "2026-11-27",
@@ -423,7 +120,11 @@
    "type": "verified",
    "cta": "Get Tickets",
    "source": "19hz",
-   "link": "https://dice.fm/event/vvpe96-bud-light-college-tour-in-tucson-27th-nov-hotel-congress-plaza-tucson-tickets"
+   "link": "https://dice.fm/event/vvpe96-bud-light-college-tour-in-tucson-27th-nov-hotel-congress-plaza-tucson-tickets",
+   "details": {
+    "tried": "2026-11-26T14:42-07:00",
+    "note": "artist not found on page"
+   }
   },
   {
    "date": "2026-11-27",
@@ -437,7 +138,21 @@
    "type": "verified",
    "cta": "Event Info",
    "source": "Songkick",
-   "link": "https://www.songkick.com/concerts/43442315-brian-bromberg-at-century-room"
+   "link": "https://www.songkick.com/concerts/43442315-brian-bromberg-at-century-room",
+   "details": {
+    "url": "https://dice.fm/event/92nve6-brian-bromberg-classic-jazz-quintet-27th-nov-the-century-room-tucson-tickets?_branch_match_id=1654615880266413552&utm_medium=partners_api&_branch_referrer=H4sIAAAAAAAAA8soKSkottLXz8nMy9ZLyUxO1UvL1S9LtTRNMjRMskw1SLWvK0pNSy0qysxLj08qyi8vTi2ydc4oys9NBQBgs78LOwAAAA%3D%3D",
+    "official": true,
+    "doors": "6:00 PM",
+    "show": "6:30 PM",
+    "price": {
+     "min": 30.0,
+     "text": "$30–40",
+     "fees": "+ fees"
+    },
+    "checked": "2026-11-26",
+    "tried": "2026-11-26T14:42-07:00",
+    "goIf": "Go if you're in the mood for contemporary jazz — it's the earliest start in Tucson on Friday. Doors are at 6, but the show starts at 6:30."
+   }
   },
   {
    "date": "2026-11-27",
@@ -451,7 +166,20 @@
    "type": "verified",
    "cta": "Get Tickets",
    "source": "Plaza Stage",
-   "link": "https://link.dice.fm/K6885b22ab6e"
+   "link": "https://link.dice.fm/K6885b22ab6e",
+   "details": {
+    "url": "https://dice.fm/event/vvpe96-bud-light-college-tour-in-tucson-27th-nov-hotel-congress-plaza-tucson-tickets?_branch_match_id=1654615897217037672&utm_medium=partners_api&_branch_referrer=H4sIAAAAAAAAA8soKSkottLXz8nMy9ZLyUxO1UvL1fc2s7AwTTIySkwyS7WvK0pNSy0qysxLj08qyi8vTi2ydc4oys9NBQCvaqeMOwAAAA%3D%3D",
+    "official": true,
+    "doors": "10:00 PM",
+    "ends": "2:00 AM",
+    "free": {
+     "condition": "with RSVP"
+    },
+    "ages": "21+",
+    "minAge": 21,
+    "checked": "2026-11-26",
+    "tried": "2026-11-26T14:42-07:00"
+   }
   },
   {
    "date": "2026-11-27",
@@ -465,7 +193,11 @@
    "type": "verified",
    "cta": "Get Tickets",
    "source": "Valley Bar",
-   "link": "https://www.valleybarphx.com/tm-event/earthsurfaceopen-soul-reggae-house-amapiano-dancehall-2/"
+   "link": "https://www.valleybarphx.com/tm-event/earthsurfaceopen-soul-reggae-house-amapiano-dancehall-2/",
+   "details": {
+    "tried": "2026-11-26T14:42-07:00",
+    "note": "date not confirmed on page"
+   }
   },
   {
    "date": "2026-11-27",
@@ -479,7 +211,11 @@
    "type": "verified",
    "cta": "Get Tickets",
    "source": "SeatGeek",
-   "link": "https://seatgeek.com/garth-live-tribute-to-garth-brooks-tickets/chandler-arizona-gila-river-hotels-casinos-wild-horse-pass-2026-11-27-8-pm/concert/18375238"
+   "link": "https://seatgeek.com/garth-live-tribute-to-garth-brooks-tickets/chandler-arizona-gila-river-hotels-casinos-wild-horse-pass-2026-11-27-8-pm/concert/18375238",
+   "details": {
+    "tried": "2026-11-26T14:42-07:00",
+    "note": "only a resale or homepage link, and no venue event page found"
+   }
   },
   {
    "date": "2026-11-27",
@@ -493,7 +229,11 @@
    "type": "verified",
    "cta": "Get Tickets",
    "source": "The Van Buren",
-   "link": "https://www.ticketmaster.com/imminence-axis-mundi-tour-north-america-phoenix-arizona-11-27-2026/event/190064CBCBD77D98"
+   "link": "https://www.ticketmaster.com/imminence-axis-mundi-tour-north-america-phoenix-arizona-11-27-2026/event/190064CBCBD77D98",
+   "details": {
+    "tried": "2026-11-26T14:42-07:00",
+    "note": "page unavailable"
+   }
   },
   {
    "date": "2026-11-27",
@@ -507,7 +247,14 @@
    "type": "verified",
    "cta": "Get Tickets",
    "source": "KTAR",
-   "link": "https://www.desertdiamondarena.com/event/jonas-brothers/112/"
+   "link": "https://www.desertdiamondarena.com/event/jonas-brothers/112/",
+   "details": {
+    "url": "https://www.desertdiamondarena.com/event/jonas-brothers/112/",
+    "official": true,
+    "checked": "2026-11-26",
+    "tried": "2026-11-26T14:42-07:00",
+    "goIf": "Go if you're in the mood for pop rock — it's the only pop show in Glendale on Friday."
+   }
   },
   {
    "date": "2026-11-27",
@@ -521,7 +268,21 @@
    "type": "verified",
    "cta": "Get Tickets",
    "source": "The Century Room",
-   "link": "https://link.dice.fm/f5c2767f9b36"
+   "link": "https://link.dice.fm/f5c2767f9b36",
+   "details": {
+    "url": "https://dice.fm/event/q233y9-late-night-eric-nakanishi-quartet-27th-nov-the-century-room-tucson-tickets?_branch_match_id=1654615913438256323&utm_medium=partners_api&_branch_referrer=H4sIAAAAAAAAA8soKSkottLXz8nMy9ZLyUxO1UvL1U8zTTYyNzNPs0wyNrOvK0pNSy0qysxLj08qyi8vTi2ydc4oys9NBQAv832XOwAAAA%3D%3D",
+    "official": true,
+    "show": "10:30 PM",
+    "price": {
+     "min": 10.0,
+     "text": "$10",
+     "fees": "+ fees"
+    },
+    "ages": "21+",
+    "minAge": 21,
+    "checked": "2026-11-26",
+    "tried": "2026-11-26T14:42-07:00"
+   }
   },
   {
    "date": "2026-11-27",
@@ -535,7 +296,11 @@
    "type": "verified",
    "cta": "Get Tickets",
    "source": "19hz",
-   "link": "https://tixr.com/e/210240"
+   "link": "https://tixr.com/e/210240",
+   "details": {
+    "tried": "2026-11-26T14:42-07:00",
+    "note": "page unavailable"
+   }
   },
   {
    "date": "2026-11-27",
@@ -549,7 +314,11 @@
    "type": "verified",
    "cta": "Get Tickets",
    "source": "SeatGeek",
-   "link": "https://seatgeek.com/logan-ryan-band-tickets/scottsdale-arizona-westworld-of-scottsdale-2026-11-27-9-30-pm/concert/18736014"
+   "link": "https://seatgeek.com/logan-ryan-band-tickets/scottsdale-arizona-westworld-of-scottsdale-2026-11-27-9-30-pm/concert/18736014",
+   "details": {
+    "tried": "2026-11-26T14:42-07:00",
+    "note": "only a resale or homepage link, and no venue event page found"
+   }
   },
   {
    "date": "2026-11-27",
@@ -563,7 +332,11 @@
    "type": "verified",
    "cta": "Get Tickets",
    "source": "19hz",
-   "link": "https://www.tixr.com/groups/relentlessbeats/events/lumasi-202304"
+   "link": "https://www.tixr.com/groups/relentlessbeats/events/lumasi-202304",
+   "details": {
+    "tried": "2026-11-26T14:42-07:00",
+    "note": "page unavailable"
+   }
   },
   {
    "date": "2026-11-27",
@@ -577,7 +350,29 @@
    "type": "verified",
    "cta": "Get Tickets",
    "source": "19hz",
-   "link": "https://wl.eventim.us/event/oden-and-fatzo-somehow-it-flies-album-tour-w-monroe/703631?afflky=WalterWhereHouse"
+   "link": "https://wl.eventim.us/event/oden-and-fatzo-somehow-it-flies-album-tour-w-monroe/703631?afflky=WalterWhereHouse",
+   "details": {
+    "url": "https://wl.eventim.us/event/oden-and-fatzo-somehow-it-flies-album-tour-w-monroe/703631?afflky=WalterWhereHouse",
+    "official": true,
+    "doors": "9:00 PM",
+    "show": "9:00 PM",
+    "ends": "2:00 AM",
+    "price": {
+     "min": 32.08,
+     "text": "$32.08"
+    },
+    "lineup": [
+     {
+      "name": "Oden & Fatzo"
+     },
+     {
+      "name": "m.O.N.R.O.E."
+     }
+    ],
+    "checked": "2026-11-26",
+    "tried": "2026-11-26T14:42-07:00",
+    "goIf": "Go if you're in the mood for deep house — it runs later than anything else in Phoenix on Friday. m.O.N.R.O.E. is on the bill too."
+   }
   },
   {
    "date": "2026-11-27",
@@ -591,7 +386,31 @@
    "type": "verified",
    "cta": "Get Tickets",
    "source": "Crescent Ballroom",
-   "link": "https://www.crescentphx.com/tm-event/old-school-rb-and-hip-hop-party-with-dj-rikkie-tee/"
+   "link": "https://www.crescentphx.com/tm-event/old-school-rb-and-hip-hop-party-with-dj-rikkie-tee/",
+   "details": {
+    "url": "https://www.crescentphx.com/tm-event/old-school-rb-and-hip-hop-party-with-dj-rikkie-tee/",
+    "official": true,
+    "listed": "8:00 PM",
+    "price": {
+     "min": 5.0,
+     "text": "$5"
+    },
+    "ages": "21+",
+    "minAge": 21,
+    "lineup": [
+     {
+      "name": "Old School R&B and Hip Hop"
+     },
+     {
+      "name": "DJ Rikkie Tee"
+     },
+     {
+      "name": "MyGodComPlex"
+     }
+    ],
+    "checked": "2026-11-26",
+    "tried": "2026-11-26T14:42-07:00"
+   }
   },
   {
    "date": "2026-11-27",
@@ -605,7 +424,11 @@
    "type": "verified",
    "cta": "Get Tickets",
    "source": "SeatGeek",
-   "link": "https://seatgeek.com/orkesta-mendoza-tickets/tucson-arizona-la-rosa-tucson-2026-11-27-8-pm/concert/18835114"
+   "link": "https://seatgeek.com/orkesta-mendoza-tickets/tucson-arizona-la-rosa-tucson-2026-11-27-8-pm/concert/18835114",
+   "details": {
+    "tried": "2026-11-26T14:42-07:00",
+    "note": "only a resale or homepage link, and no venue event page found"
+   }
   },
   {
    "date": "2026-11-27",
@@ -619,7 +442,11 @@
    "type": "verified",
    "cta": "Get Tickets",
    "source": "SeatGeek",
-   "link": "https://seatgeek.com/psycroptic-tickets/mesa-arizona-the-rosetta-room-2026-11-27-7-pm/concert/18736112"
+   "link": "https://seatgeek.com/psycroptic-tickets/mesa-arizona-the-rosetta-room-2026-11-27-7-pm/concert/18736112",
+   "details": {
+    "tried": "2026-11-26T14:42-07:00",
+    "note": "only a resale or homepage link, and no venue event page found"
+   }
   },
   {
    "date": "2026-11-27",
@@ -633,7 +460,28 @@
    "type": "verified",
    "cta": "Get Tickets",
    "source": "Valley Bar",
-   "link": "https://www.valleybarphx.com/tm-event/quinn-ayres-album-release-show-with-mo-maduro-mario-why-ms-moody/"
+   "link": "https://www.valleybarphx.com/tm-event/quinn-ayres-album-release-show-with-mo-maduro-mario-why-ms-moody/",
+   "details": {
+    "url": "https://www.valleybarphx.com/tm-event/quinn-ayres-album-release-show-with-mo-maduro-mario-why-ms-moody/",
+    "official": true,
+    "doors": "6:00 PM",
+    "show": "6:30 PM",
+    "price": {
+     "min": 12.0,
+     "text": "$12 adv · $15 door",
+     "fees": "+ fees"
+    },
+    "ages": "16+",
+    "minAge": 16,
+    "lineup": [
+     {
+      "name": "Quinn Ayres"
+     }
+    ],
+    "checked": "2026-11-26",
+    "tried": "2026-11-26T14:42-07:00",
+    "goIf": "Go if you want a release show — it's the earliest start in Phoenix on Friday. Doors are at 6, but the show starts at 6:30."
+   }
   },
   {
    "date": "2026-11-27",
@@ -647,7 +495,18 @@
    "type": "verified",
    "cta": "Get Tickets",
    "source": "Westside box office",
-   "link": "https://boxoffice.westsideblues.com/events/westsidebluesjazzmore/1978432?date=2026-11-27"
+   "link": "https://boxoffice.westsideblues.com/events/westsidebluesjazzmore/1978432?date=2026-11-27",
+   "details": {
+    "url": "https://boxoffice.westsideblues.com/events/westsidebluesjazzmore/1978432?date=2026-11-27",
+    "official": true,
+    "status": "Sold out",
+    "doors": "6:00 PM",
+    "show": "7:30 PM",
+    "note": "two-drink minimum",
+    "checked": "2026-11-26",
+    "tried": "2026-11-26T14:42-07:00",
+    "goIf": "Go if you're in the mood for R&B — it's the only hip-hop and R&B show in Glendale on Friday. Doors are at 6, but the show starts at 7:30."
+   }
   },
   {
    "date": "2026-11-27",
@@ -661,7 +520,11 @@
    "type": "verified",
    "cta": "Get Tickets",
    "source": "SeatGeek",
-   "link": "https://seatgeek.com/roger-clyne-tickets/phoenix-arizona-celebrity-theatre-phoenix-2026-11-27-7-pm/concert/18708235"
+   "link": "https://seatgeek.com/roger-clyne-tickets/phoenix-arizona-celebrity-theatre-phoenix-2026-11-27-7-pm/concert/18708235",
+   "details": {
+    "tried": "2026-11-26T14:42-07:00",
+    "note": "only a resale or homepage link, and no venue event page found"
+   }
   },
   {
    "date": "2026-11-27",
@@ -675,7 +538,20 @@
    "type": "verified",
    "cta": "Get Tickets",
    "source": "Club Congress",
-   "link": "https://link.dice.fm/L583f6d6ad26"
+   "link": "https://link.dice.fm/L583f6d6ad26",
+   "details": {
+    "url": "https://dice.fm/event/2wn55p-room-service-27th-nov-club-congress-tucson-tickets?_branch_match_id=1654615947392271464&utm_medium=partners_api&_branch_referrer=H4sIAAAAAAAAA8soKSkottLXz8nMy9ZLyUxO1UvL1fcxtTBOM0sxS0wxMrOvK0pNSy0qysxLj08qyi8vTi2ydc4oys9NBQDmkTZOOwAAAA%3D%3D",
+    "official": true,
+    "ends": "2:00 AM",
+    "listed": "10:00 PM",
+    "free": {
+     "condition": ""
+    },
+    "ages": "21+",
+    "minAge": 21,
+    "checked": "2026-11-26",
+    "tried": "2026-11-26T14:42-07:00"
+   }
   },
   {
    "date": "2026-11-27",
@@ -689,7 +565,11 @@
    "type": "verified",
    "cta": "Get Tickets",
    "source": "19hz",
-   "link": "https://www.tixr.com/groups/rbfestivals/events/svdden-death-201785"
+   "link": "https://www.tixr.com/groups/rbfestivals/events/svdden-death-201785",
+   "details": {
+    "tried": "2026-11-26T14:42-07:00",
+    "note": "page unavailable"
+   }
   },
   {
    "date": "2026-11-27",
@@ -703,7 +583,11 @@
    "type": "verified",
    "cta": "Get Tickets",
    "source": "SeatGeek",
-   "link": "https://seatgeek.com/the-dwarves-tickets/glendale-arizona-the-44-sports-grill-and-nightlife-2026-11-27-7-pm/concert/18735937"
+   "link": "https://seatgeek.com/the-dwarves-tickets/glendale-arizona-the-44-sports-grill-and-nightlife-2026-11-27-7-pm/concert/18735937",
+   "details": {
+    "tried": "2026-11-26T14:42-07:00",
+    "note": "only a resale or homepage link, and no venue event page found"
+   }
   },
   {
    "date": "2026-11-27",
@@ -717,7 +601,11 @@
    "type": "verified",
    "cta": "Get Tickets",
    "source": "SeatGeek",
-   "link": "https://seatgeek.com/the-fab-four-the-ultimate-tribute-tickets/mesa-arizona-mesa-arts-center-ikeda-theater-2026-11-27-7-30-pm/concert/18141150"
+   "link": "https://seatgeek.com/the-fab-four-the-ultimate-tribute-tickets/mesa-arizona-mesa-arts-center-ikeda-theater-2026-11-27-7-30-pm/concert/18141150",
+   "details": {
+    "tried": "2026-11-26T14:42-07:00",
+    "note": "only a resale or homepage link, and no venue event page found"
+   }
   },
   {
    "date": "2026-11-28",
@@ -1286,7 +1174,7 @@
    "source": "KTAR",
    "link": "https://mortgagematchupcenter.com/events/the-neighbourhood/",
    "details": {
-    "tried": "2026-11-25T14:49-07:00",
+    "tried": "2026-11-26T14:42-07:00",
     "note": "date not confirmed on page"
    }
   },
@@ -1681,8 +1569,8 @@
    "details": {
     "url": "https://www.desertdiamondarena.com/event/rush/52/",
     "official": true,
-    "checked": "2026-11-25",
-    "tried": "2026-11-25T14:49-07:00",
+    "checked": "2026-11-26",
+    "tried": "2026-11-26T14:42-07:00",
     "goIf": "Go if you're in the mood for prog rock."
    }
   },
@@ -2202,6 +2090,20 @@
    "cta": "Get Tickets",
    "source": "The Century Room",
    "link": "https://link.dice.fm/Scf0b204d5c2"
+  },
+  {
+   "date": "2026-12-05",
+   "title": "Grand Funk Railroad",
+   "venue": "Harrah's Ak Chin Casino Resort",
+   "city": "Maricopa",
+   "genre": "blues",
+   "sub": "Classic Rock / Pop / Rock / Blues / Hard Rock",
+   "scale": "club",
+   "price": "See listing",
+   "type": "verified",
+   "cta": "Get Tickets",
+   "source": "SeatGeek",
+   "link": "https://seatgeek.com/grand-funk-railroad-tickets/maricopa-arizona-harrahs-ak-chin-casino-resort-2026-12-05-8-pm/concert/18932042"
   },
   {
    "date": "2026-12-05",
@@ -2874,7 +2776,7 @@
    "source": "KTAR",
    "link": "https://www.ticketmaster.com/desert-diamond-arena-tickets-glendale/venue/204917?startDate=2026-12-09&endDate=2026-12-10",
    "details": {
-    "tried": "2026-11-25T14:49-07:00",
+    "tried": "2026-11-26T14:42-07:00",
     "note": "page unavailable"
    }
   },
@@ -2892,7 +2794,7 @@
    "source": "SeatGeek",
    "link": "https://seatgeek.com/hudson-westbrook-tickets/tempe-arizona-mullett-arena-2026-12-09-7-pm/concert/18370892",
    "details": {
-    "tried": "2026-11-25T14:49-07:00",
+    "tried": "2026-11-26T14:42-07:00",
     "note": "only a resale or homepage link, and no venue event page found"
    }
   },
@@ -2996,6 +2898,20 @@
   },
   {
    "date": "2026-12-10",
+   "title": "Charles Lewis Quintet",
+   "venue": "ASU Kerr Cultural Center",
+   "city": "Scottsdale",
+   "genre": "rock",
+   "sub": "",
+   "scale": "club",
+   "price": "See listing",
+   "type": "verified",
+   "cta": "Get Tickets",
+   "source": "SeatGeek",
+   "link": "https://seatgeek.com/charles-lewis-quintet-tickets/scottsdale-arizona-asu-kerr-cultural-center-2026-12-10-7-30-pm/concert/18907547"
+  },
+  {
+   "date": "2026-12-10",
    "title": "Gates to Hell",
    "venue": "The Rosetta Room",
    "city": "Mesa",
@@ -3022,7 +2938,7 @@
    "source": "SeatGeek",
    "link": "https://seatgeek.com/gracie-abrams-tickets/glendale-arizona-desert-diamond-arena-2026-12-10-8-pm/concert/18270515",
    "details": {
-    "tried": "2026-11-25T14:49-07:00",
+    "tried": "2026-11-26T14:42-07:00",
     "note": "only a resale or homepage link, and no venue event page found"
    }
   },
@@ -3169,8 +3085,8 @@
     "url": "https://www.songkick.com/concerts/43464114-format-at-nile-theater",
     "official": false,
     "listed": "7:30 PM",
-    "checked": "2026-11-25",
-    "tried": "2026-11-25T14:49-07:00"
+    "checked": "2026-11-26",
+    "tried": "2026-11-26T14:42-07:00"
    }
   },
   {
@@ -3497,8 +3413,8 @@
     "url": "https://www.songkick.com/concerts/43464118-format-at-nile-theater",
     "official": false,
     "listed": "7:30 PM",
-    "checked": "2026-11-25",
-    "tried": "2026-11-25T14:49-07:00"
+    "checked": "2026-11-26",
+    "tried": "2026-11-26T14:42-07:00"
    }
   },
   {
@@ -3517,8 +3433,8 @@
    "details": {
     "url": "https://www.desertdiamondarena.com/event/alt-az-93-3-presents%3a-ugly-sweater-holiday-party-with-sublime-slightly-stoopid-and-codefendants/108/",
     "official": true,
-    "checked": "2026-11-25",
-    "tried": "2026-11-25T14:49-07:00",
+    "checked": "2026-11-26",
+    "tried": "2026-11-26T14:42-07:00",
     "goIf": "Go if you want a holiday show of reggae rock."
    }
   },
@@ -3870,6 +3786,20 @@
    "cta": "Get Tickets",
    "source": "SeatGeek",
    "link": "https://seatgeek.com/the-undercovers-tickets/green-valley-arizona-community-performance-art-center-2026-12-12-3-pm/concert/18855860"
+  },
+  {
+   "date": "2026-12-12",
+   "title": "Wasted Youth",
+   "venue": "The 44 Sports Grill and Nightlife",
+   "city": "Glendale",
+   "genre": "rock",
+   "sub": "Punk",
+   "scale": "club",
+   "price": "See listing",
+   "type": "verified",
+   "cta": "Get Tickets",
+   "source": "SeatGeek",
+   "link": "https://seatgeek.com/wasted-youth-tickets/glendale-arizona-the-44-sports-grill-and-nightlife-2026-12-12-7-pm/concert/18951751"
   },
   {
    "date": "2026-12-12",
@@ -4499,6 +4429,20 @@
    "cta": "Get Tickets",
    "source": "Westside box office",
    "link": "https://boxoffice.westsideblues.com/events/westsidebluesjazzmore/2441440?date=2026-12-16"
+  },
+  {
+   "date": "2026-12-16",
+   "title": "Stephen Wilson Jr.",
+   "venue": "Gila River Hotels & Casinos - Wild Horse Pass",
+   "city": "Chandler",
+   "genre": "rock",
+   "sub": "Rock",
+   "scale": "club",
+   "price": "See listing",
+   "type": "verified",
+   "cta": "Get Tickets",
+   "source": "SeatGeek",
+   "link": "https://seatgeek.com/stephen-wilson-jr-tickets/chandler-arizona-gila-river-hotels-casinos-wild-horse-pass-2026-12-16-7-pm/concert/18931370"
   },
   {
    "date": "2026-12-16",
@@ -5199,7 +5143,7 @@
    "source": "The Van Buren",
    "link": "https://www.ticketmaster.com/president-gator-25th-anniversary-show-miniature-phoenix-arizona-12-19-2026/event/190064FD00FDC9DF",
    "details": {
-    "tried": "2026-11-25T14:49-07:00",
+    "tried": "2026-11-26T14:42-07:00",
     "note": "page unavailable"
    }
   },
@@ -5411,6 +5355,20 @@
    "cta": "Get Tickets",
    "source": "SeatGeek",
    "link": "https://seatgeek.com/lindsey-stirling-tickets/tucson-arizona-tucson-arena-2026-12-21-7-pm/concert/18528295"
+  },
+  {
+   "date": "2026-12-21",
+   "title": "Mickey Guyton",
+   "venue": "Mesa Arts Center - Piper Repertory Theater",
+   "city": "Mesa",
+   "genre": "country",
+   "sub": "Country / Folk",
+   "scale": "club",
+   "price": "See listing",
+   "type": "verified",
+   "cta": "Get Tickets",
+   "source": "SeatGeek",
+   "link": "https://seatgeek.com/mickey-guyton-tickets/mesa-arizona-mesa-arts-center-piper-repertory-theater-2026-12-21-7-30-pm/concert/18934291"
   },
   {
    "date": "2026-12-21",
@@ -6026,6 +5984,20 @@
    "cta": "Get Tickets",
    "source": "Valley Bar",
    "link": "https://www.valleybarphx.com/tm-event/valley-bars-5th-annual-nye-block-party/"
+  },
+  {
+   "date": "2026-12-31",
+   "title": "Yachtley Crew",
+   "venue": "Gila River Hotels & Casinos - Wild Horse Pass",
+   "city": "Chandler",
+   "genre": "rock",
+   "sub": "",
+   "scale": "club",
+   "price": "See listing",
+   "type": "verified",
+   "cta": "Get Tickets",
+   "source": "SeatGeek",
+   "link": "https://seatgeek.com/yachtley-crew-tickets/chandler-arizona-gila-river-hotels-casinos-wild-horse-pass-2026-12-31-9-pm/concert/18931363"
   },
   {
    "date": "2027-01-01",
@@ -7959,6 +7931,20 @@
   },
   {
    "date": "2027-01-23",
+   "title": "Malaa",
+   "venue": "Sunbar Tempe",
+   "city": "Tempe",
+   "genre": "techno",
+   "sub": "Electronic / Techno",
+   "scale": "club",
+   "price": "See listing",
+   "type": "verified",
+   "cta": "Get Tickets",
+   "source": "SeatGeek",
+   "link": "https://seatgeek.com/malaa-tickets/tempe-arizona-sunbar-tempe-2027-01-23-9-pm/concert/18972492"
+  },
+  {
+   "date": "2027-01-23",
    "title": "Melissa Aldana",
    "venue": "The Century Room",
    "city": "Tucson",
@@ -8393,6 +8379,20 @@
   },
   {
    "date": "2027-01-29",
+   "title": "The Irish Tenors",
+   "venue": "Casino Arizona",
+   "city": "Scottsdale",
+   "genre": "rock",
+   "sub": "Alternative",
+   "scale": "club",
+   "price": "See listing",
+   "type": "verified",
+   "cta": "Get Tickets",
+   "source": "SeatGeek",
+   "link": "https://seatgeek.com/the-irish-tenors-tickets/scottsdale-arizona-casino-arizona-2027-01-29-7-30-pm/concert/18758980"
+  },
+  {
+   "date": "2027-01-29",
    "title": "The Sways",
    "venue": "Valley Bar",
    "city": "Phoenix",
@@ -8418,6 +8418,20 @@
    "cta": "Get Tickets",
    "source": "SeatGeek",
    "link": "https://seatgeek.com/adam-del-monte-tickets/tucson-arizona-crowder-hall-2027-01-30-3-pm/concert/18811933"
+  },
+  {
+   "date": "2027-01-30",
+   "title": "Aname",
+   "venue": "Rooftop Lounge",
+   "city": "Tempe",
+   "genre": "rock",
+   "sub": "",
+   "scale": "club",
+   "price": "See listing",
+   "type": "verified",
+   "cta": "Get Tickets",
+   "source": "SeatGeek",
+   "link": "https://seatgeek.com/aname-tickets/tempe-arizona-rooftop-lounge-2027-01-30-7-pm/concert/18953168"
   },
   {
    "date": "2027-01-30",
@@ -8516,6 +8530,20 @@
    "cta": "Get Tickets",
    "source": "Valley Bar",
    "link": "https://www.valleybarphx.com/tm-event/merkules/"
+  },
+  {
+   "date": "2027-01-30",
+   "title": "The Irish Tenors",
+   "venue": "Casino Arizona",
+   "city": "Scottsdale",
+   "genre": "rock",
+   "sub": "Alternative",
+   "scale": "club",
+   "price": "See listing",
+   "type": "verified",
+   "cta": "Get Tickets",
+   "source": "SeatGeek",
+   "link": "https://seatgeek.com/the-irish-tenors-tickets/scottsdale-arizona-casino-arizona-2027-01-30-7-30-pm/concert/18758986"
   },
   {
    "date": "2027-01-30",
@@ -9146,6 +9174,20 @@
    "cta": "Get Tickets",
    "source": "SeatGeek",
    "link": "https://seatgeek.com/valentine-s-super-love-jam-tickets/phoenix-arizona-mortgage-matchup-center-2027-02-06-7-30-pm/music-festival/18629226"
+  },
+  {
+   "date": "2027-02-06",
+   "title": "Vegas McGraw - Tim McGraw Tribute",
+   "venue": "Cocopah Casino",
+   "city": "Somerton",
+   "genre": "rock",
+   "sub": "",
+   "scale": "club",
+   "price": "See listing",
+   "type": "verified",
+   "cta": "Get Tickets",
+   "source": "SeatGeek",
+   "link": "https://seatgeek.com/vegas-mcgraw-tribute-to-tim-mcgraw-tickets/somerton-arizona-cocopah-casino-2027-02-06-11-pm/concert/18946717"
   },
   {
    "date": "2027-02-07",
@@ -9863,6 +9905,20 @@
   },
   {
    "date": "2027-02-19",
+   "title": "Dad Rock Night @ Rialto Theatre",
+   "venue": "Rialto Theatre",
+   "city": "Tucson",
+   "genre": "rock",
+   "sub": "",
+   "scale": "club",
+   "price": "See listing",
+   "type": "verified",
+   "cta": "Get Tickets",
+   "source": "SeatGeek",
+   "link": "https://seatgeek.com/dad-rock-night-tickets/tucson-arizona-rialto-theatre-2027-02-19-8-pm/concert/18653239"
+  },
+  {
+   "date": "2027-02-19",
    "title": "David Cross - Fake Joy",
    "venue": "Crescent Ballroom",
    "city": "Phoenix",
@@ -9874,6 +9930,20 @@
    "cta": "Get Tickets",
    "source": "Crescent Ballroom",
    "link": "https://www.crescentphx.com/tm-event/david-cross-fake-joy/"
+  },
+  {
+   "date": "2027-02-19",
+   "title": "Giuseppe Ottaviani (21+)",
+   "venue": "Sunbar Tempe",
+   "city": "Tempe",
+   "genre": "house",
+   "sub": "Electronic",
+   "scale": "club",
+   "price": "See listing",
+   "type": "verified",
+   "cta": "Get Tickets",
+   "source": "SeatGeek",
+   "link": "https://seatgeek.com/giuseppe-ottaviani-tickets/tempe-arizona-sunbar-tempe-2027-02-19-9-pm/concert/18972485"
   },
   {
    "date": "2027-02-19",
@@ -10000,6 +10070,20 @@
    "cta": "Get Tickets",
    "source": "SeatGeek",
    "link": "https://seatgeek.com/beast-in-black-tickets/mesa-arizona-nile-theater-mesa-2027-02-20-7-30-pm/concert/18727567"
+  },
+  {
+   "date": "2027-02-20",
+   "title": "Beyond Creation",
+   "venue": "The Rosetta Room",
+   "city": "Mesa",
+   "genre": "rock",
+   "sub": "Hard Rock",
+   "scale": "club",
+   "price": "See listing",
+   "type": "verified",
+   "cta": "Get Tickets",
+   "source": "SeatGeek",
+   "link": "https://seatgeek.com/beyond-creation-tickets/mesa-arizona-the-rosetta-room-2027-02-20-6-30-pm/concert/18983346"
   },
   {
    "date": "2027-02-20",
@@ -10381,6 +10465,20 @@
   },
   {
    "date": "2027-02-26",
+   "title": "Mark Hummel’s Blues Harmonica Blowout",
+   "venue": "MIM Music Theater",
+   "city": "Phoenix",
+   "genre": "blues",
+   "sub": "Blues",
+   "scale": "club",
+   "price": "See listing",
+   "type": "verified",
+   "cta": "Get Tickets",
+   "source": "MIM",
+   "link": "https://mim.org/events/mark-hummels-blues-harmonica-blowout/"
+  },
+  {
+   "date": "2027-02-26",
    "title": "System Overload",
    "venue": "Rawhide Western Town and Event Center",
    "city": "Chandler",
@@ -10560,6 +10658,20 @@
    "cta": "Event Info",
    "source": "Songkick",
    "link": "https://www.songkick.com/concerts/43416796-lemonheads-at-crescent-ballroom"
+  },
+  {
+   "date": "2027-02-27",
+   "title": "Thee Phantom & Illharmonic Orchestra",
+   "venue": "Marquee Theatre - Tempe, AZ",
+   "city": "Tempe",
+   "genre": "rock",
+   "sub": "",
+   "scale": "club",
+   "price": "See listing",
+   "type": "verified",
+   "cta": "Get Tickets",
+   "source": "SeatGeek",
+   "link": "https://seatgeek.com/thee-phantom-and-illharmonic-orchestra-tickets/tempe-arizona-marquee-theatre-tempe-az-2027-02-27-8-pm/concert/18392993"
   },
   {
    "date": "2027-02-27",
@@ -10826,6 +10938,20 @@
    "cta": "Get Tickets",
    "source": "Valley Bar",
    "link": "https://www.valleybarphx.com/tm-event/cloud-nothings/"
+  },
+  {
+   "date": "2027-03-04",
+   "title": "Fred Hersch",
+   "venue": "Mesa Arts Center - Piper Repertory Theater",
+   "city": "Mesa",
+   "genre": "rock",
+   "sub": "",
+   "scale": "club",
+   "price": "See listing",
+   "type": "verified",
+   "cta": "Get Tickets",
+   "source": "SeatGeek",
+   "link": "https://seatgeek.com/fred-hersch-tickets/mesa-arizona-mesa-arts-center-piper-repertory-theater-2027-03-04-7-30-pm/concert/18934290"
   },
   {
    "date": "2027-03-04",
@@ -12117,6 +12243,20 @@
   },
   {
    "date": "2027-03-20",
+   "title": "Out of the Park Music Fest",
+   "venue": "Mark Coronado Park",
+   "city": "Surprise",
+   "genre": "rock",
+   "sub": "",
+   "scale": "club",
+   "price": "See listing",
+   "type": "verified",
+   "cta": "Get Tickets",
+   "source": "SeatGeek",
+   "link": "https://seatgeek.com/out-of-the-park-music-fest-tickets/surprise-arizona-mark-coronado-park-2027-03-20-4-pm/music-festival/18982856"
+  },
+  {
+   "date": "2027-03-20",
    "title": "The Irish Tenors",
    "venue": "MIM Music Theater",
    "city": "Phoenix",
@@ -12663,6 +12803,20 @@
   },
   {
    "date": "2027-03-30",
+   "title": "Midnight Tyrannosaurus",
+   "venue": "Nile Theater - Mesa",
+   "city": "Mesa",
+   "genre": "techno",
+   "sub": "Electronic / Techno",
+   "scale": "club",
+   "price": "See listing",
+   "type": "verified",
+   "cta": "Get Tickets",
+   "source": "SeatGeek",
+   "link": "https://seatgeek.com/midnight-tyrannosaurus-tickets/mesa-arizona-nile-theater-mesa-2027-03-30-6-30-pm/concert/18889869"
+  },
+  {
+   "date": "2027-03-30",
    "title": "Poison The Well and Alexisonfire with Touche Amore",
    "venue": "The Van Buren",
    "city": "Phoenix",
@@ -13150,6 +13304,20 @@
    "cta": "Get Tickets",
    "source": "SeatGeek",
    "link": "https://seatgeek.com/dina-preston-band-tickets/scottsdale-arizona-asu-kerr-cultural-center-2027-04-09-7-30-pm/concert/18687709"
+  },
+  {
+   "date": "2027-04-09",
+   "title": "Float Fridays",
+   "venue": "Maya Day & Nightclub",
+   "city": "Scottsdale",
+   "genre": "rock",
+   "sub": "",
+   "scale": "club",
+   "price": "See listing",
+   "type": "verified",
+   "cta": "Get Tickets",
+   "source": "SeatGeek",
+   "link": "https://seatgeek.com/float-friday-s-tickets/scottsdale-arizona-maya-day-nightclub-2027-04-09-12-pm/concert/18853674"
   },
   {
    "date": "2027-04-09",
@@ -13768,6 +13936,20 @@
    "link": "https://mortgagematchupcenter.com/events/nickelback/"
   },
   {
+   "date": "2027-04-20",
+   "title": "Robert Cray",
+   "venue": "Virginia G. Piper Theater",
+   "city": "Scottsdale",
+   "genre": "jazz",
+   "sub": "Classic Rock / Jazz / Pop / Rock / Blues",
+   "scale": "club",
+   "price": "See listing",
+   "type": "verified",
+   "cta": "Get Tickets",
+   "source": "SeatGeek",
+   "link": "https://seatgeek.com/robert-cray-tickets/scottsdale-arizona-virginia-g-piper-theater-2027-04-20-7-30-pm/concert/18938058"
+  },
+  {
    "date": "2027-04-21",
    "title": "Matthew Morrison",
    "venue": "Virginia G. Piper Theater",
@@ -14284,6 +14466,20 @@
    "cta": "Get Tickets",
    "source": "SeatGeek",
    "link": "https://seatgeek.com/wilco-tickets/tucson-arizona-linda-ronstadt-music-hall-2027-05-01-8-pm/concert/18869731"
+  },
+  {
+   "date": "2027-05-02",
+   "title": "Los Lonely Boys",
+   "venue": "La Rosa - Tucson",
+   "city": "Tucson",
+   "genre": "blues",
+   "sub": "Pop / Rock / Blues / Latin",
+   "scale": "club",
+   "price": "See listing",
+   "type": "verified",
+   "cta": "Get Tickets",
+   "source": "SeatGeek",
+   "link": "https://seatgeek.com/los-lonely-boys-tickets/tucson-arizona-la-rosa-tucson-2027-05-02-7-30-pm/concert/18983433"
   },
   {
    "date": "2027-05-02",
@@ -15197,6 +15393,20 @@
   },
   {
    "date": "2027-06-25",
+   "title": "Alison Wonderland",
+   "venue": "Arizona Broadway Theatre",
+   "city": "Peoria",
+   "genre": "techno",
+   "sub": "Electronic / Techno",
+   "scale": "club",
+   "price": "See listing",
+   "type": "verified",
+   "cta": "Get Tickets",
+   "source": "SeatGeek",
+   "link": "https://seatgeek.com/alison-wonderland-tickets/peoria-arizona-arizona-broadway-theatre-2027-06-25-7-30-pm/concert/18899393"
+  },
+  {
+   "date": "2027-06-25",
    "title": "Elevate Music Festival (3 Day Pass)",
    "venue": "Highlands Church",
    "city": "Scottsdale",
@@ -15224,6 +15434,34 @@
    "link": "https://theravenscroft.com/event/jazzbird-nights-kevin-hays-trio-5/"
   },
   {
+   "date": "2027-06-26",
+   "title": "Alison Wonderland",
+   "venue": "Arizona Broadway Theatre",
+   "city": "Peoria",
+   "genre": "techno",
+   "sub": "Electronic / Techno",
+   "scale": "club",
+   "price": "See listing",
+   "type": "verified",
+   "cta": "Get Tickets",
+   "source": "SeatGeek",
+   "link": "https://seatgeek.com/alison-wonderland-tickets/peoria-arizona-arizona-broadway-theatre-2027-06-26-2-pm/concert/18899397"
+  },
+  {
+   "date": "2027-06-27",
+   "title": "Alison Wonderland",
+   "venue": "Arizona Broadway Theatre",
+   "city": "Peoria",
+   "genre": "techno",
+   "sub": "Electronic / Techno",
+   "scale": "club",
+   "price": "See listing",
+   "type": "verified",
+   "cta": "Get Tickets",
+   "source": "SeatGeek",
+   "link": "https://seatgeek.com/alison-wonderland-tickets/peoria-arizona-arizona-broadway-theatre-2027-06-27-2-pm/concert/18899403"
+  },
+  {
    "date": "2027-06-27",
    "title": "Vlad Holiday",
    "venue": "The Rebel Lounge - Phoenix",
@@ -15238,6 +15476,300 @@
    "link": "https://seatgeek.com/vlad-holiday-tickets/phoenix-arizona-the-rebel-lounge-phoenix-2027-06-27-8-pm/concert/18820002"
   },
   {
+   "date": "2027-06-29",
+   "title": "Alison Wonderland",
+   "venue": "Arizona Broadway Theatre",
+   "city": "Peoria",
+   "genre": "techno",
+   "sub": "Electronic / Techno",
+   "scale": "club",
+   "price": "See listing",
+   "type": "verified",
+   "cta": "Get Tickets",
+   "source": "SeatGeek",
+   "link": "https://seatgeek.com/alison-wonderland-tickets/peoria-arizona-arizona-broadway-theatre-2027-06-29-7-30-pm/concert/18899409"
+  },
+  {
+   "date": "2027-06-30",
+   "title": "Alison Wonderland",
+   "venue": "Arizona Broadway Theatre",
+   "city": "Peoria",
+   "genre": "techno",
+   "sub": "Electronic / Techno",
+   "scale": "club",
+   "price": "See listing",
+   "type": "verified",
+   "cta": "Get Tickets",
+   "source": "SeatGeek",
+   "link": "https://seatgeek.com/alison-wonderland-tickets/peoria-arizona-arizona-broadway-theatre-2027-06-30-7-30-pm/concert/18899413"
+  },
+  {
+   "date": "2027-07-01",
+   "title": "Alison Wonderland",
+   "venue": "Arizona Broadway Theatre",
+   "city": "Peoria",
+   "genre": "techno",
+   "sub": "Electronic / Techno",
+   "scale": "club",
+   "price": "See listing",
+   "type": "verified",
+   "cta": "Get Tickets",
+   "source": "SeatGeek",
+   "link": "https://seatgeek.com/alison-wonderland-tickets/peoria-arizona-arizona-broadway-theatre-2027-07-01-7-30-pm/concert/18899415"
+  },
+  {
+   "date": "2027-07-02",
+   "title": "Alison Wonderland",
+   "venue": "Arizona Broadway Theatre",
+   "city": "Peoria",
+   "genre": "techno",
+   "sub": "Electronic / Techno",
+   "scale": "club",
+   "price": "See listing",
+   "type": "verified",
+   "cta": "Get Tickets",
+   "source": "SeatGeek",
+   "link": "https://seatgeek.com/alison-wonderland-tickets/peoria-arizona-arizona-broadway-theatre-2027-07-02-7-30-pm/concert/18899419"
+  },
+  {
+   "date": "2027-07-03",
+   "title": "Alison Wonderland",
+   "venue": "Arizona Broadway Theatre",
+   "city": "Peoria",
+   "genre": "techno",
+   "sub": "Electronic / Techno",
+   "scale": "club",
+   "price": "See listing",
+   "type": "verified",
+   "cta": "Get Tickets",
+   "source": "SeatGeek",
+   "link": "https://seatgeek.com/alison-wonderland-tickets/peoria-arizona-arizona-broadway-theatre-2027-07-03-2-pm/concert/18899423"
+  },
+  {
+   "date": "2027-07-04",
+   "title": "Alison Wonderland",
+   "venue": "Arizona Broadway Theatre",
+   "city": "Peoria",
+   "genre": "techno",
+   "sub": "Electronic / Techno",
+   "scale": "club",
+   "price": "See listing",
+   "type": "verified",
+   "cta": "Get Tickets",
+   "source": "SeatGeek",
+   "link": "https://seatgeek.com/alison-wonderland-tickets/peoria-arizona-arizona-broadway-theatre-2027-07-04-2-pm/concert/18899427"
+  },
+  {
+   "date": "2027-07-06",
+   "title": "Alison Wonderland",
+   "venue": "Arizona Broadway Theatre",
+   "city": "Peoria",
+   "genre": "techno",
+   "sub": "Electronic / Techno",
+   "scale": "club",
+   "price": "See listing",
+   "type": "verified",
+   "cta": "Get Tickets",
+   "source": "SeatGeek",
+   "link": "https://seatgeek.com/alison-wonderland-tickets/peoria-arizona-arizona-broadway-theatre-2027-07-06-7-30-pm/concert/18899429"
+  },
+  {
+   "date": "2027-07-07",
+   "title": "Alison Wonderland",
+   "venue": "Arizona Broadway Theatre",
+   "city": "Peoria",
+   "genre": "techno",
+   "sub": "Electronic / Techno",
+   "scale": "club",
+   "price": "See listing",
+   "type": "verified",
+   "cta": "Get Tickets",
+   "source": "SeatGeek",
+   "link": "https://seatgeek.com/alison-wonderland-tickets/peoria-arizona-arizona-broadway-theatre-2027-07-07-7-30-pm/concert/18899432"
+  },
+  {
+   "date": "2027-07-08",
+   "title": "Alison Wonderland",
+   "venue": "Arizona Broadway Theatre",
+   "city": "Peoria",
+   "genre": "techno",
+   "sub": "Electronic / Techno",
+   "scale": "club",
+   "price": "See listing",
+   "type": "verified",
+   "cta": "Get Tickets",
+   "source": "SeatGeek",
+   "link": "https://seatgeek.com/alison-wonderland-tickets/peoria-arizona-arizona-broadway-theatre-2027-07-08-2-pm/concert/18899435"
+  },
+  {
+   "date": "2027-07-09",
+   "title": "Alison Wonderland",
+   "venue": "Arizona Broadway Theatre",
+   "city": "Peoria",
+   "genre": "techno",
+   "sub": "Electronic / Techno",
+   "scale": "club",
+   "price": "See listing",
+   "type": "verified",
+   "cta": "Get Tickets",
+   "source": "SeatGeek",
+   "link": "https://seatgeek.com/alison-wonderland-tickets/peoria-arizona-arizona-broadway-theatre-2027-07-09-7-30-pm/concert/18899437"
+  },
+  {
+   "date": "2027-07-10",
+   "title": "Alison Wonderland",
+   "venue": "Arizona Broadway Theatre",
+   "city": "Peoria",
+   "genre": "techno",
+   "sub": "Electronic / Techno",
+   "scale": "club",
+   "price": "See listing",
+   "type": "verified",
+   "cta": "Get Tickets",
+   "source": "SeatGeek",
+   "link": "https://seatgeek.com/alison-wonderland-tickets/peoria-arizona-arizona-broadway-theatre-2027-07-10-2-pm/concert/18899439"
+  },
+  {
+   "date": "2027-07-11",
+   "title": "Alison Wonderland",
+   "venue": "Arizona Broadway Theatre",
+   "city": "Peoria",
+   "genre": "techno",
+   "sub": "Electronic / Techno",
+   "scale": "club",
+   "price": "See listing",
+   "type": "verified",
+   "cta": "Get Tickets",
+   "source": "SeatGeek",
+   "link": "https://seatgeek.com/alison-wonderland-tickets/peoria-arizona-arizona-broadway-theatre-2027-07-11-2-pm/concert/18899441"
+  },
+  {
+   "date": "2027-07-13",
+   "title": "Alison Wonderland",
+   "venue": "Arizona Broadway Theatre",
+   "city": "Peoria",
+   "genre": "techno",
+   "sub": "Electronic / Techno",
+   "scale": "club",
+   "price": "See listing",
+   "type": "verified",
+   "cta": "Get Tickets",
+   "source": "SeatGeek",
+   "link": "https://seatgeek.com/alison-wonderland-tickets/peoria-arizona-arizona-broadway-theatre-2027-07-13-7-30-pm/concert/18899442"
+  },
+  {
+   "date": "2027-07-14",
+   "title": "Alison Wonderland",
+   "venue": "Arizona Broadway Theatre",
+   "city": "Peoria",
+   "genre": "techno",
+   "sub": "Electronic / Techno",
+   "scale": "club",
+   "price": "See listing",
+   "type": "verified",
+   "cta": "Get Tickets",
+   "source": "SeatGeek",
+   "link": "https://seatgeek.com/alison-wonderland-tickets/peoria-arizona-arizona-broadway-theatre-2027-07-14-7-30-pm/concert/18899444"
+  },
+  {
+   "date": "2027-07-15",
+   "title": "Alison Wonderland",
+   "venue": "Arizona Broadway Theatre",
+   "city": "Peoria",
+   "genre": "techno",
+   "sub": "Electronic / Techno",
+   "scale": "club",
+   "price": "See listing",
+   "type": "verified",
+   "cta": "Get Tickets",
+   "source": "SeatGeek",
+   "link": "https://seatgeek.com/alison-wonderland-tickets/peoria-arizona-arizona-broadway-theatre-2027-07-15-2-pm/concert/18899446"
+  },
+  {
+   "date": "2027-07-16",
+   "title": "Alison Wonderland",
+   "venue": "Arizona Broadway Theatre",
+   "city": "Peoria",
+   "genre": "techno",
+   "sub": "Electronic / Techno",
+   "scale": "club",
+   "price": "See listing",
+   "type": "verified",
+   "cta": "Get Tickets",
+   "source": "SeatGeek",
+   "link": "https://seatgeek.com/alison-wonderland-tickets/peoria-arizona-arizona-broadway-theatre-2027-07-16-7-30-pm/concert/18899448"
+  },
+  {
+   "date": "2027-07-17",
+   "title": "Alison Wonderland",
+   "venue": "Arizona Broadway Theatre",
+   "city": "Peoria",
+   "genre": "techno",
+   "sub": "Electronic / Techno",
+   "scale": "club",
+   "price": "See listing",
+   "type": "verified",
+   "cta": "Get Tickets",
+   "source": "SeatGeek",
+   "link": "https://seatgeek.com/alison-wonderland-tickets/peoria-arizona-arizona-broadway-theatre-2027-07-17-2-pm/concert/18899452"
+  },
+  {
+   "date": "2027-07-18",
+   "title": "Alison Wonderland",
+   "venue": "Arizona Broadway Theatre",
+   "city": "Peoria",
+   "genre": "techno",
+   "sub": "Electronic / Techno",
+   "scale": "club",
+   "price": "See listing",
+   "type": "verified",
+   "cta": "Get Tickets",
+   "source": "SeatGeek",
+   "link": "https://seatgeek.com/alison-wonderland-tickets/peoria-arizona-arizona-broadway-theatre-2027-07-18-2-pm/concert/18899456"
+  },
+  {
+   "date": "2027-07-22",
+   "title": "Alison Wonderland",
+   "venue": "Arizona Broadway Theatre",
+   "city": "Peoria",
+   "genre": "techno",
+   "sub": "Electronic / Techno",
+   "scale": "club",
+   "price": "See listing",
+   "type": "verified",
+   "cta": "Get Tickets",
+   "source": "SeatGeek",
+   "link": "https://seatgeek.com/alison-wonderland-tickets/peoria-arizona-arizona-broadway-theatre-2027-07-22-7-30-pm/concert/18899459"
+  },
+  {
+   "date": "2027-07-23",
+   "title": "Alison Wonderland",
+   "venue": "Arizona Broadway Theatre",
+   "city": "Peoria",
+   "genre": "techno",
+   "sub": "Electronic / Techno",
+   "scale": "club",
+   "price": "See listing",
+   "type": "verified",
+   "cta": "Get Tickets",
+   "source": "SeatGeek",
+   "link": "https://seatgeek.com/alison-wonderland-tickets/peoria-arizona-arizona-broadway-theatre-2027-07-23-7-30-pm/concert/18899464"
+  },
+  {
+   "date": "2027-07-24",
+   "title": "Alison Wonderland",
+   "venue": "Arizona Broadway Theatre",
+   "city": "Peoria",
+   "genre": "techno",
+   "sub": "Electronic / Techno",
+   "scale": "club",
+   "price": "See listing",
+   "type": "verified",
+   "cta": "Get Tickets",
+   "source": "SeatGeek",
+   "link": "https://seatgeek.com/alison-wonderland-tickets/peoria-arizona-arizona-broadway-theatre-2027-07-24-2-pm/concert/18899468"
+  },
+  {
    "date": "2027-07-24",
    "title": "KPop Demon Hunters",
    "venue": "Mortgage Matchup Center",
@@ -15250,6 +15782,76 @@
    "cta": "Get Tickets",
    "source": "SeatGeek",
    "link": "https://seatgeek.com/kpop-demon-hunters-tickets/phoenix-arizona-mortgage-matchup-center-2027-07-24-2-pm/concert/18772699"
+  },
+  {
+   "date": "2027-07-25",
+   "title": "Alison Wonderland",
+   "venue": "Arizona Broadway Theatre",
+   "city": "Peoria",
+   "genre": "techno",
+   "sub": "Electronic / Techno",
+   "scale": "club",
+   "price": "See listing",
+   "type": "verified",
+   "cta": "Get Tickets",
+   "source": "SeatGeek",
+   "link": "https://seatgeek.com/alison-wonderland-tickets/peoria-arizona-arizona-broadway-theatre-2027-07-25-2-pm/concert/18899472"
+  },
+  {
+   "date": "2027-07-29",
+   "title": "Alison Wonderland",
+   "venue": "Arizona Broadway Theatre",
+   "city": "Peoria",
+   "genre": "techno",
+   "sub": "Electronic / Techno",
+   "scale": "club",
+   "price": "See listing",
+   "type": "verified",
+   "cta": "Get Tickets",
+   "source": "SeatGeek",
+   "link": "https://seatgeek.com/alison-wonderland-tickets/peoria-arizona-arizona-broadway-theatre-2027-07-29-7-30-pm/concert/18899481"
+  },
+  {
+   "date": "2027-07-30",
+   "title": "Alison Wonderland",
+   "venue": "Arizona Broadway Theatre",
+   "city": "Peoria",
+   "genre": "techno",
+   "sub": "Electronic / Techno",
+   "scale": "club",
+   "price": "See listing",
+   "type": "verified",
+   "cta": "Get Tickets",
+   "source": "SeatGeek",
+   "link": "https://seatgeek.com/alison-wonderland-tickets/peoria-arizona-arizona-broadway-theatre-2027-07-30-7-30-pm/concert/18899486"
+  },
+  {
+   "date": "2027-07-31",
+   "title": "Alison Wonderland",
+   "venue": "Arizona Broadway Theatre",
+   "city": "Peoria",
+   "genre": "techno",
+   "sub": "Electronic / Techno",
+   "scale": "club",
+   "price": "See listing",
+   "type": "verified",
+   "cta": "Get Tickets",
+   "source": "SeatGeek",
+   "link": "https://seatgeek.com/alison-wonderland-tickets/peoria-arizona-arizona-broadway-theatre-2027-07-31-2-pm/concert/18899492"
+  },
+  {
+   "date": "2027-08-01",
+   "title": "Alison Wonderland",
+   "venue": "Arizona Broadway Theatre",
+   "city": "Peoria",
+   "genre": "techno",
+   "sub": "Electronic / Techno",
+   "scale": "club",
+   "price": "See listing",
+   "type": "verified",
+   "cta": "Get Tickets",
+   "source": "SeatGeek",
+   "link": "https://seatgeek.com/alison-wonderland-tickets/peoria-arizona-arizona-broadway-theatre-2027-08-01-2-pm/concert/18899496"
   },
   {
    "date": "2027-08-08",
